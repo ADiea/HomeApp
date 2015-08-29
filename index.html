@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html ng-app="ionicApp">
-<head>
+<html>
+  <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title></title>
@@ -16,32 +16,10 @@
 
     <!-- your app's js -->
     <script src="js/app.js"></script>
+    <script src="js/controllers.js"></script>
+  </head>
 
-</head>
-
-
-
-<body  ng-controller="MyCtrl" animation="slide-left-right-ios7">
-
-    <ion-header-bar title="myTitle"></ion-header-bar>
-
-    <ion-content has-header="true" padding="true">
-      <div class="range">
-        <i class="icon ion-volume-low"></i>
-        <input type="range" name="volume" ng-model="data.volume">
-        <i class="icon ion-volume-high"></i>
-      </div>
-      <p>Volume : {{data.volume}}</p>
-	  
-	        <div class="list-group-item list-group-item-home">
-		<p><button class="btn btn-default" ng-click="alertDeviceInfo()">Device</button></p>
-		<p><button class="btn btn-default" ng-click="alertGeoLocation()">Location</button></p>
-		<p><button class="btn btn-default" ng-click="beepNotify()">Beep</button></p>
-		<p><button class="btn btn-default" ng-click="vibrateNotify()">Vibrate</button></p>
-      </div>	
-	  
-    </ion-content>
-	
-
-</body>
+  <body ng-app="ionicApp">
+    <ion-nav-view></ion-nav-view>
+  </body>
 </html>

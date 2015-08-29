@@ -1,0 +1,33 @@
+<ion-view view-title="Light Control">
+
+    <ion-content>
+	
+	 <ion-list>
+	 
+		<ion-item >
+			 
+			<div class="range">
+				<i class="icon ion-ios-sunny"></i> 
+				Intensity : {{data.dimMax}}
+				<input style="max-width:60%;float:right;" type="range" name="dimMax" ng-model="data.dimMax">
+			</div>
+			
+		</ion-item>	
+		
+		<ion-item >
+			 
+			<div class="range">
+				<i class="icon ion-ios-sunny"></i> 
+				 : {{data.dimMax}}
+				<input style="max-width:60%;float:right;"  type="range" name="dimMax" ng-model="data.dimMax">
+			</div>
+			
+		</ion-item>	
+	
+
+	  
+<ion-toggle ng-model="airplaneMode" toggle-class="toggle-calm">Manual control</ion-toggle>
+
+	   </ion-list>
+    </ion-content>
+</ion-view>

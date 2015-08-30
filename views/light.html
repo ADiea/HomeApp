@@ -3,30 +3,32 @@
     <ion-content>
 	
 	 <ion-list>
-	 
-		<ion-item >
-			 
-			<div class="range">
-				<i class="icon ion-ios-sunny"></i> 
-				Intensity : {{data.dimMax}}
-				<input style="max-width:60%;float:right;" type="range" name="dimMax" ng-model="data.dimMax">
-			</div>
-			
-		</ion-item>	
+		
+		<ion-item class="item-divider">Intensity: {{data.dimMax}}</ion-item>
 		
 		<ion-item >
-			 
-			<div class="range">
-				<i class="icon ion-ios-sunny"></i> 
-				 : {{data.dimMax}}
-				<input style="max-width:60%;float:right;"  type="range" name="dimMax" ng-model="data.dimMax">
-			</div>
-			
+			<input type="range" name="dimMax" ng-model="data.dimMax">
 		</ion-item>	
-	
+		
 
-	  
-<ion-toggle ng-model="airplaneMode" toggle-class="toggle-calm">Manual control</ion-toggle>
+	
+<!--
+	<ion-toggle ng-model="manualControl" toggle-class="toggle-calm">Manual control</ion-toggle>
+-->
+
+		<ion-item class="item-divider" ng-click="toggleSettings()" ng-class="{active: isSettingsShown()}">
+              <i class="icon" ng-class="isSettingsShown() ? 'ion-minus' : 'ion-plus'"></i>
+            &nbsp;
+            Settings
+        </ion-item>
+		  
+        <ion-item class="item-accordion" ng-show="isSettingsShown()">
+            <input type="range" name="dimMax" ng-model="data.dimMax">
+        </ion-item>
+		
+		<ion-item class="item-accordion" ng-show="isSettingsShown()">
+           <input type="range" id="example_id" name="dimMax" value="{{data.dimMax}}" ng-model="data.dimMax"/>
+        </ion-item>
 
 	   </ion-list>
     </ion-content>

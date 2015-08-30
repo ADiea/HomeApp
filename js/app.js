@@ -46,7 +46,12 @@ angular.module('ionicApp', ['ionic', 'ionicApp.controllers'])
       views: {
         'menuContent': {
           templateUrl: 'views/settings.html',
-          controller: 'SettingsCtrl'
+          controller: 'SettingsCtrl',
+		  resolve: {
+			  settings: function(SettingsService) {
+				return SettingsService.getSettings()
+				}
+			}
         }
       }
     })
@@ -55,7 +60,12 @@ angular.module('ionicApp', ['ionic', 'ionicApp.controllers'])
       views: {
         'menuContent': {
           templateUrl: 'views/light.html',
-          controller: 'LightCtrl'
+          controller: 'LightCtrl',
+		  resolve: {
+			  settings: function(SettingsService) {
+				return SettingsService.getSettings()
+				}
+			}
         }
       }
     })

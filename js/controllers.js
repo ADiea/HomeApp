@@ -43,16 +43,59 @@ angular.module('ionicApp.controllers', [])
 
 })
 
-.controller('SettingsCtrl', function($scope) {
+.controller('SettingsCtrl', function($scope, settings) {
+
+$scope.settings = settings;// = {serverIP : "192.168.0.6"};
 
 })
 .controller('BlankCtrl', function($scope) {
 
 })
 
-.controller('LightCtrl', function($scope, $stateParams) {
+.controller('LightCtrl', function($scope, $timeout) {
 
 $scope.data = {dimMax : 0};
+
+
+    var timeoutId = null;
+    
+    $scope.$watch('data.dimMax', function() 
+	{
+        if(timeoutId !== null) {
+
+            return;
+        }
+
+        timeoutId = $timeout( function() {
+            
+            console.log('Value:'+$scope.data.dimMax);
+            
+            $timeout.cancel(timeoutId);
+            timeoutId = null;
+            
+            // Now load data from server 
+        }, 300);  
+    });
+
+$("#example_id").ionRangeSlider();
+
+  $scope.toggleSettings = function() {
+    if ($scope.isSettingsShown()) 
+	{
+      $scope.shownSettings = false;
+    }
+	else 
+	{
+      $scope.shownSettings = true;
+    }
+  };
+  
+  $scope.isSettingsShown = function() 
+  {
+	if($scope.shownSettings)
+		return $scope.shownSettings;
+	return false;
+  };
 
 
 })
@@ -111,4 +154,16 @@ $scope.data = {dimMax : 0};
 		navigator.notification.vibrate(1000);
 	};
 
+})
+.service('SettingsService', function($q) {
+  return {
+    settings:
+      {
+        serverIP: "192.168.0.3"
+      }
+    ,
+    getSettings: function() {
+      return this.settings
+    }
+  }
 });

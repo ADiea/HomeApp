@@ -7,7 +7,7 @@
 		<ion-item class="item-divider">Intensity: {{data.dimMax}}</ion-item>
 		
 		<ion-item >
-			<input type="range" name="dimMax" ng-model="data.dimMax">
+			<input type="range" name="dimMax" ng-model="data.dimMax"> </input>
 		</ion-item>	
 		
 
@@ -18,16 +18,27 @@
 
 		<ion-item class="item-divider" ng-click="toggleSettings()" ng-class="{active: isSettingsShown()}">
               <i class="icon" ng-class="isSettingsShown() ? 'ion-minus' : 'ion-plus'"></i>
-            &nbsp;
             Settings
         </ion-item>
 		  
         <ion-item class="item-accordion" ng-show="isSettingsShown()">
-            <input type="range" name="dimMax" ng-model="data.dimMax">
+            <input type="range" name="dimMax" ng-model="data.dimMax"></input>
         </ion-item>
 		
 		<ion-item class="item-accordion" ng-show="isSettingsShown()">
-           <input type="range" id="example_id" name="dimMax" value="{{data.dimMax}}" ng-model="data.dimMax"/>
+           <input type="range" id="example_id" name="dimMax" value="{{data.dimMax}}" ng-model="data.dimMax"></input>
+        </ion-item>
+		
+		<ion-item class="item-accordion" ng-show="isSettingsShown()">
+           <ionslider  type="single"
+						grid=true
+						min="model.min"
+						max="model.max"
+						from="data.dimMax"
+						
+						disable="model.disabled"
+						on-change="rangeChangeCallback"
+						on-finish="rangeFinishCallback"></ionslider>
         </ion-item>
 
 	   </ion-list>

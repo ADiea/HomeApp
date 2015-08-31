@@ -52,7 +52,14 @@ $scope.settings = settings;// = {serverIP : "192.168.0.6"};
 
 })
 
-.controller('LightCtrl', function($scope, $timeout) {
+.controller('LightCtrl', function($scope, $timeout, $ionicSideMenuDelegate) {
+
+ $scope.$on('$ionicView.enter', function(){
+      $ionicSideMenuDelegate.canDragContent(false);
+    });
+  $scope.$on('$ionicView.leave', function(){
+      $ionicSideMenuDelegate.canDragContent(true);
+    });
 
 $scope.data = {dimMax : 0};
 
@@ -77,7 +84,22 @@ $scope.data = {dimMax : 0};
         }, 300);  
     });
 
-$("#example_id").ionRangeSlider();
+
+
+$scope.rangeChangeCallback = function(sliderObj)
+{ $scope.data.dimMax  = sliderObj.from; 
+//console.log('update:'+$scope.data.dimMax);
+//$ionicSideMenuDelegate.canDragContent(false);
+}
+$scope.rangeFinishCallback = function(sliderObj)
+{ 
+$scope.data.dimMax = sliderObj.from; 
+$scope.$apply();
+//$ionicSideMenuDelegate.canDragContent(true);
+}
+
+
+$scope.model = {min:5, max:100, currentValue:50, disabled:false};
 
   $scope.toggleSettings = function() {
     if ($scope.isSettingsShown()) 

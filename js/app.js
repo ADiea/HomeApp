@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('ionicApp', ['ionic', 'ionicApp.controllers'/*, 'ionRangeSlider'*/])
+angular.module('ionicApp', ['ionic', 'ionicApp.controllers', 'angular.circular-slider'/*, 'ionRangeSlider'*/])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -61,6 +61,20 @@ angular.module('ionicApp', ['ionic', 'ionicApp.controllers'/*, 'ionRangeSlider'*
         'menuContent': {
           templateUrl: 'views/lights.html',
           controller: 'LightsCtrl',
+		  resolve: {
+			  settings: function(SettingsService) {
+				return SettingsService.getSettings()
+				}
+			}
+        }
+      }
+    })
+	.state('app.thermo', {
+      url: '/thermo',
+      views: {
+        'menuContent': {
+          templateUrl: 'views/thermo.html',
+          controller: 'ThermoCtrl',
 		  resolve: {
 			  settings: function(SettingsService) {
 				return SettingsService.getSettings()
@@ -135,3 +149,5 @@ angular.module('ionicApp', ['ionic', 'ionicApp.controllers'/*, 'ionRangeSlider'*
         }
     }
 });
+//.directive('circularSlider', circularSlider);
+;

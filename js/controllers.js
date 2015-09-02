@@ -20,6 +20,60 @@ $scope.settings = settings;// = {serverIP : "192.168.0.6"};
 
 })
 
+.controller('ThermoCtrl', function($scope, settings) {
+
+$scope.settings = settings;
+
+$scope.value = 1;
+$scope.min = 0;
+$scope.max = 9;
+
+
+$scope.ui = {min: 0, max:9, value:1, lastValue:1};
+$scope.thermo = {minTemp:16.0, maxTemp:27.0, curTemp:21.0};
+
+$scope.onSlide = function onSlide (value) 
+{
+	var dif = value - $scope.ui.lastValue;
+	
+	if(dif > ($scope.ui.max - $scope.ui.min) / 2)
+		dif = -1;
+	else if(dif < -($scope.ui.max - $scope.ui.min) / 2)
+		dif = 1;
+	
+	
+/*	
+	if(dif > 0)
+	{
+		if(dif > ($scope.ui.max - $scope.ui.min) / 2)
+		{
+			dif = -1;
+		}
+	}
+	else
+	{
+		if(dif < ($scope.ui.max - $scope.ui.min) / 2)
+		{
+			dif = 1;
+		}
+	}
+*/	
+
+	if(dif != 0)
+	{
+		$scope.ui.lastValue = value;
+		
+		
+		console.log('on slide  delta ' + dif);
+	}
+}
+
+
+$scope.onSlideEnd = function onSlideEnd(value) {
+	console.log('on slide end  ' + value);
+}
+
+})
 
 .controller('LightsCtrl', function($scope, $ionicModal, $timeout) {
 
@@ -190,7 +244,7 @@ $scope.rangeFinishCallback_speed = function(sliderObj)
   return {
     settings:
       {
-        serverIP: "192.168.0.3"
+        serverIP: "192.168.0.101"
       }
     ,
     getSettings: function() {

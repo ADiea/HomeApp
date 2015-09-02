@@ -55,32 +55,23 @@ angular.module('ionicApp', ['ionic', 'ionicApp.controllers'/*, 'ionRangeSlider'*
         }
       }
     })
-   .state('app.light', {
-      url: '/light',
+   .state('app.lights', {
+      url: '/lights',
       views: {
         'menuContent': {
-          templateUrl: 'views/light.html',
-          controller: 'LightCtrl',
+          templateUrl: 'views/lights.html',
+          controller: 'LightsCtrl',
 		  resolve: {
-				
 			  settings: function(SettingsService) {
 				return SettingsService.getSettings()
 				}
 			}
         }
       }
-    })
-  .state('app.single', {
-    url: '/playlists/:playlistId',
-    views: {
-      'menuContent': {
-        templateUrl: 'views/playlist.html',
-        controller: 'BlankCtrl'
-      }
-    }
-  });
+    });	
+
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/light');
+  $urlRouterProvider.otherwise('/app/lights');
 })
 .directive('ionslider',function($timeout){
     return{

@@ -1,0 +1,19 @@
+<ion-view view-title="Light Control">
+
+    <ion-content>
+	
+	 <ion-list>
+
+
+		 <ion-toggle ng-repeat="light in houseLights"  ng-model="light.enable" toggle-class="toggle-positive">
+			
+			<a style="display:block;" ng-click="openLight({{light.light}})">
+					{{light.title}}
+			</a>
+			
+		</ion-toggle>
+
+
+	   </ion-list>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,25 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title">Light Settings</h1>
+    <div class="buttons">
+      <button class="button button-clear" ng-click="closeLight()">Close</button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+    <form ng-submit="setLight()">
+      <div class="list">
+        <label class="item">
+			<ionslider  type="single" grid=true min="modalLight.minDim" max="modalLight.maxDim" from="modalLight.curDim" 
+						on-change="rangeChangeCallback_dim" on-finish="rangeFinishCallback_dim"></ionslider>
+        </label>
+		<label class="item">
+ 			<ionslider  type="single" grid=true min="modalLight.minSpeed" max="modalLight.maxSpeed" from="modalLight.curSpeed" 
+						on-change="rangeChangeCallback_speed" on-finish="rangeFinishCallback_speed"></ionslider>         
+        </label>
+        <label class="item">
+          <button class="button button-block button-positive" type="submit">Done</button>
+        </label>
+      </div>
+    </form>
+  </ion-content>
+</ion-modal-view>

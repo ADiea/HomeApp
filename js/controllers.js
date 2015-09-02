@@ -9,36 +9,7 @@ angular.module('ionicApp.controllers', [])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
 
-  // Form data for the login modal
-  $scope.loginData = {};
-
-  // Create the login modal that we will use later
-  $ionicModal.fromTemplateUrl('views/login.html', {
-    scope: $scope
-  }).then(function(modal) {
-    $scope.modal = modal;
-  });
-
-  // Triggered in the login modal to close it
-  $scope.closeLogin = function() {
-    $scope.modal.hide();
-  };
-
-  // Open the login modal
-  $scope.login = function() {
-    $scope.modal.show();
-  };
-
-  // Perform the login action when the user submits the login form
-  $scope.doLogin = function() {
-    console.log('Doing login', $scope.loginData);
-
-    // Simulate a login delay. Remove this and replace with your login
-    // code if using a login system
-    $timeout(function() {
-      $scope.closeLogin();
-    }, 1000);
-  };
+ 
   
 
 })
@@ -48,22 +19,44 @@ angular.module('ionicApp.controllers', [])
 $scope.settings = settings;// = {serverIP : "192.168.0.6"};
 
 })
-.controller('BlankCtrl', function($scope) {
-
-})
-
-.controller('LightCtrl', function($scope, $timeout, $ionicSideMenuDelegate) {
-
- $scope.$on('$ionicView.enter', function(){
-      $ionicSideMenuDelegate.canDragContent(false);
-    });
-  $scope.$on('$ionicView.leave', function(){
-      $ionicSideMenuDelegate.canDragContent(true);
-    });
-
-$scope.data = {dimMax : 0};
 
 
+.controller('LightsCtrl', function($scope, $ionicModal, $timeout) {
+
+
+$scope.houseLights = [
+	{id:0, title:"Hall Ceil", light:{enable:true, minDim:30, maxDim:100, curDim:0, minSpeed:1, maxSpeed:15, curSpeed:5}},
+	{id:1, title:"Bath Ceil", light:{enable:true, minDim:50, maxDim:100, curDim:0, minSpeed:1, maxSpeed:15, curSpeed:5}},
+	{id:2, title:"Kitchen Ambient", light:{enable:true, minDim:0, maxDim:100, curDim:0, minSpeed:1, maxSpeed:15, curSpeed:5}}
+];
+
+//$scope.modalLight = houseLights[0];
+
+  $ionicModal.fromTemplateUrl('views/light_single.html', {
+    scope: $scope
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
+
+  // Triggered in the login modal to close it
+  $scope.closeLight = function() {
+    $scope.modal.hide();
+  };
+
+  // Open the login modal
+  $scope.openLight = function(light) {
+	$scope.modalLight = light;
+    $scope.modal.show();
+  };
+  
+  $scope.setLight = function() {
+	
+	$scope.houseLights[$scope.modalLight.id] = $scope.modalLight;
+
+	$scope.closeLight();
+  };
+
+/*
     var timeoutId = null;
     
     $scope.$watch('data.dimMax', function() 
@@ -82,25 +75,41 @@ $scope.data = {dimMax : 0};
             
             // Now load data from server 
         }, 300);  
+	
+		
     });
+*/	
 
 
-
-$scope.rangeChangeCallback = function(sliderObj)
-{ $scope.data.dimMax  = sliderObj.from; 
-//console.log('update:'+$scope.data.dimMax);
-//$ionicSideMenuDelegate.canDragContent(false);
-}
-$scope.rangeFinishCallback = function(sliderObj)
+$scope.rangeChangeCallback_dim = function(sliderObj)
 { 
-$scope.data.dimMax = sliderObj.from; 
-$scope.$apply();
-//$ionicSideMenuDelegate.canDragContent(true);
+//$scope.data.dimMax  = sliderObj.from; 
+//console.log('update:'+$scope.data.dimMax);
+
+}
+$scope.rangeFinishCallback_dim = function(sliderObj)
+{ 
+//$scope.data.dimMax = sliderObj.from; 
+//$scope.$apply();
+
+}
+
+$scope.rangeChangeCallback_speed = function(sliderObj)
+{ 
+//$scope.data.dimMax  = sliderObj.from; 
+//console.log('update:'+$scope.data.dimMax);
+
+}
+$scope.rangeFinishCallback_speed = function(sliderObj)
+{ 
+//$scope.data.dimMax = sliderObj.from; 
+//$scope.$apply();
+
 }
 
 
-$scope.model = {min:5, max:100, currentValue:50, disabled:false};
-
+/*accordion*/
+/*
   $scope.toggleSettings = function() {
     if ($scope.isSettingsShown()) 
 	{
@@ -118,7 +127,7 @@ $scope.model = {min:5, max:100, currentValue:50, disabled:false};
 		return $scope.shownSettings;
 	return false;
   };
-
+*/
 
 })
 .controller('TestsCtrl', function($scope, $stateParams) {

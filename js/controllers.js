@@ -24,21 +24,21 @@ $scope.settings = settings;// = {serverIP : "192.168.0.6"};
 
 $scope.settings = settings;
 
-$scope.value = 1;
-$scope.min = 0;
-$scope.max = 9;
+//$scope.value = 1;
+//$scope.min = 0;
+//$scope.max = 9;
 
 
-$scope.ui = {min: 0, max:9, value:1, lastValue:1};
+$scope.myui = {min: 0, max:9, val:1, lastValue:1};
 $scope.thermo = {minTemp:16.0, maxTemp:27.0, curTemp:21.0};
 
 $scope.onSlide = function onSlide (value) 
 {
-	var dif = value - $scope.ui.lastValue;
+	var dif = value - $scope.myui.lastValue;
 	
-	if(dif > ($scope.ui.max - $scope.ui.min) / 2)
+	if(dif > ($scope.myui.max - $scope.myui.min) / 2)
 		dif = -1;
-	else if(dif < -($scope.ui.max - $scope.ui.min) / 2)
+	else if(dif < -($scope.myui.max - $scope.myui.min) / 2)
 		dif = 1;
 	
 	
@@ -61,9 +61,10 @@ $scope.onSlide = function onSlide (value)
 
 	if(dif != 0)
 	{
-		$scope.ui.lastValue = value;
+		$scope.myui.lastValue = value;
 		
-		
+		$scope.myui.val  = value;
+		$scope.$apply();
 		console.log('on slide  delta ' + dif);
 	}
 }

@@ -24,9 +24,8 @@ Copyright (c) 2015 Prince John Wesley <princejohnwesley@gmail.com>
 
 .acs {
   position: relative;
-  border-style: solid;
+  border: 30px solid #ddd;
   border-radius: 100%;
-  border-color: hotpink;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   cursor: pointer;
@@ -35,22 +34,21 @@ Copyright (c) 2015 Prince John Wesley <princejohnwesley@gmail.com>
 
 .acs-value {
   position: absolute;
-  border-style: none;
   border-radius: 100%;
-  border: 2px solid rgb(236, 248, 212);
+  border: 2px solid #aaa;
   text-align: center;
   pointer-events: none;
   line-height: 4em;
-  color: white;
-  background-color: yellowgreen;
+  color: black;
+  background-color: #387ef5;
   outline: none;
 }
 
 .acs-indicator {
   position: absolute;
   border-radius: 100%;
-  background-color: deeppink;
-  border: 1px solid rgb(177, 177, 177);
+  background-color: #387ef5;
+  border: 3px solid #aaa;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   pointer-events: none;

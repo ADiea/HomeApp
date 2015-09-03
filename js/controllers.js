@@ -29,7 +29,7 @@ $scope.settings = settings;
 //$scope.max = 9;
 
 
-$scope.myui = {min: 0, max:9, val:1, lastValue:1};
+$scope.myui = {min: 5, max:15, value:6, lastValue:6};
 $scope.thermo = {minTemp:16.0, maxTemp:27.0, curTemp:21.0};
 
 $scope.onSlide = function onSlide (value) 

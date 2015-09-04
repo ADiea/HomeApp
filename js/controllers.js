@@ -29,17 +29,54 @@ $scope.settings = settings;
 //$scope.max = 9;
 
 
-$scope.myui = {min: 5, max:15, value:6, lastValue:6};
+$scope.myui = {min: 0, max:60, value:0, lastValue:0};
 $scope.thermo = {minTemp:16.0, maxTemp:27.0, curTemp:21.0};
+
+$scope.sliderCallback = function sliderCallback(cbkSetValue, cbkSetColor)
+{
+	$scope.cbkSetValue = cbkSetValue;
+	$scope.cbkSetColor = cbkSetColor;
+}
 
 $scope.onSlide = function onSlide (value) 
 {
 	var dif = value - $scope.myui.lastValue;
 	
+	if(dif != 0)
+	{
+	
 	if(dif > ($scope.myui.max - $scope.myui.min) / 2)
 		dif = -1;
 	else if(dif < -($scope.myui.max - $scope.myui.min) / 2)
 		dif = 1;
+	
+	$scope.thermo.curTemp += dif * 0.1;
+	
+	if($scope.thermo.curTemp > $scope.thermo.maxTemp )
+	{
+		$scope.thermo.curTemp = $scope.thermo.maxTemp;
+		$scope.cbkSetColor('', '#ff0000');
+	}
+	else if($scope.thermo.curTemp < $scope.thermo.minTemp )
+	{
+		$scope.thermo.curTemp = $scope.thermo.minTemp;
+		$scope.cbkSetColor('', '#FF0000');
+	}
+	else
+	{
+		$scope.cbkSetColor('', '#dddddd');
+	}
+	
+/*	
+	function transition(value, maximum, start_point, end_point){
+    return start_point + (end_point - start_point)*value/maximum;}
+	
+	var color = "rgb(" + transition(interp, 1, 0, 255) + ',0 ,' + transition(interp, 1, 255, 0) + ')';
+*/
+	
+	$scope.cbkSetValue((Math.round( $scope.thermo.curTemp * 10 ) / 10).toFixed(1) + '*');
+	
+	var interp = ($scope.thermo.curTemp - $scope.thermo.minTemp) / ($scope.thermo.maxTemp - $scope.thermo.minTemp);
 	
 	
 /*	
@@ -59,8 +96,7 @@ $scope.onSlide = function onSlide (value)
 	}
 */	
 
-	if(dif != 0)
-	{
+
 		$scope.myui.lastValue = value;
 		
 		$scope.myui.val  = value;

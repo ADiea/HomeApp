@@ -24,7 +24,8 @@ Copyright (c) 2015 Prince John Wesley <princejohnwesley@gmail.com>
 
 .acs {
   position: relative;
-  border: 30px solid #ddd;
+  border-style: solid;
+  border-color: #387ef5;
   border-radius: 100%;
   -moz-box-sizing: border-box;
   box-sizing: border-box;

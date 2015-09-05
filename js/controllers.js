@@ -29,13 +29,58 @@ $scope.settings = settings;
 //$scope.max = 9;
 
 
-$scope.myui = {min: 0, max:60, value:0, lastValue:0};
+$scope.myui = {min: 0, max:20, value:0, lastValue:0};
 $scope.thermo = {minTemp:16.0, maxTemp:27.0, curTemp:21.0};
 
-$scope.sliderCallback = function sliderCallback(cbkSetValue, cbkSetColor)
+$scope.sliderCallback = function sliderCallback(cbkSetValue, cbkSetColorValue, cbkSetColorTrack, cbkSetSliderValue)
 {
 	$scope.cbkSetValue = cbkSetValue;
-	$scope.cbkSetColor = cbkSetColor;
+	$scope.cbkSetColorValue = cbkSetColorValue;
+	$scope.cbkSetColorTrack = cbkSetColorTrack;
+	$scope.cbkSetSliderValue = cbkSetSliderValue;
+}
+
+$scope.lerp = function lerp(value, start_point, end_point)
+{
+    return start_point + (end_point - start_point)*value;
+}
+
+$scope.onSliderMouseUp = function onSliderMouseUp()
+{
+
+	
+	if($scope.lockSlide === 'down' || $scope.lockSlide === 'up')
+	{
+
+		$scope.cbkSetSliderValue($scope.myui.lastValue);
+	}
+}
+
+$scope.onTrySlide = function onTrySlide (value)
+{
+	
+	
+	if($scope.lockSlide === 'down')
+	{
+	
+		var minVal = $scope.myui.lastValue - 1;
+		if(minVal < $scope.myui.minValue)
+			nimVal = $scope.myui.maxValue;
+		
+		if(value < minVal)
+			return false;
+	}
+	else if($scope.lockSlide === 'up')
+	{
+		var maxVal = $scope.myui.lastValue + 1;
+		if(maxVal > $scope.myui.maxValue)
+			naxVal = $scope.myui.minValue;
+		
+		if(value > maxVal)
+			return false;
+	}
+	
+	return true;
 }
 
 $scope.onSlide = function onSlide (value) 
@@ -55,24 +100,53 @@ $scope.onSlide = function onSlide (value)
 	if($scope.thermo.curTemp > $scope.thermo.maxTemp )
 	{
 		$scope.thermo.curTemp = $scope.thermo.maxTemp;
-		$scope.cbkSetColor('', '#ff0000');
+		$scope.cbkSetColorTrack('#ff0000');
+		
+		$scope.lockSlide = 'up';
 	}
 	else if($scope.thermo.curTemp < $scope.thermo.minTemp )
 	{
 		$scope.thermo.curTemp = $scope.thermo.minTemp;
-		$scope.cbkSetColor('', '#FF0000');
+		$scope.cbkSetColorTrack('#FF0000');
+		
+		$scope.lockSlide = 'down';
 	}
 	else
 	{
-		$scope.cbkSetColor('', '#dddddd');
+		$scope.cbkSetColorTrack('#387ef5');
+		$scope.lockSlide = 'none';
+		
+		$scope.myui.lastValue = value;
+		$scope.myui.val  = value;
 	}
 	
-/*	
-	function transition(value, maximum, start_point, end_point){
-    return start_point + (end_point - start_point)*value/maximum;}
 	
-	var color = "rgb(" + transition(interp, 1, 0, 255) + ',0 ,' + transition(interp, 1, 255, 0) + ')';
-*/
+	var iniR = 0, iniG = 128, iniB = 255,
+		midR =255, midG = 255, midB = 255,
+		finR = 255, finG = 128, finB = 0;
+
+	var interp = ($scope.thermo.curTemp -  $scope.thermo.minTemp) / ( $scope.thermo.maxTemp -  $scope.thermo.minTemp);
+	
+	var lertR, lerpG, lerpB;
+	
+	if(interp < 0.5)
+	{
+		lerpR = $scope.lerp(interp*2, iniR, midR);
+		lerpG = $scope.lerp(interp*2, iniG, midG);
+		lerpB = $scope.lerp(interp*2, iniB, midB);
+	}
+	else
+	{
+		lerpR = $scope.lerp((interp-0.5)*2, midR, finR);
+		lerpG = $scope.lerp((interp-0.5)*2, midG, finG);
+		lerpB = $scope.lerp((interp-0.5)*2, midB, finB);	
+	}
+	
+	var color = "rgb(" + lerpR.toFixed(0) + 
+					',' + lerpG.toFixed(0) +
+					',' + lerpB.toFixed(0) + ')';
+	$scope.cbkSetColorValue(color);
+	
 	
 	$scope.cbkSetValue((Math.round( $scope.thermo.curTemp * 10 ) / 10).toFixed(1) + '*');
 	
@@ -97,10 +171,8 @@ $scope.onSlide = function onSlide (value)
 */	
 
 
-		$scope.myui.lastValue = value;
+
 		
-		$scope.myui.val  = value;
-		$scope.$apply();
 		console.log('on slide  delta ' + dif);
 	}
 }

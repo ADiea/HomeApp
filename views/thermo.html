@@ -2,7 +2,7 @@
   <ion-content>
   <ion-list>
    	    
-	<circular-slider shape='Circle' border-Width="2" touch="true" animate='true' on-slide='onSlide' set-callback='sliderCallback' on-slide-end='onSlideEnd' min="myui.min" max="myui.max" value="myui.value">
+	<circular-slider shape='Circle' border-Width="2" indicator-ball-ratio=".33" touch="true" animate='true' on-slider-mouse-up='onSliderMouseUp' on-try-slide='onTrySlide'on-slide='onSlide' set-callback='sliderCallback' on-slide-end='onSlideEnd' min="myui.min" max="myui.max" value="myui.value">
 		{{text_value}}
 	</circular-slider>
 	

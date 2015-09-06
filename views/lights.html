@@ -7,7 +7,7 @@
 
 		 <ion-toggle ng-repeat="light in houseLights"  ng-model="light.enable" toggle-class="toggle-positive">
 			
-			<a style="display:block;" ng-click="openLight({{light.light}})">
+			<a style="display:block;" ng-click="openLight({{light.id}})">
 					{{light.title}}
 			</a>
 			

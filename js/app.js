@@ -33,7 +33,7 @@ angular.module('ionicApp', ['ionic', 'ionicApp.controllers', 'angular.circular-s
   })
 
   .state('app.tests', {
-      url: '/tests',
+      url: '/house/tests',
       views: {
         'menuContent': {
           templateUrl: 'views/tests.html',
@@ -42,7 +42,7 @@ angular.module('ionicApp', ['ionic', 'ionicApp.controllers', 'angular.circular-s
       }
     })
   .state('app.settings', {
-      url: '/settings',
+      url: '/house/settings',
       views: {
         'menuContent': {
           templateUrl: 'views/settings.html',
@@ -56,7 +56,7 @@ angular.module('ionicApp', ['ionic', 'ionicApp.controllers', 'angular.circular-s
       }
     })
    .state('app.lights', {
-      url: '/lights',
+      url: '/house/lights',
       views: {
         'menuContent': {
           templateUrl: 'views/lights.html',
@@ -70,7 +70,7 @@ angular.module('ionicApp', ['ionic', 'ionicApp.controllers', 'angular.circular-s
       }
     })
 	.state('app.thermo', {
-      url: '/thermo',
+      url: '/house/thermo',
       views: {
         'menuContent': {
           templateUrl: 'views/thermo.html',
@@ -82,10 +82,38 @@ angular.module('ionicApp', ['ionic', 'ionicApp.controllers', 'angular.circular-s
 			}
         }
       }
+	})
+	 .state('app.house', {
+      url: '/house',
+      views: {
+        'menuContent': {
+          templateUrl: 'views/house.html',
+          controller: 'AppCtrl',
+		  resolve: {
+			  settings: function(SettingsService) {
+				return SettingsService.getSettings()
+				}
+			}
+        }
+      }
+    })
+	.state('app.fmradio', {
+      url: '/house/fmradio',
+      views: {
+        'menuContent': {
+          templateUrl: 'views/fmradio.html',
+          controller: 'FMRadioCtrl',
+		  resolve: {
+			  settings: function(SettingsService) {
+				return SettingsService.getSettings()
+				}
+			}
+        }
+      }
     });	
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/lights');
+  $urlRouterProvider.otherwise('/app/house');
 })
 .directive('ionslider',function($timeout){
     return{

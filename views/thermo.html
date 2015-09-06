@@ -2,9 +2,46 @@
   <ion-content>
   <ion-list>
    	    
-	<circular-slider shape='Circle' border-Width="2" indicator-ball-ratio=".33" touch="true" animate='true' on-slider-mouse-up='onSliderMouseUp' on-try-slide='onTrySlide'on-slide='onSlide' set-callback='sliderCallback' on-slide-end='onSlideEnd' min="myui.min" max="myui.max" value="myui.value">
-		{{text_value}}
-	</circular-slider>
+	<ion-item class="item-divider">Bedroom</ion-item>
+	
+	<!--
+	<ion-item >
+		<span style="float:left">
+			Target:<strong>{{getThermoSetTemp()}}</strong>
+		</span>
+		
+		<span style="float:right">
+			Temperature: <strong>{{getThermoSensorTemp()}}</strong> 
+		</span>
+	</ion-item>
+	
+	-->
+	
+	<ion-item>
+
+		<span style="float:left;height:100%;">
+		
+			<span >
+				Now: <strong>{{getThermoSensorTemp()}}</strong> 
+			</span>
+			
+			<span style="display:block">
+				Target:<strong>{{getThermoSetTemp()}}</strong>
+				<button ng-mousedown="doTempUp()" class="button button-icon" > <i class="icon ion-arrow-up-a"></i> </button>
+				<button ng-click="doTempDown()" class="button button-icon" > <i class="icon ion-arrow-down-a"></i> </button>
+			</span>
+		
+		</span>	
+
+		<span style="display:inline;float:auto">
+			<circular-slider shape='Circle' border-Width="2" indicator-ball-ratio=".33" touch="true" animate='true' on-slider-mouse-up='onSliderMouseUp' on-try-slide='onTrySlide'on-slide='onSlide' set-callback='sliderCallback' on-slide-end='onSlideEnd' min="myui.min" max="myui.max" value="myui.value">
+				{{text_value}}
+			</circular-slider>
+		</span>
+		
+
+		
+	</ion-item>
 	
 	</ion-list>	
 	</ion-content>

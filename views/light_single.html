@@ -9,11 +9,11 @@
     <form ng-submit="setLight()">
       <div class="list">
         <label class="item">
-			<ionslider  type="single" grid=true min="modalLight.minDim" max="modalLight.maxDim" from="modalLight.curDim" 
+			<ionslider  type="single" grid=true min="modalLight.light.minDim" max="modalLight.light.maxDim" from="modalLight.light.curDim" 
 						on-change="rangeChangeCallback_dim" on-finish="rangeFinishCallback_dim"></ionslider>
         </label>
 		<label class="item">
- 			<ionslider  type="single" grid=true min="modalLight.minSpeed" max="modalLight.maxSpeed" from="modalLight.curSpeed" 
+ 			<ionslider  type="single" grid=true min="modalLight.light.minSpeed" max="modalLight.light.maxSpeed" from="modalLight.light.curSpeed" 
 						on-change="rangeChangeCallback_speed" on-finish="rangeFinishCallback_speed"></ionslider>         
         </label>
         <label class="item">

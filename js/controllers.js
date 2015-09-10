@@ -191,15 +191,36 @@ angular.module('ionicApp.controllers', [])
 		console.log('on slide end  ' + value);
 	}
 })
-.controller('LightsCtrl', function($scope, $ionicModal, $timeout) 
+.controller('LightsCtrl', function($scope, $ionicModal, $interval) 
 {
 	$scope.houseLights = [
-		{id:0, title:"Hall Ceiling", light:{enable:true, minDim:30, maxDim:100, curDim:60, minSpeed:1, maxSpeed:15, curSpeed:5, minTimeOn:1, maxTimeOn:15, curTimeOn:4}},
-		{id:1, title:"Bath Ceiling", light:{enable:true, minDim:50, maxDim:100, curDim:50, minSpeed:1, maxSpeed:15, curSpeed:5, minTimeOn:1, maxTimeOn:15, curTimeOn:4}},
-		{id:2, title:"Kitchen Ambient", light:{enable:true, minDim:0, maxDim:100, curDim:70, minSpeed:1, maxSpeed:15, curSpeed:5, minTimeOn:1, maxTimeOn:15, curTimeOn:4}}
+		{id:0, title:"Hall Ceiling", light:{enable:true, dirty:false,
+											params:[{id:0, toggled:false, name:"Inty", title:"Intensity", min:30, max:90, cur:60, step:1},
+													{id:1, toggled:false, name:"Speed", title:"FadeSpeed", min:1, max:15, cur:5, step:1},
+													{id:2, toggled:false, name:"OnTime", title:"OnTime", min:4, max:956, cur:4, step:4},
+													{id:3, toggled:false, name:"MinInty", title:"MinIntensity", min:10, max:50, cur:30, step:1}]}},
+															
+		{id:1, title:"Bath Ceiling", light:{enable:true, dirty:false,
+											params:[{id:0, toggled:false, name:"Inty", title:"Intensity", min:10, max:100, cur:20, step:1},
+													{id:1, toggled:false, name:"Speed", title:"FadeSpeed", min:1, max:15, cur:5, step:1},
+													{id:2, toggled:false, name:"OnTime", title:"OnTime", min:4, max:956, cur:4, step:4},
+													{id:3, toggled:false, name:"MinInty", title:"MinIntensity", min:10, max:50, cur:30, step:1}]}},
+															
+		{id:2, title:"Kitchen Ambient", light:{enable:true, dirty:false,
+											params:[{id:0, toggled:false, name:"Inty", title:"Intensity", min:0, max:80, cur:30, step:1},
+													{id:1, toggled:false, name:"Speed", title:"FadeSpeed", min:1, max:15, cur:5, step:1},
+													{id:2, toggled:false, name:"OnTime", title:"OnTime", min:4, max:956, cur:4, step:4},
+													{id:3, toggled:false, name:"MinInty", title:"MinIntensity", min:10, max:50, cur:30, step:1}]}},
 	];
 	
+	$scope.serverAnswer = "notStarted";
 	
+	$scope.sendToServer = function sendToServer()
+	{
+			//$scope.houseLights[$scope.modalLight.id].light = $scope.modalLight.light;
+		$scope.serverAnswer = "Sent!";
+		//$scope.closeLight();
+	}
 
 	$ionicModal.fromTemplateUrl('views/light_single.html', {scope: $scope}).then(
 		function(modal) 
@@ -208,23 +229,41 @@ angular.module('ionicApp.controllers', [])
 		});
 
 	// Triggered in the login modal to close it
-	$scope.closeLight = function() 
+	$scope.closeLight = function closeLight() 
 	{
 		$scope.modal.hide();
+		
+		/*
+		$timeout.cancel($scope.timeoutId);
+		$scope.timeoutId = null;*/
 	};
 
+	$scope.serverSequence = 0;
+
 	// Open the login modal
-	$scope.openLight = function(lightId) 
+	$scope.openLight = function openLight(lightId) 
 	{
 		$scope.modalLight = $scope.houseLights[lightId];
 		$scope.modal.show();
+		
+	/*	$scope.timeoutId = $interval( function() 
+		{
+			$scope.serverSequence++;
+			if($scope.modalLight.dirty)
+			{
+				$scope.modalLight.dirty = false;
+				$scope.serverAnswer = $scope.serverSequence + "_Sending...";
+
+			}
+			else
+			{
+				$scope.serverAnswer = $scope.serverSequence+"_WaitForInput";
+			}
+		}, 1000);*/
 	};
 
-	$scope.setLight = function() 
-	{
-		//$scope.houseLights[$scope.modalLight.id].light = $scope.modalLight.light;
-		$scope.closeLight();
-	};
+	$scope.timeoutId = null;
+
 
 	/*
 		var timeoutId = null;
@@ -251,44 +290,46 @@ angular.module('ionicApp.controllers', [])
 	*/	
 
 
-	$scope.rangeChangeCallback_dim = function(sliderObj)
+	$scope.rangeChangeCallback = function rangeChangeCallback(sliderObj)
 	{ 
-		$scope.modalLight.light.curDim  = sliderObj.from; 
+		var b1 = sliderObj.input[0].id;
+		var b2 = parseInt(sliderObj.input["0"].id);
+		$scope.modalLight.light.params[parseInt(sliderObj.input[0].id)].cur  = sliderObj.from;
+		$scope.modalLight.dirty = true;
 	}
-	$scope.rangeFinishCallback_dim = function(sliderObj)
-	{ 
-		$scope.modalLight.light.curDim  = sliderObj.from; 
+	
+	$scope.doUp = function doUp(id)
+	{
+		$scope.modalLight.light.params[id].cur  += 10;
+		if($scope.modalLight.light.params[id].cur > $scope.modalLight.light.maxDim)
+			$scope.modalLight.light.params[id].cur = $scope.modalLight.light.maxDim;
 	}
-	$scope.rangeChangeCallback_speed = function(sliderObj)
-	{ 
-		$scope.modalLight.light.curSpeed  = sliderObj.from; 
+	
+	$scope.doDown = function doDown(id)
+	{
+		$scope.modalLight.light.params[id].cur -= 10;
+		if($scope.modalLight.light.params[id].cur < $scope.modalLight.light.minDim)
+			$scope.modalLight.light.params[id].cur = $scope.modalLight.light.minDim;
 	}
-	$scope.rangeFinishCallback_speed = function(sliderObj)
-	{ 
-		$scope.modalLight.light.curSpeed  = sliderObj.from;  
-	}
+
 
 
 	/*accordion*/
-	/*
-	  $scope.toggleSettings = function() {
-		if ($scope.isSettingsShown()) 
-		{
-		  $scope.shownSettings = false;
-		}
+	  $scope.toggleSettings = function toggleSettings(id) {
+		if ($scope.isSettingsShown(id)) 
+		  $scope.modalLight.light.params[id].toggle = false;
 		else 
-		{
-		  $scope.shownSettings = true;
-		}
+		  $scope.modalLight.light.params[id].toggle = true;
 	  };
 	  
-	  $scope.isSettingsShown = function() 
+	  $scope.isSettingsShown = function isSettingsShown(id) 
 	  {
-		if($scope.shownSettings)
-			return $scope.shownSettings;
+		if($scope.modalLight.light.params[id].toggle)
+			return $scope.modalLight.light.params[id].toggle;
 		return false;
 	  };
-	*/
+	  
+
 
 })
 .controller('TestsCtrl', function($scope, $stateParams) 

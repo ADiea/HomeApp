@@ -152,6 +152,7 @@ angular.module('ionicApp', ['ionic', 'ionicApp.controllers', 'angular.circular-s
             hideMinMax:'@',
             hideFromTo:'@',
             from:'=',
+			to:'=',
             disable:'=',
             onChange:'=',
             onFinish:'='
@@ -177,7 +178,8 @@ angular.module('ionicApp', ['ionic', 'ionicApp.controllers', 'angular.circular-s
                     from:$scope.from,
                     disable:$scope.disable,
                     onChange:$scope.onChange,
-                    onFinish:$scope.onFinish
+                    onFinish:$scope.onFinish,
+					to:$scope.to
                 });
 
             })();
@@ -191,6 +193,9 @@ angular.module('ionicApp', ['ionic', 'ionicApp.controllers', 'angular.circular-s
             });
             $scope.$watch('from', function(value) {
                 $timeout(function(){ $element.data("ionRangeSlider").update({from: value}); });
+            });
+			$scope.$watch('to', function(value) {
+                $timeout(function(){ $element.data("ionRangeSlider").update({to: value}); });
             });
             $scope.$watch('disable', function(value) {
                 $timeout(function(){ $element.data("ionRangeSlider").update({disable: value}); });

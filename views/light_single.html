@@ -1,32 +1,39 @@
 <ion-modal-view>
   <ion-header-bar>
-    <h1 class="title">Light Settings</h1>
+    <h1 class="title">{{modalLight.title}}</h1>
     <div class="buttons">
       <button class="button button-clear" ng-click="closeLight()">Close</button>
     </div>
   </ion-header-bar>
   <ion-content>
-    <form ng-submit="setLight()">
-      <div class="list">
-        <label class="item">
-			<ionslider  type="double" grid=true min="0" max="modalLight.light.maxDim" from="modalLight.light.minDim" 
-						to="modalLight.light.curDim" 
-						on-change="rangeChangeCallback_dim" on-finish="rangeFinishCallback_dim"></ionslider>
-        </label>
+    <form ng-submit="sendToServer()">
+      <ion-list>
+	
+<div ng-repeat="lightParam in modalLight.light.params">  
+		<ion-item class="item-divider"  ng-class="{active: isSettingsShown({{lightParam.id}})}">
+              <i ng-click="toggleSettings({{lightParam.id}})" class="icon" ng-class="isSettingsShown({{lightParam.id}}) ? 'ion-minus' : 'ion-plus'"></i>
+           {{lightParam.title}}
+			<i  ng-click="doUp({{lightParam.id}})" class="icon ion-arrow-up-a"></i> 
+			<strong>{{lightParam.cur}}</strong>
+			<i ng-click="doDown({{lightParam.id}})"class="icon ion-arrow-down-a"></i> 
+        </ion-item>
+	  
+        <ion-item class="item-accordion" ng-show="isSettingsShown({{lightParam.id}})">
+			<ionslider id="{{lightParam.id}}" prefix="{{lightParam.title}}" type="single" grid=true min="lightParam.min" max="lightParam.max" from="lightParam.cur" 
+						on-change="rangeChangeCallback" on-finish="rangeChangeCallback"></ionslider>
+        </ion-item >
+</div>		
+
+<ion-item>
+	{{serverAnswer}}
+</ion-item>
+
+<ion-item>
+ <button style="display:inline" class="button button-positive" ng-click="sendToServer()">Send</button>
+  <button style="display:inline" class="button" ng-click="closeLight()">Cancel</button>
+</ion-item>
 		
-		<label class="item">
- 			<ionslider  type="single" grid=true min="modalLight.light.minSpeed" max="modalLight.light.maxSpeed" from="modalLight.light.curSpeed" 
-						on-change="rangeChangeCallback_speed" on-finish="rangeFinishCallback_speed"></ionslider>         
-        </label>
-		
-		<label class="item">
- 			<ionslider  type="single" grid=true min="modalLight.light.minTimeOn" max="modalLight.light.maxTimeOn" from="modalLight.light.curTimeOn" 
-						on-change="rangeChangeCallback_TimeOn" on-finish="rangeFinishCallback_TimeOn"></ionslider>         
-        </label>
-        <label class="item">
-          <button class="button button-block button-positive" type="submit">Done</button>
-        </label>
-      </div>
+      </ion-list>
     </form>
   </ion-content>
 </ion-modal-view>

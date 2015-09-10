@@ -119,7 +119,7 @@
         '<span class="irs-bar"></span>';
 
     var single_html =
-        //'<span class="irs-bar-edge"></span>' +
+        '<span class="irs-bar-edge"></span>' +
         '<span class="irs-shadow shadow-single"></span>' +
         '<span class="irs-slider single"></span>';
 
@@ -314,7 +314,7 @@
             postfix: "",
             max_postfix: "",
             decorate_both: true,
-            values_separator: " - ",
+            values_separator: " — ",
 
             disable: false,
 
@@ -445,7 +445,7 @@
 
             if (this.options.type === "single") {
                 this.$cache.cont.append(single_html);
-                //this.$cache.edge = this.$cache.cont.find(".irs-bar-edge");
+                this.$cache.edge = this.$cache.cont.find(".irs-bar-edge");
                 this.$cache.s_single = this.$cache.cont.find(".single");
                 this.$cache.from[0].style.visibility = "hidden";
                 this.$cache.to[0].style.visibility = "hidden";
@@ -547,7 +547,7 @@
 
                 this.$cache.single.on("mousedown.irs_" + this.plugin_count, this.pointerDown.bind(this, "single"));
                 this.$cache.s_single.on("mousedown.irs_" + this.plugin_count, this.pointerDown.bind(this, "single"));
-               // this.$cache.edge.on("mousedown.irs_" + this.plugin_count, this.pointerClick.bind(this, "click"));
+                this.$cache.edge.on("mousedown.irs_" + this.plugin_count, this.pointerClick.bind(this, "click"));
                 this.$cache.shad_single.on("mousedown.irs_" + this.plugin_count, this.pointerClick.bind(this, "click"));
             } else {
                 this.$cache.single.on("touchstart.irs_" + this.plugin_count, this.pointerDown.bind(this, "from"));
@@ -1049,9 +1049,8 @@
 
                 this.drawLabels();
 
-				//this.$cache.bar[0].style.left = "5px";
-                //
-                this.$cache.bar[0].style.width = (this.coords.p_bar_w) + "%";
+                this.$cache.bar[0].style.left = this.coords.p_bar_x + "%";
+                this.$cache.bar[0].style.width = this.coords.p_bar_w + "%";
 
                 if (this.options.type === "single") {
                     this.$cache.s_single[0].style.left = this.coords.p_single + "%";
@@ -1066,7 +1065,6 @@
                         this.$cache.input.data("from", this.result.from);
                     }
                 } else {
-		this.$cache.bar[0].style.left = this.coords.p_bar_x + "%";
                     this.$cache.s_from[0].style.left = this.coords.p_from + "%";
                     this.$cache.s_to[0].style.left = this.coords.p_to + "%";
 

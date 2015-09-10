@@ -23,7 +23,8 @@ angular.module('ionicApp', ['ionic', 'ionicApp.controllers', 'angular.circular-s
   
    $ionicPlatform.registerBackButtonAction(function(e){
     if ($rootScope.backButtonPressedOnceToExit) {
-      $ionicPlatform.exitApp();
+      //$ionicPlatform.exitApp();
+	  navigator.app.exitApp();
     }
 
     else if ($ionicHistory.backView()) {

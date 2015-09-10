@@ -10,7 +10,7 @@
       <ion-list>
 	
 <div ng-repeat="lightParam in modalLight.light.params">  
-		<ion-item class="item-divider"  ng-class="{active: isSettingsShown({{lightParam.id}})}">
+		<ion-item data-tap-disabled="true" class="item-divider"  ng-class="{active: isSettingsShown({{lightParam.id}})}">
               <i ng-click="toggleSettings({{lightParam.id}})" class="icon" ng-class="isSettingsShown({{lightParam.id}}) ? 'ion-minus' : 'ion-plus'"></i>
            {{lightParam.title}}
 			<i  ng-click="doUp({{lightParam.id}})" class="icon ion-arrow-up-a"></i> 

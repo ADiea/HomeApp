@@ -20,6 +20,27 @@ angular.module('ionicApp', ['ionic', 'ionicApp.controllers', 'angular.circular-s
       StatusBar.styleDefault();
     }
   });
+  
+   $ionicPlatform.registerBackButtonAction(function(e){
+    if ($rootScope.backButtonPressedOnceToExit) {
+      ionic.Platform.exitApp();
+    }
+
+    else if ($ionicHistory.backView()) {
+      $ionicHistory.goBack();
+    }
+    else {
+      $rootScope.backButtonPressedOnceToExit = true;
+      window.plugins.toast.showShortCenter(
+        "Press back button again to exit",function(a){},function(b){}
+      );
+      setTimeout(function(){
+        $rootScope.backButtonPressedOnceToExit = false;
+      },2000);
+    }
+    e.preventDefault();
+    return false;
+  },101);
 })
 
 .config(function($stateProvider, $urlRouterProvider) {

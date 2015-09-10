@@ -24,11 +24,12 @@
 			<span >
 				Now: <strong>{{getThermoSensorTemp()}}</strong> 
 			</span>
-			
+			<span style="display:block">&nbsp;</span>
 			<span style="display:block">
-				Target:<strong>{{getThermoSetTemp()}}</strong>
-				<button ng-mousedown="doTempUp()" class="button button-icon" > <i class="icon ion-arrow-up-a"></i> </button>
-				<button ng-click="doTempDown()" class="button button-icon" > <i class="icon ion-arrow-down-a"></i> </button>
+				<span>Target</span>
+				<button style="display:block" ng-click="doTempUp()" class="button button-icon" > <i class="icon ion-arrow-up-a"></i> </button>
+				<span style="display:block"><strong>{{getThermoSetTemp()}}</strong></span>
+				<button style="display:block" ng-click="doTempDown()" class="button button-icon" > <i class="icon ion-arrow-down-a"></i> </button>
 			</span>
 		
 		</span>	

@@ -20,6 +20,8 @@ angular.module('ionicApp.controllers', [])
 	$scope.settings = settings;// = {serverIP : "192.168.0.6"};
 	
 	$scope.radioTitle = "Bathroom Radio";
+	
+	$scope.radioOn = true;
 })
 .controller('ThermoCtrl', function($scope, settings) 
 {
@@ -144,15 +146,13 @@ angular.module('ionicApp.controllers', [])
 				$scope.myui.lastValue = value;
 				$scope.myui.val  = value;
 				
-				if(value % 2)
-				{
 				try
 				{
-					navigator.notification.vibrate(100);
-					}
-					catch(e)
-					{}
+					navigator.notification.vibrate(20);
 				}
+				catch(e)
+				{}
+
 			}
 		}
 		
@@ -194,9 +194,9 @@ angular.module('ionicApp.controllers', [])
 .controller('LightsCtrl', function($scope, $ionicModal, $timeout) 
 {
 	$scope.houseLights = [
-		{id:0, title:"Hall Ceiling", light:{enable:true, minDim:30, maxDim:100, curDim:60, minSpeed:1, maxSpeed:15, curSpeed:5}},
-		{id:1, title:"Bath Ceiling", light:{enable:true, minDim:50, maxDim:100, curDim:50, minSpeed:1, maxSpeed:15, curSpeed:5}},
-		{id:2, title:"Kitchen Ambient", light:{enable:true, minDim:0, maxDim:100, curDim:70, minSpeed:1, maxSpeed:15, curSpeed:5}}
+		{id:0, title:"Hall Ceiling", light:{enable:true, minDim:30, maxDim:100, curDim:60, minSpeed:1, maxSpeed:15, curSpeed:5, minTimeOn:1, maxTimeOn:15, curTimeOn:4}},
+		{id:1, title:"Bath Ceiling", light:{enable:true, minDim:50, maxDim:100, curDim:50, minSpeed:1, maxSpeed:15, curSpeed:5, minTimeOn:1, maxTimeOn:15, curTimeOn:4}},
+		{id:2, title:"Kitchen Ambient", light:{enable:true, minDim:0, maxDim:100, curDim:70, minSpeed:1, maxSpeed:15, curSpeed:5, minTimeOn:1, maxTimeOn:15, curTimeOn:4}}
 	];
 	
 	

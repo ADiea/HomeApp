@@ -55,6 +55,10 @@
     <preference name="phonegap-version"       value="3.7.0" />
 
     <!-- Plugins -->
+	
+	<feature name="Toast">
+  <param name="android-package" value="nl.xservices.plugins.Toast" />
+</feature>
 
     <!-- Core plugins -->
     <gap:plugin name="org.apache.cordova.battery-status" />

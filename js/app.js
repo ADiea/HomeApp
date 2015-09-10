@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('ionicApp', ['ionic', 'ionicApp.controllers', 'angular.circular-slider'/*, 'ionRangeSlider'*/])
 
-.run(function($ionicPlatform) {
+.run(function($rootScope, $ionicPlatform, $ionicHistory) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -23,7 +23,7 @@ angular.module('ionicApp', ['ionic', 'ionicApp.controllers', 'angular.circular-s
   
    $ionicPlatform.registerBackButtonAction(function(e){
     if ($rootScope.backButtonPressedOnceToExit) {
-      ionic.Platform.exitApp();
+      $ionicPlatform.exitApp();
     }
 
     else if ($ionicHistory.backView()) {

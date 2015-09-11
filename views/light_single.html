@@ -29,8 +29,8 @@
         </ion-item>
 	  
         <ion-item class="item-accordion" ng-show="isSettingsShown({{lightParam.id}})">
-			<ionslider id="{{lightParam.id}}" prefix="{{lightParam.title}}" type="single" grid=true min="lightParam.min" max="lightParam.max" from="lightParam.cur" 
-						on-change="rangeChangeCallback" on-finish="rangeChangeCallback"></ionslider>
+			<ionslider id="{{lightParam.id}}" prefix="{{lightParam.title}}:" type="single" grid=true min="lightParam.min" max="lightParam.max" from="lightParam.cur" 
+						on-change="rangeChangeCallback" on-finish="rangeChangeCallbackFinish"></ionslider>
         </ion-item >
 </div>		
 

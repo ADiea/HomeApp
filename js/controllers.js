@@ -207,7 +207,7 @@ angular.module('ionicApp.controllers', [])
 													{id:3, toggled:false, name:"MinInty", title:"MinIntensity", min:10, max:50, cur:30, step:1}]}},
 															
 		{id:2, title:"Kitchen Ambient", light:{enable:true, dirty:false,
-											params:[{id:0, toggled:false, name:"Inty", title:"Intensity", min:0, max:80, cur:30, step:1},
+											params:[{id:0, toggled:false, name:"Inty", title:"Intensity", min:0, max:5, cur:2, step:1},
 													{id:1, toggled:false, name:"Speed", title:"FadeSpeed", min:1, max:15, cur:5, step:1},
 													{id:2, toggled:false, name:"OnTime", title:"OnTime", min:4, max:956, cur:4, step:4},
 													{id:3, toggled:false, name:"MinInty", title:"MinIntensity", min:10, max:50, cur:30, step:1}]}},
@@ -292,24 +292,33 @@ angular.module('ionicApp.controllers', [])
 
 	$scope.rangeChangeCallback = function rangeChangeCallback(sliderObj)
 	{ 
-		var b1 = sliderObj.input[0].id;
-		var b2 = parseInt(sliderObj.input["0"].id);
 		$scope.modalLight.light.params[parseInt(sliderObj.input[0].id)].cur  = sliderObj.from;
 		$scope.modalLight.dirty = true;
+	}
+
+	$scope.rangeChangeCallbackFinish = function rangeChangeCallback(sliderObj)
+	{ 
+		$scope.rangeChangeCallback(sliderObj);
+		$scope.$apply();
 	}
 	
 	$scope.doUp = function doUp(id)
 	{
-		$scope.modalLight.light.params[id].cur  += 10;
-		if($scope.modalLight.light.params[id].cur > $scope.modalLight.light.maxDim)
-			$scope.modalLight.light.params[id].cur = $scope.modalLight.light.maxDim;
+		var delta = Math.round(($scope.modalLight.light.params[id].max - $scope.modalLight.light.params[id].min)/10);
+
+		$scope.modalLight.light.params[id].cur  += delta;
+		
+		if($scope.modalLight.light.params[id].cur > $scope.modalLight.light.params[id].max)
+			$scope.modalLight.light.params[id].cur = $scope.modalLight.light.params[id].max;
 	}
 	
 	$scope.doDown = function doDown(id)
 	{
-		$scope.modalLight.light.params[id].cur -= 10;
-		if($scope.modalLight.light.params[id].cur < $scope.modalLight.light.minDim)
-			$scope.modalLight.light.params[id].cur = $scope.modalLight.light.minDim;
+		var delta = Math.round(($scope.modalLight.light.params[id].max - $scope.modalLight.light.params[id].min)/10);
+
+		$scope.modalLight.light.params[id].cur -= delta;
+		if($scope.modalLight.light.params[id].cur < $scope.modalLight.light.params[id].min)
+			$scope.modalLight.light.params[id].cur = $scope.modalLight.light.params[id].min;
 	}
 
 

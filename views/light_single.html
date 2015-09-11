@@ -9,13 +9,23 @@
     <form ng-submit="sendToServer()">
       <ion-list>
 	
-<div ng-repeat="lightParam in modalLight.light.params">  
-		<ion-item data-tap-disabled="true" class="item-divider"  ng-class="{active: isSettingsShown({{lightParam.id}})}">
-              <i ng-click="toggleSettings({{lightParam.id}})" class="icon" ng-class="isSettingsShown({{lightParam.id}}) ? 'ion-minus' : 'ion-plus'"></i>
+<div  ng-repeat="lightParam in modalLight.light.params">  
+		<ion-item style="vertical-align: middle;" class="item-divider"  ng-class="{active: isSettingsShown({{lightParam.id}})}">
+		
+		<button ng-click="toggleSettings({{lightParam.id}})" class="button button-small button-outline">
+  <i  class="icon" ng-class="isSettingsShown({{lightParam.id}}) ? 'ion-minus' : 'ion-plus'"></i>
+</button>
+              
            {{lightParam.title}}
-			<i  ng-click="doUp({{lightParam.id}})" class="icon ion-arrow-up-a"></i> 
+		   
+		   <button ng-click="doUp({{lightParam.id}})" class="button button-small button-outline">
+			<i   class="icon ion-arrow-up-a"></i> 
+			</button>
 			<strong>{{lightParam.cur}}</strong>
-			<i ng-click="doDown({{lightParam.id}})"class="icon ion-arrow-down-a"></i> 
+			
+			<button ng-click="doDown({{lightParam.id}})" class="button button-small button-outline">
+			<i class="icon ion-arrow-down-a"></i> 
+			</button>
         </ion-item>
 	  
         <ion-item class="item-accordion" ng-show="isSettingsShown({{lightParam.id}})">

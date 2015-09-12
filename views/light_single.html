@@ -1,6 +1,6 @@
 <ion-modal-view>
   <ion-header-bar>
-    <h1 class="title">{{modalLight.title}}</h1>
+    <h1 class="title">{{modalLight.title}} Light</h1>
     <div class="buttons">
       <button class="button button-clear" ng-click="closeLight()">Close</button>
     </div>
@@ -34,14 +34,22 @@
         </ion-item >
 </div>		
 
-<ion-item>
-	{{serverAnswer}}
+<ion-item  has-bouncing="true" class="content">
+	<ion-scroll ng-click="logScrollUp()" delegate-handle="logscroll" zooming="false" direction="y" style="height:100px;">
+			<ul>
+				<li ng-repeat="log in logData" >
+					{{log.log}}
+				</li>
+			</ul>
+	</ion-scroll>
 </ion-item>
 
 <ion-item>
  <button style="display:inline" class="button button-positive" ng-click="sendToServer()">Send</button>
   <button style="display:inline" class="button" ng-click="closeLight()">Cancel</button>
 </ion-item>
+
+
 		
       </ion-list>
     </form>

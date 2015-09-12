@@ -3,8 +3,14 @@
    	    <ion-list>	
 			<label class="item item-input item-stacked-label">
 				<span class="input-label">Server IP</span>
-				<input type="text" placeholder="{{settings.serverIP}}" ng-model="setting.serverIP"></input>
+				<input type="text" placeholder="{{settings.serverURL}}" ng-model="settings.serverURL"></input>
 			</label>
+			
+			<ion-item>
+		<!--	 <button style="display:inline" class="button button-positive" ng-click="saveSettings()">Save</button> -->
+			  <button style="display:inline" class="button" ng-click="defaultSettings()">Restore Defaults</button>
+			</ion-item>
+			
 		</ion-list>	
 	</ion-content>
    	    

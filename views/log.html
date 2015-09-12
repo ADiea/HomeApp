@@ -1,0 +1,16 @@
+<ion-view view-title="Log">
+  <ion-content>
+    
+
+	<ion-scroll ng-click="logScrollUp()" delegate-handle="logscroll" zooming="false" direction="y" >
+			<ul>
+				<li ng-repeat="log in logData" >
+					{{log.log}}
+				</li>
+			</ul>
+	</ion-scroll>
+
+
+
+  </ion-content>
+</ion-view>

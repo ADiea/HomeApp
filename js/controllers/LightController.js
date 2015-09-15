@@ -33,17 +33,17 @@ var _LightCtrl = ionicApp.controller('LightsCtrl', function($scope, $ionicModal,
 		$scope.logData.unshift({log:date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + " " + msg});
 	}
 	
-		 socket.s.on('message', function (data) {
+		 socket.getSocket().on('message', function (data) {
 	
 		$scope.addLog("MSG:" + data);	  
 		});
 	
-	 socket.s.on('new message', function (data) {
+	 socket.getSocket().on('new message', function (data) {
 	 if(data.username)
 		$scope.addLog("["+data.username+"] "+data.message);	  
 		});
 	  
-	  socket.s.on('user joined', function (data) {
+	  socket.getSocket().on('user joined', function (data) {
 		$scope.addLog("Joined: " + data.username);
 	  });
 	
@@ -80,7 +80,7 @@ var _LightCtrl = ionicApp.controller('LightsCtrl', function($scope, $ionicModal,
 		$scope.modalLight = $scope.houseLights[lightId];
 		$scope.modal.show();
 		
-		socket.s.emit('add user', $scope.modalLight.title);
+		socket.getSocket().emit('add user', $scope.modalLight.title);
 		
 		/*
 		$scope.timeoutId = $interval( function() 

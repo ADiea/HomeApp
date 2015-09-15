@@ -1,25 +1,36 @@
 ionicApp.factory('socket',function(socketFactory, SettingsService){
+	
+	var socket = {};
+
 	//Create socket and connect to http://chat.socket.io 
 	var _Socket = null;
-
-	_Socket = resetSocket(_Socket);
 	
-	function resetSocket(mySocket)
+	socket.getSocket = function()
+	{
+		if(_Socket == null)
+		{
+			socket.resetSocket();
+		}
+		
+		return _Socket;
+	}
+
+	socket.resetSocket = function()
 	{
 		var settings = SettingsService.get('settings');
 	
 		if(settings == null)
 		{
-			mySocket = socketFactory();
+			_Socket = socketFactory();
 		}
 		else
 		{
 			var myIoSocket = io.connect(settings.serverURL);
-			mySocket = socketFactory({ ioSocket: myIoSocket });
+			_Socket = socketFactory({ ioSocket: myIoSocket });
 		}
 		
-		return mySocket;
+		return _Socket;
 	}
-
-	return {s:_Socket, reset:resetSocket};
+	
+	return socket;
 })

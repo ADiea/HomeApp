@@ -19,7 +19,7 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 		
 		if($scope.settings.serverURL != $scope.oldSettings.serverURL)
 		{
-			socket.reset(socket.s);
+			socket.resetSocket();
 		}
 	});
 	

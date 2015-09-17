@@ -19,6 +19,13 @@ ionicApp.factory('socket',function(socketFactory, SettingsService){
 	{
 		var settings = SettingsService.get('settings');
 	
+		if(_Socket != null)
+		{
+			_Socket.removeAllListeners();
+			_Socket.disconnect();
+			_Socket = null;
+		}
+		
 		if(settings == null)
 		{
 			_Socket = socketFactory();
@@ -27,6 +34,7 @@ ionicApp.factory('socket',function(socketFactory, SettingsService){
 		{
 			var myIoSocket = io.connect(settings.serverURL);
 			_Socket = socketFactory({ ioSocket: myIoSocket });
+			_Socket.connect();
 		}
 		
 		return _Socket;

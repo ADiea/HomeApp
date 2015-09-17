@@ -22,6 +22,27 @@ var _LightCtrl = ionicApp.controller('LightsCtrl', function($scope, $ionicModal,
 	
 	$scope.logData = logData;
 	
+	$scope.$on('$ionicView.afterEnter', function() 
+	{
+		socket.getSocket().removeAllListeners();
+		
+		socket.getSocket().on('message', function (data) 
+		{
+			$scope.addLog("MSG:" + data);	  
+		});
+	
+		socket.getSocket().on('new message', function (data) 
+		{
+			if(data.username)
+				$scope.addLog("["+data.username+"] "+data.message);	  
+		});
+		  
+		socket.getSocket().on('user joined', function (data) 
+		{
+			$scope.addLog("Joined: " + data.username);
+		});
+	});
+	
 	$scope.logScrollUp = function logScrollUp()
 	{
 		$ionicScrollDelegate.$getByHandle('logscroll').scrollTop();
@@ -33,19 +54,7 @@ var _LightCtrl = ionicApp.controller('LightsCtrl', function($scope, $ionicModal,
 		$scope.logData.unshift({log:date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + " " + msg});
 	}
 	
-		 socket.getSocket().on('message', function (data) {
-	
-		$scope.addLog("MSG:" + data);	  
-		});
-	
-	 socket.getSocket().on('new message', function (data) {
-	 if(data.username)
-		$scope.addLog("["+data.username+"] "+data.message);	  
-		});
-	  
-	  socket.getSocket().on('user joined', function (data) {
-		$scope.addLog("Joined: " + data.username);
-	  });
+		 
 	
 	$scope.serverAnswer = "notStarted";
 	

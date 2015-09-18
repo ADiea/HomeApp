@@ -30,6 +30,26 @@ var _LightCtrl = ionicApp.controller('LightsCtrl', function($scope, $ionicModal,
 		{
 			$scope.addLog("MSG:" + data);	  
 		});
+		
+		socket.getSocket().on('connect', function () 
+		{
+			$scope.addLog("CONNECTED");	  
+		});
+		
+		socket.getSocket().on('connect_error', function (err) 
+		{
+			$scope.addLog("CONN ERR>"+err.type+" : "+err.message);	  
+		});
+		
+		socket.getSocket().on('connect_timeout', function () 
+		{
+			$scope.addLog("CONN TIMEOUT");	  
+		});
+		
+		socket.getSocket().on('reconnecting', function (num) 
+		{
+			$scope.addLog("RECONN #"+num);	  
+		});
 	
 		socket.getSocket().on('new message', function (data) 
 		{
@@ -51,7 +71,8 @@ var _LightCtrl = ionicApp.controller('LightsCtrl', function($scope, $ionicModal,
 	$scope.addLog = function addLog(msg)
 	{
 		var date = new Date();
-		$scope.logData.unshift({log:date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + " " + msg});
+		
+		$scope.logData.unshift({log:date.getHours() + ":" + ('0'+date.getMinutes()).slice(-2) + ":" + ('0'+date.getSeconds()).slice(-2) + " " + msg});
 	}
 	
 		 

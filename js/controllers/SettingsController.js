@@ -19,7 +19,7 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 		
 		if($scope.settings.serverURL != $scope.oldSettings.serverURL)
 		{
-			socket.resetSocket();
+			socket.connectSocket(true);
 		}
 	});
 	
@@ -31,7 +31,7 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 	
 	$scope.defaultSettings = function defaultSettings()
 	{
-		$scope.settings = {serverURL : "http://chat.socket.io"};
+		$scope.settings = {serverURL : "ws://chat.socket.io"};
 		//$state.go('app.house');
 	}
 

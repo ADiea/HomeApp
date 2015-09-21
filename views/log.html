@@ -4,7 +4,7 @@
 
 	<ion-scroll ng-click="logScrollUp()" delegate-handle="logscroll" zooming="false" direction="y" >
 			<ul>
-				<li ng-repeat="log in logData" >
+				<li ng-repeat="log in logData" style="color:{{log.col}}">
 					{{log.log}}
 				</li>
 			</ul>

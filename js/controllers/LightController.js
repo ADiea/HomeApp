@@ -23,44 +23,21 @@ var _LightCtrl = ionicApp.controller('LightsCtrl', function($scope, $ionicModal,
 	$scope.logData = logData;
 	
 	$scope.$on('$ionicView.afterEnter', function() 
-	{
-		socket.getSocket().removeAllListeners();
+	{  
+		socket.setCallbacks({protocol:"light", 
+			//onMessage
+			onMessage:function (data) 
+			{
+				//$scope.addLog("Light Message: " + data);
+			},
+			//onError
+			onError:function (data) 
+			{
+				//$scope.addLog("Light Error: " + data);
+			}
+		);
 		
-		socket.getSocket().on('message', function (data) 
-		{
-			$scope.addLog("MSG:" + data);	  
-		});
-		
-		socket.getSocket().on('connect', function () 
-		{
-			$scope.addLog("CONNECTED");	  
-		});
-		
-		socket.getSocket().on('connect_error', function (err) 
-		{
-			$scope.addLog("CONN ERR>"+err.type+" : "+err.message);	  
-		});
-		
-		socket.getSocket().on('connect_timeout', function () 
-		{
-			$scope.addLog("CONN TIMEOUT");	  
-		});
-		
-		socket.getSocket().on('reconnecting', function (num) 
-		{
-			$scope.addLog("RECONN #"+num);	  
-		});
-	
-		socket.getSocket().on('new message', function (data) 
-		{
-			if(data.username)
-				$scope.addLog("["+data.username+"] "+data.message);	  
-		});
-		  
-		socket.getSocket().on('user joined', function (data) 
-		{
-			$scope.addLog("Joined: " + data.username);
-		});
+		socket.connectSocket();
 	});
 	
 	$scope.logScrollUp = function logScrollUp()
@@ -74,8 +51,6 @@ var _LightCtrl = ionicApp.controller('LightsCtrl', function($scope, $ionicModal,
 		
 		$scope.logData.unshift({log:date.getHours() + ":" + ('0'+date.getMinutes()).slice(-2) + ":" + ('0'+date.getSeconds()).slice(-2) + " " + msg});
 	}
-	
-		 
 	
 	$scope.serverAnswer = "notStarted";
 	
@@ -110,7 +85,7 @@ var _LightCtrl = ionicApp.controller('LightsCtrl', function($scope, $ionicModal,
 		$scope.modalLight = $scope.houseLights[lightId];
 		$scope.modal.show();
 		
-		socket.getSocket().emit('add user', $scope.modalLight.title);
+		socket.send('config '+$scope.modalLight.title);
 		
 		/*
 		$scope.timeoutId = $interval( function() 

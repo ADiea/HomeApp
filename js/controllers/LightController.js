@@ -24,6 +24,7 @@ var _LightCtrl = ionicApp.controller('LightsCtrl', function($scope, $ionicModal,
 	
 	$scope.$on('$ionicView.afterEnter', function() 
 	{  
+	/*
 		socket.setCallbacks({protocol:"light", 
 			//onMessage
 			onMessage:function (data) 
@@ -35,8 +36,8 @@ var _LightCtrl = ionicApp.controller('LightsCtrl', function($scope, $ionicModal,
 			{
 				//$scope.addLog("Light Error: " + data);
 			}
-		);
-		
+		});
+	*/
 		socket.connectSocket();
 	});
 	

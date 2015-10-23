@@ -1,9 +1,95 @@
-var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings) 
+var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, socket, logData, commWeb) 
 {
 	$scope.settings = settings;
 
 	$scope.myui = {min: 0, max:20, value:0, lastValue:0, halfValue:10};
 	$scope.thermo = {minTemp:16.0, maxTemp:27.0, curTemp:21.0, curSensorTemp:22, curTempSymbol:'C'};
+	
+	$scope.houseTH = [
+		{id:0, sensorID:0, title:"Bedroom Temp", dirty:false, minTemp:16.0, maxTemp:27.0, curTemp:21.0, curSensorTemp:22, curTempSymbol:'C'},
+	];
+	
+	$scope.addLog = function addLog(msg)
+	{
+		var date = new Date();
+		
+		$scope.logData.unshift({log:date.getHours() + ":" + ('0'+date.getMinutes()).slice(-2) + ":" + ('0'+date.getSeconds()).slice(-2) + " " + msg});
+	}
+	
+	$scope.$on('$ionicView.afterEnter', function() 
+	{  
+		socket.setCallbacks({protocol:commWeb.eCommWebMsgTYpes.cwReplyTHs, 
+			//onMessage
+			onMessage:function (data) 
+			{
+				$scope.addLog("Msg cwReplyTHs: " + data);
+				
+				var numTHs, objTH;
+				
+				var curID = 0;
+				
+				var res = commWeb.skipInt(data);
+				
+				if(!res.err)
+				{
+					numTHs = res.result;
+					
+					while(numTHs)
+					{
+						objTH.id = curID++;
+						
+						res = commWeb.skipInt(res.str);
+						if(!res.err) return;
+						
+						objTH.sensorID = res.result;
+						
+						res = commWeb.skipString(res.str);
+						if(!res.err) return;
+						
+						objTH.title = res.result;
+						
+						objTH.dirty = false;
+						
+						objTH.minTemp = 16;
+						
+						objTH.maxTemp = 27;
+						
+						res = commWeb.skipFloat(res.str);
+						if(!res.err) return;
+						
+						objTH.curTemp = res.result;
+						
+						res = commWeb.skipFloat(res.str);
+						if(!res.err) return;
+						
+						objTH.curSensorTemp = res.result;
+						
+						res = commWeb.skipInt(res.str);
+						if(!res.err) return;
+						
+						if(res.result == 1)
+							objTH.curTempSymbol = 'C';
+						else
+							objTH.curTempSymbol = 'F';
+					}
+					
+					
+				}				
+			},
+		});
+		
+		socket.setCallbacks({protocol:commWeb.eCommWebMsgTYpes.cwNotifyTHStatus, 
+			//onMessage
+			onMessage:function (data) 
+			{
+				$scope.addLog("Msg cwNotifyTHStatus: " + data);
+			},
+		});		
+	
+		socket.connectSocket();
+		
+		socket.send(commWeb.eCommWebMsgTYpes.cwGetTHs+";");
+	});
 	
 	$scope.getThermoSetTemp = function getThermoSetTemp()
 	{

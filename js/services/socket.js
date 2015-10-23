@@ -1,4 +1,4 @@
-ionicApp.factory('socket',function(socketFactory, SettingsService, LogDataService){
+ionicApp.factory('socket',function(socketFactory, SettingsService, LogDataService, commWeb){
 	
 	var socket = {};
 
@@ -88,13 +88,16 @@ ionicApp.factory('socket',function(socketFactory, SettingsService, LogDataServic
 			{
 				LogDataService.addLog("MSG:"+evt.data);
 				
-				var message = JSON.parse(evt.data);
+				var res = commWeb.skipInt(evt.data);
 				
-				for(var i=0; i< _Callbacks.length; i++)
-				{
-					if(_Callbacks[i].protocol == message.proto)
+				if(!res.err)
+				{	
+					for(var i=0; i < _Callbacks.length; i++)
 					{
-						_Callbacks[i].onMessage(message);
+						if(_Callbacks[i].protocol == res.result)
+						{
+							_Callbacks[i].onMessage(res.str);
+						}
 					}
 				}
 			};
@@ -102,16 +105,6 @@ ionicApp.factory('socket',function(socketFactory, SettingsService, LogDataServic
 			{
 				LogDataService.addLog("ERR:"+evt.data, "#f00");
 				_reconnNo ++;
-				
-				var message = JSON.parse(evt.data);
-				
-				for(var i=0; i < _Callbacks.length; i++)
-				{
-					if(_Callbacks[i].protocol == message.proto)
-					{
-						_Callbacks[i].onError(message);
-					}
-				}
 			};
 		}
 		

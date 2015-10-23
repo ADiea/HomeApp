@@ -118,7 +118,10 @@ var ionicApp = angular.module('ionicApp', ['ionic', 'angular.circular-slider', '
 		  resolve: {
 			  settings: function(SettingsService) {
 				return SettingsService;
-				}
+				},
+				logData: function(LogDataService) {
+				return LogDataService.getLogData();
+				},
 			}
         }
       }

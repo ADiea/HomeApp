@@ -8,7 +8,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 	
 	$scope.houseTH = [
 		{id:0, sensorID:0, title:"Bedroom Temp", dirty:false, 
-		minTemp:16.0, maxTemp:27.0, curTemp:21.0, curSensorTemp:22, curTempSymbol:'C', timestamp:1445802480  },
+		minTemp:16.0, maxTemp:27.0, curTemp:21.0, curSensorTemp:22, curTempSymbol:'C', timestamp:1445802480, heaterOn:1,  autoPilot:1},
 		/*{id:1, sensorID:0, title:"Bedroom Temp", dirty:false, minTemp:16.0, maxTemp:27.0, curTemp:21.0, curSensorTemp:22, curTempSymbol:'C'},
 	*/
 	];
@@ -133,6 +133,11 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 	$scope.getThermoSensorTemp = function getThermoSetTemp(id)
 	{
 		return (Math.round( $scope.houseTH[id].curSensorTemp * 10 ) / 10).toFixed(1) + '*' + $scope.thermo.curTempSymbol;
+	}
+
+	$scope.getThermoAutoPilot = function getThermoAutoPilot(id)
+	{
+		return $scope.houseTH[id].autoPilot ? "autoPilot mode":"manual mode";
 	}	
 	
 	$scope.sliderCallback = function sliderCallback(cbkSetTextValue, cbkSetColorValue, cbkSetColorTrack, cbkSetSliderValue)

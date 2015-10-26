@@ -1,21 +1,40 @@
 <ion-view view-title="Temperature">
   <ion-content>
+  	<ion-list>
+		
+		<div ng-repeat="th in houseTH">
+		<ion-item class="item-divider">
+			
+			<span>{{th.title}} <strong>{{getThermoSensorTemp(th.id)}}</strong> <p style="display:inline">({{textTimestamp(th.timestamp)}} ago)</p>
+					</span>
+	
+
+<!--
+				<span style="display:inline;float:auto">
+					<circular-slider shape='Circle' border-Width="2" indicator-ball-ratio=".33" touch="true" animate='true' on-slider-mouse-up='onSliderMouseUp' on-try-slide='onTrySlide'on-slide='onSlide' set-callback='sliderCallback' on-slide-end='onSlideEnd' min="myui.min" max="myui.max" value="myui.value">
+						{{text_value}}
+					</circular-slider>
+				</span>
+				-->
+
+			
+		</ion-item>
+		<ion-item >
+		Target: 
+						<button  ng-click="doTempUp(th.id)" class="button button-icon button-small" > <i class="icon ion-arrow-up-a"></i> </button>
+						<span ><strong>{{getThermoSetTemp(th.id)}}</strong></span>
+						<button  ng-click="doTempDown(th.id)" class="button button-icon button-small" > <i class="icon ion-arrow-down-a"></i> </button>
+		</ion-item >
+</div>
+
+	</ion-list>
+  
+  <!--
   <ion-list>
    	    
 	<ion-item class="item-divider">Bedroom</ion-item>
 	
-	<!--
-	<ion-item >
-		<span style="float:left">
-			Target:<strong>{{getThermoSetTemp()}}</strong>
-		</span>
-		
-		<span style="float:right">
-			Temperature: <strong>{{getThermoSensorTemp()}}</strong> 
-		</span>
-	</ion-item>
-	
-	-->
+
 	
 	<ion-item>
 
@@ -45,5 +64,7 @@
 	</ion-item>
 	
 	</ion-list>	
+	-->
+	
 	</ion-content>
 </ion-view>

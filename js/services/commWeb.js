@@ -4,13 +4,14 @@ ionicApp.factory('commWeb',function(){
 	
 	commWeb.skipInt = function skipInt( string)
 	{
-		var ret, i;
+		var ret={};
+		var i;
 		i = string.indexOf(";");
 		
 		if(i != -1)
 		{		
 			ret.result = parseInt(string.substring(0, i));
-			ret.err = isNan(ret.result);
+			ret.err = isNaN(ret.result);
 			ret.str = string.substring(i+1);
 		}
 		else ret.err = true;
@@ -20,13 +21,14 @@ ionicApp.factory('commWeb',function(){
 	
 	commWeb.skipFloat = function skipFloat( string)
 	{
-		var ret, i;
+		var ret={};
+		var i;
 		i = string.indexOf(";");
 		
 		if(i != -1)
 		{
 			ret.result = parseFloat(string.substring(0, i));
-			ret.err = isNan(ret.result);
+			ret.err = isNaN(ret.result);
 			ret.str = string.substring(i+1);
 		}
 		else ret.err = true;
@@ -36,7 +38,8 @@ ionicApp.factory('commWeb',function(){
 	
 	commWeb.skipString = function skipString( string)
 	{
-		var ret, i;
+		var ret={};
+		var i;
 		var done = false;
 		
 		ret.result = "";
@@ -52,7 +55,7 @@ ionicApp.factory('commWeb',function(){
 				break;
 			}
 			
-			if(charAt(i-1) == "\\")
+			if(string.charAt(i-1) == "\\")
 			{
 				ret.result += string.substring(0, i-1) + ';';
 				string = string.substring(i+1);

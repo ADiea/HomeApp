@@ -1,13 +1,39 @@
-var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, socket, logData, commWeb) 
+var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, socket, logData, commWeb, $interval) 
 {
 	$scope.settings = settings;
+	$scope.logData = logData;
 
 	$scope.myui = {min: 0, max:20, value:0, lastValue:0, halfValue:10};
 	$scope.thermo = {minTemp:16.0, maxTemp:27.0, curTemp:21.0, curSensorTemp:22, curTempSymbol:'C'};
 	
 	$scope.houseTH = [
-		{id:0, sensorID:0, title:"Bedroom Temp", dirty:false, minTemp:16.0, maxTemp:27.0, curTemp:21.0, curSensorTemp:22, curTempSymbol:'C'},
+		{id:0, sensorID:0, title:"Bedroom Temp", dirty:false, 
+		minTemp:16.0, maxTemp:27.0, curTemp:21.0, curSensorTemp:22, curTempSymbol:'C', timestamp:1445802480  },
+		/*{id:1, sensorID:0, title:"Bedroom Temp", dirty:false, minTemp:16.0, maxTemp:27.0, curTemp:21.0, curSensorTemp:22, curTempSymbol:'C'},
+	*/
 	];
+	
+	$scope.textTimestamp = function textTimestamp(date)
+	{
+		var seconds = Math.floor(((new Date().getTime()/1000) - date)),
+		interval = Math.floor(seconds / 31536000);
+
+		if (interval > 1) return interval + "y";
+
+		interval = Math.floor(seconds / 2592000);
+		if (interval > 1) return interval + "m";
+
+		interval = Math.floor(seconds / 86400);
+		if (interval >= 1) return interval + "d";
+
+		interval = Math.floor(seconds / 3600);
+		if (interval >= 1) return interval + "h";
+
+		interval = Math.floor(seconds / 60);
+		if (interval > 1) return interval + "m ";
+
+		return Math.floor(seconds) + "s";
+	}
 	
 	$scope.addLog = function addLog(msg)
 	{
@@ -24,7 +50,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 			{
 				$scope.addLog("Msg cwReplyTHs: " + data);
 				
-				var numTHs, objTH;
+				var numTHs;
 				
 				var curID = 0;
 				
@@ -34,17 +60,20 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 				{
 					numTHs = res.result;
 					
-					while(numTHs)
+					$scope.houseTH = [];
+					
+					while(numTHs--)
 					{
+						var objTH={};
 						objTH.id = curID++;
 						
 						res = commWeb.skipInt(res.str);
-						if(!res.err) return;
+						if(res.err) return;
 						
 						objTH.sensorID = res.result;
 						
 						res = commWeb.skipString(res.str);
-						if(!res.err) return;
+						if(res.err) return;
 						
 						objTH.title = res.result;
 						
@@ -55,25 +84,25 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 						objTH.maxTemp = 27;
 						
 						res = commWeb.skipFloat(res.str);
-						if(!res.err) return;
+						if(res.err) return;
 						
 						objTH.curTemp = res.result;
 						
 						res = commWeb.skipFloat(res.str);
-						if(!res.err) return;
+						if(res.err) return;
 						
 						objTH.curSensorTemp = res.result;
 						
 						res = commWeb.skipInt(res.str);
-						if(!res.err) return;
+						if(res.err) return;
 						
 						if(res.result == 1)
 							objTH.curTempSymbol = 'C';
 						else
 							objTH.curTempSymbol = 'F';
+							
+						$scope.houseTH.push(objTH);
 					}
-					
-					
 				}				
 			},
 		});
@@ -91,14 +120,19 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 		socket.send(commWeb.eCommWebMsgTYpes.cwGetTHs+";");
 	});
 	
-	$scope.getThermoSetTemp = function getThermoSetTemp()
+	$scope.timeoutId = $interval( function() 
 	{
-		return (Math.round( $scope.thermo.curTemp * 10 ) / 10).toFixed(1) + '*' + $scope.thermo.curTempSymbol;
+		socket.send(commWeb.eCommWebMsgTYpes.cwGetTHs+";");
+	}, 5000);
+	
+	$scope.getThermoSetTemp = function getThermoSetTemp(id)
+	{
+		return (Math.round( $scope.houseTH[id].curTemp * 10 ) / 10).toFixed(1) + '*' + $scope.thermo.curTempSymbol;
 	}
 	
-	$scope.getThermoSensorTemp = function getThermoSetTemp()
+	$scope.getThermoSensorTemp = function getThermoSetTemp(id)
 	{
-		return (Math.round( $scope.thermo.curSensorTemp * 10 ) / 10).toFixed(1) + '*' + $scope.thermo.curTempSymbol;
+		return (Math.round( $scope.houseTH[id].curSensorTemp * 10 ) / 10).toFixed(1) + '*' + $scope.thermo.curTempSymbol;
 	}	
 	
 	$scope.sliderCallback = function sliderCallback(cbkSetTextValue, cbkSetColorValue, cbkSetColorTrack, cbkSetSliderValue)
@@ -109,22 +143,28 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 		$scope.cbkSetSliderValue = cbkSetSliderValue;
 	}
 	
-	$scope.doTempUp = function doTempUp()
+	$scope.doTempUp = function doTempUp(id)
 	{
-		var val = $scope.myui.lastValue + 1;
-		if(val > $scope.myui.max)
+		$scope.houseTH[id].curTemp += 0.1;
+	
+		/*var val = $scope.houseTH[id].curTemp + 0.1;
+		if(val > $scope.houseTH[id].maxTemp)
 			val = $scope.myui.min;
 		//$scope.onSlide(val);
 		$scope.cbkSetSliderValue(val);
+		*/
 	}
 	
-	$scope.doTempDown = function doTempDown()
+	$scope.doTempDown = function doTempDown(id)
 	{
-		var val = $scope.myui.lastValue - 1;
+		$scope.houseTH[id].curTemp -= 0.1;
+		
+		/*var val = $scope.myui.lastValue - 1;
 		if(val < $scope.myui.min)
 			val = $scope.myui.max;
 		//$scope.onSlide(val);
 		$scope.cbkSetSliderValue(val);
+		*/
 	}
 
 	$scope.lerp = function lerp(value, start_point, end_point)

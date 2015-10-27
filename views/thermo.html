@@ -11,19 +11,20 @@
 			
 			<span style="display:inline;float:left;margin-left:10px;" > 
 				
-				{{th.title}} Temperature: <strong>{{getThermoSensorTemp(th.id)}}</strong>
+				{{th.title}}: <strong>{{getThermoSensorTemp(th.id)}}</strong>
 			</span>
 		
 			<p ng-show="th.autoPilotOn" style="display:inline;float:right">
 
 				{{getThermoHeaterActivity(th.id)}} 
 
+				<strong>{{getThermoSetTemp(th.id)}}</strong> 
+
 				<button ng-disabled="!canTempUp(th.id)"   ng-click="doTempUp(th.id)" on-hold="holdTempSetBtn(true, true, th.id)" on-release="holdTempSetBtn(true, false, th.id)" class="button-icon button-custom" > 
 					<i class="icon ion-ios-plus-outline"></i> 
 				</button>
 				
 				<!--<i class="icon icon-size-normal ion-thermometer"></i>-->
-				<strong>{{getThermoSetTemp(th.id)}}</strong> 
 				
 				<button ng-disabled="!canTempDown(th.id)" ng-click="doTempDown(th.id)" on-hold="holdTempSetBtn(false, true, th.id)" on-release="holdTempSetBtn(false, false, th.id)" class="button-icon button-custom" > 
 					<i class="icon ion-ios-minus-outline"></i> 
@@ -83,7 +84,7 @@
 		<ion-item class="item-accordion" ng-show="uiOpenedTH==th.id">
 
 			<span style="display:inline;float:left"> 
-				<i class="icon icon-size-normal ion-waterdrop"></i> {{th.title}} Humidity: <strong>{{getThermoSensorRH(th.id)}}</strong>
+				<i class="icon icon-size-normal ion-waterdrop"></i>Humidity <strong>{{getThermoSensorRH(th.id)}}</strong>
 			</span>
 
 			

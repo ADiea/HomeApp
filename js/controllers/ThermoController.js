@@ -208,9 +208,9 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 	$scope.getThermoHeaterActivity = function getThermoHeaterActivity(id)
 	{
 		if($scope.houseTH[id].acOn)
-			return "cooling to"
+			return "cool to"
 		else if($scope.houseTH[id].heaterOn) 
-			return "heating to";
+			return "heat to";
 		else return "set to";
 	}
 	

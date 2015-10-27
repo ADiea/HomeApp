@@ -8,7 +8,8 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 	
 	$scope.houseTH = [
 		{id:0, sensorID:0, title:"Bedroom Temp", dirty:false, 
-		minTemp:16.0, maxTemp:27.0, curTemp:21.0, curSensorTemp:22, curTempSymbol:'C', timestamp:1445802480, heaterOn:1,  autoPilot:1},
+		minTemp:16.0, maxTemp:27.0, curTemp:21.0, curSensorTemp:22, curTempSymbol:'C', 
+		timestamp:1445802480, heaterOn:false, acOn:false,  autoPilotOn:true, autoPilotEndProgTimeH:22, autoPilotEndProgTimeM:30},
 		/*{id:1, sensorID:0, title:"Bedroom Temp", dirty:false, minTemp:16.0, maxTemp:27.0, curTemp:21.0, curSensorTemp:22, curTempSymbol:'C'},
 	*/
 	];
@@ -101,6 +102,8 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 						else
 							objTH.curTempSymbol = 'F';
 							
+						objTH.timestamp = (new Date()).getTime();
+							
 						$scope.houseTH.push(objTH);
 					}
 				}				
@@ -134,11 +137,37 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 	{
 		return (Math.round( $scope.houseTH[id].curSensorTemp * 10 ) / 10).toFixed(1) + '*' + $scope.thermo.curTempSymbol;
 	}
-
-	$scope.getThermoAutoPilot = function getThermoAutoPilot(id)
+	
+	$scope.getThermoHeaterActivity = function getThermoHeaterActivity(id)
 	{
-		return $scope.houseTH[id].autoPilot ? "autoPilot mode":"manual mode";
-	}	
+		if($scope.houseTH[id].acOn)
+			return "cooling to"
+		else if($scope.houseTH[id].heaterOn) 
+			return "heating to";
+		else return "maintaining";
+	}
+
+	$scope.getThermoAutoPilotDescr = function getThermoAutoPilotDescr(id)
+	{	
+		var descr = "off (manual)";
+		
+		if($scope.houseTH[id].autoPilotOn)
+		{
+			descr = $scope.getThermoHeaterActivity(id) + ' ' + 
+						$scope.getThermoSetTemp(id) + " until " + 
+						$scope.houseTH[id].autoPilotEndProgTimeH + ":" + $scope.houseTH[id].autoPilotEndProgTimeM;
+		}
+		
+		return descr;
+	}
+	
+	$scope.getThermoAutoPilotDescrSimple = function getThermoAutoPilotDescrSimple(id)
+	{	
+		if($scope.houseTH[id].autoPilotOn)
+			return "autopilot";
+		else
+			return "manual";
+	}
 	
 	$scope.sliderCallback = function sliderCallback(cbkSetTextValue, cbkSetColorValue, cbkSetColorTrack, cbkSetSliderValue)
 	{
@@ -148,9 +177,27 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 		$scope.cbkSetSliderValue = cbkSetSliderValue;
 	}
 	
+	$scope.canTempUp = function canTempUp(id)
+	{
+		if($scope.houseTH[id].curTemp < $scope.houseTH[id].maxTemp)
+			return true;
+		else
+			return false;
+	}
+	
+	$scope.canTempDown = function canTempDown(id)
+	{
+		if($scope.houseTH[id].curTemp > $scope.houseTH[id].minTemp)
+			return true;
+		else
+			return false;
+	}
+	
 	$scope.doTempUp = function doTempUp(id)
 	{
-		$scope.houseTH[id].curTemp += 0.1;
+	
+		if($scope.houseTH[id].curTemp < $scope.houseTH[id].maxTemp)
+			$scope.houseTH[id].curTemp += 0.1;
 	
 		/*var val = $scope.houseTH[id].curTemp + 0.1;
 		if(val > $scope.houseTH[id].maxTemp)
@@ -162,7 +209,8 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 	
 	$scope.doTempDown = function doTempDown(id)
 	{
-		$scope.houseTH[id].curTemp -= 0.1;
+		if($scope.houseTH[id].curTemp > $scope.houseTH[id].minTemp)
+			$scope.houseTH[id].curTemp -= 0.1;
 		
 		/*var val = $scope.myui.lastValue - 1;
 		if(val < $scope.myui.min)

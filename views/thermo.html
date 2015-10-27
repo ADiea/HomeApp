@@ -5,23 +5,40 @@
 		<div ng-repeat="th in houseTH">
 		<ion-item class="item-divider">
 			
-			<span style="display:inline;float:left">{{th.title}} <strong>{{getThermoSensorTemp(th.id)}}</strong> heating to <strong>{{getThermoSetTemp(th.id)}}</strong> 
-			 
+			<span style="display:inline;float:left">{{th.title}} : <strong>{{getThermoSensorTemp(th.id)}}</strong>
+				{{getThermoHeaterActivity(th.id)}} 
+				
+				<!-- on-hold="holdTempUp(th.id, true) on-release="holdTempUp(th.id, false)" -->
+				
+				<button ng-disabled="!canTempUp(th.id)"   ng-click="doTempUp(th.id)" class="button button-icon button-small" > <i class="icon ion-android-add-circle"></i> </button>
+				
+				<strong>{{getThermoSetTemp(th.id)}}</strong> 
+				
+				<button ng-disabled="!canTempDown(th.id)" ng-click="doTempDown(th.id)" class="button button-icon button-small" > <i class="icon ion-android-remove-circle"></i> </button>
 			</span>
 			
-			<p style="display:inline;float:right">{{getThermoAutoPilot(th.id)}}</p>
+			<p style="display:inline;float:right">({{getThermoAutoPilotDescrSimple(th.id)}})</p>
+			
+			
 			
 		</ion-item>
+		<ion-toggle ng-model="th.autoPilotOn" toggle-class="toggle-positive">
+			
+			<span style="display:inline;float:left">Autopilot</span>
+			<p style="display:inline;float:right">{{getThermoAutoPilotDescr(th.id)}}</p>
+			
+		</ion-toggle>
+		
+		<!--
 		<ion-item >
 		
 		<div  style="display:inline;float:left">
 			<div>Now: <strong>{{getThermoSensorTemp(th.id)}}</strong> <p style="display:inline">({{textTimestamp(th.timestamp)}} ago)</p></div>
 			<div style="display:block">
 					Target: <span ><strong>{{getThermoSetTemp(th.id)}}</strong></span>
-							<button  ng-click="doTempUp(th.id)" class="button button-icon button-small" > <i class="icon ion-arrow-up-a"></i> </button>
-							<button  ng-click="doTempDown(th.id)" class="button button-icon button-small" > <i class="icon ion-arrow-down-a"></i> </button>
+							
 			</div>
-			<div> Autopilot
+			
 		</div>
 		
 		<div style="display:inline;float:auto">
@@ -29,6 +46,7 @@
 				{{text_value}}
 			</circular-slider>
 		</div>
+		-->
 		
 		</ion-item >
 </div>

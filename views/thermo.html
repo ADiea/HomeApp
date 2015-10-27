@@ -3,31 +3,60 @@
   	<ion-list>
 		
 		<div ng-repeat="th in houseTH">
-		<ion-item class="item-divider">
+		<ion-toggle class="item-divider" ng-model="th.autoPilotOn" toggle-class="toggle-positive">
 			
-			<span style="display:inline;float:left">{{th.title}} : <strong>{{getThermoSensorTemp(th.id)}}</strong>
+			<button style="display:inline;float:left" ng-click="uiToggleShowTH(th.id)" class="button button-small button-outline">
+					<i  class="icon" ng-class="uiOpenedTH==th.id ? 'ion-minus' : 'ion-plus'"></i>
+				</button>
+			
+			<span style="display:inline;float:left;margin-left:10px;" > 
+				
+				{{th.title}} Temperature: <strong>{{getThermoSensorTemp(th.id)}}</strong>
+			</span>
+		
+			<p ng-show="th.autoPilotOn" style="display:inline;float:right">
+
 				{{getThermoHeaterActivity(th.id)}} 
+
+				<button ng-disabled="!canTempUp(th.id)"   ng-click="doTempUp(th.id)" on-hold="holdTempSetBtn(true, true, th.id)" on-release="holdTempSetBtn(true, false, th.id)" class="button-icon button-custom" > 
+					<i class="icon ion-ios-plus-outline"></i> 
+				</button>
 				
-				<!-- on-hold="holdTempUp(th.id, true) on-release="holdTempUp(th.id, false)" -->
-				
-				<button ng-disabled="!canTempUp(th.id)"   ng-click="doTempUp(th.id)" class="button button-icon button-small" > <i class="icon ion-android-add-circle"></i> </button>
-				
+				<!--<i class="icon icon-size-normal ion-thermometer"></i>-->
 				<strong>{{getThermoSetTemp(th.id)}}</strong> 
 				
-				<button ng-disabled="!canTempDown(th.id)" ng-click="doTempDown(th.id)" class="button button-icon button-small" > <i class="icon ion-android-remove-circle"></i> </button>
-			</span>
+				<button ng-disabled="!canTempDown(th.id)" ng-click="doTempDown(th.id)" on-hold="holdTempSetBtn(false, true, th.id)" on-release="holdTempSetBtn(false, false, th.id)" class="button-icon button-custom" > 
+					<i class="icon ion-ios-minus-outline"></i> 
+				</button>
+			</p>
 			
-			<p style="display:inline;float:right">({{getThermoAutoPilotDescrSimple(th.id)}})</p>
+			<p ng-show="!th.autoPilotOn" style="display:inline;float:right">
+				<!-- <i class="icon icon-size-normal ion-eye-disabled"></i> -->
+				autopilot off
+			</p>
+			<!--
 			
+			<p ng-show="th.autoPilotOn" style="display:inline;float:right">
+				<i style="font-size:20pt" class="icon-size-normal icon ion-eye"></i> 
+			</p>
 			
-			
-		</ion-item>
-		<ion-toggle ng-model="th.autoPilotOn" toggle-class="toggle-positive">
-			
-			<span style="display:inline;float:left">Autopilot</span>
-			<p style="display:inline;float:right">{{getThermoAutoPilotDescr(th.id)}}</p>
+			<p ng-show="!th.autoPilotOn" style="display:inline;float:right">
+				<i style="font-size:20pt" class="icon-size-normal icon ion-eye-disabled"></i> 
+			</p>			
+			-->
 			
 		</ion-toggle>
+
+		<ion-item class="item-accordion" ng-show="uiOpenedTH==th.id" >
+			<span style="display:inline;float:left"><i class="icon icon-size-normal ion-eye"></i>Autopilot</span>
+			
+			<div style="display:inline;float:right">
+				<p style="display:inline;">{{getThermoAutoPilotDescr(th.id)}}</p>
+				<button ng-click="showAutopilotSettings(th.id)" class="button button-small button-outline">
+					<i  class="icon ion-plus"></i>
+				</button>
+			</div>
+		</ion-item>
 		
 		<!--
 		<ion-item >
@@ -46,9 +75,44 @@
 				{{text_value}}
 			</circular-slider>
 		</div>
-		-->
 		
-		</ion-item >
+		
+		</ion-item > -->
+		
+		
+		<ion-item class="item-accordion" ng-show="uiOpenedTH==th.id">
+
+			<span style="display:inline;float:left"> 
+				<i class="icon icon-size-normal ion-waterdrop"></i> {{th.title}} Humidity: <strong>{{getThermoSensorRH(th.id)}}</strong>
+			</span>
+
+			
+			<div style="display:inline;float:right">
+				<p style="display:inline;">{{getHealthyDescrRH(th.id)}}</p>
+				<button ng-click="showRHMoreInfo(th.id)" class="button button-small button-outline">
+					<i  class="icon ion-information"></i>
+				</button>
+			</div>
+
+		</ion-item>
+		
+		<ion-item class="item-accordion" ng-show="uiOpenedTH==th.id">
+			
+			<span style="display:inline;float:left"> 
+				<i class="icon icon-size-normal ion-android-settings"></i> Settings
+			</span>
+			
+			<p style="display:inline;float:right">
+				<button ng-click="showTHSettings(th.id)" class="button button-small button-outline">
+					<i  class="icon ion-plus"></i>
+				</button>
+			</p>
+			
+		</ion-item>
+		
+		
+		
+		
 </div>
 
 	</ion-list>

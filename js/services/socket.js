@@ -7,28 +7,28 @@ ionicApp.factory('socket',function(socketFactory, SettingsService, LogDataServic
 	
 	var _Callbacks = [];
 	
-	
-	
-	var _Connected = false;
+	socket._Connected = false;
 	
 	var _MessageToSend = null;
 	
-	var _reconnNo = 0;
+	socket._reconnNo = 0;
 	
 	socket.send =  function (message) 
 	{
-		LogDataService.addLog("SEND:" + message);
-	
-		if(!_Connected)
+		if(!socket._Connected)
 		{
-			LogDataService.addLog("RECONN #"+_reconnNo);
+			if((socket._reconnNo % 10) == 0)
+				LogDataService.addLog("RECONN #"+socket._reconnNo, "#f00");
+
+			socket._reconnNo++;
 			_MessageToSend = message;
 			socket.connectSocket();
 		}
 		else
 		{
 			_Socket.send(message);
-			LogDataService.addLog("SENT!", "#aaa");
+			LogDataService.addLog("SENT " + message);
+			//LogDataService.addLog("SENT!", "#aaa");
 		}
     }
 	
@@ -54,11 +54,11 @@ ionicApp.factory('socket',function(socketFactory, SettingsService, LogDataServic
 	
 		if(_Socket != null)
 		{
-			if(_force || !_Connected)
+			if(_force || !socket._Connected)
 			{
 				_Socket = null;
-				_Connected = false;
-				_reconnNo = 0;
+				socket._Connected = false;
+				//socket._reconnNo = 0;
 			}
 			else return _Socket;	
 		}
@@ -74,19 +74,19 @@ ionicApp.factory('socket',function(socketFactory, SettingsService, LogDataServic
 			
 			_Socket.onopen = function(evt)
 			{
-				LogDataService.addLog("CONNECTED", "#0f0");
-				_Connected = true;
-				_reconnNo = 0;
+				LogDataService.addLog("CONN ", "#0f0");
+				socket._Connected = true;
+				socket._reconnNo = 0;
 			};
 			_Socket.onclose = function(evt)
 			{
-				LogDataService.addLog("DISCONNECTED", "#f00");
-				_Connected = false;
-				socket.connectSocket();
+				//LogDataService.addLog("DISC ", "#f00");
+				socket._Connected = false;
+				//socket.connectSocket();
 			};
 			_Socket.onmessage = function(evt)
 			{
-				LogDataService.addLog("MSG:"+evt.data);
+				LogDataService.addLog("RX "+evt.data);
 				
 				var res = commWeb.skipInt(evt.data);
 				
@@ -103,8 +103,8 @@ ionicApp.factory('socket',function(socketFactory, SettingsService, LogDataServic
 			};
 			_Socket.onerror = function(evt)
 			{
-				LogDataService.addLog("ERR:"+evt.data, "#f00");
-				_reconnNo ++;
+				//LogDataService.addLog("ERR:"+evt.data, "#f00");
+				//socket._reconnNo ++;
 			};
 		}
 		

@@ -10,9 +10,11 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 		{id:0, sensorID:0, title:"Indoor", dirty:false, 
 		minTemp:16.0, maxTemp:27.0, curTemp:21.0, curSensorTemp:22, curTempSymbol:'C', curSensorHumid:45.2, 
 		timestamp:1445802480, heaterOn:false, acOn:false,  autoPilotOn:true, autoPilotEndProgTimeH:-1, autoPilotEndProgTimeM:-1},
+		
 		{id:1, sensorID:0, title:"Kitchen", dirty:false, 
 		minTemp:16.0, maxTemp:27.0, curTemp:18.0, curSensorTemp:22, curTempSymbol:'C', curSensorHumid:30.2, 
 		timestamp:1445802480, heaterOn:false, acOn:true,  autoPilotOn:true, autoPilotEndProgTimeH:-1, autoPilotEndProgTimeM:-1},
+		
 		{id:2, sensorID:0, title:"Bathroom", dirty:false, 
 		minTemp:16.0, maxTemp:27.0, curTemp:19.0, curSensorTemp:22, curTempSymbol:'C', curSensorHumid:73.2, 
 		timestamp:1445802480, heaterOn:true, acOn:false,  autoPilotOn:true, autoPilotEndProgTimeH:22, autoPilotEndProgTimeM:30},
@@ -103,7 +105,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 						if(res.err) return;
 						objTH.curSensorHumid = res.result;
 												
-						objTH.autoPilotOn = false;
+						
 						objTH.autoPilotEndProgTimeH = -1;
 						objTH.autoPilotEndProgTimeM = -1;
 							
@@ -155,7 +157,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 	timestamp:1445802480, heaterOn:false, acOn:false,  autoPilotOn:true, autoPilotEndProgTimeH:22, autoPilotEndProgTimeM:30},
 	*/
 				var message = commWeb.eCommWebMsgTYpes.cwSetTHParams + ";" + 
-							th.sensorID + ";" + th.curTemp + ";" + th.curTemp + ";"; //+autoPilotOn
+							th.sensorID + ";" + th.curTemp + ";"; //+autoPilotOn
 							
 				socket.send(message);
 				

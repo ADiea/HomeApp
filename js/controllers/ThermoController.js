@@ -251,7 +251,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 		
 		if($scope.houseTH[id].autoPilotOn)
 		{
-			descr = $scope.getThermoHeaterActivity(id) + ' ' + 
+			descr = /*$scope.getThermoHeaterActivity(id)*/'set to' + ' ' + 
 						$scope.getThermoSetTemp(id);
 			if($scope.houseTH[id].autoPilotEndProgTimeH > 0)
 			{
@@ -415,7 +415,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 	
 		if($scope.houseTH[id].curTemp < $scope.houseTH[id].maxTemp)
 		{
-			$scope.houseTH[id].curTemp += 0.1;
+			$scope.houseTH[id].curTemp += 0.5;
 			$scope.houseTH[id].dirty = true;
 		}
 	
@@ -431,7 +431,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 	{
 		if($scope.houseTH[id].curTemp > $scope.houseTH[id].minTemp)
 		{
-			$scope.houseTH[id].curTemp -= 0.1;
+			$scope.houseTH[id].curTemp -= 0.5;
 			$scope.houseTH[id].dirty = true;
 		}
 		

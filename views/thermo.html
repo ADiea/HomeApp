@@ -5,36 +5,49 @@
 		<div ng-repeat="th in houseTH">
 		<ion-toggle class="item-divider" ng-model="th.autoPilotOn" toggle-class="toggle-positive">
 			
-			<button style="display:inline;float:left" ng-click="uiToggleShowTH(th.id)" class="button button-small button-outline">
-					<i  class="icon" ng-class="uiOpenedTH==th.id ? 'ion-minus' : 'ion-plus'"></i>
+			<div style="display:inline-table;">
+				<button style="display:inline;" ng-click="uiToggleShowTH(th.id)" class="button button-small button-outline">
+						<i  class="icon" ng-class="uiOpenedTH==th.id ? 'ion-minus' : 'ion-plus'"></i>
 				</button>
+			</div>
+			<div style="display:inline-table;padding-left:10px;">
+							
+				{{th.title}} 
+							
+				<div ng-show="th.autoPilotOn" style="display:inline;">
+						
+						<!--<p style="display:inline;">set to</p>-->
+						
+						<p style="display:inline;"><i class="icon icon-size-normal ion-eye"></i></p>
+						
+						<strong>{{getThermoSetTemp(th.id)}}</strong> 
+					
+					
+							<button ng-disabled="!canTempDown(th.id)" ng-click="doTempDown(th.id)" on-hold="holdTempSetBtn(false, true, th.id)" on-release="holdTempSetBtn(false, false, th.id)" class="button-icon button-custom" > 
+								<i class="icon ion-arrow-down-a"></i> 
+							</button>
+
+							<button ng-disabled="!canTempUp(th.id)"   ng-click="doTempUp(th.id)" on-hold="holdTempSetBtn(true, true, th.id)" on-release="holdTempSetBtn(true, false, th.id)" class="button-icon button-custom" > 
+								<i class="icon ion-arrow-up-a"></i> 
+							</button>
+					
+				</div>
+				
+				<p ng-show="!th.autoPilotOn" style="display:inline;">
+						
+						<i class="icon ion-thermometer"></i>  <strong>{{getThermoSensorTemp(th.id)}}</strong> ({{textTimestamp(th.timestamp)}} ago)
+						
+				</p>
+
+				<p ng-show="th.autoPilotOn" style="display:list-item;">
+					<i class="icon ion-thermometer"></i>  <strong>{{getThermoSensorTemp(th.id)}}</strong> ({{textTimestamp(th.timestamp)}} ago)
+				</p>
+				
+				<p ng-show="!th.autoPilotOn" style="display:list-item;">
+					<i class="icon icon-size-normal ion-eye-disabled"></i> autopilot off
+				</p>
 			
-			<span style="display:inline;float:left;margin-left:10px;" > 
-				
-				{{th.title}}: <strong>{{getThermoSensorTemp(th.id)}}</strong>
-			</span>
-		
-			<p ng-show="th.autoPilotOn" style="display:inline;float:right">
-
-				{{getThermoHeaterActivity(th.id)}} 
-
-				<strong>{{getThermoSetTemp(th.id)}}</strong> 
-
-				<button ng-disabled="!canTempUp(th.id)"   ng-click="doTempUp(th.id)" on-hold="holdTempSetBtn(true, true, th.id)" on-release="holdTempSetBtn(true, false, th.id)" class="button-icon button-custom" > 
-					<i class="icon ion-ios-plus-outline"></i> 
-				</button>
-				
-				<!--<i class="icon icon-size-normal ion-thermometer"></i>-->
-				
-				<button ng-disabled="!canTempDown(th.id)" ng-click="doTempDown(th.id)" on-hold="holdTempSetBtn(false, true, th.id)" on-release="holdTempSetBtn(false, false, th.id)" class="button-icon button-custom" > 
-					<i class="icon ion-ios-minus-outline"></i> 
-				</button>
-			</p>
-			
-			<p ng-show="!th.autoPilotOn" style="display:inline;float:right">
-				<!-- <i class="icon icon-size-normal ion-eye-disabled"></i> -->
-				autopilot off
-			</p>
+			</div>
 			<!--
 			
 			<p ng-show="th.autoPilotOn" style="display:inline;float:right">

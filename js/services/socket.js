@@ -2,8 +2,7 @@ ionicApp.factory('socket',function(socketFactory, SettingsService, LogDataServic
 	
 	var socket = {};
 
-	//Create socket and connect to http://chat.socket.io 
-	var _Socket = null;
+	socket._Socket = null;
 	
 	var _Callbacks = [];
 	
@@ -26,7 +25,7 @@ ionicApp.factory('socket',function(socketFactory, SettingsService, LogDataServic
 		}
 		else
 		{
-			_Socket.send(message);
+			socket._Socket.send(message);
 			LogDataService.addLog("SENT " + message);
 			//LogDataService.addLog("SENT!", "#aaa");
 		}
@@ -39,12 +38,12 @@ ionicApp.factory('socket',function(socketFactory, SettingsService, LogDataServic
 	
 	socket.getSocket = function()
 	{
-		if(_Socket == null)
+		if(socket._Socket == null)
 		{
 			socket.connectSocket();
 		}
 		
-		return _Socket;
+		return socket._Socket;
 	}
 
 	socket.connectSocket = function(force)
@@ -52,39 +51,38 @@ ionicApp.factory('socket',function(socketFactory, SettingsService, LogDataServic
 		var settings = SettingsService.get('settings');
 		var _force = force || false;
 	
-		if(_Socket != null)
+		if(socket._Socket != null)
 		{
 			if(_force || !socket._Connected)
 			{
-				_Socket = null;
+				socket._Socket = null;
 				socket._Connected = false;
 				//socket._reconnNo = 0;
 			}
-			else return _Socket;	
+			else return socket._Socket;	
 		}
 		
 		if(settings == null)
 		{
-			//_Socket = socketFactory();
-			//connect to external web server
+			LogDataService.addLog("NO SETS", "#f00");
 		}
 		else
 		{
-			_Socket = new WebSocket(settings.serverURL);
+			socket._Socket = new WebSocket(settings.serverURL);
 			
-			_Socket.onopen = function(evt)
+			socket._Socket.onopen = function(evt)
 			{
 				LogDataService.addLog("CONN ", "#0f0");
 				socket._Connected = true;
 				socket._reconnNo = 0;
 			};
-			_Socket.onclose = function(evt)
+			socket._Socket.onclose = function(evt)
 			{
 				//LogDataService.addLog("DISC ", "#f00");
 				socket._Connected = false;
 				//socket.connectSocket();
 			};
-			_Socket.onmessage = function(evt)
+			socket._Socket.onmessage = function(evt)
 			{
 				LogDataService.addLog("RX "+evt.data);
 				
@@ -101,14 +99,14 @@ ionicApp.factory('socket',function(socketFactory, SettingsService, LogDataServic
 					}
 				}
 			};
-			_Socket.onerror = function(evt)
+			socket._Socket.onerror = function(evt)
 			{
 				//LogDataService.addLog("ERR:"+evt.data, "#f00");
 				//socket._reconnNo ++;
 			};
 		}
 		
-		return _Socket;
+		return socket._Socket;
 	}
 	
 	return socket;

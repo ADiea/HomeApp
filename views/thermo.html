@@ -12,7 +12,7 @@
 			</div>
 			<div style="display:inline-table;padding-left:10px;">
 							
-				{{th.title}} 
+				<div style="display:inline-block;min-width:100px;">{{th.title}} </div>
 							
 				<div ng-show="th.autoPilotOn" style="display:inline;">
 						
@@ -23,11 +23,11 @@
 						<strong>{{getThermoSetTemp(th.id)}}</strong> 
 					
 					
-							<button ng-disabled="!canTempDown(th.id)" ng-click="doTempDown(th.id)" on-hold="holdTempSetBtn(false, true, th.id)" on-release="holdTempSetBtn(false, false, th.id)" class="button-icon button-custom" > 
+							<button ng-disabled="!canTempDown(th.id)" ng-click="doTempDown(th.id)" on-hold="holdTempSetBtn(false, true, th.id)" on-release="holdTempSetBtn(false, false, th.id)" class="button button-small button-positive button-outline" > 
 								<i class="icon ion-arrow-down-a"></i> 
 							</button>
 
-							<button ng-disabled="!canTempUp(th.id)"   ng-click="doTempUp(th.id)" on-hold="holdTempSetBtn(true, true, th.id)" on-release="holdTempSetBtn(true, false, th.id)" class="button-icon button-custom" > 
+							<button ng-disabled="!canTempUp(th.id)"   ng-click="doTempUp(th.id)" on-hold="holdTempSetBtn(true, true, th.id)" on-release="holdTempSetBtn(true, false, th.id)" class="button button-small button-positive button-outline" > 
 								<i class="icon ion-arrow-up-a"></i> 
 							</button>
 					
@@ -35,12 +35,12 @@
 				
 				<p ng-show="!th.autoPilotOn" style="display:inline;">
 						
-						<i class="icon ion-thermometer"></i>  <strong>{{getThermoSensorTemp(th.id)}}</strong> ({{textTimestamp(th.timestamp)}} ago)
+						<i class="icon ion-thermometer"></i>  <strong>{{getThermoSensorTemp(th.id)}}</strong> ({{textTimestamp(th.timestamp)}})
 						
 				</p>
 
 				<p ng-show="th.autoPilotOn" style="display:list-item;">
-					<i class="icon ion-thermometer"></i>  <strong>{{getThermoSensorTemp(th.id)}}</strong> ({{textTimestamp(th.timestamp)}} ago)
+					<i class="icon ion-thermometer"></i>  <strong>{{getThermoSensorTemp(th.id)}}</strong> ({{textTimestamp(th.timestamp)}})
 				</p>
 				
 				<p ng-show="!th.autoPilotOn" style="display:list-item;">

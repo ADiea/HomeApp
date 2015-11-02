@@ -10,9 +10,11 @@
 						<i  class="icon" ng-class="uiOpenedTH==th.id ? 'ion-minus' : 'ion-plus'"></i>
 				</button>
 			</div>
-			<div style="display:inline-table;padding-left:10px;">
-							
-				<div style="display:inline-block;min-width:100px;">{{th.title}} </div>
+			<div style="display:inline-table;padding-left:10px;width:100%">
+			
+				<div style="display:inline-block;width:18%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
+					{{th.title}} 
+				</div>
 							
 				<div ng-show="th.autoPilotOn" style="display:inline;">
 						
@@ -35,12 +37,19 @@
 				
 				<p ng-show="!th.autoPilotOn" style="display:inline;">
 						
-						<i class="icon ion-thermometer"></i>  <strong>{{getThermoSensorTemp(th.id)}}</strong> ({{textTimestamp(th.timestamp)}})
-						
+						<i class="icon ion-thermometer"></i>  
+					<strong>{{getThermoSensorTemp(th.id)}}</strong> 
+					<i style="margin-left:10px" class="icon ion-waterdrop"></i>
+					<strong>{{getThermoSensorRH(th.id)}}</strong>
+					<!--<span style="margin-left:10px" >({{textTimestamp(th.timestamp)}})</span>-->
 				</p>
 
 				<p ng-show="th.autoPilotOn" style="display:list-item;">
-					<i class="icon ion-thermometer"></i>  <strong>{{getThermoSensorTemp(th.id)}}</strong> ({{textTimestamp(th.timestamp)}})
+					<i class="icon ion-thermometer"></i>  
+					<strong>{{getThermoSensorTemp(th.id)}}</strong> 
+					<i style="margin-left:10px" class="icon ion-waterdrop"></i>
+					<strong>{{getThermoSensorRH(th.id)}}</strong>
+					<!--<span style="margin-left:10px" >({{textTimestamp(th.timestamp)}})</span>-->
 				</p>
 				
 				<p ng-show="!th.autoPilotOn" style="display:list-item;">
@@ -123,11 +132,60 @@
 			</p>
 			
 		</ion-item>
+	</div>
+	
+	<div ng-repeat="heater in houseHeat">
+		<ion-item class="item-divider" >
+			
+			<div style="display:inline;">
+				<button style="display:inline;" ng-click="uiToggleShowHeater(heater.id)" class="button button-small button-outline">
+						<i  class="icon" ng-class="uiOpenedHeater==heater.id ? 'ion-minus' : 'ion-plus'"></i>
+				</button>
+			</div>
+			
+			<div style="display:inline-table;padding-left:10px;width:80%">
+			
+				<div style="display:inline-block;width:15%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
+					{{heater.title}} 
+				</div>
+			
+				<div  style="display:inline;">
+							
+						<!--<p style="display:inline;">set to</p>-->
+						
+						<p style="display:inline;"><i class="icon icon-size-normal ion-flame"></i></p>
+						
+						<strong>ON</strong> 
+					
+					
+					
+				</div>
+				<!-- ng-show="!th.autoPilotOn" -->
+				<p  style="display:list-item;">	
+					<i class="icon ion-android-warning"></i>  
+					<strong>None</strong> 
+					<i style="margin-left:10px" class="icon ion-flame"></i>
+					<strong>130 min today</strong>				
+				</p>
+			
+			</div>
+
+		</ion-item>
+
+<!--
+		<ion-item class="item-accordion" ng-show="uiOpenedHeater==heater.id" >
+			<span style="display:inline;float:left"><i class="icon icon-size-normal ion-eye"></i>Autopilot</span>
+			
+			<div style="display:inline;float:right">
+				<p style="display:inline;">{{getThermoAutoPilotDescr(th.id)}}</p>
+				<button ng-click="showAutopilotSettings(th.id)" class="button button-small button-outline">
+					<i  class="icon ion-plus"></i>
+				</button>
+			</div>
+		</ion-item>
+		-->
 		
-		
-		
-		
-</div>
+	</div>
 
 	</ion-list>
   

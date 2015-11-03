@@ -71,6 +71,14 @@ ionicApp.factory('commWeb',function(){
 		return ret;
 	}
 	
+	commWeb.eDeviceTypes = {
+	
+		devTypeLight:0,
+		devTypeTH:1,
+		devTypeHeater:2,
+	
+	},
+	
 	commWeb.eCommWebErrorCodes = {
 		cwErrSuccess:0,
 		cwErrNotImplemented:1,
@@ -89,8 +97,8 @@ ionicApp.factory('commWeb',function(){
 		cwSetLightParams:3,
 		cwNotifyLightStatus:4,
 
-		cwGetTHs:5,
-		cwReplyTHs:6,
+		cwGetDevicesOfType:5,
+		cwReplyDevicesOfType:6,
 		cwSetTHParams:7,
 		cwGetConfortStatus:8,
 		cwReplyConfortStatus:9,
@@ -104,6 +112,8 @@ ionicApp.factory('commWeb',function(){
 		cwReplyMovements:15,
 		cwSetMovementParams:16,
 		cwNotifyMovementStatus:17,
+		
+		cwSetHeaterParams:18,
 
 	//	cwGetDevices:,
 	//	cwReplyDeviceList:,

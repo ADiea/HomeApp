@@ -17,7 +17,8 @@ ionicApp.directive('ionslider',function($timeout){
 			to:'=',
             disable:'=',
             onChange:'=',
-            onFinish:'='
+            onFinish:'=',
+			values:'=',
 
         },
         template:'<div></div>',
@@ -41,7 +42,9 @@ ionicApp.directive('ionslider',function($timeout){
                     disable:$scope.disable,
                     onChange:$scope.onChange,
                     onFinish:$scope.onFinish,
-					to:$scope.to
+					to:$scope.to,
+					values:$scope.values
+					
                 });
 
             })();

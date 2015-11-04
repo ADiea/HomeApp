@@ -4,51 +4,84 @@
 		<div ng-repeat="th in houseTH">
 		<ion-toggle class="item-divider" ng-model="th.autoPilotOn" toggle-class="toggle-positive">
 					
-			<div style="display:inline-table;">
-				<button style="display:inline;" ng-click="uiToggleShowTH(th.id)" class="button button-small button-outline">
-						<i  class="icon" ng-class="uiOpenedTH==th.id ? 'ion-minus' : 'ion-plus'"></i>
-				</button>
-			</div>
+			<table style="width:200px">
 			
-			<div style="display:inline-table;padding-left:10px;width:100%">
-			
-				<div style="display:inline-block;width:18%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
-					{{th.title}} 
-				</div>
-							
-				<div ng-show="th.autoPilotOn" style="display:inline;">
-						<p style="display:inline;"><i class="icon icon-size-normal ion-ios-timer-outline"></i></p>
-						
-						
-						<strong><span class="h2">{{getThermoSetTemp_Int(th.id)}}°</span><span class="h4">{{getThermoSetTemp_Frac(th.id)}}</span></strong>
-						
+				<tr>
+					<td rowspan="2">
+						<button style="display:inline;" ng-click="uiToggleShowTH(th.id)" class="button button-small button-outline">
+							<i  class="icon" ng-class="uiOpenedTH==th.id ? 'ion-minus' : 'ion-plus'"></i>
+						</button>
+					</td>
 					
-						<button ng-disabled="!canTempDown(th.id)" ng-click="doTempDown(th.id)" on-hold="holdTempSetBtn(false, true, th.id)" on-release="holdTempSetBtn(false, false, th.id)" class="button button-small button-positive button-outline" > 
-							<i class="icon ion-arrow-down-a"></i> 
-						</button>
+					<td>
+						<div style="display:inline-block;width:100%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
+							{{th.title}} 
+						</div>
+					</td>
+					
+					<td rowspan="2">
+						<div ng-show="th.autoPilotOn" style="display:inline;text-align:center;">
+							<!--<p style="display:inline;"><i class="icon icon-size-normal ion-ios-timer-outline"></i></p>-->
+							
+							<select-wheel ng-model="data.month" item-height="20" amplitude="2" options="monthOptions" ></select-wheel>
+							
+							<!--
+							
+							<p >
+							<span style="color:#888;" class="h4">{{getThermoSetTemp_Int(th.id)}}</span>
+							<span class="h6" style="vertical-align:top;color:#888;">o</span>
+							<span class="h5" style="vertical-align:top;color:#888;">{{getThermoSetTemp_Frac(th.id)}}</span>
+							</p>
+							
+							<strong><span>
+							<span class="h2">{{getThermoSetTemp_Int(th.id)}}</span>
+							<span class="h5" style="vertical-align:top;">o</span>
+							<span class="h3" style="vertical-align:top;">{{getThermoSetTemp_Frac(th.id)}}</span>
+							</span></strong>
+							
+							<p >
+							<span style="color:#888;" class="h4">{{getThermoSetTemp_Int(th.id)}}</span>
+							<span class="h6" style="vertical-align:top;color:#888;">o</span>
+							<span class="h5" style="vertical-align:top;color:#888;">{{getThermoSetTemp_Frac(th.id)}}</span>
+							</p>
+							
+							-->
+							
+						</div>
+						
+						<p ng-show="!th.autoPilotOn" style="display:inline;">
+							Oprit
+						</p>
+						
+					</td>
+				</tr>
+				
+				<tr>
+					<td>
+						<p style="display:inline;">
+							<i class="icon ion-thermometer"></i>  
+							<strong>{{getThermoSensorTemp(th.id, 0)}}</strong> 
+							<i style="margin-left:10px" class="icon ion-waterdrop"></i>
+							<strong>{{getThermoSensorRH(th.id)}}</strong>
+						</p>
+					</td>
+					<!--
+					<td>
+						<div ng-show="th.autoPilotOn" style="display:inline;">
+							<button ng-disabled="!canTempDown(th.id)" ng-click="doTempDown(th.id)" on-hold="holdTempSetBtn(false, true, th.id)" on-release="holdTempSetBtn(false, false, th.id)" class="button button-small button-positive button-outline" > 
+								<i class="icon ion-arrow-down-a"></i> 
+							</button>
 
-						<button ng-disabled="!canTempUp(th.id)"   ng-click="doTempUp(th.id)" on-hold="holdTempSetBtn(true, true, th.id)" on-release="holdTempSetBtn(true, false, th.id)" class="button button-small button-positive button-outline" > 
-							<i class="icon ion-arrow-up-a"></i> 
-						</button>
-				</div>
-				
-				<p ng-show="!th.autoPilotOn" style="display:inline;">
-					Oprit
-				</p>
-				
-				
-
-				<p style="display:list-item;">
-					<i class="icon ion-thermometer"></i>  
-					<strong>{{getThermoSensorTemp(th.id, 0)}}</strong> 
-					<i style="margin-left:10px" class="icon ion-waterdrop"></i>
-					<strong>{{getThermoSensorRH(th.id)}}</strong>
-				</p>
-				
-				
+							<button ng-disabled="!canTempUp(th.id)"   ng-click="doTempUp(th.id)" on-hold="holdTempSetBtn(true, true, th.id)" on-release="holdTempSetBtn(true, false, th.id)" class="button button-small button-positive button-outline" > 
+								<i class="icon ion-arrow-up-a"></i> 
+							</button>
+						</div>
+					</td>	
+-->		
+				</tr>
 			
-			</div>
-
+			</table>
+			
 		</ion-toggle>
 
 		<ion-item class="item-accordion" ng-show="uiOpenedTH==th.id" >
@@ -73,7 +106,7 @@
 
 			
 			<div style="display:inline;float:right">
-				<p style="display:inline;">incalzire 0.5°/h</p>
+				<p style="display:inline;">incalzire 0.5*/h</p>
 				<button ng-click="showRHMoreInfo(th.id)" class="button button-small button-outline">
 					<i  class="icon ion-plus"></i>
 				</button>

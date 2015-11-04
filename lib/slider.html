@@ -1,0 +1,20 @@
+ <div class="select-wheel">
+      <div class="select-wheel-sel"></div>
+      <ion-scroll zooming="false" on-refresh="onRefresh()" on-scroll="onScroll(event, scrollTop)" direction="y" scrollbar-y="false">
+        <div class="select-wheel-list">
+          <div class="select-wheel-item">
+          </div>
+          <div class="select-wheel-item" ng-repeat="option in options">
+            <div ng-class="{'active': $index === index}" data-value="option.value">
+
+				<span class="h4">{{option.i}}</span>
+							<span class="h6" style="vertical-align:top;">o</span>
+							<span class="h5" style="vertical-align:top;">{{option.f}}</span>
+			
+			</div>
+          </div>
+          <div class="select-wheel-item">
+          </div>
+        </div>
+      </ion-scroll>
+ </div>

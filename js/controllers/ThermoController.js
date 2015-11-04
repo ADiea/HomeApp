@@ -1,5 +1,92 @@
 var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, socket, logData, commWeb, $interval) 
 {
+
+/*
+$scope.sliderLabels = function sliderLabels(idx)
+{
+	var val = 0.5 * idx + 18;
+	var o={};
+	o.i = idx;//parseInt(val)+'';
+	o.f = (parseInt(Math.round(val * 10 ) ) % 10)+'';
+	return 1;
+}*/
+
+$scope.data = {};
+    $scope.data.month = 'march';
+    $scope.monthOptions = [{
+	id:0,
+      i: '18',
+	  f: '0',
+      value: 'january'
+    }, {
+	id:1,
+      i: '18',
+	  f: '5',
+      value: 'february'
+    }, {
+	id:2,
+      i: '19',
+	  f: '0',
+      value: 'march'
+    }, {
+	id:3,
+      i: '19',
+	  f: '5',	
+      label: '19°5',
+      value: 'april'
+    }, {
+	id:4,
+      i: '20',
+	  f: '0',	
+      label: '20',
+      value: 'may'
+    }, {
+	id:5,
+      i: '20',
+	  f: '5',	
+      label: '20*5',
+      value: 'june'
+    }, {
+	id:6,
+      i: '21',
+	  f: '0',	
+      label: '21',
+      value: 'july'
+    }, {
+	id:7,
+      i: '21',
+	  f: '5',	
+      label: '21.5',
+      value: 'august'
+    }, {
+	id:8,
+      i: '22',
+	  f: '0',	
+      label: '22',
+      value: 'september'
+    }, {
+	id:9,
+      i: '22',
+	  f: '5',	
+      label: '22*5',
+      value: 'october'
+    }, {
+	id:10,
+      i: '23',
+	  f: '0',	
+      label: '23',
+      value: 'november'
+    }, {
+	id:11,
+	  i: '23',
+	  f: '5',
+      label: '23*5',
+      value: 'december'
+    }];
+
+
+////////////////////////////////////////////////////////////////
+
 	$scope.settings = settings;
 	$scope.logData = logData;
 
@@ -308,7 +395,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 		var i_part = parseInt($scope.houseTH[id].curTemp);
 		var f_part = parseInt(Math.round( $scope.houseTH[id].curTemp * 10 ) ) % 10;
 		
-		return i_part + '°' + f_part;
+		return i_part + '*' + f_part;
 	}
 	
 	$scope.getThermoSetTemp_Int = function getThermoSetTemp(id)
@@ -323,7 +410,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 	
 	$scope.getThermoSensorRH = function getThermoSensorRH(id)
 	{
-		return (Math.round( $scope.houseTH[id].curSensorHumid * 10 ) / 10).toFixed(1) + '% RH';
+		return (Math.round( $scope.houseTH[id].curSensorHumid * 10 ) / 10).toFixed(1) + '%';
 	}
 	
 	$scope.getThermoSensorTemp = function getThermoSetTemp(id, whichTemp)
@@ -343,7 +430,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 			value = $scope.houseTH[id].curSensorTemp10m;
 		}
 		
-		return (Math.round( value * 10 ) / 10).toFixed(1) + '°' + $scope.thermo.curTempSymbol;
+		return (Math.round( value * 10 ) / 10).toFixed(1) + '*' + $scope.thermo.curTempSymbol;
 	}
 	
 	$scope.getThermoHeaterActivity = function getThermoHeaterActivity(id)

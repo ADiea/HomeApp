@@ -6,10 +6,9 @@
           </div>
           <div class="select-wheel-item" ng-repeat="option in options">
             <div ng-class="{'active': $index === index}" data-value="option.value">
-
-				<span class="h4">{{option.i}}</span>
-							<span class="h6" style="vertical-align:top;">o</span>
-							<span class="h5" style="vertical-align:top;">{{option.f}}</span>
+				<span ng-class="($index === index)?'h3':'h4'" style="color:inherit">{{option.i}}</span>
+				<span ng-class="($index === index)?'h5':'h6'" style="vertical-align:top;color:inherit">o</span>
+				<span ng-class="($index === index)?'h4':'h5'" style="vertical-align:top;color:inherit">{{option.f}}</span>
 			
 			</div>
           </div>

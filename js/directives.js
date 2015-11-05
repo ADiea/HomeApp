@@ -129,7 +129,7 @@ ionicApp.directive('selectWheel', function($ionicScrollDelegate, $ionicGesture, 
                 scope.ngModel = scope.options[index].value;
               });
             }
-			else
+			else if(scope.index != index)
 			{
 			 scope.index = index;
 			 scope.$apply(function() {

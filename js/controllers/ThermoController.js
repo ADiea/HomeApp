@@ -97,15 +97,18 @@ $scope.data = {};
 	$scope.houseTH = [
 		{id:0, sensorID:0, title:"Dormitor", dirty:false, 
 		minTemp:16.0, maxTemp:27.0, curTemp:21.0, curSensorTemp:22, curSensorTemp1m:22.1, curSensorTemp10m:21.9, curTempSymbol:'C', curSensorHumid:45.2, 
-		timestamp:1445802480, heaterOn:false, acOn:false,  autoPilotOn:true, autoPilotEndProgTimeH:-1, autoPilotEndProgTimeM:-1},
+		timestamp:1445802480, heaterOn:false, acOn:false,  autoPilotOn:true, autoPilotEndProgTimeH:-1, autoPilotEndProgTimeM:-1,
+		ui:{index:2}},
 		
 		{id:1, sensorID:0, title:"Living", dirty:false, 
 		minTemp:16.0, maxTemp:27.0, curTemp:18.0, curSensorTemp:22, curSensorTemp1m:22.1, curSensorTemp10m:21.9, curTempSymbol:'C', curSensorHumid:30.2, 
-		timestamp:1445802480, heaterOn:false, acOn:true,  autoPilotOn:true, autoPilotEndProgTimeH:-1, autoPilotEndProgTimeM:-1},
+		timestamp:1445802480, heaterOn:false, acOn:true,  autoPilotOn:true, autoPilotEndProgTimeH:-1, autoPilotEndProgTimeM:-1,
+		ui:{index:5}},
 		
 		{id:2, sensorID:0, title:"Baie", dirty:false, 
 		minTemp:16.0, maxTemp:27.0, curTemp:19.0, curSensorTemp:22, curSensorTemp1m:22.1, curSensorTemp10m:21.9, curTempSymbol:'C', curSensorHumid:73.2, 
-		timestamp:1445802480, heaterOn:true, acOn:false,  autoPilotOn:true, autoPilotEndProgTimeH:22, autoPilotEndProgTimeM:30},
+		timestamp:1445802480, heaterOn:true, acOn:false,  autoPilotOn:true, autoPilotEndProgTimeH:22, autoPilotEndProgTimeM:30,
+		ui:{index:7}},
 	];
 	
 	

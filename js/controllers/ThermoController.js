@@ -433,7 +433,10 @@ $scope.data = {};
 			value = $scope.houseTH[id].curSensorTemp10m;
 		}
 		
-		return (Math.round( value * 10 ) / 10).toFixed(1) + '*' + $scope.thermo.curTempSymbol;
+		var i_part = parseInt(value);
+		var f_part = parseInt(Math.round( value * 10 ) ) % 10;
+		
+		return i_part + '*' + f_part;
 	}
 	
 	$scope.getThermoHeaterActivity = function getThermoHeaterActivity(id)
@@ -476,7 +479,7 @@ $scope.data = {};
 
 	$scope.getThermoAutoPilotDescr = function getThermoAutoPilotDescr(id)
 	{	
-		var descr = "oprit";
+		var descr = "dezactivat";
 		
 		if($scope.houseTH[id].autoPilotOn)
 		{

@@ -4,80 +4,67 @@
 		<div ng-repeat="th in houseTH">
 		<ion-toggle class="item-divider" ng-model="th.autoPilotOn" toggle-class="toggle-positive">
 					
-			<table style="width:200px">
+			<table style="width:100%">
 			
 				<tr>
-					<td rowspan="2">
+					<td rowspan="2" style="vertical-align:middle">
 						<button style="display:inline;" ng-click="uiToggleShowTH(th.id)" class="button button-small button-outline">
 							<i  class="icon" ng-class="uiOpenedTH==th.id ? 'ion-minus' : 'ion-plus'"></i>
 						</button>
 					</td>
 					
-					<td>
-						<div style="display:inline-block;width:100%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
+					<td > <!-- vertical-align="center" -->
+						<!-- <div style="display:inline-block;width:100%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"> -->
+							<span class="h3">
 							{{th.title}} 
-						</div>
+							</span>
+						<!--</div>-->
 					</td>
 					
-					<td rowspan="2">
-						<div ng-show="th.autoPilotOn" style="display:inline;text-align:center;">
+					<td style="text-align:right;"> <!-- rowspan="2" -->
+						<div style="display:inline;">
 							<!--<p style="display:inline;"><i class="icon icon-size-normal ion-ios-timer-outline"></i></p>-->
 							
-							<select-wheel ng-model="th.ui.index" item-height="20" amplitude="2" options="monthOptions" ></select-wheel>
-							
 							<!--
-							
-							<p >
-							<span style="color:#888;" class="h4">{{getThermoSetTemp_Int(th.id)}}</span>
-							<span class="h6" style="vertical-align:top;color:#888;">o</span>
-							<span class="h5" style="vertical-align:top;color:#888;">{{getThermoSetTemp_Frac(th.id)}}</span>
-							</p>
+							<select-wheel ng-model="th.ui.index" item-height="20" amplitude="2" options="monthOptions" ></select-wheel>
+							-->
+	
 							
 							<strong><span>
-							<span class="h2">{{getThermoSetTemp_Int(th.id)}}</span>
-							<span class="h5" style="vertical-align:top;">o</span>
-							<span class="h3" style="vertical-align:top;">{{getThermoSetTemp_Frac(th.id)}}</span>
+							
+							<span class="h2 ng-class:!th.autoPilotOn?'text-disabled':'';">{{getThermoSetTemp_Int(th.id)}}</span>
+							<span class="h5 ng-class:!th.autoPilotOn?'text-disabled':'';" style="vertical-align:top;">o</span>
+							<span class="h3 ng-class:!th.autoPilotOn?'text-disabled':'';" style="vertical-align:top;">{{getThermoSetTemp_Frac(th.id)}}</span>
 							</span></strong>
-							
-							<p >
-							<span style="color:#888;" class="h4">{{getThermoSetTemp_Int(th.id)}}</span>
-							<span class="h6" style="vertical-align:top;color:#888;">o</span>
-							<span class="h5" style="vertical-align:top;color:#888;">{{getThermoSetTemp_Frac(th.id)}}</span>
-							</p>
-							
-							-->
-							
+
 						</div>
 						
-						<p ng-show="!th.autoPilotOn" style="display:inline;">
-							Oprit
-						</p>
 						
 					</td>
 				</tr>
 				
 				<tr>
-					<td>
+					<td style="vertical-align:bottom">
 						<p style="display:inline;">
 							<i class="icon ion-thermometer"></i>  
 							<strong>{{getThermoSensorTemp(th.id, 0)}}</strong> 
-							<i style="margin-left:10px" class="icon ion-waterdrop"></i>
+							<i style="margin-left:5px" class="icon ion-waterdrop"></i>
 							<strong>{{getThermoSensorRH(th.id)}}</strong>
 						</p>
 					</td>
-					<!--
-					<td>
-						<div ng-show="th.autoPilotOn" style="display:inline;">
-							<button ng-disabled="!canTempDown(th.id)" ng-click="doTempDown(th.id)" on-hold="holdTempSetBtn(false, true, th.id)" on-release="holdTempSetBtn(false, false, th.id)" class="button button-small button-positive button-outline" > 
+					
+					<td style="text-align:right;" >
+						<div style="display:inline;">
+							<button ng-disabled="!canTempDown(th.id) || !th.autoPilotOn" ng-click="doTempDown(th.id)" on-hold="holdTempSetBtn(false, true, th.id)" on-release="holdTempSetBtn(false, false, th.id)" class="button button-small button-positive button-outline" > 
 								<i class="icon ion-arrow-down-a"></i> 
 							</button>
 
-							<button ng-disabled="!canTempUp(th.id)"   ng-click="doTempUp(th.id)" on-hold="holdTempSetBtn(true, true, th.id)" on-release="holdTempSetBtn(true, false, th.id)" class="button button-small button-positive button-outline" > 
+							<button ng-disabled="!canTempUp(th.id) || !th.autoPilotOn"   ng-click="doTempUp(th.id)" on-hold="holdTempSetBtn(true, true, th.id)" on-release="holdTempSetBtn(true, false, th.id)" class="button button-small button-positive button-outline" > 
 								<i class="icon ion-arrow-up-a"></i> 
 							</button>
 						</div>
 					</td>	
--->		
+	
 				</tr>
 			
 			</table>

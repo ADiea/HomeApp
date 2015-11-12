@@ -28,7 +28,6 @@
 							<!--
 							<select-wheel ng-model="th.ui.index" item-height="20" amplitude="2" options="monthOptions" ></select-wheel>
 							-->
-	
 							
 							<strong><span>
 							
@@ -38,9 +37,13 @@
 							</span></strong>
 
 						</div>
-						
-						
 					</td>
+					
+					<td style="text-align:center;vertical-align:middle"> 
+						<button ng-disabled="false" ng-click="doTempDown(th.id)" class="button button-small button-positive button-clear" > 
+							<i class="icon ion-ios-undo"></i> 
+						</button>
+					</td>					
 				</tr>
 				
 				<tr>
@@ -55,6 +58,11 @@
 					
 					<td style="text-align:right;" >
 						<div style="display:inline;">
+						
+						<!--	<button ng-disabled="false" ng-click="doTempDown(th.id)" class="button button-small button-positive button-outline" > 
+								<i class="icon ion-ios-undo"></i> 
+							</button> -->
+							
 							<button ng-disabled="!canTempDown(th.id) || !th.autoPilotOn" ng-click="doTempDown(th.id)" on-hold="holdTempSetBtn(false, true, th.id)" on-release="holdTempSetBtn(false, false, th.id)" class="button button-small button-positive button-outline" > 
 								<i class="icon ion-arrow-down-a"></i> 
 							</button>
@@ -64,6 +72,12 @@
 							</button>
 						</div>
 					</td>	
+					
+					<td style="text-align:center;vertical-align:middle"> 
+						<button ng-disabled="false" ng-click="doTempDown(th.id)" class="button button-small button-positive button-clear" > 
+							<i class="icon ion-briefcase"></i> 
+						</button>						
+					</td>
 	
 				</tr>
 			
@@ -87,8 +101,8 @@
 		<ion-item class="item-accordion" ng-show="uiOpenedTH==th.id">
 
 			<span style="display:inline;float:left"> 
-				<i class="icon icon-size-normal ion-image"></i>
-				<span style="margin-left:10px">Stare</span>
+				<i class="icon icon-size-normal ion-ios-speedometer-outline"></i>
+				<span style="margin-left:10px">Istoric</span>
 			</span>
 
 			

@@ -7,11 +7,12 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 		holidayShow:false,
 		holidayStart:
 		{
-			mo:'Oct', 
-			day:'22',
-			year:'2015',
+			mo:10, 
+			day:22,
+			year:0,
 			moOptions:[],
 			dayOptions:[],
+			yearOptions:[]
 		}, 
 		holidayEnd:
 		{
@@ -26,23 +27,56 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 			{
 				var date = new Date($scope.settings.houseHolidayStart*1000);
 				
-				$scope.ui.holidayStart.moOptions = [];
-				for(var i=1;i<13;i++)
-				{
-					var obj={id:i, type:1};
-					obj.value = "L_"+i;
-					
-					$scope.ui.holidayStart.moOptions.push(obj);
-				}
+				var _year = date.getYear();
+				var _month = date.getMonth();
+				var _day = date.getDate();
 				
-				$scope.ui.holidayStart.dayOptions = [];
-				for(var i=1;i<32;i++)
+				
+				var validMonths = ["Ianuarie", "Februarie", "Martie", "Aprilie",
+								"Mai", "Iunie", "Iulie", "August", "Septembrie", 
+								"Octombrie", "Noiembrie", "Decembrie"];
+								
+				var validDaysInMounth = [31, 28, 31, 30, 31, 30, 31, 
+										31, 30, 31, 30, 31];
+										
+				if (_year%4 == 0)	validDaysInMounth[1]++;
+					
+				
+				var monopts = [];
+				for(var i=0;i<12;i++)
 				{
 					var obj={id:i, type:1};
-					obj.value = ""+i;
+					obj.value = validMonths[i];					
+					monopts.push(obj);
+				}
+				$scope.ui.holidayStart.moOptions = monopts;
+				
+				
+				var dayopts = [];
+				for(var i=0;i<validDaysInMounth[_month];i++)
+				{
+					var obj={id:i, type:1};
+					obj.value = (i<9?'0':"")+(i+1)+" ";
 					
-					$scope.ui.holidayStart.dayOptions.push(obj);
-				}				
+					dayopts.push(obj);
+				}	
+				$scope.ui.holidayStart.dayOptions = dayopts;
+
+				var yopts=[]
+				for(var i=_year;i<_year+10;i++)
+				{
+					var obj={id:i, type:1};
+					obj.value = ""+(i+1900);
+					
+					yopts.push(obj);
+				}	
+				
+				$scope.ui.holidayStart.yearOptions = yopts;
+
+
+				$scope.ui.holidayStart.mo = _month;
+				$scope.ui.holidayStart.day = _day-1;
+				$scope.ui.holidayStart.year = 0;
 				
 				//$scope.ui.holidayStart = 
 				//date.getMonth();

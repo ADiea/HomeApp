@@ -66,9 +66,13 @@
 	  min-height:0px;
 	}
 	
+	.select-selection-text{
+		font-weight:bold;
+	}
 	
 	.select-wheel > ion-scroll {
-	  height: 60px;
+	  height: 40px;
+	  
 	}
 
 	select-wheel {
@@ -78,7 +82,9 @@
 	.select-wheel-item {
 	  height: 20px;
 	  overflow:hidden;
-	  //padding: 3px;
+	  min-width:35px;
+	  padding: 0px 5px 0px 5px;
+	  
 	  text-align: center;
 	  display: block;
 	}
@@ -89,23 +95,24 @@
 
 	.select-wheel-item .active {
 	  color: inherit;
+	  //height: 20px;
 	}
 
 	.select-wheel {
-	  position: relative;
-	  left:10px;
+	  //position: relative;
+	  //left:10px;
 	  //display: inline;
 	}
 
 	.select-wheel-sel {
 	 // z-index: 1;
 	  position: absolute;
-	  top: 20px;
+	  top: 10px;
 	  height: 20px;
-	  //left: 50%;
+	  left: 25%;
 	  //width: 70px;
-	  width: 100%;
-	  //margin-left: -35px;
+	  width: 50%;
+	 // margin-left: -35px;
 	  border-top: 1px solid #3232d4;
 	  border-bottom: 1px solid #3232d4;
 	}

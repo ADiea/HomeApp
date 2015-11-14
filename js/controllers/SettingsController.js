@@ -7,8 +7,8 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 		holidayShow:false,
 		holidayStart:
 		{
-			mo:10, 
-			day:22,
+			mo:0, 
+			day:0,
 			year:0,
 			moOptions:[],
 			dayOptions:[],
@@ -74,6 +74,8 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 				$scope.ui.holidayStart.yearOptions = yopts;
 
 
+				
+				
 				$scope.ui.holidayStart.mo = _month;
 				$scope.ui.holidayStart.day = _day-1;
 				$scope.ui.holidayStart.year = 0;
@@ -120,62 +122,5 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 			houseHolidayTemperature:18,
 			};
 		//$state.go('app.house');
-	}
-	
-	//////////////////////////////////
-	
-	
-	 
-    $scope.monthOptions = function  monthOptions()
-	{
-	return [{
-	id:0,
-      type:1,
-      value: 'Ian'
-    }, {
-	id:1,
-      type:1,
-      value: 'Feb'
-    }, {
-	id:2,
-      type:1,
-      value: 'Mar'
-    }, {
-	id:3,
-      type:1,	
-      value: 'Apr'
-    }, {
-	id:4,
-      type:1,
-      value: 'Mai'
-    }, {
-	id:5,
-     type:1,
-      value: 'Iun'
-    }, {
-	id:6,
-     type:1,
-      value: 'Iul'
-    }, {
-	id:7,
-      type:1,
-      value: 'Aug'
-    }, {
-	id:8,
-      type:1,
-      value: 'Sep'
-    }, {
-	id:9,
-      type:1,
-      value: 'Oct'
-    }, {
-	id:10,
-      type:1,
-      value: 'Noi'
-    }, {
-	id:11,
-	  type:1,
-      value: 'Dec'
-    }];
 	}
 });

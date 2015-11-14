@@ -12,7 +12,7 @@
 			</div>
 			
             <div ng-show="option.type == 1" ng-class="{'active': $index === index}" data-value="option.value">
-				<span ng-class="($index === index)?'select-selection-text':''"  style="color:inherit">{{option.value}}</span> <!-- ng-class="($index === index)?'h3':'h4'" -->
+				<span ng-class="(option.id === $index)?'select-selection-text':''"  style="color:inherit">{{option.value}}</span> <!-- ng-class="($index === index)?'h3':'h4'" -->
 			</div>			
 			
           </div>

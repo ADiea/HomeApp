@@ -62,10 +62,11 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 				}	
 				$scope.ui.holidayStart.dayOptions = dayopts;
 
-				var yopts=[]
+				var yopts=[];
+				var j=0;
 				for(var i=_year;i<_year+10;i++)
 				{
-					var obj={id:i, type:1};
+					var obj={id:j++, type:1};
 					obj.value = ""+(i+1900);
 					
 					yopts.push(obj);

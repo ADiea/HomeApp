@@ -93,8 +93,6 @@ ionicApp.directive('selectWheel', function($ionicScrollDelegate, $ionicGesture, 
 		  scope.options = scope.options || [];
 		  
 		  scope.index = scope.ngModel || -1;
-				
-		//scrollHandle.scrollTo(0, scope.index * scope.itemHeight-scope.itemHeight/2);
 
           var resize = function() {
             scrollHandle.scrollTo(0, (scope.index+1) * scope.itemHeight-scope.itemHeight/2);
@@ -132,39 +130,39 @@ ionicApp.directive('selectWheel', function($ionicScrollDelegate, $ionicGesture, 
 			{
 				index = 0;
 				nearestPos = +scope.itemHeight/2;
-				//scrollHandle.scrollTo(0, nearestPos);
-				//scope.index = index;
-				//resize();
+
 			}
 			else if(index >= scope.options.length && scope.options.length > 0)
 			{
 				index = scope.options.length-1;
 				nearestPos = scope.itemHeight*(index)+ scope.itemHeight/2;
-				//scrollHandle.scrollTo(0, nearestPos);
-				//scope.index = index;
-				//resize();
-			}
-			 
-			if (!_touched && !_fixed) {
-				  if(nearestPos != scrollTop)
-					scrollHandle.scrollTo(0, nearestPos);
-				  _fixed = true;
 
-				}
+			}
 			 
 			if(scope.index != index)
 			{
-				scope.index = index;
-				  scope.$apply(function() {
-					scope.ngModel = scope.index;
+				
+				
+				scope.$apply(function() {
+					scope.index = index;
 				  });
-				  
+
 				try
 				{
-					navigator.notification.vibrate(20);
+					navigator.notification.vibrate(10);
 				}
 				catch(e)
 				{}
+			}
+			 
+			if (!_touched && !_fixed) 
+			{
+				if(nearestPos != scrollTop)
+					scrollHandle.scrollTo(0, nearestPos);
+				_fixed = true;
+				scope.$apply(function() {
+					scope.ngModel = scope.index;
+				  });
 			}
           };
 
@@ -173,11 +171,7 @@ ionicApp.directive('selectWheel', function($ionicScrollDelegate, $ionicGesture, 
 
           var unWatchModel = scope.$watch('ngModel', function(newVal) {
             if (typeof newVal != 'undefined' && newVal != scope.index/*&& newVal.value*/) {
-              /*for (var i = 0, len = scope.options.length; i < len; ++i) {
-                if (scope.options[i].value == scope.ngModel) {
-                  scope.index = i;
-                }
-              }*/
+
 			   scope.index = newVal;
 			   //resize();
             }
@@ -186,12 +180,7 @@ ionicApp.directive('selectWheel', function($ionicScrollDelegate, $ionicGesture, 
 		  
 		  var unWatchOptions = scope.$watch('options', function(newVal) {
             if (newVal) {
-             
-/* for (var i = 0, len = scope.options.length; i < len; ++i) {
-                if (scope.options[i].value == scope.ngModel) {
-                  scope.index = i;
-                }
-              }*/
+
 				scope.options = newVal;
 				resize();
 			

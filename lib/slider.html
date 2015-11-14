@@ -1,8 +1,8 @@
  <div class="select-wheel">
-      <div class="select-wheel-sel"></div>
+    <div class="select-wheel-sel"></div>
       <ion-scroll zooming="false" on-refresh="onRefresh()" on-scroll="onScroll(event, scrollTop)" direction="y" scrollbar-y="false">
         <div class="select-wheel-list">
-          <div class="select-wheel-item">
+        <div class="select-wheel-item">
           </div>
           <div class="select-wheel-item" ng-repeat="option in options">
             <div ng-show="option.type == 0" ng-class="{'active': $index === index}" data-value="option.value">

@@ -1,4 +1,4 @@
- <div class="select-wheel">
+ <div class="select-wheel" style="min-width:{{minWidth}}px;">
     <div class="select-wheel-sel"></div>
       <ion-scroll zooming="false" on-refresh="onRefresh()" on-scroll="onScroll(event, scrollTop)" direction="y" scrollbar-y="false">
         <div class="select-wheel-list">
@@ -11,8 +11,10 @@
 				<span ng-class="($index === index)?'h4':'h5'" style="vertical-align:top;color:inherit">{{option.f}}</span>
 			</div>
 			
-            <div ng-show="option.type == 1" ng-class="{'active': $index === index}" data-value="option.value">
-				<span ng-class="(option.id === $index)?'select-selection-text':''"  style="color:inherit">{{option.value}}</span> <!-- ng-class="($index === index)?'h3':'h4'" -->
+            <div ng-show="option.type == 1" ng-class="{'active select-selection-text': $index === index}" data-value="option.value">
+				<!--<span ng-class="(option.id === $index)?'select-selection-text':''"  style="color:inherit;vertical-align:inherit;">-->
+				{{option.value}}
+				<!--</span> <!-- ng-class="($index === index)?'h3':'h4'" -->
 			</div>			
 			
           </div>

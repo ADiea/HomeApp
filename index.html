@@ -72,12 +72,12 @@
 	
 	.select-wheel > ion-scroll {
 	  height: 40px;
-	  
+	  overflow:visible;
 	}
 
 	.select-wheel {
 	  position: relative;
-	  border: 1px solid #aaf;
+	  //border: 1px solid #aaf;
 	  margin-left:5px;
 	   //border-bottom: 1px solid #aaa;
 	  //left:1px;
@@ -85,21 +85,23 @@
 
 	.select-wheel-item {
 	  height: 20px;
-	  overflow:hidden;
-	  min-width:35px;
+	  //overflow:visible;
+	 
 	  padding: 0px 5px 0px 5px;
-	  
 	  text-align: center;
 	  display: block;
 	}
 
 	.select-wheel-item > * {
 	  color: #aaa;
-	 
+	  
+	 font-size: 70%;
 	}
 
 	.select-wheel-item .active {
 	  color: inherit;
+	  
+	font-size: 100%;
 	
 	  //height: 20px;
 	}

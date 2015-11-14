@@ -77,7 +77,8 @@ ionicApp.directive('selectWheel', function($ionicScrollDelegate, $ionicGesture, 
         amplitude: '@',
         ngModel: '=',
         options: '=',
-        index: '='
+        index: '=',
+		minWidth: '='
       },
       templateUrl: 'lib/slider.html',
       compile: function(element) {
@@ -93,6 +94,8 @@ ionicApp.directive('selectWheel', function($ionicScrollDelegate, $ionicGesture, 
 		  scope.options = scope.options || [];
 		  
 		  scope.index = scope.ngModel || -1;
+		  
+		  scope.minWidth = scope.minWidth ||35;
 
           var resize = function() {
             scrollHandle.scrollTo(0, (scope.index+1) * scope.itemHeight-scope.itemHeight/2);

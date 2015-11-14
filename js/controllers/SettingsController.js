@@ -5,62 +5,56 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 	$scope.ui = 
 	{
 		holidayShow:false,
-		holidayStart:
+		holidayEnd:
 		{
 			mo:0, 
 			day:0,
 			year:0,
+			temp:0,
 			moOptions:[],
 			dayOptions:[],
-			yearOptions:[]
+			yearOptions:[],
+			tempOptions:[]
 		}, 
-		holidayEnd:
-		{
-			mo:'Dec', 
-			day:'23',
-			year:'2015'
-		},
+		validMonths:["Ianuarie", "Februarie", "Martie", "Aprilie",
+								"Mai", "Iunie", "Iulie", "August", "Septembrie", 
+								"Octombrie", "Noiembrie", "Decembrie"],
+		validDaysInMounth: [31, 28, 31, 30, 31, 30, 31, 
+										31, 30, 31, 30, 31],
+		
 		toggleHolydayShow:function toggleHolydayShow()
 		{
 			$scope.ui.holidayShow = !$scope.ui.holidayShow;
 			if($scope.ui.holidayShow)
 			{
-				var date = new Date($scope.settings.houseHolidayStart*1000);
+				var date = new Date($scope.settings.houseHolidayEnd*1000);
 				
 				var _year = date.getYear();
 				var _month = date.getMonth();
 				var _day = date.getDate();
 				
-				
-				var validMonths = ["Ianuarie", "Februarie", "Martie", "Aprilie",
-								"Mai", "Iunie", "Iulie", "August", "Septembrie", 
-								"Octombrie", "Noiembrie", "Decembrie"];
-								
-				var validDaysInMounth = [31, 28, 31, 30, 31, 30, 31, 
-										31, 30, 31, 30, 31];
-										
-				if (_year%4 == 0)	validDaysInMounth[1]++;
+				if (_year%4 == 0)	
+					$scope.ui.validDaysInMounth[1] = 29;
+				else
+					$scope.ui.validDaysInMounth[1] = 28;
 					
-				
 				var monopts = [];
 				for(var i=0;i<12;i++)
 				{
 					var obj={id:i, type:1};
-					obj.value = validMonths[i];					
+					obj.value = $scope.ui.validMonths[i];					
 					monopts.push(obj);
 				}
-				$scope.ui.holidayStart.moOptions = monopts;
-				
+				$scope.ui.holidayEnd.moOptions = monopts;
 				
 				var dayopts = [];
-				for(var i=0;i<validDaysInMounth[_month];i++)
+				for(var i=0;i<$scope.ui.validDaysInMounth[_month];i++)
 				{
 					var obj={id:i, type:1};
-					obj.value = (i<9?'0':"")+(i+1)+" ";
-					
+					obj.value = (i<9?'0':"")+(i+1);
 					dayopts.push(obj);
 				}	
-				$scope.ui.holidayStart.dayOptions = dayopts;
+				$scope.ui.holidayEnd.dayOptions = dayopts;
 
 				var yopts=[];
 				var j=0;
@@ -68,24 +62,77 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 				{
 					var obj={id:j++, type:1};
 					obj.value = ""+(i+1900);
-					
 					yopts.push(obj);
 				}	
+				$scope.ui.holidayEnd.yearOptions = yopts;
 				
-				$scope.ui.holidayStart.yearOptions = yopts;
+				var tempopts=[];
+				for(var i=0;i<22;i++)
+				{
+					var obj={id:i, type:0};
 
+					obj.value = 16 + 0.5*i;
+					
+					obj.i = parseInt(obj.value);
+					obj.f = parseInt(Math.round( obj.value * 10 ) ) % 10;
+					
+					tempopts.push(obj);
+				}	
+				$scope.ui.holidayEnd.tempOptions = tempopts;
 
-				
-				
-				$scope.ui.holidayStart.mo = _month;
-				$scope.ui.holidayStart.day = _day-1;
-				$scope.ui.holidayStart.year = 0;
-				
-				//$scope.ui.holidayStart = 
-				//date.getMonth();
+				$scope.ui.holidayEnd.mo = _month;
+				$scope.ui.holidayEnd.day = _day-1;
+				$scope.ui.holidayEnd.year = 0;
 			}
 		}
 	};
+	
+	$scope.ui.holidayEnd.unwatchMo = $scope.$watch('ui.holidayEnd.mo', function(newVal) 
+	{
+		if (typeof newVal != 'undefined' ) 
+		{
+			if (parseInt($scope.ui.holidayEnd.yearOptions[$scope.ui.holidayEnd.year].value)%4 == 0)	
+				$scope.ui.validDaysInMounth[1] = 29;
+			else
+				$scope.ui.validDaysInMounth[1] = 28;
+				
+			var dayopts = [];
+			for(var i=0;i<$scope.ui.validDaysInMounth[$scope.ui.holidayEnd.mo];i++)
+			{
+				var obj={id:i, type:1};
+				obj.value = (i<9?'0':"")+(i+1);
+				dayopts.push(obj);
+			}	
+			$scope.ui.holidayEnd.dayOptions = dayopts;
+		}
+	});
+	
+	$scope.ui.holidayEnd.unwatchYear = $scope.$watch('ui.holidayEnd.year', function(newVal) 
+	{
+		if (typeof newVal != 'undefined' ) 
+		{
+			if (parseInt($scope.ui.holidayEnd.yearOptions[$scope.ui.holidayEnd.year].value)%4 == 0)	
+				$scope.ui.validDaysInMounth[1] = 29;
+			else
+				$scope.ui.validDaysInMounth[1] = 28;
+				
+			var dayopts = [];
+			for(var i=0;i<$scope.ui.validDaysInMounth[$scope.ui.holidayEnd.mo];i++)
+			{
+				var obj={id:i, type:1};
+				obj.value = (i<9?'0':"")+(i+1);
+				dayopts.push(obj);
+			}	
+			$scope.ui.holidayEnd.dayOptions = dayopts;
+		}
+	});
+	
+	
+	$scope.$on('destroy', function() {
+            // Unbind events
+            $scope.ui.holidayEnd.unwatchMo();
+			$scope.ui.holidayEnd.unwatchYear();
+          });
 	
 	$scope.$on('$ionicView.beforeEnter', function() 
 	{
@@ -118,8 +165,8 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 		$scope.settings = {
 			serverURL : "ws://192.168.0.103",
 			houseHoliday:true,
-			houseHolidayStart:1447205294,
-			houseHolidayEnd:1447265294,
+			//householidayStart:1447205294,
+			houseHolidayEnd:1447910991,
 			houseHolidayTemperature:18,
 			};
 		//$state.go('app.house');

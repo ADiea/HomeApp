@@ -1,47 +1,75 @@
 <ion-view view-title="Settings">
   <ion-content>
    	    <ion-list>	
+			
 			<label class="item item-input item-stacked-label">
-				<span class="input-label">Server IP</span>
-				<input type="text" placeholder="{{settings.serverURL}}" ng-model="settings.serverURL"></input>
+				<i style="margin:5px" class="icon icon-size-normal ion-paper-airplane"></i>
+				<span class="input-label">Baza</span>
+				<input style="display:inline" type="text" placeholder="{{settings.serverURL}}" ng-model="settings.serverURL"></input>
 			</label>
 			
-			<ion-toggle class="item-divider" ng-model="settings.houseHoliday" toggle-class="toggle-positive">
+			<ion-toggle ng-model="settings.houseHoliday" toggle-class="toggle-positive">
+			<table style="width:80%">
+			<tr>
+			<td >
 				<button style="display:inline;" ng-click="ui.toggleHolydayShow()" class="button button-small button-outline">
 							<i  class="icon" ng-class="ui.holidayShow ? 'ion-minus' : 'ion-plus'"></i>
 				</button>
-				Holiday Mode
+			</td>
+			<td style="text-align:left;">
+				<i style="margin:5px" class="icon icon-size-normal ion-briefcase"></i>
+				Mod Vacanta
+			</td>
+			<td style="text-align:right;">
+				<span ng-show="settings.houseHoliday">
+					22*3, retur in 22/11/2015
+				</span>
+				
+				<span ng-show="!settings.houseHoliday">
+					dezactivat
+				</span>
+			</td>
+			</tr>
+			</table>
 			</ion-toggle>
 			
 			<ion-item class="item-accordion" ng-show="ui.holidayShow">
-			<table>
-			<tr>
-			<td style="vertical-align:middle">Start</td>
-			<td >
-			<select-wheel min-width="20" ng-model="ui.holidayStart.day" item-height="20" amplitude="2" options="ui.holidayStart.dayOptions" >
-			</select-wheel> 
-			</td>
-			<td ><!--style="border-left: 1px solid #aaa"-->
-			<select-wheel min-width="100" ng-model="ui.holidayStart.mo" item-height="20" amplitude="2" options="ui.holidayStart.moOptions" >
-			</select-wheel> 
-			</td>
-			<td>
-			<select-wheel min-width="35" ng-model="ui.holidayStart.year" item-height="20" amplitude="2" options="ui.holidayStart.yearOptions" >
-			</select-wheel> 
-			<!--</td>
-			<td>{{ui.holidayStart.day+1}} / {{ui.holidayStart.mo+1}} / {{ui.holidayStart.year+2015}}</td>-->
-			</tr>
-			</table>
-				
-				
+				<table>
+					<tr>
+						<td style="vertical-align:middle">
+							<i class="icon icon-size-normal ion-plane"></i>
+							Retur 
+						</td>
+						<td >
+						<select-wheel min-width="35" ng-model="ui.holidayEnd.day" item-height="20" amplitude="2" options="ui.holidayEnd.dayOptions" >
+						</select-wheel> 
+						</td>
+						<td ><!--style="border-left: 1px solid #aaa"-->
+						<select-wheel min-width="100" ng-model="ui.holidayEnd.mo" item-height="20" amplitude="2" options="ui.holidayEnd.moOptions" >
+						</select-wheel> 
+						</td>
+						<td>
+						<select-wheel min-width="35" ng-model="ui.holidayEnd.year" item-height="20" amplitude="2" options="ui.holidayEnd.yearOptions" >
+						</select-wheel> 
+						</td>
+					</tr>
+				</table>
 			</ion-item>
-			
+
 			<ion-item class="item-accordion" ng-show="ui.holidayShow" >
-				End: <input type="date"/>
-			</ion-item>
-			
-			<ion-item class="item-accordion" ng-show="ui.holidayShow" >
-				Temperature: 
+				<table>
+					<tr>
+						<td style="vertical-align:middle">
+							<i class="icon icon-size-normal ion-thermometer"></i> 
+							Temperatura
+						</td>
+						<td >
+							<select-wheel min-width="35" ng-model="ui.holidayEnd.temp" item-height="20" amplitude="2" options="ui.holidayEnd.tempOptions" >
+							</select-wheel> 
+						</td>
+					</tr>
+				</table>
+
 			</ion-item>
 			
 			<ion-item>

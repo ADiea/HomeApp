@@ -4,10 +4,10 @@
         <div class="select-wheel-list">
 		  <div class="select-wheel-item"><div>-</div></div>
           <div class="select-wheel-item" ng-repeat="option in options">
-            <div ng-show="option.type == 0" ng-class="{'active': $index === index}" data-value="option.value">
-				<span ng-class="($index === index)?'h3':'h4'" style="color:inherit">{{option.i}}</span>
-				<span ng-class="($index === index)?'h5':'h6'" style="vertical-align:top;color:inherit">o</span>
-				<span ng-class="($index === index)?'h4':'h5'" style="vertical-align:top;color:inherit">{{option.f}}</span>
+            <div ng-show="option.type == 0" ng-class="{'active select-selection-text': $index === index}" data-value="option.value">
+				<span ng-class="($index === index)?'h4':'h4'" style="margin:0;color:inherit">{{option.i}}</span>
+				<span ng-class="($index === index)?'h5':'h6'" style="margin:0;vertical-align:top;color:inherit">o</span>
+				<span ng-class="($index === index)?'h4':'h5'" style="margin:0;vertical-align:top;color:inherit">{{option.f}}</span>
 			</div>
 			
             <div ng-show="option.type == 1" ng-class="{'active select-selection-text': $index === index}" data-value="option.value">

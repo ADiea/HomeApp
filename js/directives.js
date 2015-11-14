@@ -185,6 +185,12 @@ ionicApp.directive('selectWheel', function($ionicScrollDelegate, $ionicGesture, 
             if (newVal) {
 
 				scope.options = newVal;
+				
+				if(scope.index >= scope.options.length && scope.options.length > 0)
+				{
+					scope.index = scope.options.length-1;
+				}
+				
 				resize();
 			
 			}

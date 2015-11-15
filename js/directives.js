@@ -78,7 +78,9 @@ ionicApp.directive('selectWheel', function($ionicScrollDelegate, $ionicGesture, 
         ngModel: '=',
         options: '=',
         index: '=',
-		minWidth: '='
+		minWidth: '=',
+		type: '@',
+		refresh: '='
       },
       templateUrl: 'lib/slider.html',
       compile: function(element) {
@@ -86,8 +88,8 @@ ionicApp.directive('selectWheel', function($ionicScrollDelegate, $ionicGesture, 
         element.find('ion-scroll').attr('delegate-handle', id);
         return function(scope, element) {
           var _fixed = true,
-            _touched = false,
             scrollHandle = $ionicScrollDelegate.$getByHandle(id);
+			scope.touched = false;
           scope.itemHeight = scope.itemHeight || 50;
           scope.amplitude = scope.amplitude || 5;
 		  
@@ -96,10 +98,14 @@ ionicApp.directive('selectWheel', function($ionicScrollDelegate, $ionicGesture, 
 		  scope.index = scope.ngModel || -1;
 		  
 		  scope.minWidth = scope.minWidth ||35;
+		  
+		  scope.type = scope.type || 1;
 
           var resize = function() {
             scrollHandle.scrollTo(0, (scope.index+1) * scope.itemHeight-scope.itemHeight/2);
           };
+		  
+		  scope.refresh = resize;
 
           scope.onScroll = function(event, scrollTop) 
 		  {
@@ -158,7 +164,7 @@ ionicApp.directive('selectWheel', function($ionicScrollDelegate, $ionicGesture, 
 				{}
 			}
 			 
-			if (!_touched && !_fixed) 
+			if (!scope.touched && !_fixed) 
 			{
 				if(nearestPos != scrollTop)
 					scrollHandle.scrollTo(0, nearestPos);
@@ -186,25 +192,27 @@ ionicApp.directive('selectWheel', function($ionicScrollDelegate, $ionicGesture, 
 
 				scope.options = newVal;
 				
-				if(scope.index >= scope.options.length && scope.options.length > 0)
-				{
-					scope.index = scope.options.length-1;
+				if(scope.options.length > 0)
+				{				
+					if(scope.index >= scope.options.length)
+					{
+						scope.index = scope.options.length-1;
+					}
+					
+					resize();
 				}
-				
-				resize();
-			
 			}
 
           });
 		  
 		  
           $ionicGesture.on('touch', function() {
-            _touched = true;
+            scope.touched = true;
             _fixed = false;
           }, element, {});
 
           $ionicGesture.on('release', function() {
-            _touched = false;
+            scope.touched = false;
           }, element, {});
 
           scope.$on('destroy', function() {

@@ -3,7 +3,7 @@
       <ion-scroll zooming="false" on-refresh="onRefresh()" on-scroll="onScroll(event, scrollTop)" direction="y" scrollbar-y="false">
         <div class="select-wheel-list">
 		  <div class="select-wheel-item"><div>-</div></div>
-          <div class="select-wheel-item" ng-repeat="option in options">
+          <div ng-show="usefulLength < 0 || $index < usefulLength" class="select-wheel-item" ng-repeat="option in options">
             <div ng-show="type == 0" ng-class="{'active': $index === index}" data-value="option.value">
 				<span ng-class="($index === index)?'h4 select-selection-text':'h5'" style="margin:0;color:inherit">{{option.i}}</span>
 				<span ng-class="($index === index)?'h6 select-selection-text':'h6'" style="margin:0;vertical-align:top;color:inherit">o</span>

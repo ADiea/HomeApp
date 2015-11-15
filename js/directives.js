@@ -80,7 +80,8 @@ ionicApp.directive('selectWheel', function($ionicScrollDelegate, $ionicGesture, 
         index: '=',
 		minWidth: '=',
 		type: '@',
-		refresh: '='
+		refresh: '=',
+		usefulLength: '='
       },
       templateUrl: 'lib/slider.html',
       compile: function(element) {
@@ -100,12 +101,18 @@ ionicApp.directive('selectWheel', function($ionicScrollDelegate, $ionicGesture, 
 		  scope.minWidth = scope.minWidth ||35;
 		  
 		  scope.type = scope.type || 1;
+		  
+		  scope.usefulLength = scope.usefulLength || -1;
 
           var resize = function() {
             scrollHandle.scrollTo(0, (scope.index+1) * scope.itemHeight-scope.itemHeight/2);
           };
 		  
-		  scope.refresh = resize;
+		  scope.refresh = function refresh()
+							{
+								scope.index = scope.ngModel || 0;
+								resize();
+							};
 
           scope.onScroll = function(event, scrollTop) 
 		  {
@@ -135,15 +142,17 @@ ionicApp.directive('selectWheel', function($ionicScrollDelegate, $ionicGesture, 
               index = Math.floor((scrollTop - scope.itemHeight/2)/ height);
             }
 			
+			var usedLength = scope.usefulLength > 0 ? scope.usefulLength : scope.options.length;
+			
 			if(index < 0)
 			{
 				index = 0;
 				nearestPos = +scope.itemHeight/2;
 
 			}
-			else if(index >= scope.options.length && scope.options.length > 0)
+			else if(index >= usedLength && usedLength > 0)
 			{
-				index = scope.options.length-1;
+				index = usedLength-1;
 				nearestPos = scope.itemHeight*(index)+ scope.itemHeight/2;
 
 			}
@@ -179,7 +188,8 @@ ionicApp.directive('selectWheel', function($ionicScrollDelegate, $ionicGesture, 
           angular.element($window).bind('resize', resize);
 
           var unWatchModel = scope.$watch('ngModel', function(newVal) {
-            if (typeof newVal != 'undefined' && newVal != scope.index/*&& newVal.value*/) {
+            if (typeof newVal != 'undefined' && newVal != scope.index/*&& newVal.value*/) 
+			{
 
 			   scope.index = newVal;
 			   //resize();
@@ -190,13 +200,33 @@ ionicApp.directive('selectWheel', function($ionicScrollDelegate, $ionicGesture, 
 		  var unWatchOptions = scope.$watch('options', function(newVal) {
             if (newVal) {
 
-				scope.options = newVal;
+				//scope.options = newVal;
 				
-				if(scope.options.length > 0)
+				var usedLength = scope.usefulLength > 0 ? scope.usefulLength : scope.options.length;
+				
+				if(usedLength > 0)
 				{				
-					if(scope.index >= scope.options.length)
+					if(scope.index >= usedLength)
 					{
-						scope.index = scope.options.length-1;
+						scope.index = usedLength-1;
+					}
+					
+					resize();
+				}
+			}
+
+          });
+		  
+		  var unWatchUsedLength = scope.$watch('usefulLength', function(newVal) {
+            if (newVal) {
+
+				//scope.usefulLength = newVal;
+				
+				if(newVal > 0)
+				{				
+					if(scope.index >= newVal)
+					{
+						scope.index = newVal-1;
 					}
 					
 					resize();
@@ -222,6 +252,7 @@ ionicApp.directive('selectWheel', function($ionicScrollDelegate, $ionicGesture, 
             angular.element($window).off('resize', resize);
             unWatchModel();
 			unWatchOptions();
+			unWatchUsedLength();
           });
 
           // Resize on start

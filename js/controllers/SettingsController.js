@@ -11,16 +11,30 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 			day:0,
 			year:0,
 			temp:0,
-			moOptions:[],
-			dayOptions:[],
+			moOptions:[{id:0, value:"Ianuarie"}, {id:1, value:"Februarie"}, {id:2, value:"Martie"}, 
+					 {id:3, value:"Aprilie"},{id:4, value:"Mai"}, {id:5, value:"Iunie"}, {id:6, value:"Iulie"}, 
+					 {id:7, value:"August"}, {id:8, value:"Septembrie"}, {id:9, value:"Octombrie"}, 
+					 {id:10, value:"Noiembrie"}, {id:11, value:"Decembrie"}],
+			dayOptions:[{id:0, value:"00"}, {id:1, value:"01"}, {id:2, value:"02"}, 
+					 {id:3, value:"03"},{id:4, value:"04"}, {id:5, value:"05"}, {id:6, value:"06"}, 
+					 {id:7, value:"07"}, {id:8, value:"08"}, {id:9, value:"09"}, 
+					 {id:10, value:"10"}, {id:11, value:"11"},
+					 {id:0, value:"12"}, {id:1, value:"13"}, {id:2, value:"14"}, 
+					 {id:3, value:"15"},{id:4, value:"16"}, {id:5, value:"17"}, {id:6, value:"18"}, 
+					 {id:7, value:"19"}, {id:8, value:"20"}, {id:9, value:"21"}, 
+					 {id:10, value:"22"}, {id:11, value:"23"},
+					 {id:0, value:"24"}, {id:1, value:"25"}, {id:2, value:"26"}, 
+					 {id:3, value:"27"},{id:4, value:"28"}, {id:5, value:"29"}, {id:6, value:"30"}, 
+					 {id:7, value:"31"}],
 			yearOptions:[],
 			tempOptions:[],
 			daysInCurrentMo:0,
 			refreshMo:null, refreshYear:null, refreshDay:null, refreshTemp:null
 		}, 
-		validMonths:["Ianuarie", "Februarie", "Martie", "Aprilie",
-								"Mai", "Iunie", "Iulie", "August", "Septembrie", 
-								"Octombrie", "Noiembrie", "Decembrie"],
+		/*validMonths:[{id:0, value:"Ianuarie"}, {id:1, value:"Februarie"}, {id:2, value:"Martie"}, 
+					 {id:3, value:"Aprilie"},{id:4, value:"Mai"}, {id:5, value:"Iunie"}, {id:6, value:"Iulie"}, 
+					 {id:7, value:"August"}, {id:8, value:"Septembrie"}, {id:9, value:"Octombrie"}, 
+					 {id:10, value:"Noiembrie"}, {id:11, value:"Decembrie"}],*/
 		validDaysInMounth: [31, 28, 31, 30, 31, 30, 31, 
 										31, 30, 31, 30, 31],
 		
@@ -38,10 +52,16 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 	{
 		if(!reinit)
 		{
+			$scope.ui.holidayEnd.mo = $scope.ui.holidayEnd.mo;
+			$scope.ui.holidayEnd.day = $scope.ui.holidayEnd.day;
+			$scope.ui.holidayEnd.year = $scope.ui.holidayEnd.year;
+		
 			$scope.ui.holidayEnd.refreshMo();
 			$scope.ui.holidayEnd.refreshYear();
 			$scope.ui.holidayEnd.refreshDay();
 			$scope.ui.holidayEnd.refreshTemp();
+			
+			
 		}
 		else
 		{
@@ -56,7 +76,7 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 			else
 				$scope.ui.validDaysInMounth[1] = 28;
 				
-			var monopts = [];
+			/*var monopts = [];
 			for(var i=0;i<12;i++)
 			{
 				var obj={id:i};
@@ -72,7 +92,7 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 				obj.value = (i<9?'0':"")+(i+1);
 				dayopts.push(obj);
 			}	
-			$scope.ui.holidayEnd.dayOptions = dayopts;
+			$scope.ui.holidayEnd.dayOptions = dayopts;*/
 
 			var yopts=[];
 			var j=0;

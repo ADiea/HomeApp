@@ -91,22 +91,22 @@ ionicApp.directive('selectWheel', function($ionicScrollDelegate, $ionicGesture, 
           var _fixed = true,
             scrollHandle = $ionicScrollDelegate.$getByHandle(id);
 			scope.touched = false;
-          scope.itemHeight = scope.itemHeight || 50;
-          scope.amplitude = scope.amplitude || 5;
+          scope.itemHeight = (scope.itemHeight | 0) || 50;
+          scope.amplitude = (scope.amplitude | 0) || 5;
 		  
 		  scope.options = scope.options || [];
 		  
-		  scope.index = scope.ngModel || -1;
+		  scope.index = (scope.ngModel | 0) || -1;
 		  
 		  scope.minWidth = scope.minWidth ||35;
 		  
 		  scope.type = scope.type || 1;
 		  
-		  scope.usefulLength = scope.usefulLength || -1;
+		  scope.usefulLength = scope.usefulLength  || -1;
 
           var resize = function() 
 		  {
-			var yOffset = (scope.index + 1) * scope.itemHeight - scope.itemHeight/2;
+			var yOffset = (scope.index + 1) * (scope.itemHeight ) - scope.itemHeight /2;
             scrollHandle.scrollTo(0, yOffset);
           };
 		  

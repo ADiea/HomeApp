@@ -104,15 +104,17 @@ ionicApp.directive('selectWheel', function($ionicScrollDelegate, $ionicGesture, 
 		  
 		  scope.usefulLength = scope.usefulLength || -1;
 
-          var resize = function() {
-            scrollHandle.scrollTo(0, (scope.index+1) * scope.itemHeight-scope.itemHeight/2);
+          var resize = function() 
+		  {
+			var yOffset = (scope.index + 1) * scope.itemHeight - scope.itemHeight/2;
+            scrollHandle.scrollTo(0, yOffset);
           };
 		  
 		  scope.refresh = function refresh()
-							{
-								scope.index = scope.ngModel || 0;
-								resize();
-							};
+		  {
+			scope.index = scope.ngModel || 0;
+			resize();
+		  };
 
           scope.onScroll = function(event, scrollTop) 
 		  {
@@ -159,8 +161,6 @@ ionicApp.directive('selectWheel', function($ionicScrollDelegate, $ionicGesture, 
 			 
 			if(scope.index != index)
 			{
-				
-				
 				scope.$apply(function() {
 					scope.index = index;
 				  });

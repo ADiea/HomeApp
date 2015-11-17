@@ -57,9 +57,9 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 	{
 		if(!reinit)
 		{
-			$scope.ui.holidayEnd.mo = $scope.ui.holidayEnd.mo;
+			/*$scope.ui.holidayEnd.mo = $scope.ui.holidayEnd.mo;
 			$scope.ui.holidayEnd.day = $scope.ui.holidayEnd.day;
-			$scope.ui.holidayEnd.year = $scope.ui.holidayEnd.year;
+			$scope.ui.holidayEnd.year = $scope.ui.holidayEnd.year;*/
 		
 			$scope.ui.holidayEnd.refreshMo();
 			$scope.ui.holidayEnd.refreshYear();
@@ -86,20 +86,6 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 				yopts.push(""+(i+1900));
 			}	
 			$scope.ui.holidayEnd.yearOptions = yopts;
-			
-			var tempopts=[];
-			for(var i=0;i<22;i++)
-			{
-				var obj={id:i};
-
-				obj.value = 16 + 0.5*i;
-				
-				obj.i = parseInt(obj.value);
-				obj.f = parseInt(Math.round( obj.value * 10 ) ) % 10;
-				
-				tempopts.push(obj);
-			}	
-			$scope.ui.holidayEnd.tempOptions = tempopts;
 
 			$scope.ui.holidayEnd.mo = _month;
 			$scope.ui.holidayEnd.day = _day-1;

@@ -24,7 +24,7 @@
 			<tr>
 			<td >
 				<span ng-show="settings.houseHoliday">
-					{{ui.holidayEnd.tempOptions[ui.holidayEnd.temp].value}}* pana pe 
+					{{ui.getHolidayTemp()}}* pana pe 
 					{{ui.holidayEnd.dayOptions[ui.holidayEnd.day]}} 
 					{{ui.holidayEnd.moOptions[ui.holidayEnd.mo]}} 
 					{{ui.holidayEnd.yearOptions[ui.holidayEnd.year]}}
@@ -53,9 +53,9 @@
 								
 								<strong><span>
 								
-								<span class="h3 ng-class:!settings.houseHoliday?'text-disabled':'';">{{ui.holidayEnd.tempOptions[ui.holidayEnd.temp].i}}</span>
+								<span class="h3 ng-class:!settings.houseHoliday?'text-disabled':'';">{{ui.getHolidayTempInt()}}</span>
 								<span class="h6 ng-class:!settings.houseHoliday?'text-disabled':'';" style="vertical-align:top;">o</span>
-								<span class="h4 ng-class:!settings.houseHoliday?'text-disabled':'';" style="vertical-align:top;">{{ui.holidayEnd.tempOptions[ui.holidayEnd.temp].f}}</span>
+								<span class="h4 ng-class:!settings.houseHoliday?'text-disabled':'';" style="vertical-align:top;">{{ui.getHolidayTempFrac()}}</span>
 								</span></strong>
 							
 							<button ng-disabled="!settings.houseHoliday || (ui.holidayEnd.temp <= 0)" ng-click="ui.doTempDown()" on-hold="" on-release="" class="button button-small button-positive button-outline" > 

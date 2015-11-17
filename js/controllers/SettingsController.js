@@ -10,25 +10,35 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 			mo:0, 
 			day:0,
 			year:0,
-			temp:0,
 			moOptions:["Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie", 
-						"IUlie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie" ],
-			dayOptions:["00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", 
+						"Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie" ],
+			dayOptions:["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", 
 						"16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"],
 			yearOptions:[],
-			tempOptions:[],
 			daysInCurrentMo:0,
-			refreshMo:null, refreshYear:null, refreshDay:null, refreshTemp:null
+			refreshMo:null, refreshYear:null, refreshDay:null
+		},
+		getHolidayTemp:function getHolidayTemp()
+		{
+			return $scope.settings.houseHolidayTemperature.toFixed(1);
 		},
 		doTempUp: function doTempUp()
 		{
-			if($scope.ui.holidayEnd.temp < $scope.ui.holidayEnd.tempOptions.length) 
-				$scope.ui.holidayEnd.temp++;
+			if($scope.settings.houseHolidayTemperature < $scope.settings.houseHolidayMaxTemperature) 
+				$scope.settings.houseHolidayTemperature += 0.5;
 		},
 		doTempDown: function doTempDown()
 		{
-			if($scope.ui.holidayEnd.temp > 0)
-				$scope.ui.holidayEnd.temp--;
+			if($scope.settings.houseHolidayTemperature > $scope.settings.houseHolidayMinTemperature) 
+				$scope.settings.houseHolidayTemperature -= 0.5;
+		},
+		getHolidayTempInt : function getHolidayTempInt()
+		{
+			return parseInt($scope.settings.houseHolidayTemperature);
+		},	
+		getHolidayTempFrac : function getHolidayTempFrac()
+		{
+			return parseInt(Math.round($scope.settings.houseHolidayTemperature * 10 ) ) % 10;
 		},
 		validDaysInMounth: [31, 28, 31, 30, 31, 30, 31, 
 							31, 30, 31, 30, 31],
@@ -146,6 +156,10 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 	
 	$scope.$on('$ionicView.beforeLeave', function() 
 	{
+	
+		//$scope.settings.houseHolidayEnd = DATE($scope.ui.holidayEnd.day, $scope.ui.holidayEnd.mo, $scope.ui.holidayEnd.year)
+		//$scope.settings.houseHolidayTemperature = $scope.ui.holidayTemp;
+	
 		settings.persist('settings', $scope.settings);
 		
 		if($scope.settings.serverURL != $scope.oldSettings.serverURL)
@@ -163,11 +177,13 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 	$scope.defaultSettings = function defaultSettings()
 	{
 		$scope.settings = {
+			settingsVersion:1,
 			serverURL : "ws://192.168.0.103",
 			houseHoliday:true,
-			//householidayStart:1447205294,
 			houseHolidayEnd:1447910991,
-			houseHolidayTemperature:18,
+			houseHolidayTemperature:18.0,
+			houseHolidayMinTemperature:16.0,
+			houseHolidayMaxTemperature:27.0
 			};
 		//$state.go('app.house');
 	}

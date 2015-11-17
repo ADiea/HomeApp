@@ -1,4 +1,4 @@
-<ion-view view-title="Settings">
+<ion-view view-title="Setari">
   <ion-content>
    	    <ion-list>	
 			
@@ -18,16 +18,16 @@
 			</td>
 			<td style="text-align:left;">
 				<i style="margin:5px" class="icon icon-size-normal ion-briefcase"></i>
-				Mod Vacanta
+				<strong>Mod Vacanta</strong>
 			</td>
 			</tr>
 			<tr>
 			<td >
 				<span ng-show="settings.houseHoliday">
-					{{ui.holidayEnd.tempOptions[ui.holidayEnd.temp].value}}* pana in 
-					{{ui.holidayEnd.dayOptions[ui.holidayEnd.day].value}} 
-					{{ui.holidayEnd.moOptions[ui.holidayEnd.mo].value}} 
-					{{ui.holidayEnd.yearOptions[ui.holidayEnd.year].value}}
+					{{ui.holidayEnd.tempOptions[ui.holidayEnd.temp].value}}* pana pe 
+					{{ui.holidayEnd.dayOptions[ui.holidayEnd.day]}} 
+					{{ui.holidayEnd.moOptions[ui.holidayEnd.mo]}} 
+					{{ui.holidayEnd.yearOptions[ui.holidayEnd.year]}}
 				</span>
 				
 				<span ng-show="!settings.houseHoliday">
@@ -38,6 +38,53 @@
 			</table>
 			</ion-toggle>
 			
+			<ion-item class="item-accordion" ng-show="ui.holidayShow" >
+				<table>
+					<tr>
+						<td rowspan="2" style="vertical-align:middle">
+							<i class="icon icon-size-normal ion-thermometer"></i> 
+							Temperatura
+						</td>
+						<td >
+							<!--<select-wheel min-width="35" type="0" refresh="ui.holidayEnd.refreshTemp" ng-model="ui.holidayEnd.temp" item-height="20" amplitude="2" options="ui.holidayEnd.tempOptions" >
+							</select-wheel> -->
+
+							<div style="display:inline;margin-left:10px;">
+								
+								<strong><span>
+								
+								<span class="h3 ng-class:!settings.houseHoliday?'text-disabled':'';">{{ui.holidayEnd.tempOptions[ui.holidayEnd.temp].i}}</span>
+								<span class="h6 ng-class:!settings.houseHoliday?'text-disabled':'';" style="vertical-align:top;">o</span>
+								<span class="h4 ng-class:!settings.houseHoliday?'text-disabled':'';" style="vertical-align:top;">{{ui.holidayEnd.tempOptions[ui.holidayEnd.temp].f}}</span>
+								</span></strong>
+							
+							<button ng-disabled="!settings.houseHoliday || (ui.holidayEnd.temp <= 0)" ng-click="ui.doTempDown()" on-hold="" on-release="" class="button button-small button-positive button-outline" > 
+								<i class="icon ion-minus"></i> 
+							</button>
+
+							<button ng-disabled="!settings.houseHoliday || (ui.holidayEnd.temp >= ui.holidayEnd.tempOptions.length - 1)"   ng-click="ui.doTempUp()" on-hold="" on-release="" class="button button-small button-positive button-outline" > 
+								<i class="icon ion-plus"></i> 
+							</button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align:right;" >
+						<!--<div style="display:inline;">
+							<button ng-disabled="!settings.houseHoliday || (ui.holidayEnd.temp <= 0)" ng-click="ui.doTempDown()" on-hold="" on-release="" class="button button-small button-positive button-outline" > 
+								<i class="icon ion-minus"></i> 
+							</button>
+
+							<button ng-disabled="!settings.houseHoliday || (ui.holidayEnd.temp >= ui.holidayEnd.tempOptions.length - 1)"   ng-click="ui.doTempUp()" on-hold="" on-release="" class="button button-small button-positive button-outline" > 
+								<i class="icon ion-plus"></i> 
+							</button>
+						</div>-->
+					</td>	
+					</tr>
+				</table>
+
+			</ion-item>
+			
 			<ion-item class="item-accordion" ng-show="ui.holidayShow">
 				<table>
 					<tr>
@@ -46,10 +93,10 @@
 							Retur 
 						</td>
 						<td >
-						<select-wheel min-width="35" useful-length="ui.holidayEnd.daysInCurrentMo" type="1" refresh="ui.holidayEnd.refreshDay" ng-model="ui.holidayEnd.day" item-height="20" amplitude="2" options="ui.holidayEnd.dayOptions" >
+						<select-wheel ng-disabled="!settings.houseHoliday" min-width="35" useful-length="ui.holidayEnd.daysInCurrentMo" type="1" refresh="ui.holidayEnd.refreshDay" ng-model="ui.holidayEnd.day" item-height="20" amplitude="2" options="ui.holidayEnd.dayOptions" >
 						</select-wheel> 
 						</td>
-						<td ><!--style="border-left: 1px solid #aaa"-->
+						<td >
 						<select-wheel min-width="100" type="1" refresh="ui.holidayEnd.refreshMo" ng-model="ui.holidayEnd.mo" item-height="20" amplitude="2" options="ui.holidayEnd.moOptions" >
 						</select-wheel> 
 						</td>
@@ -60,83 +107,8 @@
 					</tr>
 				</table>
 			</ion-item>
-	
-			<ion-item class="item-accordion" ng-show="ui.holidayShow">
-				<table>
-					<tr style="vertical-align:middle;text-align:center;">
-						<td rowspan="2" style="vertical-align:middle;text-align:center;padding:0 10px 0 0">
-							<i class="icon icon-size-normal ion-plane"></i>
-							Retur 
-						</td>
-						<td >
-							<span style="vertical-align:middle;text-align:center;padding:0 10px 0 10px;" class="h3">
-							{{ui.holidayEnd.dayOptions[ui.holidayEnd.day].value}}
-							</span>
-						</td>
-						<td style="vertical-align:middle;text-align:center;padding:0 10px 0 10px;min-width:100px;" class="h4">
-							{{ui.holidayEnd.moOptions[ui.holidayEnd.mo].value}} 
-						</td>
-						<td style="vertical-align:middle;text-align:center;padding:0 10px 0 10px;" class="h3">
-							{{ui.holidayEnd.yearOptions[ui.holidayEnd.year].value}}
-						</td>
-					</tr>
-					<tr>
-						
-						<td style="vertical-align:middle;text-align:center;" >
-							<div style="display:inline;">				
-								<button ng-click="ui.holidayEnd.day=ui.holidayEnd.day-1" class="button button-small button-positive button-outline" > 
-									<i class="icon ion-arrow-down-a"></i> 
-								</button>
-
-								<button ng-click="ui.holidayEnd.day=ui.holidayEnd.day+1" class="button button-small button-positive button-outline" > 
-									<i class="icon ion-arrow-up-a"></i> 
-								</button>
-							</div>
-						</td>
-						<td style="vertical-align:middle;text-align:center;" >
-							<div style="display:inline;">				
-								<button ng-click="ui.holidayEnd.mo=ui.holidayEnd.mo-1;" class="button button-small button-positive button-outline" > 
-									<i class="icon ion-arrow-down-a"></i> 
-								</button>
-
-								<button ng-click="ui.holidayEnd.mo=ui.holidayEnd.mo+1" class="button button-small button-positive button-outline" > 
-									<i class="icon ion-arrow-up-a"></i> 
-								</button>
-							</div>						
-						</td>
-						<td style="vertical-align:middle;text-align:center;" >
-							<div style="display:inline;">				
-								<button ng-click="ui.holidayEnd.year=ui.holidayEnd.year-1" class="button button-small button-positive button-outline" > 
-									<i class="icon ion-arrow-down-a"></i> 
-								</button>
-
-								<button ng-click="ui.holidayEnd.year=ui.holidayEnd.year+1" class="button button-small button-positive button-outline" > 
-									<i class="icon ion-arrow-up-a"></i> 
-								</button>
-							</div>						
-						</td>
-					</tr>
-				</table>
-			</ion-item>
-
-			<ion-item class="item-accordion" ng-show="ui.holidayShow" >
-				<table>
-					<tr>
-						<td style="vertical-align:middle">
-							<i class="icon icon-size-normal ion-thermometer"></i> 
-							Temperatura
-						</td>
-						<td >
-							<select-wheel min-width="35" type="0" refresh="ui.holidayEnd.refreshTemp" ng-model="ui.holidayEnd.temp" item-height="20" amplitude="2" options="ui.holidayEnd.tempOptions" >
-							</select-wheel> 
-						</td>
-					</tr>
-				</table>
-
-			</ion-item>
 			
 			<ion-item>
-		<!--	 <button style="display:inline" class="button button-positive" ng-click="saveSettings()">Save</button> -->
 			  <button style="display:inline" class="button" ng-click="defaultSettings()">Restore Defaults</button>
 			</ion-item>
 			

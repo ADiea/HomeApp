@@ -10,9 +10,9 @@
 				<span ng-class="($index === index)?'h5 select-selection-text':'h6'" style="margin:0;vertical-align:top;color:inherit">{{option.f}}</span>
 			</div>
 			
-            <div ng-show="type == 1" ng-class="{'active select-selection-text': $index === index}" data-value="option.value">
+            <div ng-show="type == 1" ng-class="{'active select-selection-text': $index === index}" data-value="option">
 				<!--<span ng-class="(option.id === $index)?'select-selection-text':''"  style="color:inherit;vertical-align:inherit;">-->
-				{{option.value}}
+				{{option}}
 				<!--</span> <!-- ng-class="($index === index)?'h3':'h4'" -->
 			</div>			
 			
@@ -29,7 +29,7 @@
 		</div>
 		
 		<div ng-show="type == 1" class="active select-selection-text">
-			{{options[index].value}}	
+			{{options[index]}}	
 		</div>			
 	  </div>
  </div>

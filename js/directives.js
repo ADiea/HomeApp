@@ -188,7 +188,7 @@ ionicApp.directive('selectWheel', function($ionicScrollDelegate, $ionicGesture, 
           angular.element($window).bind('resize', resize);
 
           var unWatchModel = scope.$watch('ngModel', function(newVal) {
-            if (typeof newVal != 'undefined' && newVal != scope.index/*&& newVal.value*/) 
+            if (typeof newVal != 'undefined' && newVal != scope.index/*&& newVal*/) 
 			{
 
 			   scope.index = newVal;

@@ -253,8 +253,6 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 			$scope.uiOpenedHeater = id;
 	}
 	
-	
-	
 	$scope.sendParamsToServer = function sendParamsToServer()
 	{
 		var th;

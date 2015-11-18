@@ -1,4 +1,4 @@
-var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, settings, $state, socket, $timeout) 
+var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, settings, $state, socket, $timeout, $interval) 
 {
 	$scope.settings = {};
 	$scope.oldSettings = {};
@@ -25,12 +25,28 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 		doTempUp: function doTempUp()
 		{
 			if($scope.settings.houseHolidayTemperature < $scope.settings.houseHolidayMaxTemperature) 
+			{
 				$scope.settings.houseHolidayTemperature += 0.5;
+				try
+				{
+					navigator.notification.vibrate(10);
+				}
+				catch(e)
+				{}
+			}
 		},
 		doTempDown: function doTempDown()
 		{
 			if($scope.settings.houseHolidayTemperature > $scope.settings.houseHolidayMinTemperature) 
+			{
 				$scope.settings.houseHolidayTemperature -= 0.5;
+								try
+				{
+					navigator.notification.vibrate(10);
+				}
+				catch(e)
+				{}
+			}
 		},
 		getHolidayTempInt : function getHolidayTempInt()
 		{
@@ -54,8 +70,7 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 		holdTempSetBtn: function holdTempSetBtn(up, hold)
 		{
 			$scope.thermoTempChangeDirectionUp = up;
-			
-			
+
 			if (angular.isDefined($scope.thermoTempChangeTimer)) 
 			{
 				$interval.cancel($scope.thermoTempChangeTimer);
@@ -85,10 +100,6 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 	
 		if(!reinit)
 		{
-			/*$scope.ui.holidayEnd.mo = $scope.ui.holidayEnd.mo;
-			$scope.ui.holidayEnd.day = $scope.ui.holidayEnd.day;
-			$scope.ui.holidayEnd.year = $scope.ui.holidayEnd.year;*/
-			
 			$timeout(function(){
 				$scope.ui.holidayEnd.refreshMo();
 				$scope.ui.holidayEnd.refreshYear();
@@ -160,19 +171,22 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 	
 	$scope.$on('$ionicView.beforeEnter', function() 
 	{
-		$scope.settings = settings.get('settings');
-		if($scope.settings == null)
+		$timeout(function()
 		{
-			$scope.defaultSettings();
-		}
-		$scope.oldSettings = JSON.parse(JSON.stringify($scope.settings));
-		
-		$scope.refreshHolidayControls(true);
+			$scope.settings = settings.get('settings');
+
+			if($scope.settings == null)
+			{
+				$scope.defaultSettings();
+			}
+			$scope.oldSettings = JSON.parse(JSON.stringify($scope.settings));
+			
+			$scope.refreshHolidayControls(true);
+		});
 	});
 	
 	$scope.$on('$ionicView.beforeLeave', function() 
 	{
-	
 		//$scope.settings.houseHolidayEnd = DATE($scope.ui.holidayEnd.day, $scope.ui.holidayEnd.mo, $scope.ui.holidayEnd.year)
 		//$scope.settings.houseHolidayTemperature = $scope.ui.holidayTemp;
 	

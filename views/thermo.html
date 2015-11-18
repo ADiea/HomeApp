@@ -2,7 +2,7 @@
   <ion-content>
   	<ion-list>
 		<div ng-repeat="th in houseTH">
-		<ion-toggle class="item-divider" ng-model="th.autoPilotOn" toggle-class="toggle-positive">
+		<ion-toggle class="item-divider" ng-disabled="settings.houseHoliday" ng-model="th.autoPilotOn" toggle-class="toggle-positive">
 					
 			<table style="width:100%">
 			
@@ -31,16 +31,13 @@
 							
 							<strong><span>
 							
-							<span class="h2 ng-class:!th.autoPilotOn?'text-disabled':'';">{{getThermoSetTemp_Int(th.id)}}</span>
-							<span class="h5 ng-class:!th.autoPilotOn?'text-disabled':'';" style="vertical-align:top;">o</span>
-							<span class="h3 ng-class:!th.autoPilotOn?'text-disabled':'';" style="vertical-align:top;">{{getThermoSetTemp_Frac(th.id)}}</span>
+							<span class="h2 ng-class:(!th.autoPilotOn || settings.houseHoliday)?'text-disabled':'';">{{getThermoSetTemp_Int(th.id)}}</span>
+							<span class="h5 ng-class:(!th.autoPilotOn || settings.houseHoliday)?'text-disabled':'';" style="vertical-align:top;">o</span>
+							<span class="h3 ng-class:(!th.autoPilotOn || settings.houseHoliday)?'text-disabled':'';" style="vertical-align:top;">{{getThermoSetTemp_Frac(th.id)}}</span>
 							</span></strong>
-
 						</div>
 					</td>
-				
 				</tr>
-				
 				<tr>
 					<td style="vertical-align:bottom">
 						<p style="display:inline;">
@@ -62,7 +59,7 @@
 							</button>
 						</div>
 						<div ng-show="settings.houseHoliday" style="display:inline;">
-							<button ng-disabled="!canTempDown(th.id) || !th.autoPilotOn" ng-click="" on-hold="" on-release="" class="button button-small button-positive button-outline" > 
+							<button ng-disabled="!canTempDown(th.id) || !th.autoPilotOn" ng-click="showHolidayConfirm()" class="button button-small button-positive button-outline" > 
 								<i style="margin:5px" class="icon icon-size-small ion-briefcase"></i> <strong>Vacanta</strong>
 							</button>
 						</div>

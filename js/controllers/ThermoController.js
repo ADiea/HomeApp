@@ -1,7 +1,5 @@
-var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, socket, logData, commWeb, $interval) 
+var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, socket, logData, commWeb, $interval, $timeout, $ionicPopup) 
 {
-
-
 	$scope.settings = settings.get('settings');
 	$scope.logData = logData;
 
@@ -38,6 +36,25 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 		lastGasReading:350, heaterOn:false, heaterFault:true, heaterFaultDescr:"GasLeak",
 		timestamp:1445802480},
 	];
+
+	$scope.$on('$ionicView.beforeEnter', function() 
+	{  
+		$timeout(function(){
+		$scope.settings = settings.get('settings');});
+	});
+	
+	$scope.showHolidayConfirm = function() {
+	   var confirmPopup = $ionicPopup.confirm({
+		 title: 'Modul Vacanta activ',
+		 template: 'Parasiti modul vacanta?'
+	   });
+	   confirmPopup.then(function(res) {
+		 if(res) 
+		 {
+			$scope.settings.houseHoliday = false;
+		 } 
+	   });
+	 };
 	
 	$scope.$on('$ionicView.afterEnter', function() 
 	{  
@@ -279,7 +296,9 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 	
 	$scope.$on('$ionicView.beforeLeave', function() 
 	{ 
-		$scope.sendParamsToServer();
+	  settings.persist('settings', $scope.settings);
+	
+	  $scope.sendParamsToServer();
 	  if (angular.isDefined($scope.thermoViewUpdate)) 
 	  {
 		$interval.cancel($scope.thermoViewUpdate);
@@ -400,15 +419,22 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 		
 		if($scope.houseTH[id].autoPilotOn)
 		{
-			descr = /*$scope.getThermoHeaterActivity(id)*/'mentine' + ' ' + 
-						$scope.getThermoSetTemp(id);
-			if($scope.houseTH[id].autoPilotEndProgTimeH > 0)
+			if($scope.settings.houseHoliday)
 			{
-				descr += " pana la " + $scope.houseTH[id].autoPilotEndProgTimeH + ":" + $scope.houseTH[id].autoPilotEndProgTimeM;
+				descr = "in modul vacanta";
 			}
 			else
 			{
-				//descr += "";
+				descr = /*$scope.getThermoHeaterActivity(id)*/'mentine' + ' ' + 
+							$scope.getThermoSetTemp(id);
+				if($scope.houseTH[id].autoPilotEndProgTimeH > 0)
+				{
+					descr += " pana la " + $scope.houseTH[id].autoPilotEndProgTimeH + ":" + $scope.houseTH[id].autoPilotEndProgTimeM;
+				}
+				else
+				{
+					//descr += "";
+				}
 			}
 		}
 		

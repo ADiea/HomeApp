@@ -4,11 +4,14 @@
         <div class="select-wheel-list">
 		  <div class="select-wheel-item"><div>-</div></div>
           <div ng-show="usefulLength < 0 || $index < usefulLength" class="select-wheel-item" ng-repeat="option in options">
-            <div ng-show="type == 0" ng-class="{'active': $index === index}" data-value="option.value">
+            
+			<!--
+			<div ng-show="type == 0" ng-class="{'active': $index === index}" data-value="option.value">
 				<span ng-class="($index === index)?'h4 select-selection-text':'h5'" style="margin:0;color:inherit">{{option.i}}</span>
 				<span ng-class="($index === index)?'h6 select-selection-text':'h6'" style="margin:0;vertical-align:top;color:inherit">o</span>
 				<span ng-class="($index === index)?'h5 select-selection-text':'h6'" style="margin:0;vertical-align:top;color:inherit">{{option.f}}</span>
 			</div>
+			-->
 			
             <div ng-show="type == 1" ng-class="{'active select-selection-text': $index === index}" data-value="option">
 				<!--<span ng-class="(option.id === $index)?'select-selection-text':''"  style="color:inherit;vertical-align:inherit;">-->
@@ -22,12 +25,13 @@
       </ion-scroll>
 	 
 	  <div class="select-wheel-hint" ng-show="touched">
+	  <!--
 		<div ng-show="type == 0" class="active">
 			<span class="h4 select-selection-text" style="margin:0;color:inherit">{{options[index].i}}</span>
 			<span class="h6 select-selection-text"  style="margin:0;vertical-align:top;color:inherit">o</span>
 			<span class="h5 select-selection-text"  style="margin:0;vertical-align:top;color:inherit">{{options[index].f}}</span>
 		</div>
-		
+		-->
 		<div ng-show="type == 1" class="active select-selection-text">
 			{{options[index]}}	
 		</div>			

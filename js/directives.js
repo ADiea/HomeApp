@@ -44,12 +44,8 @@ ionicApp.directive('ionslider',function($timeout){
                     onFinish:$scope.onFinish,
 					to:$scope.to,
 					values:$scope.values
-					
                 });
-
             })();
-			
-			
             $scope.$watch('min', function(value) {
                 $timeout(function(){ $element.data("ionRangeSlider").update({min: value}); });
             },true);
@@ -156,7 +152,6 @@ ionicApp.directive('selectWheel', function($ionicScrollDelegate, $ionicGesture, 
 			{
 				index = usedLength-1;
 				nearestPos = scope.itemHeight*(index)+ scope.itemHeight/2;
-
 			}
 			 
 			if(scope.index != index)
@@ -256,7 +251,7 @@ ionicApp.directive('selectWheel', function($ionicScrollDelegate, $ionicGesture, 
           });
 
           // Resize on start
-          resize();
+		  $timeout(resize());
         };
 
       },

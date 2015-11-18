@@ -2,7 +2,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 {
 
 
-	$scope.settings = settings;
+	$scope.settings = settings.get('settings');
 	$scope.logData = logData;
 
 	$scope.arrayTempSlider=['Off', 'On', 'Auto'];
@@ -268,7 +268,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 	timestamp:1445802480, heaterOn:false, acOn:false,  autoPilotOn:true, autoPilotEndProgTimeH:22, autoPilotEndProgTimeM:30},
 	*/
 				var message = commWeb.eCommWebMsgTYpes.cwSetTHParams + ";" + 
-							th.sensorID + ";" + (Math.round( $scope.houseTH[id].curTemp * 10 ) / 10).toFixed(1)  + ";" + 
+							th.sensorID + ";" + (Math.round( th.curTemp * 10 ) / 10).toFixed(1)  + ";" + 
 							th.title + ";"; //+autoPilotOn
 							
 				socket.send(message);
@@ -316,12 +316,16 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 	
 	$scope.getThermoSetTemp_Int = function getThermoSetTemp(id)
 	{
-		return parseInt($scope.houseTH[id].curTemp);
+		return $scope.settings.houseHoliday ?
+			parseInt($scope.settings.houseHolidayTemperature)
+			: parseInt($scope.houseTH[id].curTemp);
 	}
 	
 	$scope.getThermoSetTemp_Frac = function getThermoSetTemp(id)
 	{
-		return parseInt(Math.round( $scope.houseTH[id].curTemp * 10 ) ) % 10;
+		return $scope.settings.houseHoliday ?
+			parseInt(Math.round($scope.settings.houseHolidayTemperature * 10 )) % 10
+			: parseInt(Math.round( $scope.houseTH[id].curTemp * 10 ))  % 10;
 	}	
 	
 	$scope.getThermoSensorRH = function getThermoSensorRH(id)

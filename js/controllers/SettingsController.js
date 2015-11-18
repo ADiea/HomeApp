@@ -1,4 +1,4 @@
-var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, settings, $state, socket) 
+var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, settings, $state, socket, $timeout) 
 {
 	$scope.settings = {};
 	$scope.oldSettings = {};
@@ -50,21 +50,50 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 			{
 				$scope.refreshHolidayControls(false);
 			}
+		},
+		holdTempSetBtn: function holdTempSetBtn(up, hold)
+		{
+			$scope.thermoTempChangeDirectionUp = up;
+			
+			
+			if (angular.isDefined($scope.thermoTempChangeTimer)) 
+			{
+				$interval.cancel($scope.thermoTempChangeTimer);
+				$scope.thermoTempChangeTimer = undefined;
+			}
+
+			if(hold)
+			{
+				$scope.thermoTempChangeTimer = $interval( function() 
+				{
+					if($scope.thermoTempChangeDirectionUp)
+					{
+						$scope.ui.doTempUp();
+						
+					}
+					else
+					{
+						$scope.ui.doTempDown();
+					}
+				}, 250);
+			}
 		}
 	};
 	
 	$scope.refreshHolidayControls = function refreshHolidayControls(reinit)
 	{
+	
 		if(!reinit)
 		{
 			/*$scope.ui.holidayEnd.mo = $scope.ui.holidayEnd.mo;
 			$scope.ui.holidayEnd.day = $scope.ui.holidayEnd.day;
 			$scope.ui.holidayEnd.year = $scope.ui.holidayEnd.year;*/
-		
-			$scope.ui.holidayEnd.refreshMo();
-			$scope.ui.holidayEnd.refreshYear();
-			$scope.ui.holidayEnd.refreshDay();
-			//$scope.ui.holidayEnd.refreshTemp();
+			
+			$timeout(function(){
+				$scope.ui.holidayEnd.refreshMo();
+				$scope.ui.holidayEnd.refreshYear();
+				$scope.ui.holidayEnd.refreshDay();
+				}, 0);
 		}
 		else
 		{
@@ -93,6 +122,7 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 			
 			$scope.ui.holidayEnd.daysInCurrentMo = $scope.ui.validDaysInMounth[$scope.ui.holidayEnd.mo];
 		}
+	
 	}
 	
 	$scope.ui.holidayEnd.unwatchMo = $scope.$watch('ui.holidayEnd.mo', function(newVal) 

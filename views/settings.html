@@ -58,11 +58,11 @@
 								<span class="h4 ng-class:!settings.houseHoliday?'text-disabled':'';" style="vertical-align:top;">{{ui.getHolidayTempFrac()}}</span>
 								</span></strong>
 							
-							<button ng-disabled="!settings.houseHoliday || (settings.houseHolidayTemperature <= settings.houseHolidayMinTemperature)" ng-click="ui.doTempDown()" on-hold="" on-release="" class="button button-small button-positive button-outline" > 
+							<button ng-disabled="!settings.houseHoliday || (settings.houseHolidayTemperature <= settings.houseHolidayMinTemperature)" ng-click="ui.doTempDown()" on-hold="ui.holdTempSetBtn(false, true)" on-release="ui.holdTempSetBtn(false, false)" class="button button-small button-positive button-outline" > 
 								<i class="icon ion-minus"></i> 
 							</button>
 
-							<button ng-disabled="!settings.houseHoliday || (settings.houseHolidayTemperature >= settings.houseHolidayMaxTemperature)"   ng-click="ui.doTempUp()" on-hold="" on-release="" class="button button-small button-positive button-outline" > 
+							<button ng-disabled="!settings.houseHoliday || (settings.houseHolidayTemperature >= settings.houseHolidayMaxTemperature)"   ng-click="ui.doTempUp()" on-hold="ui.holdTempSetBtn(true, true)" on-release="ui.holdTempSetBtn(true, false)" class="button button-small button-positive button-outline" > 
 								<i class="icon ion-plus"></i> 
 							</button>
 							</div>
@@ -109,7 +109,7 @@
 			</ion-item>
 			
 			<ion-item>
-			  <button style="display:inline" class="button" ng-click="defaultSettings()">Restore Defaults</button>
+			  <button style="display:inline" class="button" ng-click="defaultSettings()">Reset Setari</button>
 			</ion-item>
 			
 		</ion-list>	

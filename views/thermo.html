@@ -38,12 +38,7 @@
 
 						</div>
 					</td>
-					
-					<td style="text-align:center;vertical-align:middle"> 
-						<button ng-disabled="false" ng-click="doTempDown(th.id)" class="button button-small button-positive button-clear" > 
-							<i class="icon ion-ios-undo"></i> 
-						</button>
-					</td>					
+				
 				</tr>
 				
 				<tr>
@@ -57,12 +52,7 @@
 					</td>
 					
 					<td style="text-align:right;" >
-						<div style="display:inline;">
-						
-						<!--	<button ng-disabled="false" ng-click="doTempDown(th.id)" class="button button-small button-positive button-outline" > 
-								<i class="icon ion-ios-undo"></i> 
-							</button> -->
-							
+						<div ng-show="!settings.houseHoliday" style="display:inline;">
 							<button ng-disabled="!canTempDown(th.id) || !th.autoPilotOn" ng-click="doTempDown(th.id)" on-hold="holdTempSetBtn(false, true, th.id)" on-release="holdTempSetBtn(false, false, th.id)" class="button button-small button-positive button-outline" > 
 								<i class="icon ion-arrow-down-a"></i> 
 							</button>
@@ -71,13 +61,14 @@
 								<i class="icon ion-arrow-up-a"></i> 
 							</button>
 						</div>
+						<div ng-show="settings.houseHoliday" style="display:inline;">
+							<button ng-disabled="!canTempDown(th.id) || !th.autoPilotOn" ng-click="" on-hold="" on-release="" class="button button-small button-positive button-outline" > 
+								<i style="margin:5px" class="icon icon-size-small ion-briefcase"></i> <strong>Vacanta</strong>
+							</button>
+						</div>
 					</td>	
 					
-					<td style="text-align:center;vertical-align:middle"> 
-						<button ng-disabled="false" ng-click="doTempDown(th.id)" class="button button-small button-positive button-clear" > 
-							<i class="icon ion-briefcase"></i> 
-						</button>						
-					</td>
+
 	
 				</tr>
 			

@@ -108,7 +108,7 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 		}
 		else
 		{
-			var date = new Date(); //$scope.settings.houseHolidayEnd*1000
+			var date = new Date($scope.settings.houseHolidayEnd*1000);
 					
 			var _year = date.getYear();
 			var _month = date.getMonth();

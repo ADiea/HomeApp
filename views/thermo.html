@@ -2,7 +2,7 @@
   <ion-content>
   	<ion-list>
 		<div ng-repeat="th in houseTH">
-		<ion-toggle class="item-divider" ng-disabled="settings.houseHoliday" ng-model="th.autoPilotOn" toggle-class="toggle-positive">
+		<ion-toggle class="item-divider" ng-model="th.autoPilotOn" toggle-class="toggle-positive">
 					
 			<table style="width:100%">
 			
@@ -51,15 +51,15 @@
 					<td style="text-align:right;" >
 						<div ng-show="!settings.houseHoliday" style="display:inline;">
 							<button ng-disabled="!canTempDown(th.id) || !th.autoPilotOn" ng-click="doTempDown(th.id)" on-hold="holdTempSetBtn(false, true, th.id)" on-release="holdTempSetBtn(false, false, th.id)" class="button button-small button-positive button-outline" > 
-								<i class="icon ion-arrow-down-a"></i> 
+								<i class="icon ion-minus"></i> 
 							</button>
 
 							<button ng-disabled="!canTempUp(th.id) || !th.autoPilotOn"   ng-click="doTempUp(th.id)" on-hold="holdTempSetBtn(true, true, th.id)" on-release="holdTempSetBtn(true, false, th.id)" class="button button-small button-positive button-outline" > 
-								<i class="icon ion-arrow-up-a"></i> 
+								<i class="icon ion-plus"></i> 
 							</button>
 						</div>
 						<div ng-show="settings.houseHoliday" style="display:inline;">
-							<button ng-disabled="!canTempDown(th.id) || !th.autoPilotOn" ng-click="showHolidayConfirm()" class="button button-small button-positive button-outline" > 
+							<button ng-click="showHolidayConfirm()" class="button button-small button-positive button-outline" > 
 								<i style="margin:5px" class="icon icon-size-small ion-briefcase"></i> <strong>Vacanta</strong>
 							</button>
 						</div>

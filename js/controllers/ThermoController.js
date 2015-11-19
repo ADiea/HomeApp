@@ -415,18 +415,18 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 
 	$scope.getThermoAutoPilotDescr = function getThermoAutoPilotDescr(id)
 	{	
-		var descr = "dezactivat";
+		var descr = "senzor dezactivat";
 		
 		if($scope.houseTH[id].autoPilotOn)
 		{
+			descr = 'mentine '; 
 			if($scope.settings.houseHoliday)
 			{
-				descr = "in modul vacanta";
+				descr += $scope.settings.houseHolidayTemperature + "*C (in vacanta)";
 			}
 			else
 			{
-				descr = /*$scope.getThermoHeaterActivity(id)*/'mentine' + ' ' + 
-							$scope.getThermoSetTemp(id);
+				descr += $scope.getThermoSetTemp(id);
 				if($scope.houseTH[id].autoPilotEndProgTimeH > 0)
 				{
 					descr += " pana la " + $scope.houseTH[id].autoPilotEndProgTimeH + ":" + $scope.houseTH[id].autoPilotEndProgTimeM;

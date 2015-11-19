@@ -6,70 +6,62 @@
     </div>
   </ion-header-bar>
   <ion-content>
-    <form ng-submit="">
+
 	
 	<ion-item>
-	<div class="button-bar" >
-	  <a ng-class="{'button-outline':modalAutopilot.weekday == 0, 'select-selection-text':modalAutopilot.curWeekDay == 0}" ng-click="modalAutopilot.weekday=0" class="button button-weekday">Lu</a>
-	  <a ng-class="{'button-outline':modalAutopilot.weekday == 1 , 'select-selection-text':modalAutopilot.curWeekDay == 1}" ng-click="modalAutopilot.weekday=1" class="button button-weekday">Ma</a>
-	  <a ng-class="{'button-outline':modalAutopilot.weekday == 2, 'select-selection-text':modalAutopilot.curWeekDay == 2}" ng-click="modalAutopilot.weekday=2" class="button button-weekday">Mi</a>
-	  <a ng-class="{'button-outline':modalAutopilot.weekday == 3, 'select-selection-text':modalAutopilot.curWeekDay == 3}" ng-click="modalAutopilot.weekday=3" class="button button-weekday">Jo</a>
-	<!--  <a ng-class="modalAutopilot.weekday == 4?'button-outline':'' modalAutopilot.curWeekDay == 0?'select-selection-text':''" ng-click="modalAutopilot.weekday=4" class="button button-weekday">Vi</a>
-	  <a ng-class="modalAutopilot.weekday == 5?'button-outline':'' modalAutopilot.curWeekDay == 0?'select-selection-text':''" ng-click="modalAutopilot.weekday=5" class="button button-weekday">Sa</a>  
-	  <a ng-class="modalAutopilot.weekday == 6?'button-outline':'' modalAutopilot.curWeekDay == 0?'select-selection-text':''" ng-click="modalAutopilot.weekday=6" class="button button-weekday">Du</a>  
-	-->
-	</div>
-<!--
-<table><tr>
-		<td><button style="display:inline" class="button button-clear button-small" ng-click="">Lu</button>
-		</td><td><button style="display:inline" class="button button-clear button-medium" ng-click="">Ma</button>
-		</td><td><button style="display:inline" class="button button-clear button-medium" ng-click="">Mi</button>
-		</td><td><button style="display:inline" class="button button-clear" ng-click="">Jo</button>
-		</td><td><button style="display:inline" class="button button-clear" ng-click="">Vi</button>
-		</td><td><button style="display:inline" class="button button-clear" ng-click="">Sa</button>
-		</td><td><button style="display:inline" class="button button-clear" ng-click="">Du</button>
-		</td>
-</tr>		
-</table>
--->
+		<div class="button-bar" >
+		  <a ng-class="{'button-outline':modalAutoPilotProgram.ui.weekday == 0, 'select-selection-text':modalAutoPilotProgram.ui.curWeekDay == 0}" 
+			ng-click="modalAutoPilotProgram.ui.weekday=0" class="button button-weekday">Lu</a>
+		  <a ng-class="{'button-outline':modalAutoPilotProgram.ui.weekday == 1 , 'select-selection-text':modalAutoPilotProgram.ui.curWeekDay == 1}" 
+			ng-click="modalAutoPilotProgram.ui.weekday=1" class="button button-weekday">Ma</a>
+		  <a ng-class="{'button-outline':modalAutoPilotProgram.ui.weekday == 2, 'select-selection-text':modalAutoPilotProgram.ui.curWeekDay == 2}" 
+			ng-click="modalAutoPilotProgram.ui.weekday=2" class="button button-weekday">Mi</a>
+		  <a ng-class="{'button-outline':modalAutoPilotProgram.ui.weekday == 3, 'select-selection-text':modalAutoPilotProgram.ui.curWeekDay == 3}" 	
+			ng-click="modalAutoPilotProgram.ui.weekday=3" class="button button-weekday">Jo</a>
+		  <a ng-class="{'button-outline':modalAutoPilotProgram.ui.weekday == 4 , 'select-selection-text':modalAutoPilotProgram.ui.curWeekDay == 4}" 
+			ng-click="modalAutoPilotProgram.ui.weekday=4" class="button button-weekday">Vi</a>
+		  <a ng-class="{'button-outline':modalAutoPilotProgram.ui.weekday == 5, 'select-selection-text':modalAutoPilotProgram.ui.curWeekDay == 5}" 
+			ng-click="modalAutoPilotProgram.ui.weekday=5" class="button button-weekday">Sa</a>
+		  <a ng-class="{'button-outline':modalAutoPilotProgram.ui.weekday == 6, 'select-selection-text':modalAutoPilotProgram.ui.curWeekDay == 6}" 
+			ng-click="modalAutoPilotProgram.ui.weekday=6" class="button button-weekday">Du</a>
+		</div>
 	</ion-item>
 	
-      <ion-list>
+     
 	  
-	  
-	<!--
-<div  ng-repeat="lightParam in modalLight.light.params">  
-		<ion-item style="vertical-align: middle;" class="item-divider"  ng-class="{active: isSettingsShown({{lightParam.id}})}">
+    <div ng-repeat="sched in modalAutoPilotProgram.schedule[modalAutoPilotProgram.ui.weekday]">
+	  <ion-item>
 		
-		<button ng-click="toggleSettings({{lightParam.id}})" class="button button-small button-outline">
-  <i  class="icon" ng-class="isSettingsShown({{lightParam.id}}) ? 'ion-minus' : 'ion-plus'"></i>
-</button>
-              
-           {{lightParam.title}}
-		   
-		   <button ng-click="doUp({{lightParam.id}})" class="button button-small button-outline">
-			<i   class="icon ion-arrow-up-a"></i> 
+		<span style="float:left">
+		<i class="icon ion-ios-timer-outline"></i>
+			<strong>{{sched.startH}}:{{sched.startM}} - {{sched.endH}}:{{sched.endM}}</strong> mentine <span class="h3">{{sched.t}}</span>
+		</span>	
+		<span style="float:right">
+			<button class="button button-small button-positive button-outline" ng-click="showAutopilotEditInterval($index)">
+				<i class="icon ion-edit"></i> 
 			</button>
-			<strong>{{lightParam.cur}}</strong>
 			
-			<button ng-click="doDown({{lightParam.id}})" class="button button-small button-outline">
-			<i class="icon ion-arrow-down-a"></i> 
+			<button class="button button-small button-assertive button-outline" ng-click="">
+				<i class="icon ion-trash-a"></i> 
 			</button>
-        </ion-item>
-	  
-        <ion-item class="item-accordion" ng-show="isSettingsShown({{lightParam.id}})">
-			<ionslider id="{{lightParam.id}}" prefix="{{lightParam.title}}:" type="single" grid=true min="lightParam.min" max="lightParam.max" from="lightParam.cur" 
-						on-change="rangeChangeCallback" on-finish="rangeChangeCallbackFinish"></ionslider>
-        </ion-item >
-</div>		
--->
+		</span>
+	  </ion-item>
+    </div>
+	
+	  <ion-item ng-show="modalAutoPilotProgram.schedule[modalAutoPilotProgram.ui.weekday].length < 6">
+		<strong>
+			<i class="icon ion-android-add-circle"></i>
+			Adauga interval nou
+		</strong>
+	  </ion-item>
+
+
 
 	<ion-item>
 	 <button style="display:inline" class="button button-positive" ng-click="">Ok</button>
 	  <button style="display:inline" class="button" ng-click="closeProgram()">Anulare</button>
 	</ion-item>
 	
-      </ion-list>
-    </form>
+
   </ion-content>
 </ion-modal-view>

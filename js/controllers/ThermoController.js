@@ -1,4 +1,4 @@
-var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, socket, logData, commWeb, $interval, $timeout, $ionicPopup) 
+var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, socket, logData, commWeb, $interval, $timeout, $ionicPopup, $ionicModal) 
 {
 	$scope.settings = settings.get('settings');
 	$scope.logData = logData;
@@ -11,17 +11,17 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 		{id:0, sensorID:0, title:"Dormitor", dirty:false, 
 		minTemp:16.0, maxTemp:27.0, curTemp:21.0, curSensorTemp:22, curSensorTemp1m:22.1, curSensorTemp10m:21.9, curTempSymbol:'C', curSensorHumid:45.2, 
 		timestamp:1445802480, heaterOn:false, acOn:false,  autoPilotOn:true, autoPilotEndProgTimeH:-1, autoPilotEndProgTimeM:-1,
-		ui:{index:2}},
+		ui:{index:2}, schedule:[[{t:18.0, startH:18, startM:15, endH:19, endM:30}], [{t:18.5, startH:10, startM:15, endH:11, endM:30}], [{t:18.0, startH:11, startM:15, endH:15, endM:30}], [], [], [], [{t:18.0, startH:18, startM:15, endH:19, endM:30}, {t:18.0, startH:19, startM:30, endH:19, endM:30}]]},
 		
 		{id:1, sensorID:0, title:"Living", dirty:false, 
 		minTemp:16.0, maxTemp:27.0, curTemp:18.0, curSensorTemp:22, curSensorTemp1m:22.1, curSensorTemp10m:21.9, curTempSymbol:'C', curSensorHumid:30.2, 
 		timestamp:1445802480, heaterOn:false, acOn:true,  autoPilotOn:true, autoPilotEndProgTimeH:-1, autoPilotEndProgTimeM:-1,
-		ui:{index:5}},
+		ui:{index:5}, schedule:[[{t:20.0, startH:18, startM:15, endH:19, endM:30}], [{t:20.5, startH:10, startM:15, endH:11, endM:30}], [{t:20.0, startH:11, startM:15, endH:15, endM:30}], [], [], [], [{t:18.0, startH:18, startM:15, endH:19, endM:30}, {t:18.0, startH:19, startM:30, endH:19, endM:30}]]},
 		
 		{id:2, sensorID:0, title:"Baie", dirty:false, 
 		minTemp:16.0, maxTemp:27.0, curTemp:19.0, curSensorTemp:22, curSensorTemp1m:22.1, curSensorTemp10m:21.9, curTempSymbol:'C', curSensorHumid:73.2, 
 		timestamp:1445802480, heaterOn:true, acOn:false,  autoPilotOn:true, autoPilotEndProgTimeH:22, autoPilotEndProgTimeM:30,
-		ui:{index:7}},
+		ui:{index:7}, schedule:[[{t:25.0, startH:18, startM:15, endH:19, endM:30}], [{t:25.5, startH:10, startM:15, endH:11, endM:30}], [{t:25.0, startH:11, startM:15, endH:15, endM:30}], [], [], [], [{t:18.0, startH:18, startM:15, endH:19, endM:30}, {t:18.0, startH:19, startM:30, endH:19, endM:30}]]},
 	];
 	
 	
@@ -36,6 +36,39 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 		lastGasReading:350, heaterOn:false, heaterFault:true, heaterFaultDescr:"GasLeak",
 		timestamp:1445802480},
 	];
+
+/*------MODAL AUTOPILOT*/
+	$scope.modalAutoPilot = {
+		modal:null,
+		weekday:1,
+		curWeekDay:1
+	};
+
+	$ionicModal.fromTemplateUrl('views/program.html', {scope: $scope}).
+	then(
+		function(modal) 
+		{
+			$scope.modalAutoPilot.modal = modal;
+	});
+	
+	$scope.closeProgram = function closeProgram() 
+	{
+		$scope.modalAutoPilot.modal.hide();
+	};
+	
+	$scope.showAutopilotSettings = function showAutopilotSettings(id)
+	{
+		
+		$scope.modalAutoPilotProgram = $scope.houseTH[id];
+		$scope.modalAutoPilot.weekday = 1;
+		$scope.modalAutoPilot.curWeekDay = 1;
+		
+		
+		$timeout(function(){$scope.modalAutoPilot.modal.show();});
+	}
+
+/*------MODAL */	
+	
 
 	$scope.$on('$ionicView.beforeEnter', function() 
 	{  
@@ -408,10 +441,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 	
 	}
 
-	$scope.showAutopilotSettings = function showAutopilotSettings(id)
-	{
-	
-	}
+
 
 	$scope.getThermoAutoPilotDescr = function getThermoAutoPilotDescr(id)
 	{	
@@ -592,6 +622,9 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 		{
 			$scope.houseTH[id].curTemp += 0.5;
 			$scope.houseTH[id].dirty = true;
+			
+			try {navigator.notification.vibrate(10);}
+			catch(e) {}
 		}
 	
 		/*var val = $scope.houseTH[id].curTemp + 0.1;
@@ -608,6 +641,9 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 		{
 			$scope.houseTH[id].curTemp -= 0.5;
 			$scope.houseTH[id].dirty = true;
+			
+			try {navigator.notification.vibrate(10);}
+			catch(e) {}
 		}
 		
 		/*var val = $scope.myui.lastValue - 1;

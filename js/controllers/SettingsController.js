@@ -27,12 +27,8 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 			if($scope.settings.houseHolidayTemperature < $scope.settings.houseHolidayMaxTemperature) 
 			{
 				$scope.settings.houseHolidayTemperature += 0.5;
-				try
-				{
-					navigator.notification.vibrate(10);
-				}
-				catch(e)
-				{}
+				try {navigator.notification.vibrate(10);}
+				catch(e) {}
 			}
 		},
 		doTempDown: function doTempDown()

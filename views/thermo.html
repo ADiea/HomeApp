@@ -21,20 +21,13 @@
 						<!--</div>-->
 					</td>
 					
-					<td style="text-align:right;"> <!-- rowspan="2" -->
-						<div style="display:inline;">
-							<!--<p style="display:inline;"><i class="icon icon-size-normal ion-ios-timer-outline"></i></p>-->
-							
-							<!--
-							<select-wheel ng-model="th.ui.index" item-height="20" amplitude="2" options="monthOptions" ></select-wheel>
-							-->
-							
-							<strong><span>
-							
+					<td style="text-align:right;"> 
+						<div style="display:inline;padding-left:10px;">
+							<strong>
 							<span class="h2 ng-class:(!th.autoPilotOn || settings.houseHoliday)?'text-disabled':'';">{{getThermoSetTemp_Int(th.id)}}</span>
 							<span class="h5 ng-class:(!th.autoPilotOn || settings.houseHoliday)?'text-disabled':'';" style="vertical-align:top;">o</span>
 							<span class="h3 ng-class:(!th.autoPilotOn || settings.houseHoliday)?'text-disabled':'';" style="vertical-align:top;">{{getThermoSetTemp_Frac(th.id)}}</span>
-							</span></strong>
+							</strong>
 						</div>
 					</td>
 				</tr>
@@ -49,7 +42,7 @@
 					</td>
 					
 					<td style="text-align:right;" >
-						<div ng-show="!settings.houseHoliday" style="display:inline;">
+						<div ng-show="!settings.houseHoliday" style="display:inline;padding-left:10px;">
 							<button ng-disabled="!canTempDown(th.id) || !th.autoPilotOn" ng-click="doTempDown(th.id)" on-hold="holdTempSetBtn(false, true, th.id)" on-release="holdTempSetBtn(false, false, th.id)" class="button button-small button-positive button-outline" > 
 								<i class="icon ion-minus"></i> 
 							</button>
@@ -58,15 +51,13 @@
 								<i class="icon ion-plus"></i> 
 							</button>
 						</div>
-						<div ng-show="settings.houseHoliday" style="display:inline;">
+						<div ng-show="settings.houseHoliday" style="display:inline;padding-left:10px;">
 							<button ng-click="showHolidayConfirm()" class="button button-small button-positive button-outline" > 
 								<i style="margin:5px" class="icon icon-size-small ion-briefcase"></i> <strong>Vacanta</strong>
 							</button>
 						</div>
 					</td>	
-					
 
-	
 				</tr>
 			
 			</table>

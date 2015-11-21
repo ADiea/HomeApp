@@ -11,17 +11,17 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 		{id:0, sensorID:0, title:"Dormitor", dirty:false, 
 		minTemp:16.0, maxTemp:27.0, curTemp:21.0, curSensorTemp:22, curSensorTemp1m:22.1, curSensorTemp10m:21.9, curTempSymbol:'C', curSensorHumid:45.2, 
 		timestamp:1445802480, heaterOn:false, acOn:false,  autoPilotOn:true, autoPilotEndProgTimeH:-1, autoPilotEndProgTimeM:-1,
-		ui:{index:2, weekday:0, curWeekDay:1}, schedule:[[{t:18.0, startH:18, startM:15, endH:19, endM:30}], [{t:18.5, startH:10, startM:15, endH:11, endM:30}], [{t:18.0, startH:11, startM:15, endH:15, endM:30}], [], [], [], [{t:18.0, startH:18, startM:15, endH:19, endM:30}, {t:18.0, startH:19, startM:30, endH:19, endM:30}]]},
+		/*ui:{index:2, weekday:0, curWeekDay:1},*/ schedule:[[{t:18.0, startH:18, startM:15, endH:19, endM:30}], [{t:18.5, startH:10, startM:15, endH:11, endM:30}], [{t:18.0, startH:11, startM:15, endH:15, endM:30}], [], [], [], [{t:18.0, startH:18, startM:15, endH:19, endM:30}, {t:18.0, startH:19, startM:30, endH:19, endM:30}]]},
 		
 		{id:1, sensorID:0, title:"Living", dirty:false, 
 		minTemp:16.0, maxTemp:27.0, curTemp:18.0, curSensorTemp:22, curSensorTemp1m:22.1, curSensorTemp10m:21.9, curTempSymbol:'C', curSensorHumid:30.2, 
 		timestamp:1445802480, heaterOn:false, acOn:true,  autoPilotOn:true, autoPilotEndProgTimeH:-1, autoPilotEndProgTimeM:-1,
-		ui:{index:5, weekday:0, curWeekDay:1}, schedule:[[{t:20.0, startH:18, startM:15, endH:19, endM:30}], [{t:20.5, startH:10, startM:15, endH:11, endM:30}], [{t:20.0, startH:11, startM:15, endH:15, endM:30}], [], [], [], [{t:18.0, startH:18, startM:15, endH:19, endM:30}, {t:18.0, startH:19, startM:30, endH:19, endM:30}]]},
+		/*ui:{index:5, weekday:0, curWeekDay:1},*/ schedule:[[{t:20.0, startH:18, startM:15, endH:19, endM:30}], [{t:20.5, startH:10, startM:15, endH:11, endM:30}], [{t:20.0, startH:11, startM:15, endH:15, endM:30}], [], [], [], [{t:18.0, startH:18, startM:15, endH:19, endM:30}, {t:18.0, startH:19, startM:30, endH:19, endM:30}]]},
 		
 		{id:2, sensorID:0, title:"Baie", dirty:false, 
 		minTemp:16.0, maxTemp:27.0, curTemp:19.0, curSensorTemp:22, curSensorTemp1m:22.1, curSensorTemp10m:21.9, curTempSymbol:'C', curSensorHumid:73.2, 
 		timestamp:1445802480, heaterOn:true, acOn:false,  autoPilotOn:true, autoPilotEndProgTimeH:22, autoPilotEndProgTimeM:30,
-		ui:{index:7, weekday:0, curWeekDay:1}, schedule:[[{t:25.0, startH:18, startM:15, endH:19, endM:30}], [{t:25.5, startH:10, startM:15, endH:11, endM:30}], [{t:25.0, startH:11, startM:15, endH:15, endM:30}], [], [], [], [{t:18.0, startH:18, startM:15, endH:19, endM:30}, {t:18.0, startH:19, startM:30, endH:19, endM:30}]]},
+		/*ui:{index:7, weekday:0, curWeekDay:1},*/ schedule:[[{t:25.0, startH:18, startM:15, endH:19, endM:30}], [{t:25.5, startH:10, startM:15, endH:11, endM:30}], [{t:25.0, startH:11, startM:15, endH:15, endM:30}], [], [], [], [{t:18.0, startH:18, startM:15, endH:19, endM:30}, {t:18.0, startH:19, startM:30, endH:19, endM:30}]]},
 	];
 	
 	
@@ -40,60 +40,82 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 
 /*------MODAL AUTOPILOT*/
 	$scope.modalAutoPilot = {
-		modal:null,
-		//weekday:1,
-		//curWeekDay:1
+		modalSched:null,
+		modalEdit:null,
+		ui:{index:2, weekday:0, curWeekDay:1},
+		th: {},
+		editInterval:{}
 	};
 
 	$ionicModal.fromTemplateUrl('views/program.html', {scope: $scope}).
 	then(
 		function(modal) 
 		{
-			$scope.modalAutoPilot.modal = modal;
+			$scope.modalAutoPilot.modalSched = modal;
 	});
 	
 	$scope.closeProgram = function closeProgram() 
 	{
-		$scope.modalAutoPilot.modal.hide();
+		$scope.modalAutoPilot.modalSched.hide();
 	};
 	
 	$scope.showAutopilotSettings = function showAutopilotSettings(id)
 	{
+		$scope.modalAutoPilot.th = $scope.houseTH[id];
+		$scope.modalAutoPilot.ui.intvIdx = 0;
+		$scope.modalAutoPilot.ui.weekday = 0;
+		$scope.modalAutoPilot.ui.curWeekday = 1;
 		
-		$scope.modalAutoPilotProgram = $scope.houseTH[id];
+		//$scope.modalAutoPilotProgram = $scope.houseTH[id];
 		//$scope.modalAutoPilot.weekday = 1;
 		//$scope.modalAutoPilot.curWeekDay = 1;
 		
 		
-		$timeout(function(){$scope.modalAutoPilot.modal.show();});
+		$timeout(function(){$scope.modalAutoPilot.modalSched.show();});
 	}
 
 /*------MODAL */	
 	
 /*------MODAL AUTOPILOT INTERVAL*/
-	$scope.modalAutoPilotEdit = {modal:null};
+	
 
 	$ionicModal.fromTemplateUrl('views/editProgram.html', {scope: $scope}).
 	then(
 		function(modal) 
 		{
-			$scope.modalAutoPilotEdit.modal = modal;
+			$scope.modalAutoPilot.modalEdit = modal;
 	});
 	
 	$scope.closeAutopilotEdit = function closeAutopilotEdit() 
 	{
-		$scope.modalAutoPilotEdit.modal.hide();
+		$scope.modalAutoPilot.modalEdit.hide();
 	};
 	
 	$scope.showAutopilotEditInterval = function showAutopilotEditInterval(id)
 	{
+		if(id == -1)
+		{
+			var len = $scope.modalAutoPilot.th.schedule[$scope.modalAutoPilot.ui.weekday].length;
+			var lastObj = {t:18.0, startH:0, startM:0, endH:08, endM:30};
+			if(len > 0)
+				lastObj = $scope.modalAutoPilot.th.schedule[$scope.modalAutoPilot.ui.weekday][len-1];
+				
+			var obj={t:lastObj.t, startH:lastObj.endH, startM:lastObj.endM, endH:lastObj.endH, endM:lastObj.endM};
+			$scope.modalAutoPilot.th.schedule[$scope.modalAutoPilot.ui.weekday].push(obj);
+			$scope.modalAutoPilot.editInterval = $scope.modalAutoPilot.th.schedule[$scope.modalAutoPilot.ui.weekday][len];
+			
+		}
+		else
+		{
+			$scope.modalAutoPilot.editInterval = $scope.modalAutoPilot.th.schedule[$scope.modalAutoPilot.ui.weekday][id];
+		}
 		
 		//$scope.modalAutoPilotEdit.interval = //$scope.houseTH[id];
 		//$scope.modalAutoPilot.weekday = 1;
 		//$scope.modalAutoPilot.curWeekDay = 1;
 		
 		
-		$timeout(function(){$scope.modalAutoPilotEdit.modal.show();});
+		$scope.modalAutoPilot.modalEdit.show();
 	}
 
 /*------MODAL */	

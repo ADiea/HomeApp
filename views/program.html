@@ -1,6 +1,6 @@
 <ion-modal-view>
   <ion-header-bar>
-    <h1 class="title">Program {{modalAutoPilotProgram.title}}</h1>
+    <h1 class="title">Program {{modalAutoPilot.th.title}}</h1>
     <div class="buttons">
       <button class="button button-clear" ng-click="closeProgram()">Inchide</button>
     </div>
@@ -10,26 +10,26 @@
 	
 	<ion-item>
 		<div class="button-bar" >
-		  <a ng-class="{'button-outline':modalAutoPilotProgram.ui.weekday == 0, 'select-selection-text':modalAutoPilotProgram.ui.curWeekDay == 0}" 
-			ng-click="modalAutoPilotProgram.ui.weekday=0" class="button button-weekday">Lu</a>
-		  <a ng-class="{'button-outline':modalAutoPilotProgram.ui.weekday == 1 , 'select-selection-text':modalAutoPilotProgram.ui.curWeekDay == 1}" 
-			ng-click="modalAutoPilotProgram.ui.weekday=1" class="button button-weekday">Ma</a>
-		  <a ng-class="{'button-outline':modalAutoPilotProgram.ui.weekday == 2, 'select-selection-text':modalAutoPilotProgram.ui.curWeekDay == 2}" 
-			ng-click="modalAutoPilotProgram.ui.weekday=2" class="button button-weekday">Mi</a>
-		  <a ng-class="{'button-outline':modalAutoPilotProgram.ui.weekday == 3, 'select-selection-text':modalAutoPilotProgram.ui.curWeekDay == 3}" 	
-			ng-click="modalAutoPilotProgram.ui.weekday=3" class="button button-weekday">Jo</a>
-		  <a ng-class="{'button-outline':modalAutoPilotProgram.ui.weekday == 4 , 'select-selection-text':modalAutoPilotProgram.ui.curWeekDay == 4}" 
-			ng-click="modalAutoPilotProgram.ui.weekday=4" class="button button-weekday">Vi</a>
-		  <a ng-class="{'button-outline':modalAutoPilotProgram.ui.weekday == 5, 'select-selection-text':modalAutoPilotProgram.ui.curWeekDay == 5}" 
-			ng-click="modalAutoPilotProgram.ui.weekday=5" class="button button-weekday">Sa</a>
-		  <a ng-class="{'button-outline':modalAutoPilotProgram.ui.weekday == 6, 'select-selection-text':modalAutoPilotProgram.ui.curWeekDay == 6}" 
-			ng-click="modalAutoPilotProgram.ui.weekday=6" class="button button-weekday">Du</a>
+		  <a ng-class="{'button-outline':modalAutoPilot.ui.weekday == 0, 'select-selection-text':modalAutoPilot.ui.curWeekDay == 0}" 
+			ng-click="modalAutoPilot.ui.weekday=0" class="button button-weekday">Lu</a>
+		  <a ng-class="{'button-outline':modalAutoPilot.ui.weekday == 1 , 'select-selection-text':modalAutoPilot.ui.curWeekDay == 1}" 
+			ng-click="modalAutoPilot.ui.weekday=1" class="button button-weekday">Ma</a>
+		  <a ng-class="{'button-outline':modalAutoPilot.ui.weekday == 2, 'select-selection-text':modalAutoPilot.ui.curWeekDay == 2}" 
+			ng-click="modalAutoPilot.ui.weekday=2" class="button button-weekday">Mi</a>
+		  <a ng-class="{'button-outline':modalAutoPilot.ui.weekday == 3, 'select-selection-text':modalAutoPilot.ui.curWeekDay == 3}" 	
+			ng-click="modalAutoPilot.ui.weekday=3" class="button button-weekday">Jo</a>
+		  <a ng-class="{'button-outline':modalAutoPilot.ui.weekday == 4 , 'select-selection-text':modalAutoPilot.ui.curWeekDay == 4}" 
+			ng-click="modalAutoPilot.ui.weekday=4" class="button button-weekday">Vi</a>
+		  <a ng-class="{'button-outline':modalAutoPilot.ui.weekday == 5, 'select-selection-text':modalAutoPilot.ui.curWeekDay == 5}" 
+			ng-click="modalAutoPilot.ui.weekday=5" class="button button-weekday">Sa</a>
+		  <a ng-class="{'button-outline':modalAutoPilot.ui.weekday == 6, 'select-selection-text':modalAutoPilot.ui.curWeekDay == 6}" 
+			ng-click="modalAutoPilot.ui.weekday=6" class="button button-weekday">Du</a>
 		</div>
 	</ion-item>
 	
      
 	  
-    <div ng-repeat="sched in modalAutoPilotProgram.schedule[modalAutoPilotProgram.ui.weekday]">
+    <div ng-repeat="sched in modalAutoPilot.th.schedule[modalAutoPilot.ui.weekday]">
 	  <ion-item>
 		
 		<span style="float:left">
@@ -48,7 +48,7 @@
 	  </ion-item>
     </div>
 	
-	  <ion-item ng-show="modalAutoPilotProgram.schedule[modalAutoPilotProgram.ui.weekday].length < 6" ng-click="showAutopilotEditInterval(-1)">
+	  <ion-item ng-show="modalAutoPilot.th.schedule[modalAutoPilot.ui.weekday].length < 6" ng-click="showAutopilotEditInterval(-1)">
 		<strong>
 			<i class="icon ion-android-add-circle"></i>
 			Adauga interval nou

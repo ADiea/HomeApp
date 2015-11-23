@@ -42,6 +42,22 @@ var ionicApp = angular.module('ionicApp', ['ionic', 'angular.circular-slider', '
     e.preventDefault();
     return false;
   },101);
+  
+  var sets = SettingsService.get('settings');
+  if(null == sets)
+  {
+	sets = {
+			settingsVersion:1,
+			serverURL : "ws://192.168.0.103",
+			houseHoliday:true,
+			houseHolidayEnd:1447910991,
+			houseHolidayTemperature:18.0,
+			houseHolidayMinTemperature:16.0,
+			houseHolidayMaxTemperature:27.0
+			};
+  }
+  
+  
 })
 
 .config(function($stateProvider, $urlRouterProvider) {

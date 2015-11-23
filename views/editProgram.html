@@ -1,4 +1,4 @@
-<ion-modal-view>
+<ion-modal-view class="modalAutoPilotRange">
   <ion-header-bar>
     <h1 class="title">Add/Edit Interval</h1>
   </ion-header-bar>
@@ -6,29 +6,86 @@
 
 	
 	<ion-item>
-	<div style="display:inline;margin-left:10px;">
-								
-		<strong><span>
-		
-		<span class="h3">18</span>
-		<span class="h6" style="vertical-align:top;">o</span>
-		<span class="h4" style="vertical-align:top;">5</span>
-		</span></strong>
+	<table class="tableFull">
+	<tr>
+		<td rowspan="2" style="vertical-align:middle;min-width:70px;">
+			<i class="icon icon-size-normal ion-thermometer"></i> 
+			Temp.
+		</td>
+		<td style="vertical-align:middle;">
 	
-	<button ng-disabled="false" ng-click="" on-hold="" on-release="" class="button button-small button-positive button-outline" > 
-		<i class="icon ion-minus"></i> 
-	</button>
+				<strong><span>
+				
+				<span class="h3">18</span>
+				<span class="h6" style="vertical-align:top;">o</span>
+				<span class="h4" style="vertical-align:top;">5</span>
+				</span></strong>
 
-	<button ng-disabled="false"   ng-click="" on-hold="" on-release="" class="button button-small button-positive button-outline" > 
-		<i class="icon ion-plus"></i> 
-	</button>
-	</div>
+		</td>
+		<td style="vertical-align:middle;padding-left:10px;">
+			
+			<button ng-disabled="false" ng-click="" on-hold="" on-release="" class="button button-small button-positive button-outline" > 
+				<i class="icon ion-plus"></i> 
+			</button>
+			
+			<div>
+			<button ng-disabled="false"   ng-click="" on-hold="" on-release="" class="button button-small button-positive button-outline" > 
+				<i class="icon ion-minus"></i> 
+			</button>
+			</div>
+		</td>
+	</tr>
+	</table>
 	</ion-item>
 	
 	<ion-item>
-		t:{{modalAutoPilot.editInterval.t}} sH:{{modalAutoPilot.editInterval.startH}} sM:{{modalAutoPilot.editInterval.startM}}
+	<table class="tableFull">
+	<tr>
+		<td style="vertical-align:middle;min-width:70px;">
+		
+			<i class="icon icon-size-normal ion-clock"></i>
+			De la 
+		
+		</td>
+		<td >
+		<!-- refresh="ui.holidayEnd.refreshDay"  -->
+		<select-wheel min-width="35" type="1" ng-model="modalAutoPilot.editInterval.startH" item-height="20" amplitude="2" options="modalAutoPilot.ui.hourOptions" >
+		</select-wheel> 
+		</td>
+		<td >
+		<select-wheel min-width="35" type="1" ng-model="modalAutoPilot.editInterval.startM" item-height="20" amplitude="2" options="modalAutoPilot.ui.minOptions" >
+		</select-wheel> 
+		</td>
+	</tr>
+	</table>
 	</ion-item>
 	
+	<ion-item>
+	<table class="tableFull">
+	<tr>
+		<td style="vertical-align:middle;min-width:70px;">
+		
+			<i class="icon icon-size-normal ion-clock rot90"></i>
+			La
+		
+		</td>
+		<td >
+		<!-- refresh="ui.holidayEnd.refreshDay"  -->
+		<select-wheel min-width="35" type="1" ng-model="modalAutoPilot.editInterval.endH" item-height="20" amplitude="2" options="modalAutoPilot.ui.hourOptions" >
+		</select-wheel> 
+		</td>
+		<td >
+		<select-wheel min-width="35" type="1" ng-model="modalAutoPilot.editInterval.endM" item-height="20" amplitude="2" options="modalAutoPilot.ui.minOptions" >
+		</select-wheel> 
+		</td>
+	</tr>
+	</table>
+	</ion-item>
+<!--	
+	<ion-item>
+		t:{{modalAutoPilot.editInterval.t}} sH:{{modalAutoPilot.editInterval.startH}} sM:{{modalAutoPilot.editInterval.startM}}
+	</ion-item>
+-->	
 	<ion-item>
 	 <button style="display:inline" class="button button-positive" ng-click="">Ok</button>
 	  <button style="display:inline" class="button" ng-click="closeAutopilotEdit()">Anulare</button>

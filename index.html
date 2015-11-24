@@ -49,9 +49,18 @@
 	
 	<style>
 	
+	/*
+	.tableFull td {
+	   border: 1px solid #ddd;
+	}
+	*/
+	
 	.tableFull{
 		width:90%;
-		border:1px solid #aaa;
+	}
+	
+	.button-save{
+		margin-left:10px;
 	}
 	
 	@media (min-width: 680px) {
@@ -75,6 +84,7 @@
 	}
 	
 	.rot90 {
+	display: inline-block;
     -moz-transform: rotate(90deg);
     -webkit-transform: rotate(90deg);
     -o-transform: rotate(90deg);
@@ -90,6 +100,10 @@
 		}
 	.icon-size-normal{
 		font-size: 20px;
+	}
+
+	.icon-size-small{
+		font-size: 15px;
 	}
 	
 	.button-bar > .button-weekday{
@@ -151,7 +165,7 @@
 	.select-wheel-hint {
 	  z-index: 1;
 	  position: absolute;
-	  //text-align:center;
+	  text-align:center;
 	  top:0;
 	  left: -120%;
 	 width: 120%;

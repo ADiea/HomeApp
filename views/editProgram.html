@@ -1,6 +1,11 @@
 <ion-modal-view class="modalAutoPilotRange">
   <ion-header-bar>
-    <h1 class="title">Add/Edit Interval</h1>
+    <h1 class="title">Interval</h1>
+
+	<div class="buttons">
+      <button class="button button-outline icon-right button-assertive button-save" ng-click="closeAutopilotEdit()"><i class="icon icon-size-small ion-close-round"></i></button>
+	  <button class="button button-outline icon-right button-positive button-save" ng-click="closeAutopilotEditAndSave()"><i class="icon icon-size-small ion-checkmark-round"></i></button>
+    </div>
   </ion-header-bar>
   <ion-content>
 
@@ -8,31 +13,27 @@
 	<ion-item>
 	<table class="tableFull">
 	<tr>
-		<td rowspan="2" style="vertical-align:middle;min-width:70px;">
+		<td style="vertical-align:middle;min-width:70px;width:30%;">
 			<i class="icon icon-size-normal ion-thermometer"></i> 
-			Temp.
+			Temperatura
 		</td>
-		<td style="vertical-align:middle;">
+		<td style="vertical-align:middle;text-align:right;">
 	
 				<strong><span>
 				
-				<span class="h3">18</span>
+				<span class="h3">{{modalAutoPilot.ui.getIntervalTemp_i(modalAutoPilot.editInterval)}}</span>
 				<span class="h6" style="vertical-align:top;">o</span>
-				<span class="h4" style="vertical-align:top;">5</span>
+				<span class="h4" style="vertical-align:top;">{{modalAutoPilot.ui.getIntervalTemp_f(modalAutoPilot.editInterval)}}</span>
 				</span></strong>
-
-		</td>
-		<td style="vertical-align:middle;padding-left:10px;">
 			
-			<button ng-disabled="false" ng-click="" on-hold="" on-release="" class="button button-small button-positive button-outline" > 
-				<i class="icon ion-plus"></i> 
-			</button>
-			
-			<div>
-			<button ng-disabled="false"   ng-click="" on-hold="" on-release="" class="button button-small button-positive button-outline" > 
+			<button ng-disabled="!modalAutoPilot.ui.canTempDown(modalAutoPilot.editInterval, modalAutoPilot.th)" ng-click="modalAutoPilot.ui.doTempDown(modalAutoPilot.editInterval, modalAutoPilot.th)" on-hold="" on-release="" class="button button-small button-positive button-outline" > 
 				<i class="icon ion-minus"></i> 
 			</button>
-			</div>
+			
+			<button ng-disabled="!modalAutoPilot.ui.canTempUp(modalAutoPilot.editInterval, modalAutoPilot.th)"  ng-click="modalAutoPilot.ui.doTempUp(modalAutoPilot.editInterval, modalAutoPilot.th)" on-hold="" on-release="" class="button button-small button-positive button-outline" > 
+				<i class="icon ion-plus"></i> 
+			</button>
+
 		</td>
 	</tr>
 	</table>
@@ -41,7 +42,7 @@
 	<ion-item>
 	<table class="tableFull">
 	<tr>
-		<td style="vertical-align:middle;min-width:70px;">
+		<td style="vertical-align:middle;min-width:70px;width:30%;">
 		
 			<i class="icon icon-size-normal ion-clock"></i>
 			De la 
@@ -63,10 +64,10 @@
 	<ion-item>
 	<table class="tableFull">
 	<tr>
-		<td style="vertical-align:middle;min-width:70px;">
+		<td style="vertical-align:middle;min-width:70px;width:30%;">
 		
 			<i class="icon icon-size-normal ion-clock rot90"></i>
-			La
+			La ora
 		
 		</td>
 		<td >
@@ -86,9 +87,11 @@
 		t:{{modalAutoPilot.editInterval.t}} sH:{{modalAutoPilot.editInterval.startH}} sM:{{modalAutoPilot.editInterval.startM}}
 	</ion-item>
 -->	
+<!--
 	<ion-item>
 	 <button style="display:inline" class="button button-positive" ng-click="">Ok</button>
 	  <button style="display:inline" class="button" ng-click="closeAutopilotEdit()">Anulare</button>
 	</ion-item>
+-->	
   </ion-content>
 </ion-modal-view>

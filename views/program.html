@@ -1,12 +1,14 @@
 <ion-modal-view class="modalAutoPilot">
   <ion-header-bar>
-    <h1 class="title">Program {{modalAutoPilot.th.title}}</h1>
-    <div class="buttons">
-      <button class="button button-clear" ng-click="closeProgram()">Inchide</button>
+    <h1 class="title">{{modalAutoPilot.th.title}}</h1>
+    
+	<div class="buttons">
+      <button class="button button-outline icon-right button-assertive button-save" ng-click="closeProgram()"><i class="icon icon-size-small ion-close-round"></i></button>
+	  <button class="button button-outline icon-right button-positive button-save" ng-click="closeProgramAndSave()"><i class="icon icon-size-small ion-checkmark-round"></i></button>
     </div>
+	
   </ion-header-bar>
   <ion-content>
-
 	
 	<ion-item>
 		<div class="button-bar" >
@@ -26,29 +28,31 @@
 			ng-click="modalAutoPilot.ui.weekday=6" class="button button-weekday">Du</a>
 		</div>
 	</ion-item>
-	
-     
-	  
+
     <div ng-repeat="sched in modalAutoPilot.th.schedule[modalAutoPilot.ui.weekday]">
 	  <ion-item>
 		
 		<span style="float:left">
-		<i class="icon ion-ios-timer-outline"></i>
-			<strong>{{sched.startH}}:{{sched.startM}} - {{sched.endH}}:{{sched.endM}}</strong> mentine <span class="h3">{{sched.t}}</span>
+			<!--<i class="icon ion-ios-timer-outline"></i>-->
+			<span class="h3">{{modalAutoPilot.ui.getIntervalTemp_i(sched)}}</span>
+			<span class="h6" style="vertical-align:top;">o</span>
+			<span class="h4" style="vertical-align:top;">{{modalAutoPilot.ui.getIntervalTemp_f(sched)}}</span>
+			intre
+			<strong>{{sched.startH}}:{{modalAutoPilot.ui.getMinuteStr(sched.startM)}} - {{sched.endH}}:{{modalAutoPilot.ui.getMinuteStr(sched.endM)}}</strong> 			
 		</span>	
 		<span style="float:right">
 			<button class="button button-small button-positive button-outline" ng-click="showAutopilotEditInterval($index)">
 				<i class="icon ion-edit"></i> 
 			</button>
 			
-			<button class="button button-small button-assertive button-outline" ng-click="">
+			<button class="button button-small button-assertive button-outline" ng-click="removeAutoPilotInterval($index)">
 				<i class="icon ion-trash-a"></i> 
 			</button>
 		</span>
 	  </ion-item>
     </div>
 	
-	  <ion-item ng-show="modalAutoPilot.th.schedule[modalAutoPilot.ui.weekday].length < 6" ng-click="showAutopilotEditInterval(-1)">
+	  <ion-item ng-show="modalAutoPilot.th.schedule[modalAutoPilot.ui.weekday].length < 5" ng-click="showAutopilotEditInterval(-1)">
 		<strong>
 			<i class="icon ion-android-add-circle"></i>
 			Adauga interval nou
@@ -56,12 +60,12 @@
 	  </ion-item>
 
 
-
+<!--
 	<ion-item>
 	 <button style="display:inline" class="button button-positive" ng-click="">Ok</button>
 	  <button style="display:inline" class="button" ng-click="closeProgram()">Anulare</button>
 	</ion-item>
-	
+-->	
 
   </ion-content>
 </ion-modal-view>

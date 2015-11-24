@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 var ionicApp = angular.module('ionicApp', ['ionic', 'angular.circular-slider', 'btford.socket-io'])
 
-.run(function($rootScope, $ionicPlatform, $ionicHistory) {
+.run(function($rootScope, $ionicPlatform, $ionicHistory, SettingsService) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)

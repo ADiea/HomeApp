@@ -3,7 +3,8 @@
       <ion-scroll zooming="false" on-refresh="onRefresh()" on-scroll="onScroll(event, scrollTop)" direction="y" scrollbar-y="false">
         <div class="select-wheel-list">
 		  <div class="select-wheel-item"><div>-</div></div>
-          <div ng-show="/*($index < index+2 && $index > index-2 ) && */(usefulLength < 0 || $index < usefulLength)" class="select-wheel-item" ng-repeat="option in options">
+		  <!-- /*($index < index+2 && $index > index-2 ) && */ -->
+          <div ng-show="(usefulLength < 0 || $index < usefulLength)" class="select-wheel-item" ng-repeat="option in options">
             
 			<!--
 			<div ng-show="type == 0" ng-class="{'active': $index === index}" data-value="option.value">

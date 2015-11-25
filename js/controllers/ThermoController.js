@@ -8,20 +8,53 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 	$scope.thermo = {minTemp:16.0, maxTemp:27.0, curTemp:21.0, curSensorTemp:22, curTempSymbol:'C'};
 	
 	$scope.houseTH = [
-		{id:0, sensorID:0, title:"Dormitor", dirty:false, 
-		minTemp:16.0, maxTemp:27.0, curTemp:21.0, curSensorTemp:22, curSensorTemp1m:22.1, curSensorTemp10m:21.9, curTempSymbol:'C', curSensorHumid:45.2, 
-		timestamp:1445802480, heaterOn:false, acOn:false,  autoPilotOn:true, autoPilotEndProgTimeH:-1, autoPilotEndProgTimeM:-1,
-		/*ui:{index:2, weekday:0, curWeekDay:1},*/ schedule:[[{t:18.0, startH:18, startM:2, endH:19, endM:3}], [{t:18.5, startH:10, startM:2, endH:11, endM:3}], [{t:18.0, startH:11, startM:2, endH:15, endM:3}], [], [], [], [{t:18.0, startH:18, startM:2, endH:19, endM:3}, {t:18.0, startH:19, startM:30, endH:19, endM:3}]]},
+		{
+			id:0, sensorID:0, title:"Dormitor", dirty:false, 
+			minTemp:16.0, maxTemp:27.0, curTemp:21.0, curSensorTemp:22, curSensorTemp1m:22.1, curSensorTemp10m:21.9, curTempSymbol:'C', curSensorHumid:45.2, 
+			timestamp:1445802480, heaterOn:false, acOn:false,  autoPilotOn:true, autoPilotEndProgTimeH:-1, autoPilotEndProgTimeM:-1,
+			schedule:
+			[
+				[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
+				[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
+				[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
+				[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
+				[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
+				[{t:20.0, startH:0, startM:0, endH:9, endM:0}, {t:17.5, startH:9, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
+				[{t:20.0, startH:0, startM:0, endH:9, endM:0}, {t:17.5, startH:9, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
+			]
+		},
 		
-		{id:1, sensorID:0, title:"Living", dirty:false, 
-		minTemp:16.0, maxTemp:27.0, curTemp:18.0, curSensorTemp:22, curSensorTemp1m:22.1, curSensorTemp10m:21.9, curTempSymbol:'C', curSensorHumid:30.2, 
-		timestamp:1445802480, heaterOn:false, acOn:true,  autoPilotOn:true, autoPilotEndProgTimeH:-1, autoPilotEndProgTimeM:-1,
-		/*ui:{index:5, weekday:0, curWeekDay:1},*/ schedule:[[{t:20.0, startH:18, startM:2, endH:19, endM:3}], [{t:20.5, startH:10, startM:2, endH:11, endM:3}], [{t:20.0, startH:11, startM:2, endH:15, endM:3}], [], [], [], [{t:18.0, startH:18, startM:2, endH:19, endM:3}, {t:18.0, startH:19, startM:30, endH:19, endM:3}]]},
+		{
+			id:1, sensorID:0, title:"Living", dirty:false, 
+			minTemp:16.0, maxTemp:27.0, curTemp:18.0, curSensorTemp:22, curSensorTemp1m:22.1, curSensorTemp10m:21.9, curTempSymbol:'C', curSensorHumid:30.2, 
+			timestamp:1445802480, heaterOn:false, acOn:true,  autoPilotOn:true, autoPilotEndProgTimeH:-1, autoPilotEndProgTimeM:-1,
+			schedule:
+			[
+				[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
+				[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
+				[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
+				[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
+				[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
+				[{t:20.0, startH:0, startM:0, endH:9, endM:0}, {t:17.5, startH:9, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
+				[{t:20.0, startH:0, startM:0, endH:9, endM:0}, {t:17.5, startH:9, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
+			]			
+		},
 		
-		{id:2, sensorID:0, title:"Baie", dirty:false, 
-		minTemp:16.0, maxTemp:27.0, curTemp:19.0, curSensorTemp:22, curSensorTemp1m:22.1, curSensorTemp10m:21.9, curTempSymbol:'C', curSensorHumid:73.2, 
-		timestamp:1445802480, heaterOn:true, acOn:false,  autoPilotOn:true, autoPilotEndProgTimeH:22, autoPilotEndProgTimeM:30,
-		/*ui:{index:7, weekday:0, curWeekDay:1},*/ schedule:[[{t:25.0, startH:18, startM:2, endH:19, endM:3}], [{t:25.5, startH:10, startM:2, endH:11, endM:3}], [{t:25.0, startH:11, startM:2, endH:15, endM:3}], [], [], [], [{t:18.0, startH:18, startM:2, endH:19, endM:3}, {t:18.0, startH:19, startM:30, endH:19, endM:3}]]},
+		{
+			id:2, sensorID:0, title:"Baie", dirty:false, 
+			minTemp:16.0, maxTemp:27.0, curTemp:19.0, curSensorTemp:22, curSensorTemp1m:22.1, curSensorTemp10m:21.9, curTempSymbol:'C', curSensorHumid:73.2, 
+			timestamp:1445802480, heaterOn:true, acOn:false,  autoPilotOn:true, autoPilotEndProgTimeH:22, autoPilotEndProgTimeM:30,
+			schedule:
+			[
+				[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
+				[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
+				[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
+				[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
+				[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
+				[{t:20.0, startH:0, startM:0, endH:9, endM:0}, {t:17.5, startH:9, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
+				[{t:20.0, startH:0, startM:0, endH:9, endM:0}, {t:17.5, startH:9, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
+			]			
+		},
 	];
 	
 	
@@ -56,20 +89,19 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 			},
 			getMinuteStr: function getMinuteStr(min)
 			{
-				if(min == 0)
-					return "00";
-				if(min == 1)
-					return "15";
-				if(min == 2)
-					return "30";
-				if(min == 3)
-					return "45";	
-					
-				return min;	
+				var num = min * 5 + "";
+				if(num.length < 2) num = "0"+num;
+				return num;	
+			},
+			getHourStr: function getHourStr(min)
+			{
+				var num = min + "";
+				if(num.length < 2) num = "0"+num;
+				return num;	
 			},
 			hourOptions:["00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11",
 						"12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"],
-			minOptions:["00", "15", "30", "45"],
+			minOptions:["00", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55"],
 			
 			doTempUp : function doTempUp(intv, th)
 			{
@@ -137,16 +169,10 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 	{
 		$scope.modalAutoPilot.thIndex = id;
 		$scope.modalAutoPilot.th = JSON.parse(JSON.stringify($scope.houseTH[$scope.modalAutoPilot.thIndex]));
-		
-		
+
 		$scope.modalAutoPilot.ui.intvIdx = 0;
-		$scope.modalAutoPilot.ui.weekday = 1;
-		$scope.modalAutoPilot.ui.curWeekday = 2;
-		
-		//$scope.modalAutoPilotProgram = $scope.houseTH[id];
-		//$scope.modalAutoPilot.weekday = 1;
-		//$scope.modalAutoPilot.curWeekDay = 1;
-		
+		$scope.modalAutoPilot.ui.weekday = (new Date()).getDay() - 1;
+		$scope.modalAutoPilot.ui.curWeekDay = $scope.modalAutoPilot.ui.weekday;
 		
 		$timeout(function(){$scope.modalAutoPilot.modalSched.show();});
 	}
@@ -155,7 +181,6 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 	
 /*------MODAL AUTOPILOT INTERVAL*/
 	
-
 	$ionicModal.fromTemplateUrl('views/editProgram.html', {scope: $scope}).
 	then(
 		function(modal) 
@@ -168,9 +193,82 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 		$scope.modalAutoPilot.modalEdit.hide();
 	};
 	
+	$scope.compareTime = function(h1, m1, h2, m2)
+	{
+		if(h1 > h2)
+			return 1;
+		if(h1 < h2)
+			return -1;
+		if(m1 > m2)
+			return 1;
+		if(m1 < m2)
+			return -1;
+		return 0;
+	}
+	
 	$scope.closeAutopilotEditAndSave = function closeAutopilotEditAndSave() 
 	{
-		$scope.modalAutoPilot.th.schedule[$scope.modalAutoPilot.ui.weekday][$scope.modalAutoPilot.editIntervalIndex] =  JSON.parse(JSON.stringify($scope.modalAutoPilot.editInterval));
+		var startI=0, endI=0, len=$scope.modalAutoPilot.th.schedule[$scope.modalAutoPilot.ui.weekday].length, i=0;
+		var oldArray = $scope.modalAutoPilot.th.schedule[$scope.modalAutoPilot.ui.weekday];
+		var newInterval = $scope.modalAutoPilot.editInterval;
+		var newArray = [];
+		
+		if($scope.compareTime(newInterval.endH, newInterval.endM, newInterval.startH, newInterval.startM) <= 0)
+		{
+			try
+			{
+		      window.plugins.toast.showShortCenter("Interval orar invalid!",function(a){},function(b){});
+			}
+			catch(e){}
+			return;
+		}
+		
+		for(; i< len; i++)
+		{
+			if($scope.compareTime(oldArray[i].endH, oldArray[i].endM, newInterval.startH, newInterval.startM) > 0)
+			{
+				startI = i;
+				break;
+			}
+		}
+		
+		for(i=0; i < len; i++)
+		{
+			if($scope.compareTime(oldArray[i].endH, oldArray[i].endM, newInterval.endH, newInterval.endM) >= 0)
+			{
+				endI = i;
+				break;
+			}
+		}		
+		
+		for(i=0; i<len; i++)
+		{
+			if(i < startI || i > endI)
+			{
+				newArray.push(JSON.parse(JSON.stringify(oldArray[i])));
+			}
+			
+			if(i == startI)
+			{
+				if(oldArray[i].startH != newInterval.startH || oldArray[i].startM != newInterval.startM )
+				{
+					newArray.push({t:oldArray[i].t, startH:oldArray[i].startH, startM:oldArray[i].startM, endH:newInterval.startH, endM:newInterval.startM});
+				}
+				
+				newArray.push(JSON.parse(JSON.stringify(newInterval)));
+			}
+			
+			if(i==endI)
+			{
+				if(oldArray[i].endH != newInterval.endH || oldArray[i].endM != newInterval.endM)
+				{
+					newArray.push({t:oldArray[i].t, startH:newInterval.endH, startM:newInterval.endM, endH:oldArray[i].endH, endM:oldArray[i].endM});
+				}				
+			}
+		}
+		
+		$scope.modalAutoPilot.th.schedule[$scope.modalAutoPilot.ui.weekday] =  JSON.parse(JSON.stringify(newArray));
+		
 		$scope.modalAutoPilot.modalEdit.hide();
 	};
 
@@ -183,22 +281,41 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 			if(len > 0)
 				lastObj = $scope.modalAutoPilot.th.schedule[$scope.modalAutoPilot.ui.weekday][len-1];
 				
-			var obj={t:lastObj.t, startH:lastObj.endH, startM:lastObj.endM, endH:lastObj.endH, endM:lastObj.endM};
-			$scope.modalAutoPilot.th.schedule[$scope.modalAutoPilot.ui.weekday].push(obj);
-			$scope.modalAutoPilot.editIntervalIndex = len;
+			$scope.modalAutoPilot.editInterval = {t:lastObj.t, startH:lastObj.endH, startM:lastObj.endM, endH:lastObj.endH, endM:lastObj.endM};
+			
+			//$scope.modalAutoPilot.editIntervalIndex = len;
 		}
 		else
 		{
-			$scope.modalAutoPilot.editIntervalIndex = id;
+			//$scope.modalAutoPilot.editIntervalIndex = id;
+			$scope.modalAutoPilot.editInterval =  JSON.parse(JSON.stringify($scope.modalAutoPilot.th.schedule[$scope.modalAutoPilot.ui.weekday][/*$scope.modalAutoPilot.editIntervalIndex*/id]));
 		}
 
-		$scope.modalAutoPilot.editInterval =  JSON.parse(JSON.stringify($scope.modalAutoPilot.th.schedule[$scope.modalAutoPilot.ui.weekday][$scope.modalAutoPilot.editIntervalIndex]));
+		
 
 		$scope.modalAutoPilot.modalEdit.show();
 	}
 	
 	$scope.removeAutoPilotInterval = function removeAutoPilotInterval(id)
 	{
+		var len = $scope.modalAutoPilot.th.schedule[$scope.modalAutoPilot.ui.weekday].length;
+		if(id > 0)
+		{
+			$scope.modalAutoPilot.th.schedule[$scope.modalAutoPilot.ui.weekday][id - 1].endH = 
+				$scope.modalAutoPilot.th.schedule[$scope.modalAutoPilot.ui.weekday][id].endH;
+			
+			$scope.modalAutoPilot.th.schedule[$scope.modalAutoPilot.ui.weekday][id - 1].endM = 
+				$scope.modalAutoPilot.th.schedule[$scope.modalAutoPilot.ui.weekday][id].endM;
+		}
+		else if(id == 0 && id < len - 1)
+		{
+			$scope.modalAutoPilot.th.schedule[$scope.modalAutoPilot.ui.weekday][id + 1].startH = 
+				$scope.modalAutoPilot.th.schedule[$scope.modalAutoPilot.ui.weekday][0].startH;
+			
+			$scope.modalAutoPilot.th.schedule[$scope.modalAutoPilot.ui.weekday][id + 1].startM = 
+				$scope.modalAutoPilot.th.schedule[$scope.modalAutoPilot.ui.weekday][0].startM;
+		}		
+		
 		$scope.modalAutoPilot.th.schedule[$scope.modalAutoPilot.ui.weekday].splice(id, 1);
 	}
 

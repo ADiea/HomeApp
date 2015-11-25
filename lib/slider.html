@@ -14,7 +14,7 @@
 			</div>
 			-->
 			
-            <div ng-show="type == 1" ng-class="{'active select-selection-text': $index === index}" data-value="option">
+            <div ng-show="type == 1" ng-class="{'active select-selection-text': $index === index}" data-value="option" ng-click="setIndex($index)">
 				<!--<span ng-class="(option.id === $index)?'select-selection-text':''"  style="color:inherit;vertical-align:inherit;">-->
 				{{option}}
 				<!--</span> <!-- ng-class="($index === index)?'h3':'h4'" -->

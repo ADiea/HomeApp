@@ -111,6 +111,13 @@ ionicApp.directive('selectWheel', function($ionicScrollDelegate, $ionicGesture, 
 			scope.index = scope.ngModel || 0;
 			resize();
 		  };
+		  
+		  scope.setIndex = function setIndex(i)
+		  {
+			scope.index = i;
+			try { navigator.notification.vibrate(10); } catch(e) {}
+			resize();
+		  }
 
           scope.onScroll = function(event, scrollTop) 
 		  {

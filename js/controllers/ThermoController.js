@@ -79,6 +79,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 			intvIdx:0, 
 			weekday:0, 
 			curWeekDay:0,
+			showOptionsIndex:-1,
 			getIntervalTemp_i: function getIntervalTemp_i(i)
 			{
 				return parseInt(i.t);
@@ -173,6 +174,8 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 		$scope.modalAutoPilot.ui.intvIdx = 0;
 		$scope.modalAutoPilot.ui.weekday = (new Date()).getDay() - 1;
 		$scope.modalAutoPilot.ui.curWeekDay = $scope.modalAutoPilot.ui.weekday;
+		
+		$scope.modalAutoPilot.ui.showOptionsIndex = -1;
 		
 		$timeout(function(){$scope.modalAutoPilot.modalSched.show();});
 	}

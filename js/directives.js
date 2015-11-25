@@ -115,7 +115,6 @@ ionicApp.directive('selectWheel', function($ionicScrollDelegate, $ionicGesture, 
 		  scope.setIndex = function setIndex(i)
 		  {
 			scope.index = i;
-			try { navigator.notification.vibrate(10); } catch(e) {}
 			resize();
 		  }
 

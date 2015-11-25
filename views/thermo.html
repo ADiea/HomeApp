@@ -22,12 +22,12 @@
 					</td>
 					
 					<td style="text-align:right;"> 
-						<div style="display:inline;padding-left:10px;">
-							<strong>
-							<span class="h2 ng-class:(!th.autoPilotOn || settings.houseHoliday)?'text-disabled':'';">{{getThermoSetTemp_Int(th.id)}}</span>
-							<span class="h5 ng-class:(!th.autoPilotOn || settings.houseHoliday)?'text-disabled':'';" style="vertical-align:top;">o</span>
-							<span class="h3 ng-class:(!th.autoPilotOn || settings.houseHoliday)?'text-disabled':'';" style="vertical-align:top;">{{getThermoSetTemp_Frac(th.id)}}</span>
-							</strong>
+						<div style="display:inline;padding-left:10px;" ng-class="{'text-disabled':(!th.autoPilotOn || settings.houseHoliday)}">
+							
+							<span class="textDegInt">{{getThermoSetTemp_Int(th.id)}},</span>
+							<span class="textDegFloat">{{getThermoSetTemp_Frac(th.id)}}</span>
+							<span class="textDegSymbol">o</span>
+							
 						</div>
 					</td>
 				</tr>

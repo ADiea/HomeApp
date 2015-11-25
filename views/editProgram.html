@@ -19,12 +19,11 @@
 		</td>
 		<td style="vertical-align:middle;text-align:right;">
 	
-				<strong><span>
-				
-				<span class="h3">{{modalAutoPilot.ui.getIntervalTemp_i(modalAutoPilot.editInterval)}}</span>
-				<span class="h6" style="vertical-align:top;">o</span>
-				<span class="h4" style="vertical-align:top;">{{modalAutoPilot.ui.getIntervalTemp_f(modalAutoPilot.editInterval)}}</span>
-				</span></strong>
+				<span style="vertical-align:bottom;">
+				<span class="textDegInt">{{modalAutoPilot.ui.getIntervalTemp_i(modalAutoPilot.editInterval)}},</span>
+				<span class="textDegFloat" >{{modalAutoPilot.ui.getIntervalTemp_f(modalAutoPilot.editInterval)}}</span>
+				<span class="textDegSymbol">o</span>
+				</span>
 			
 			<button ng-disabled="!modalAutoPilot.ui.canTempDown(modalAutoPilot.editInterval, modalAutoPilot.th)" ng-click="modalAutoPilot.ui.doTempDown(modalAutoPilot.editInterval, modalAutoPilot.th)" on-hold="" on-release="" class="button button-small button-positive button-outline" > 
 				<i class="icon ion-minus"></i> 

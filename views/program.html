@@ -40,11 +40,11 @@
 		
 		<span style="float:left">
 			<!--<i class="icon ion-ios-timer-outline"></i>-->
-			<span class="h3">{{modalAutoPilot.ui.getIntervalTemp_i(sched)}}</span>
-			<span class="h6" style="vertical-align:top;">o</span>
-			<span class="h4" style="vertical-align:top;">{{modalAutoPilot.ui.getIntervalTemp_f(sched)}}</span>
+			<span class="textDegInt">{{modalAutoPilot.ui.getIntervalTemp_i(sched)}},</span>
+			<span class="textDegFloat" >{{modalAutoPilot.ui.getIntervalTemp_f(sched)}}</span>
+			<span class="textDegSymbol">o</span> 
 			intre 
-			<strong>{{modalAutoPilot.ui.getHourStr(sched.startH)}}:{{modalAutoPilot.ui.getMinuteStr(sched.startM)}} - {{modalAutoPilot.ui.getHourStr(sched.endH)}}:{{modalAutoPilot.ui.getMinuteStr(sched.endM)}}</strong> 			
+			<span class="textDegFloat">{{modalAutoPilot.ui.getHourStr(sched.startH)}}:{{modalAutoPilot.ui.getMinuteStr(sched.startM)}} - {{modalAutoPilot.ui.getHourStr(sched.endH)}}:{{modalAutoPilot.ui.getMinuteStr(sched.endM)}}</span> 			
 		</span>	
 		
 		<span ng-show="modalAutoPilot.ui.showOptionsIndex != $index" style="float:right">

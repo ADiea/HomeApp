@@ -152,7 +152,6 @@ ionicApp.directive('selectWheel', function($ionicScrollDelegate, $ionicGesture, 
 			{
 				index = 0;
 				nearestPos = +scope.itemHeight/2;
-
 			}
 			else if(index >= usedLength && usedLength > 0)
 			{
@@ -162,16 +161,12 @@ ionicApp.directive('selectWheel', function($ionicScrollDelegate, $ionicGesture, 
 			 
 			if(scope.index != index)
 			{
-				scope.$apply(function() {
+				scope.$digest(function() {
 					scope.index = index;
 				  });
 
-				try
-				{
-					navigator.notification.vibrate(10);
-				}
-				catch(e)
-				{}
+				try { navigator.notification.vibrate(10); }
+				catch(e) {}
 			}
 			 
 			if (!scope.touched && !_fixed) 
@@ -257,7 +252,7 @@ ionicApp.directive('selectWheel', function($ionicScrollDelegate, $ionicGesture, 
           });
 
           // Resize on start
-		  $timeout(resize());
+		  //$timeout(resize());
         };
 
       },

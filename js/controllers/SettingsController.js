@@ -1,4 +1,4 @@
-var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, settings, $state, socket, $timeout, $interval) 
+var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, settings, $state, socket, $timeout, $interval, $ionicPopup, $location, $ionicHistory) 
 {
 	$scope.settings = {};
 	$scope.oldSettings = {};
@@ -36,12 +36,8 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 			if($scope.settings.houseHolidayTemperature > $scope.settings.houseHolidayMinTemperature) 
 			{
 				$scope.settings.houseHolidayTemperature -= 0.5;
-								try
-				{
-					navigator.notification.vibrate(10);
-				}
-				catch(e)
-				{}
+				try { navigator.notification.vibrate(10); }
+				catch(e) {}
 			}
 		},
 		getHolidayTempInt : function getHolidayTempInt()
@@ -60,6 +56,7 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 			$scope.ui.holidayShow = !$scope.ui.holidayShow;
 			if($scope.ui.holidayShow)
 			{
+				settings.houseHoliday = true;
 				$scope.refreshHolidayControls(false);
 			}
 		},
@@ -80,7 +77,6 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 					if($scope.thermoTempChangeDirectionUp)
 					{
 						$scope.ui.doTempUp();
-						
 					}
 					else
 					{
@@ -178,7 +174,34 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 			$scope.oldSettings = JSON.parse(JSON.stringify($scope.settings));
 			
 			$scope.refreshHolidayControls(true);
-		});
+		
+			$scope.unlistenLocationChange = $scope.$on('$locationChangeStart', function( event, next, prev ) 
+			{
+				if(JSON.stringify($scope.settings) !== JSON.stringify($scope.oldSettings))
+				{
+					event.preventDefault();
+					
+					var confirmPopup = $ionicPopup.confirm({
+						 title: 'Setari nesalvate',
+						 template: 'Salvati setarile?'
+					   });
+				    confirmPopup.then(function(res) 
+					{
+						if(res) 
+						{
+							settings.persist('settings', $scope.settings);
+						} 
+
+						var destination = next.substr(next.indexOf('#') + 1, next.length).trim();
+						
+						$ionicHistory.nextViewOptions({ disableAnimate: true, disableBack: true });
+						$location.path(destination);
+						//$timeout(function(){$ionicHistory.clearHistory();}, 0);
+				   });
+			   }
+			   $scope.unlistenLocationChange();
+			});
+		});//timeout
 	});
 	
 	$scope.$on('$ionicView.beforeLeave', function() 
@@ -186,12 +209,23 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 		//$scope.settings.houseHolidayEnd = DATE($scope.ui.holidayEnd.day, $scope.ui.holidayEnd.mo, $scope.ui.holidayEnd.year)
 		//$scope.settings.houseHolidayTemperature = $scope.ui.holidayTemp;
 	
-		settings.persist('settings', $scope.settings);
+		/*settings.persist('settings', $scope.settings);
 		
 		if($scope.settings.serverURL != $scope.oldSettings.serverURL)
 		{
 			socket.connectSocket(true);
-		}
+		}*/
+		
+	   /*var confirmPopup = $ionicPopup.confirm({
+		 title: 'Setari nesalvate',
+		 template: 'Salvati setarile?'
+	   });
+	   confirmPopup.then(function(res) {
+		 if(res) 
+		 {
+			settings.persist('settings', $scope.settings);
+		 } 
+	   });*/
 	});
 	
 	$scope.saveSettings = function saveSettings()

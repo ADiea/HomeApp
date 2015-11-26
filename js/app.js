@@ -49,7 +49,7 @@ var ionicApp = angular.module('ionicApp', ['ionic', 'angular.circular-slider', '
 	sets = {
 			settingsVersion:1,
 			serverURL : "ws://192.168.0.103",
-			houseHoliday:true,
+			houseHoliday:false,
 			houseHolidayEnd:1447910991,
 			houseHolidayTemperature:18.0,
 			houseHolidayMinTemperature:16.0,

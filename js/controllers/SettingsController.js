@@ -1,4 +1,4 @@
-var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, settings, $state, socket, $timeout, $interval, $ionicPopup, $location, $ionicHistory) 
+var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, settings, $state, socket, $timeout, $interval, $ionicPopup, $ionicModal) 
 {
 	$scope.settings = {};
 	$scope.oldSettings = {};
@@ -50,7 +50,7 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 		},
 		validDaysInMounth: [31, 28, 31, 30, 31, 30, 31, 
 							31, 30, 31, 30, 31],
-		
+		/*
 		toggleHolydayShow:function toggleHolydayShow()
 		{
 			$scope.ui.holidayShow = !$scope.ui.holidayShow;
@@ -59,7 +59,7 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 				settings.houseHoliday = true;
 				$scope.refreshHolidayControls(false);
 			}
-		},
+		},*/
 		holdTempSetBtn: function holdTempSetBtn(up, hold)
 		{
 			$scope.thermoTempChangeDirectionUp = up;
@@ -87,9 +87,59 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 		}
 	};
 	
+	/*MODAL Holiday*/
+	
+	$ionicModal.fromTemplateUrl('views/editHoliday.html', {scope: $scope}).
+	then(
+		function(modal) 
+		{
+			$scope.modalHoliday = modal;
+	});
+	
+	$timeout(function(){$scope.$watch("settings.houseHoliday", function(newValue, oldValue){
+		if(newValue && newValue != oldValue)
+		{
+			$timeout(function(){$scope.modalHoliday.show();});
+		}
+	});});
+  
+	$scope.closeHolidayMode = function closeHolidayMode()
+	{
+		$scope.modalHoliday.hide();
+	}
+	
+	$scope.closeHolidayModeAndSave = function closeHolidayModeAndSave()
+	{
+		var date = new Date();
+					
+			var _year = date.getYear()+1900;
+			var _month = date.getMonth();
+			var _day = date.getDate();
+	
+		if(parseInt($scope.ui.holidayEnd.yearOptions[$scope.ui.holidayEnd.year]) >= _year)
+		{
+			if($scope.ui.holidayEnd.mo >= _month)
+			{
+				if($scope.ui.holidayEnd.day > _day-1)
+				{
+					$scope.modalHoliday.hide();
+					return;
+				}
+			}
+		}
+		
+		try {
+		  window.plugins.toast.showShortCenter("Data intoarcerii este in trecut sau prezent!",function(a){},function(b){});
+		}
+		catch(e){}
+		return;
+	}
+	
+	
+	/*end modal holiday*/
+	
 	$scope.refreshHolidayControls = function refreshHolidayControls(reinit)
 	{
-	
 		if(!reinit)
 		{
 			$timeout(function(){
@@ -175,7 +225,7 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 			
 			$scope.refreshHolidayControls(true);
 		
-			$scope.unlistenLocationChange = $scope.$on('$locationChangeStart', function( event, next, prev ) 
+			/*$scope.unlistenLocationChange = $scope.$on('$locationChangeStart', function( event, next, prev ) 
 			{
 				if(JSON.stringify($scope.settings) !== JSON.stringify($scope.oldSettings))
 				{
@@ -200,7 +250,7 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 				   });
 			   }
 			   $scope.unlistenLocationChange();
-			});
+			});*/
 		});//timeout
 	});
 	
@@ -209,42 +259,46 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 		//$scope.settings.houseHolidayEnd = DATE($scope.ui.holidayEnd.day, $scope.ui.holidayEnd.mo, $scope.ui.holidayEnd.year)
 		//$scope.settings.houseHolidayTemperature = $scope.ui.holidayTemp;
 	
-		/*settings.persist('settings', $scope.settings);
+		settings.persist('settings', $scope.settings);
 		
 		if($scope.settings.serverURL != $scope.oldSettings.serverURL)
 		{
 			socket.connectSocket(true);
-		}*/
+		}
 		
-	   /*var confirmPopup = $ionicPopup.confirm({
-		 title: 'Setari nesalvate',
-		 template: 'Salvati setarile?'
-	   });
-	   confirmPopup.then(function(res) {
-		 if(res) 
-		 {
-			settings.persist('settings', $scope.settings);
-		 } 
-	   });*/
+		try {
+		  window.plugins.toast.showShortCenter("Setari salvate",function(a){},function(b){});
+		}
+		catch(e){}
+		return;
 	});
 	
 	$scope.saveSettings = function saveSettings()
 	{
 		settings.persist('settings', $scope.settings);
-		//$state.go('app.house');
 	}
 	
 	$scope.defaultSettings = function defaultSettings()
 	{
-		$scope.settings = {
-			settingsVersion:1,
-			serverURL : "ws://192.168.0.103",
-			houseHoliday:true,
-			houseHolidayEnd:1447910991,
-			houseHolidayTemperature:18.0,
-			houseHolidayMinTemperature:16.0,
-			houseHolidayMaxTemperature:27.0
-			};
-		//$state.go('app.house');
+		var confirmPopup = $ionicPopup.confirm({
+			 title: 'Setari fabrica',
+			 template: 'Doriti revenirea la setarile din fabrica?'
+		   });
+		confirmPopup.then(function(res) 
+		{
+			if(res) 
+			{
+				$scope.settings = 
+				{
+					settingsVersion:1,
+					serverURL : "ws://192.168.0.103",
+					houseHoliday:false,
+					houseHolidayEnd:1447910991,
+					houseHolidayTemperature:18.0,
+					houseHolidayMinTemperature:16.0,
+					houseHolidayMaxTemperature:27.0
+				};
+			} 
+	   });		
 	}
 });

@@ -218,8 +218,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 		
 		if($scope.compareTime(newInterval.endH, newInterval.endM, newInterval.startH, newInterval.startM) <= 0)
 		{
-			try
-			{
+			try {
 		      window.plugins.toast.showShortCenter("Interval orar invalid!",function(a){},function(b){});
 			}
 			catch(e){}

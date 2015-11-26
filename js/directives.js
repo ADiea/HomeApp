@@ -161,7 +161,7 @@ ionicApp.directive('selectWheel', function($ionicScrollDelegate, $ionicGesture, 
 			 
 			if(scope.index != index)
 			{
-				scope.$digest(function() {
+				scope.$apply(function() {
 					scope.index = index;
 				  });
 

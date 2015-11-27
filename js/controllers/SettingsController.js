@@ -86,39 +86,37 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 			$scope.modalHoliday = modal;
 	});
 	
-	$timeout(function(){$scope.$watch("settings.houseHoliday", function(newValue, oldValue){
-		if(typeof newValue != 'undefined' && typeof oldValue != 'undefined' && (newValue && newValue != oldValue))
+	$scope.editHoliday = function editHoliday()
+	{
+		$scope.ui.holidayEnd.unwatchMo = $scope.$watch('ui.holidayEnd.mo', function(newVal) 
 		{
-			$scope.ui.holidayEnd.unwatchMo = $scope.$watch('ui.holidayEnd.mo', function(newVal) 
+			if (typeof newVal != 'undefined' && $scope.ui.holidayEnd.yearOptions.length > 0) 
 			{
-				if (typeof newVal != 'undefined' && $scope.ui.holidayEnd.yearOptions.length > 0) 
-				{
-					if (parseInt($scope.ui.holidayEnd.yearOptions[$scope.ui.holidayEnd.year])%4 == 0)	
-						$scope.ui.validDaysInMounth[1] = 29;
-					else
-						$scope.ui.validDaysInMounth[1] = 28;
-						
-					$scope.ui.holidayEnd.daysInCurrentMo = $scope.ui.validDaysInMounth[$scope.ui.holidayEnd.mo];
-				}
-			});
-			
-			$scope.ui.holidayEnd.unwatchYear = $scope.$watch('ui.holidayEnd.year', function(newVal) 
+				if (parseInt($scope.ui.holidayEnd.yearOptions[$scope.ui.holidayEnd.year])%4 == 0)	
+					$scope.ui.validDaysInMounth[1] = 29;
+				else
+					$scope.ui.validDaysInMounth[1] = 28;
+					
+				$scope.ui.holidayEnd.daysInCurrentMo = $scope.ui.validDaysInMounth[$scope.ui.holidayEnd.mo];
+			}
+		});
+		
+		$scope.ui.holidayEnd.unwatchYear = $scope.$watch('ui.holidayEnd.year', function(newVal) 
+		{
+			if (typeof newVal != 'undefined' && $scope.ui.holidayEnd.yearOptions.length > 0) 
 			{
-				if (typeof newVal != 'undefined' && $scope.ui.holidayEnd.yearOptions.length > 0) 
-				{
-					if (parseInt($scope.ui.holidayEnd.yearOptions[$scope.ui.holidayEnd.year])%4 == 0)	
-						$scope.ui.validDaysInMounth[1] = 29;
-					else
-						$scope.ui.validDaysInMounth[1] = 28;
-						
-					$scope.ui.holidayEnd.daysInCurrentMo = $scope.ui.validDaysInMounth[$scope.ui.holidayEnd.mo];
-				}
-			});		
+				if (parseInt($scope.ui.holidayEnd.yearOptions[$scope.ui.holidayEnd.year])%4 == 0)	
+					$scope.ui.validDaysInMounth[1] = 29;
+				else
+					$scope.ui.validDaysInMounth[1] = 28;
+					
+				$scope.ui.holidayEnd.daysInCurrentMo = $scope.ui.validDaysInMounth[$scope.ui.holidayEnd.mo];
+			}
+		});		
 
-			$scope.refreshHolidayControls(false);
-			$timeout(function(){$scope.modalHoliday.show();});
-		}
-	});});
+		$scope.refreshHolidayControls(false);
+		$timeout(function(){$scope.modalHoliday.show();});
+	};
   
 	$scope.closeHolidayMode = function closeHolidayMode()
 	{

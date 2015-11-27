@@ -64,15 +64,15 @@
 			
 		</ion-toggle>
 
-		<ion-item class="item-accordion" ng-show="uiOpenedTH==th.id" >
+		<ion-item ng-click="showAutopilotSettings(th.id)" class="item-accordion" ng-show="uiOpenedTH==th.id" >
 			<span style="display:inline;float:left"><i class="icon icon-size-normal ion-ios-timer-outline"></i>
 			<span style="margin-left:10px">Program</span>
 			</span>
 			
 			<div style="display:inline;float:right">
 				<p style="display:inline;">{{getThermoAutoPilotDescr(th.id)}}</p>
-				<button ng-click="showAutopilotSettings(th.id)" class="button button-small button-outline">
-					<i  class="icon ion-plus"></i>
+				<button class="button button-small button-outline button-positive">
+					<i  class="icon ion-more"></i>
 				</button>
 			</div>
 		</ion-item>

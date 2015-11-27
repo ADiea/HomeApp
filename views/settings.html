@@ -17,13 +17,18 @@
 				<input style="display:inline" type="text" placeholder="{{settings.serverURL}}" ng-model="settings.serverURL"></input>
 			</label>
 			
-			<ion-toggle ng-model="settings.houseHoliday" toggle-class="toggle-positive">
-				<table style="width:80%" >
+			<ion-item ng-click="editHoliday();">
+				<table style="width:100%" >
 				<tr>
 
 				<td style="text-align:left;" >
 					<i style="margin:5px" class="icon icon-size-normal ion-briefcase"></i>
 					<strong>Mod Vacanta</strong>
+				</td>
+				<td style="text-align:right;">
+					<button class="button button-small button-outline button-positive">
+						<i  class="icon ion-more"></i>
+					</button>
 				</td>
 				</tr>
 				<tr>
@@ -39,9 +44,10 @@
 						Dezactivat
 					</span>
 				</td>
+
 				</tr>
 				</table>
-			</ion-toggle>
+			</ion-item>
 
 			<ion-item>
 				<button class="button" ng-click="defaultSettingsConfirm()"><i  class="icon ion-ios-undo-outline"></i>Setari Fabrica</button>

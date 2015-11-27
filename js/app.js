@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-var ionicApp = angular.module('ionicApp', ['ionic', 'angular.circular-slider', 'btford.socket-io'])
+var ionicApp = angular.module('ionicApp', ['ionic', 'angular.circular-slider'])
 
 .run(function($rootScope, $ionicPlatform, $ionicHistory, SettingsService) {
   $ionicPlatform.ready(function() {
@@ -55,11 +55,9 @@ var ionicApp = angular.module('ionicApp', ['ionic', 'angular.circular-slider', '
 			houseHolidayMinTemperature:16.0,
 			houseHolidayMaxTemperature:27.0
 			};
+	SettingsService.persist('settings', sets);
   }
-  
-  
 })
-
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 

@@ -252,7 +252,7 @@ ionicApp.directive('selectWheel', function($ionicScrollDelegate, $ionicGesture, 
           });
 
           // Resize on start
-		  //$timeout(resize());
+		  $timeout(resize());
         };
 
       },

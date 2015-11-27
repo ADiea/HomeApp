@@ -1,4 +1,4 @@
-ionicApp.factory('socket',function(socketFactory, SettingsService, LogDataService, commWeb){
+ionicApp.factory('socket',function(SettingsService, LogDataService, commWeb){
 	
 	var socket = {};
 

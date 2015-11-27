@@ -50,16 +50,6 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 		},
 		validDaysInMounth: [31, 28, 31, 30, 31, 30, 31, 
 							31, 30, 31, 30, 31],
-		/*
-		toggleHolydayShow:function toggleHolydayShow()
-		{
-			$scope.ui.holidayShow = !$scope.ui.holidayShow;
-			if($scope.ui.holidayShow)
-			{
-				settings.houseHoliday = true;
-				$scope.refreshHolidayControls(false);
-			}
-		},*/
 		holdTempSetBtn: function holdTempSetBtn(up, hold)
 		{
 			$scope.thermoTempChangeDirectionUp = up;
@@ -97,44 +87,101 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 	});
 	
 	$timeout(function(){$scope.$watch("settings.houseHoliday", function(newValue, oldValue){
-		if(newValue && newValue != oldValue)
+		if(typeof newValue != 'undefined' && typeof oldValue != 'undefined' && (newValue && newValue != oldValue))
 		{
+			$scope.ui.holidayEnd.unwatchMo = $scope.$watch('ui.holidayEnd.mo', function(newVal) 
+			{
+				if (typeof newVal != 'undefined' && $scope.ui.holidayEnd.yearOptions.length > 0) 
+				{
+					if (parseInt($scope.ui.holidayEnd.yearOptions[$scope.ui.holidayEnd.year])%4 == 0)	
+						$scope.ui.validDaysInMounth[1] = 29;
+					else
+						$scope.ui.validDaysInMounth[1] = 28;
+						
+					$scope.ui.holidayEnd.daysInCurrentMo = $scope.ui.validDaysInMounth[$scope.ui.holidayEnd.mo];
+				}
+			});
+			
+			$scope.ui.holidayEnd.unwatchYear = $scope.$watch('ui.holidayEnd.year', function(newVal) 
+			{
+				if (typeof newVal != 'undefined' && $scope.ui.holidayEnd.yearOptions.length > 0) 
+				{
+					if (parseInt($scope.ui.holidayEnd.yearOptions[$scope.ui.holidayEnd.year])%4 == 0)	
+						$scope.ui.validDaysInMounth[1] = 29;
+					else
+						$scope.ui.validDaysInMounth[1] = 28;
+						
+					$scope.ui.holidayEnd.daysInCurrentMo = $scope.ui.validDaysInMounth[$scope.ui.holidayEnd.mo];
+				}
+			});		
+
+			$scope.refreshHolidayControls(false);
 			$timeout(function(){$scope.modalHoliday.show();});
 		}
 	});});
   
 	$scope.closeHolidayMode = function closeHolidayMode()
 	{
+		$scope.ui.holidayEnd.unwatchMo();
+		$scope.ui.holidayEnd.unwatchYear();
 		$scope.modalHoliday.hide();
+	}
+	
+	$scope.isDateInThePast = function isDateInThePast(year, month, day)
+	{
+		var date = new Date();
+
+		var _year = date.getYear()+1900;
+		var _month = date.getMonth();
+		var _day = date.getDate() - 1;
+		
+		do
+		{
+			if(year > _year)
+				break;
+			else if(year == _year)
+			{
+				if(month > _month)
+					break;			
+				else if(month == _month)
+				{
+					if(day > _day)
+						break;
+					else if(day == _day)
+					{
+						return 0;
+					}
+				}
+			}
+			return -1;
+		}while(0);
+		return 1;
 	}
 	
 	$scope.closeHolidayModeAndSave = function closeHolidayModeAndSave()
 	{
-		var date = new Date();
-					
-			var _year = date.getYear()+1900;
-			var _month = date.getMonth();
-			var _day = date.getDate();
-	
-		if(parseInt($scope.ui.holidayEnd.yearOptions[$scope.ui.holidayEnd.year]) >= _year)
-		{
-			if($scope.ui.holidayEnd.mo >= _month)
-			{
-				if($scope.ui.holidayEnd.day > _day-1)
-				{
-					$scope.modalHoliday.hide();
-					return;
-				}
-			}
-		}
+		var dateSign = $scope.isDateInThePast(parseInt($scope.ui.holidayEnd.yearOptions[$scope.ui.holidayEnd.year]), 
+												$scope.ui.holidayEnd.mo,
+												$scope.ui.holidayEnd.day);
+		var message;
 		
-		try {
-		  window.plugins.toast.showShortCenter("Data intoarcerii este in trecut sau prezent!",function(a){},function(b){});
+		if(dateSign > 0)
+		{
+			$scope.ui.holidayEnd.unwatchMo();
+			$scope.ui.holidayEnd.unwatchYear();
+			$scope.modalHoliday.hide();
 		}
-		catch(e){}
-		return;
+		else 
+		{
+			if(dateSign == 0)
+				message = "Data intoarcerii nu poate fi astazi!";
+			else
+				message = "Data intoarcerii nu poate fi in trecut!";
+
+			try { window.plugins.toast.showShortCenter(message,function(a){},function(b){}); }
+			catch(e){}
+		}
 	}
-	
 	
 	/*end modal holiday*/
 	
@@ -152,9 +199,15 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 		{
 			var date = new Date($scope.settings.houseHolidayEnd*1000);
 					
-			var _year = date.getYear();
+			var _year = date.getYear() + 1900;
 			var _month = date.getMonth();
-			var _day = date.getDate();
+			var _day = date.getDate() - 1;
+			
+			//auto disable holiday mode if date in present or past
+			if($scope.isDateInThePast(_year, _month, _day) <= 0)
+			{
+				$scope.settings.houseHoliday = false;
+			}
 			
 			if (_year%4 == 0)	
 				$scope.ui.validDaysInMounth[1] = 29;
@@ -165,50 +218,21 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 			
 			for(var i=_year;i<_year+10;i++)
 			{
-				yopts.push(""+(i+1900));
+				yopts.push(""+(i));
 			}	
 			$scope.ui.holidayEnd.yearOptions = yopts;
 
 			$scope.ui.holidayEnd.mo = _month;
-			$scope.ui.holidayEnd.day = _day-1;
+			$scope.ui.holidayEnd.day = _day;
 			$scope.ui.holidayEnd.year = 0;
 			
 			$scope.ui.holidayEnd.daysInCurrentMo = $scope.ui.validDaysInMounth[$scope.ui.holidayEnd.mo];
 		}
-	
 	}
-	
-	$scope.ui.holidayEnd.unwatchMo = $scope.$watch('ui.holidayEnd.mo', function(newVal) 
-	{
-		if (typeof newVal != 'undefined' && $scope.ui.holidayEnd.yearOptions.length > 0) 
-		{
-			if (parseInt($scope.ui.holidayEnd.yearOptions[$scope.ui.holidayEnd.year])%4 == 0)	
-				$scope.ui.validDaysInMounth[1] = 29;
-			else
-				$scope.ui.validDaysInMounth[1] = 28;
-				
-			$scope.ui.holidayEnd.daysInCurrentMo = $scope.ui.validDaysInMounth[$scope.ui.holidayEnd.mo];
-		}
-	});
-	
-	$scope.ui.holidayEnd.unwatchYear = $scope.$watch('ui.holidayEnd.year', function(newVal) 
-	{
-		if (typeof newVal != 'undefined' && $scope.ui.holidayEnd.yearOptions.length > 0) 
-		{
-			if (parseInt($scope.ui.holidayEnd.yearOptions[$scope.ui.holidayEnd.year])%4 == 0)	
-				$scope.ui.validDaysInMounth[1] = 29;
-			else
-				$scope.ui.validDaysInMounth[1] = 28;
-				
-			$scope.ui.holidayEnd.daysInCurrentMo = $scope.ui.validDaysInMounth[$scope.ui.holidayEnd.mo];
-		}
-	});
-	
 	
 	$scope.$on('destroy', function() {
             // Unbind events
-            $scope.ui.holidayEnd.unwatchMo();
-			$scope.ui.holidayEnd.unwatchYear();
+
           });
 	
 	$scope.$on('$ionicView.beforeEnter', function() 
@@ -224,40 +248,14 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 			$scope.oldSettings = JSON.parse(JSON.stringify($scope.settings));
 			
 			$scope.refreshHolidayControls(true);
-		
-			/*$scope.unlistenLocationChange = $scope.$on('$locationChangeStart', function( event, next, prev ) 
-			{
-				if(JSON.stringify($scope.settings) !== JSON.stringify($scope.oldSettings))
-				{
-					event.preventDefault();
-					
-					var confirmPopup = $ionicPopup.confirm({
-						 title: 'Setari nesalvate',
-						 template: 'Salvati setarile?'
-					   });
-				    confirmPopup.then(function(res) 
-					{
-						if(res) 
-						{
-							settings.persist('settings', $scope.settings);
-						} 
-
-						var destination = next.substr(next.indexOf('#') + 1, next.length).trim();
-						
-						$ionicHistory.nextViewOptions({ disableAnimate: true, disableBack: true });
-						$location.path(destination);
-						//$timeout(function(){$ionicHistory.clearHistory();}, 0);
-				   });
-			   }
-			   $scope.unlistenLocationChange();
-			});*/
+			
 		});//timeout
 	});
 	
 	$scope.$on('$ionicView.beforeLeave', function() 
 	{
-		//$scope.settings.houseHolidayEnd = DATE($scope.ui.holidayEnd.day, $scope.ui.holidayEnd.mo, $scope.ui.holidayEnd.year)
-		//$scope.settings.houseHolidayTemperature = $scope.ui.holidayTemp;
+		var d = new Date(parseInt($scope.ui.holidayEnd.yearOptions[$scope.ui.holidayEnd.year]), $scope.ui.holidayEnd.mo, $scope.ui.holidayEnd.day+1);
+		$scope.settings.houseHolidayEnd = d.getTime() / 1000 | 0;
 	
 		settings.persist('settings', $scope.settings);
 		
@@ -266,10 +264,9 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 			socket.connectSocket(true);
 		}
 		
-		try {
-		  window.plugins.toast.showShortCenter("Setari salvate",function(a){},function(b){});
-		}
+		try { window.plugins.toast.showShortCenter("Setari salvate",function(a){},function(b){}); }
 		catch(e){}
+		
 		return;
 	});
 	
@@ -278,7 +275,21 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 		settings.persist('settings', $scope.settings);
 	}
 	
-	$scope.defaultSettings = function defaultSettings()
+	$scope.defaultSettings = function defaultSettings(showConfirm)
+	{
+		$scope.settings = 
+		{
+			settingsVersion:1,
+			serverURL : "ws://192.168.0.103",
+			houseHoliday:false,
+			houseHolidayEnd:1447910991,
+			houseHolidayTemperature:18.0,
+			houseHolidayMinTemperature:16.0,
+			houseHolidayMaxTemperature:27.0
+		};
+	}
+
+	$scope.defaultSettingsConfirm = function defaultSettingsConfirm()
 	{
 		var confirmPopup = $ionicPopup.confirm({
 			 title: 'Setari fabrica',
@@ -288,17 +299,8 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 		{
 			if(res) 
 			{
-				$scope.settings = 
-				{
-					settingsVersion:1,
-					serverURL : "ws://192.168.0.103",
-					houseHoliday:false,
-					houseHolidayEnd:1447910991,
-					houseHolidayTemperature:18.0,
-					houseHolidayMinTemperature:16.0,
-					houseHolidayMaxTemperature:27.0
-				};
+				$scope.defaultSettings();
 			} 
-	   });		
-	}
+	   });
+	}	
 });

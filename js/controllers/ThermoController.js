@@ -75,6 +75,8 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 	$scope.modalAutoPilot = {
 		modalSched:null,
 		modalEdit:null,
+		modalSchedCreated:false,
+		modalEditCreated:false,
 		ui:{
 			intvIdx:0, 
 			weekday:0, 
@@ -148,12 +150,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 		
 	};
 
-	$ionicModal.fromTemplateUrl('views/program.html', {scope: $scope}).
-	then(
-		function(modal) 
-		{
-			$scope.modalAutoPilot.modalSched = modal;
-	});
+
 	
 	$scope.closeProgram = function closeProgram() 
 	{
@@ -168,28 +165,44 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 		
 	$scope.showAutopilotSettings = function showAutopilotSettings(id)
 	{
+		
 		$scope.modalAutoPilot.thIndex = id;
 		$scope.modalAutoPilot.th = JSON.parse(JSON.stringify($scope.houseTH[$scope.modalAutoPilot.thIndex]));
 
 		$scope.modalAutoPilot.ui.intvIdx = 0;
 		$scope.modalAutoPilot.ui.weekday = (new Date()).getDay() - 1;
+		
+		if($scope.modalAutoPilot.ui.weekday == -1)
+			$scope.modalAutoPilot.ui.weekday = 6; //sunday
+		
 		$scope.modalAutoPilot.ui.curWeekDay = $scope.modalAutoPilot.ui.weekday;
 		
 		$scope.modalAutoPilot.ui.showOptionsIndex = -1;
 		
-		$timeout(function(){$scope.modalAutoPilot.modalSched.show();});
+		if(!$scope.modalAutoPilot.modalSchedCreated)
+		{
+			$scope.modalAutoPilot.modalSchedCreated = true;
+			
+			$ionicModal.fromTemplateUrl('views/program.html', {scope: $scope}).
+			then(
+				function(modal) 
+				{
+					$scope.modalAutoPilot.modalSched = modal;
+					$scope.modalAutoPilot.modalSched.show();
+			});
+			
+		}
+		else
+		{
+			$timeout(function(){$scope.modalAutoPilot.modalSched.show();});
+		}
 	}
 
 /*------MODAL */	
 	
 /*------MODAL AUTOPILOT INTERVAL*/
 	
-	$ionicModal.fromTemplateUrl('views/editProgram.html', {scope: $scope}).
-	then(
-		function(modal) 
-		{
-			$scope.modalAutoPilot.modalEdit = modal;
-	});
+
 	
 	$scope.closeAutopilotEdit = function closeAutopilotEdit() 
 	{
@@ -275,7 +288,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 	};
 
 	$scope.showAutopilotEditInterval = function showAutopilotEditInterval(id)
-	{
+	{	
 		if(id == -1)
 		{
 			var len = $scope.modalAutoPilot.th.schedule[$scope.modalAutoPilot.ui.weekday].length;
@@ -284,18 +297,28 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 				lastObj = $scope.modalAutoPilot.th.schedule[$scope.modalAutoPilot.ui.weekday][len-1];
 				
 			$scope.modalAutoPilot.editInterval = {t:lastObj.t, startH:lastObj.endH, startM:lastObj.endM, endH:lastObj.endH, endM:lastObj.endM};
-			
-			//$scope.modalAutoPilot.editIntervalIndex = len;
 		}
 		else
 		{
-			//$scope.modalAutoPilot.editIntervalIndex = id;
 			$scope.modalAutoPilot.editInterval =  JSON.parse(JSON.stringify($scope.modalAutoPilot.th.schedule[$scope.modalAutoPilot.ui.weekday][/*$scope.modalAutoPilot.editIntervalIndex*/id]));
 		}
 
-		
-
-		$scope.modalAutoPilot.modalEdit.show();
+		if(!$scope.modalAutoPilot.modalEditCreated)
+		{
+			$scope.modalAutoPilot.modalEditCreated = true;
+			
+			$ionicModal.fromTemplateUrl('views/editProgram.html', {scope: $scope}).
+			then(
+				function(modal) 
+				{
+					$scope.modalAutoPilot.modalEdit = modal;
+					$scope.modalAutoPilot.modalEdit.show();
+			});
+		}
+		else
+		{
+			$timeout(function(){$scope.modalAutoPilot.modalEdit.show();});
+		}	
 	}
 	
 	$scope.removeAutoPilotInterval = function removeAutoPilotInterval(id)

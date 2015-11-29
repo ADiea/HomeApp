@@ -17,27 +17,29 @@
 				<input style="display:inline" type="text" placeholder="{{settings.serverURL}}" ng-model="settings.serverURL"></input>
 			</label>
 			
-			<ion-item ng-click="editHoliday();">
-				<table style="width:100%" >
+			<ion-toggle ng-model="settings.houseHoliday" toggle-class="toggle-positive" >
+				<table style="width:100%;disaplay:block;" ng-click="editHoliday();">
 				<tr>
 
 				<td style="text-align:left;" >
 					<i style="margin:5px" class="icon icon-size-normal ion-briefcase"></i>
 					<strong>Mod Vacanta</strong>
 				</td>
+				<!--
 				<td style="text-align:right;">
 					<button class="button button-small button-outline button-positive">
 						<i  class="icon ion-more"></i>
 					</button>
 				</td>
+				-->
 				</tr>
 				<tr>
 				<td >
 					<span ng-show="settings.houseHoliday">
-						{{ui.getHolidayTemp()}}* pana pe 
-						{{ui.holidayEnd.dayOptions[ui.holidayEnd.day]}} 
-						{{ui.holidayEnd.moOptions[ui.holidayEnd.mo]}} 
-						{{ui.holidayEnd.yearOptions[ui.holidayEnd.year]}}
+						{{ui.getHolidayTemp()}}*C pana pe 
+						{{ui.holidayEnd.dayOptions[ui.holidayEnd.real_day]}} 
+						{{ui.holidayEnd.moOptions[ui.holidayEnd.real_mo]}} 
+						{{ui.holidayEnd.yearOptions[ui.holidayEnd.real_year]}}
 					</span>
 					
 					<span ng-show="!settings.houseHoliday">
@@ -47,7 +49,7 @@
 
 				</tr>
 				</table>
-			</ion-item>
+			</ion-toggle>
 
 			<ion-item>
 				<button class="button" ng-click="defaultSettingsConfirm()"><i  class="icon ion-ios-undo-outline"></i>Setari Fabrica</button>

@@ -4,12 +4,17 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 	$scope.oldSettings = {};
 	$scope.ui = 
 	{
+		houseHolidayTemperature:0,
 		holidayShow:false,
+		houseHoliday:false,
 		holidayEnd:
 		{
 			mo:0, 
 			day:0,
 			year:0,
+			real_mo:0, 
+			real_day:0,
+			real_year:0,
 			moOptions:["Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie", 
 						"Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie" ],
 			dayOptions:["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", 
@@ -24,29 +29,29 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 		},
 		doTempUp: function doTempUp()
 		{
-			if($scope.settings.houseHolidayTemperature < $scope.settings.houseHolidayMaxTemperature) 
+			if($scope.ui.houseHolidayTemperature < $scope.settings.houseHolidayMaxTemperature) 
 			{
-				$scope.settings.houseHolidayTemperature += 0.5;
+				$scope.ui.houseHolidayTemperature += 0.5;
 				try {navigator.notification.vibrate(10);}
 				catch(e) {}
 			}
 		},
 		doTempDown: function doTempDown()
 		{
-			if($scope.settings.houseHolidayTemperature > $scope.settings.houseHolidayMinTemperature) 
+			if($scope.ui.houseHolidayTemperature > $scope.settings.houseHolidayMinTemperature) 
 			{
-				$scope.settings.houseHolidayTemperature -= 0.5;
+				$scope.ui.houseHolidayTemperature -= 0.5;
 				try { navigator.notification.vibrate(10); }
 				catch(e) {}
 			}
 		},
 		getHolidayTempInt : function getHolidayTempInt()
 		{
-			return parseInt($scope.settings.houseHolidayTemperature);
+			return parseInt($scope.ui.houseHolidayTemperature);
 		},	
 		getHolidayTempFrac : function getHolidayTempFrac()
 		{
-			return parseInt(Math.round($scope.settings.houseHolidayTemperature * 10 ) ) % 10;
+			return parseInt(Math.round($scope.ui.houseHolidayTemperature * 10 ) ) % 10;
 		},
 		validDaysInMounth: [31, 28, 31, 30, 31, 30, 31, 
 							31, 30, 31, 30, 31],
@@ -79,13 +84,15 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 	
 	/*MODAL Holiday*/
 	
-	$ionicModal.fromTemplateUrl('views/editHoliday.html', {scope: $scope}).
-	then(
-		function(modal) 
-		{
-			$scope.modalHoliday = modal;
-	});
+	$scope.modalHolidayCreated = false;
 	
+	$scope.unwatchHoliday = $scope.$watch('settings.houseHoliday', function(newVal, oldVal) {
+	if (typeof newVal != 'undefined' && typeof oldVal != 'undefined' && newVal != oldVal && newVal == true) 
+	{
+		$scope.editHoliday();
+	}
+	});
+
 	$scope.editHoliday = function editHoliday()
 	{
 		$scope.ui.holidayEnd.unwatchMo = $scope.$watch('ui.holidayEnd.mo', function(newVal) 
@@ -113,13 +120,43 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 				$scope.ui.holidayEnd.daysInCurrentMo = $scope.ui.validDaysInMounth[$scope.ui.holidayEnd.mo];
 			}
 		});		
-
-		$scope.refreshHolidayControls(false);
-		$timeout(function(){$scope.modalHoliday.show();});
+		
+		$scope.ui.houseHolidayTemperature = $scope.settings.houseHolidayTemperature;
+		$scope.ui.houseHoliday = true;
+		
+		if(!$scope.modalHolidayCreated)
+		{
+			$scope.modalHolidayCreated = true;
+			$ionicModal.fromTemplateUrl('views/editHoliday.html', {scope: $scope}).
+			then(
+				function(modal) 
+				{
+					$scope.modalHoliday = modal;
+					
+					$scope.refreshHolidayControls(false);
+					$timeout(function()
+					{
+						$scope.modalHoliday.show();
+					});
+				});
+		}
+		else
+		{
+			$scope.refreshHolidayControls(false);
+			$timeout(function()
+			{
+				$scope.modalHoliday.show();
+			});
+		}
 	};
   
 	$scope.closeHolidayMode = function closeHolidayMode()
-	{
+	{	
+		$scope.ui.houseHolidayTemperature = $scope.settings.houseHolidayTemperature;
+		$scope.ui.holidayEnd.mo = $scope.ui.holidayEnd.real_mo; 
+		$scope.ui.holidayEnd.day = $scope.ui.holidayEnd.real_day;
+		$scope.ui.holidayEnd.year = $scope.ui.holidayEnd.real_year;
+		
 		$scope.ui.holidayEnd.unwatchMo();
 		$scope.ui.holidayEnd.unwatchYear();
 		$scope.modalHoliday.hide();
@@ -161,13 +198,29 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 		var dateSign = $scope.isDateInThePast(parseInt($scope.ui.holidayEnd.yearOptions[$scope.ui.holidayEnd.year]), 
 												$scope.ui.holidayEnd.mo,
 												$scope.ui.holidayEnd.day);
-		var message;
+		var message = "";
 		
-		if(dateSign > 0)
+		if(dateSign > 0 || !$scope.ui.houseHoliday)
 		{
 			$scope.ui.holidayEnd.unwatchMo();
 			$scope.ui.holidayEnd.unwatchYear();
 			$scope.modalHoliday.hide();
+			
+			$scope.settings.houseHoliday = $scope.ui.houseHoliday;
+			
+			if($scope.ui.houseHoliday)
+			{
+				message = "Modul vacanta activat. Calatorie placuta!";
+				
+				$scope.ui.holidayEnd.real_mo = $scope.ui.holidayEnd.mo; 
+				$scope.ui.holidayEnd.real_day = $scope.ui.holidayEnd.day;
+				$scope.ui.holidayEnd.real_year = $scope.ui.holidayEnd.year;
+				$scope.settings.houseHolidayTemperature = $scope.ui.houseHolidayTemperature;
+			}
+			else
+			{	
+				message = "Modul vacanta dezactivat.";
+			}
 		}
 		else 
 		{
@@ -175,14 +228,13 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 				message = "Data intoarcerii nu poate fi astazi!";
 			else
 				message = "Data intoarcerii nu poate fi in trecut!";
-
-			try { window.plugins.toast.showShortCenter(message,function(a){},function(b){}); }
-			catch(e){}
 		}
+		
+		try { window.plugins.toast.showShortCenter(message,function(a){},function(b){}); }
+		catch(e){}
 	}
 	
 	/*end modal holiday*/
-	
 	$scope.refreshHolidayControls = function refreshHolidayControls(reinit)
 	{
 		if(!reinit)
@@ -224,14 +276,18 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 			$scope.ui.holidayEnd.day = _day;
 			$scope.ui.holidayEnd.year = 0;
 			
+			$scope.ui.holidayEnd.real_mo = $scope.ui.holidayEnd.mo; 
+			$scope.ui.holidayEnd.real_day = $scope.ui.holidayEnd.day;
+			$scope.ui.holidayEnd.real_year = $scope.ui.holidayEnd.year;
+			
 			$scope.ui.holidayEnd.daysInCurrentMo = $scope.ui.validDaysInMounth[$scope.ui.holidayEnd.mo];
 		}
 	}
 	
 	$scope.$on('destroy', function() {
-            // Unbind events
-
-          });
+        // Unbind events
+		$scope.unwatchHoliday();
+	});
 	
 	$scope.$on('$ionicView.beforeEnter', function() 
 	{
@@ -252,7 +308,7 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 	
 	$scope.$on('$ionicView.beforeLeave', function() 
 	{
-		var d = new Date(parseInt($scope.ui.holidayEnd.yearOptions[$scope.ui.holidayEnd.year]), $scope.ui.holidayEnd.mo, $scope.ui.holidayEnd.day+1);
+		var d = new Date(parseInt($scope.ui.holidayEnd.yearOptions[$scope.ui.holidayEnd.real_year]), $scope.ui.holidayEnd.real_mo, $scope.ui.holidayEnd.real_day+1);
 		$scope.settings.houseHolidayEnd = d.getTime() / 1000 | 0;
 	
 		settings.persist('settings', $scope.settings);

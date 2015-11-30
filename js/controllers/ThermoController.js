@@ -11,7 +11,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 		{
 			id:0, sensorID:0, title:"Dormitor", dirty:false, 
 			minTemp:16.0, maxTemp:27.0, curTemp:21.0, curSensorTemp:22, curSensorTemp1m:22.1, curSensorTemp10m:21.9, curTempSymbol:'C', curSensorHumid:45.2, 
-			timestamp:1445802480, heaterOn:false, acOn:false,  autoPilotOn:true, autoPilotEndProgTimeH:-1, autoPilotEndProgTimeM:-1,
+			timestamp:1445802480, heaterOn:false, acOn:false, autoPilotOn:true, autoPilotProgramIndex:0,
 			schedule:
 			[
 				[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
@@ -26,8 +26,8 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 		
 		{
 			id:1, sensorID:0, title:"Living", dirty:false, 
-			minTemp:16.0, maxTemp:27.0, curTemp:18.0, curSensorTemp:22, curSensorTemp1m:22.1, curSensorTemp10m:21.9, curTempSymbol:'C', curSensorHumid:30.2, 
-			timestamp:1445802480, heaterOn:false, acOn:true,  autoPilotOn:true, autoPilotEndProgTimeH:-1, autoPilotEndProgTimeM:-1,
+			minTemp:15.0, maxTemp:27.0, curTemp:18.0, curSensorTemp:22, curSensorTemp1m:22.1, curSensorTemp10m:21.9, curTempSymbol:'C', curSensorHumid:30.2, 
+			timestamp:1445802480, heaterOn:false, acOn:true,  autoPilotOn:true, autoPilotProgramIndex:0,
 			schedule:
 			[
 				[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
@@ -43,7 +43,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 		{
 			id:2, sensorID:0, title:"Baie", dirty:false, 
 			minTemp:16.0, maxTemp:27.0, curTemp:19.0, curSensorTemp:22, curSensorTemp1m:22.1, curSensorTemp10m:21.9, curTempSymbol:'C', curSensorHumid:73.2, 
-			timestamp:1445802480, heaterOn:true, acOn:false,  autoPilotOn:true, autoPilotEndProgTimeH:22, autoPilotEndProgTimeM:30,
+			timestamp:1445802480, heaterOn:true, acOn:false,  autoPilotOn:true, autoPilotProgramIndex:0,
 			schedule:
 			[
 				[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
@@ -147,11 +147,8 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 		thIndex:0,
 		editInterval:{},
 		editIntervalIndex:0,
-		
 	};
 
-
-	
 	$scope.closeProgram = function closeProgram() 
 	{
 		$scope.modalAutoPilot.modalSched.hide();
@@ -165,7 +162,6 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 		
 	$scope.showAutopilotSettings = function showAutopilotSettings(id)
 	{
-		
 		$scope.modalAutoPilot.thIndex = id;
 		$scope.modalAutoPilot.th = JSON.parse(JSON.stringify($scope.houseTH[$scope.modalAutoPilot.thIndex]));
 
@@ -201,8 +197,6 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 /*------MODAL */	
 	
 /*------MODAL AUTOPILOT INTERVAL*/
-	
-
 	
 	$scope.closeAutopilotEdit = function closeAutopilotEdit() 
 	{
@@ -345,6 +339,158 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 	}
 
 /*------MODAL */	
+
+/* MODAL settings   */
+$scope.modalSettings = {
+		modalSettings:null,
+		modalSettingsCreated:false,
+		
+		tempMin:1,
+		tempMax:30,
+		
+		ui:{
+			getSettingsTemp_i: function getSettingsTemp_i(minTemp)
+			{
+				var temp = minTemp ? ($scope.modalSettings.tempMin) : ($scope.modalSettings.tempMax);
+				return parseInt(temp);
+			},
+			getSettingsTemp_f: function getIntervalTemp_f(minTemp)
+			{
+				var temp = minTemp ? ($scope.modalSettings.tempMin) : ($scope.modalSettings.tempMax);
+				return parseInt(Math.round( temp * 10 ) ) % 10;
+			},
+
+			doTempUp : function doTempUp(minTemp)
+			{
+				var done = false;
+				if(minTemp)
+				{
+					if($scope.modalSettings.tempMin < $scope.modalSettings.tempMax - 0.5)
+					{
+						$scope.modalSettings.tempMin += 0.5;
+					}
+				}
+				else
+				{
+					if($scope.modalSettings.tempMax < 30)
+					{
+						$scope.modalSettings.tempMax += 0.5;
+					}				
+				}
+				
+				if(done)
+				{
+					try {navigator.notification.vibrate(10);}
+					catch(e) {}
+				}
+			},
+			doTempDown : function doTempDown(minTemp)
+			{
+				var done = false;
+				if(minTemp)
+				{
+					if($scope.modalSettings.tempMin > 0)
+					{
+						$scope.modalSettings.tempMin -= 0.5;
+					}
+				}
+				else
+				{
+					if($scope.modalSettings.tempMax > $scope.modalSettings.tempMin + 0.5)
+					{
+						$scope.modalSettings.tempMax -= 0.5;
+					}				
+				}
+				
+				if(done)
+				{
+					try {navigator.notification.vibrate(10);}
+					catch(e) {}
+				}
+			},
+			canTempUp : function canTempUp(minTemp)
+			{
+				if(minTemp)
+				{
+					if($scope.modalSettings.tempMin < $scope.modalSettings.tempMax - 0.5)
+					{
+						return true;
+					}
+				}
+				else
+				{
+					if($scope.modalSettings.tempMax < 30)
+					{
+						return true;
+					}
+				}
+					
+				return false;
+			},
+			canTempDown : function canTempDown(minTemp)
+			{
+				if(minTemp)
+				{
+					if($scope.modalSettings.tempMin > 0)
+					{
+						return true;
+					}
+				}
+				else
+				{
+					if($scope.modalSettings.tempMax > $scope.modalSettings.tempMin + 0.5)
+					{
+						return true;
+					}
+				}
+					
+				return false;
+			},			
+		},
+	};
+
+	$scope.showTHSettings = function showTHSettings(id)
+	{
+		$scope.modalSettings.tempMin = $scope.houseTH[$scope.uiOpenedTH].minTemp;
+		$scope.modalSettings.tempMax = $scope.houseTH[$scope.uiOpenedTH].maxTemp;
+	
+		if(!$scope.modalSettings.modalSettingsCreated)
+		{
+			$scope.modalSettings.modalSettingsCreated = true;
+			
+			$ionicModal.fromTemplateUrl('views/editThermoSettings.html', {scope: $scope}).
+			then(
+				function(modal) 
+				{
+					$scope.modalSettings.modalSettings = modal;
+					$scope.modalSettings.modalSettings.show();
+			});	
+		}
+		else
+		{
+			$timeout(function(){$scope.modalSettings.modalSettings.show();});
+		}
+	}
+
+	$scope.closeTHSettings = function closeTHSettings(hideModal)
+	{
+		if(hideModal)
+		{
+			$scope.modalSettings.modalSettings.hide();
+		}
+	}
+	
+	$scope.closeTHSettingsAndSave = function closeTHSettingsAndSave()
+	{
+		$scope.houseTH[$scope.uiOpenedTH].minTemp = $scope.modalSettings.tempMin;
+		$scope.houseTH[$scope.uiOpenedTH].maxTemp = $scope.modalSettings.tempMax;
+		
+		$scope.houseTH[$scope.uiOpenedTH].dirty = true;
+	
+		$scope.modalSettings.modalSettings.hide();
+	}
+
+/* --- /MODAL settings*/
 
 	$scope.$on('$ionicView.beforeEnter', function() 
 	{  
@@ -639,7 +785,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 		var i_part = parseInt($scope.houseTH[id].curTemp);
 		var f_part = parseInt(Math.round( $scope.houseTH[id].curTemp * 10 ) ) % 10;
 		
-		return i_part + '*' + f_part;
+		return i_part + ',' + f_part+"*C";
 	}
 	
 	$scope.getThermoSetTemp_Int = function getThermoSetTemp(id)
@@ -711,36 +857,31 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 	{
 	
 	}
-	
-	$scope.showTHSettings = function showTHSettings(id)
-	{
-	
-	}
-
-
 
 	$scope.getThermoAutoPilotDescr = function getThermoAutoPilotDescr(id)
 	{	
 		var descr = "senzor dezactivat";
+		var dayOfWeek = (new Date()).getDay() - 1;
+		
+		if(dayOfWeek == -1)
+			dayOfWeek = 6; //sunday
+			
+		var hour = $scope.houseTH[$scope.uiOpenedTH].schedule[dayOfWeek][$scope.houseTH[$scope.uiOpenedTH].autoPilotProgramIndex].endH;
+		var min = $scope.houseTH[$scope.uiOpenedTH].schedule[dayOfWeek][$scope.houseTH[$scope.uiOpenedTH].autoPilotProgramIndex].endM * 5;
 		
 		if($scope.houseTH[id].autoPilotOn)
 		{
-			descr = 'mentine '; 
+			descr = "mentine "; 
 			if($scope.settings.houseHoliday)
 			{
-				descr += $scope.settings.houseHolidayTemperature + "*C (in vacanta)";
+				descr = "in vacanta (" + $scope.settings.houseHolidayTemperature + "*C)";
 			}
 			else
 			{
 				descr += $scope.getThermoSetTemp(id);
-				if($scope.houseTH[id].autoPilotEndProgTimeH > 0)
-				{
-					descr += " pana la " + $scope.houseTH[id].autoPilotEndProgTimeH + ":" + $scope.houseTH[id].autoPilotEndProgTimeM;
-				}
-				else
-				{
-					//descr += "";
-				}
+				
+					descr += " pana la " + hour + ":" + min;
+				
 			}
 		}
 		
@@ -836,7 +977,6 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 				}
 				catch(e)
 				{}
-
 			}
 		}
 		
@@ -867,9 +1007,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 		$scope.cbkSetColorValue(color);
 		
 		$scope.cbkSetTextValue($scope.getThermoSetTemp());
-
 	}
-
 
 	$scope.onSlideEnd = function onSlideEnd(value) {
 		console.log('on slide end  ' + value);
@@ -902,13 +1040,6 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 			try {navigator.notification.vibrate(10);}
 			catch(e) {}
 		}
-	
-		/*var val = $scope.houseTH[id].curTemp + 0.1;
-		if(val > $scope.houseTH[id].maxTemp)
-			val = $scope.myui.min;
-		//$scope.onSlide(val);
-		$scope.cbkSetSliderValue(val);
-		*/
 	}
 	
 	$scope.doTempDown = function doTempDown(id)
@@ -921,21 +1052,12 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 			try {navigator.notification.vibrate(10);}
 			catch(e) {}
 		}
-		
-		/*var val = $scope.myui.lastValue - 1;
-		if(val < $scope.myui.min)
-			val = $scope.myui.max;
-		//$scope.onSlide(val);
-		$scope.cbkSetSliderValue(val);
-		*/
 	}	
 
 	$scope.holdTempSetBtn = function holdTempSetBtn(up, hold, id)
 	{
 		$scope.thermoTempChangeDirectionUp = up;
 		$scope.thermoTempChangeId = id;
-		
-		//$scope.thermoTempChangeSpeed = 5;
 		
 		if (angular.isDefined($scope.thermoTempChangeTimer)) 
 		{
@@ -947,24 +1069,18 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 		{
 			$scope.thermoTempChangeTimer = $interval( function() 
 			{
-				//$scope.thermoTempChangeSpeed--;
 				if($scope.thermoTempChangeDirectionUp)
 				{
 					$scope.doTempUp($scope.thermoTempChangeId);
-					/*if($scope.thermoTempChangeSpeed < 0)
-						$scope.doTempUp($scope.thermoTempChangeId);*/
 				}
 				else
 				{
 					$scope.doTempDown($scope.thermoTempChangeId);
-					/*if($scope.thermoTempChangeSpeed < 0)
-						$scope.doTempDown($scope.thermoTempChangeId);*/
 				}
 			}, 250);
 		}
 	}
-	
-	
+
 	$scope.textTimestamp = function textTimestamp(date)
 	{
 		var seconds = Math.floor(((new Date().getTime()/1000) - date)),
@@ -986,14 +1102,14 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 
 		return Math.floor(seconds) < 3 ? "now" : Math.floor(seconds) + "s ago";
 	}
-	
+
 	$scope.addLog = function addLog(msg)
 	{
 		var date = new Date();
 		
 		$scope.logData.unshift({log:date.getHours() + ":" + ('0'+date.getMinutes()).slice(-2) + ":" + ('0'+date.getSeconds()).slice(-2) + " " + msg});
 	}	
-	
+
 	$scope.lerp = function lerp(value, start_point, end_point)
 	{
 		return start_point + (end_point - start_point)*value;

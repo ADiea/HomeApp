@@ -1,0 +1,75 @@
+<ion-modal-view class="modalAutoPilotRange">
+  <ion-header-bar>
+    <h1 class="title">Setari senzor</h1>
+
+	<div class="buttons">
+      <button class="button button-outline icon-right button-assertive button-save" ng-click="closeTHSettings(true)"><i class="icon icon-size-small ion-close-round"></i></button>
+	  <button class="button button-outline icon-right button-positive button-save" ng-click="closeTHSettingsAndSave()"><i class="icon icon-size-small ion-checkmark-round"></i></button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+
+	<label class="item item-input item-stacked-label">
+		<i style="margin:5px" class="icon icon-size-normal ion-paper-airplane"></i>
+		<span class="input-label">Nume</span>
+		<input class="textInput" type="text" placeholder="{{houseTH[uiOpenedTH].title}}" ng-model="houseTH[uiOpenedTH].title"></input>
+	</label>
+	
+	<ion-item>
+	<table class="tableFull">
+	<tr>
+		<td style="vertical-align:middle;min-width:70px;width:30%;">
+			<i class="icon icon-size-normal ion-thermometer"></i> 
+			Temperatura  Min.
+		</td>
+		<td style="vertical-align:middle;text-align:right;">
+	
+			<span style="vertical-align:bottom;">
+				<span class="textDegIntSizeSmall">{{modalSettings.ui.getSettingsTemp_i(true)}},</span>
+				<span class="textDegFloatSizeSmall">{{modalSettings.ui.getSettingsTemp_f(true)}}</span>
+				<span class="textDegSymbolSizeSmall textDegSymbolSmall">o</span>
+			</span>
+			
+			<button ng-disabled="!modalSettings.ui.canTempDown(true)" ng-click="modalSettings.ui.doTempDown(true)" on-hold="" on-release="" class="button button-small button-positive button-outline" > 
+				<i class="icon ion-minus"></i> 
+			</button>
+			
+			<button ng-disabled="!modalSettings.ui.canTempUp(true)"  ng-click="modalSettings.ui.doTempUp(true)" on-hold="" on-release="" class="button button-small button-positive button-outline" > 
+				<i class="icon ion-plus"></i> 
+			</button>
+
+		</td>
+	</tr>
+	</table>
+	</ion-item>
+	
+	<ion-item>
+	<table class="tableFull">
+	<tr>
+		<td style="vertical-align:middle;min-width:70px;width:30%;">
+			<i class="icon icon-size-normal ion-thermometer"></i> 
+			Temperatura  Max.
+		</td>
+		<td style="vertical-align:middle;text-align:right;">
+	
+			<span style="vertical-align:bottom;">
+				<span class="textDegIntSizeSmall">{{modalSettings.ui.getSettingsTemp_i(false)}},</span>
+				<span class="textDegFloatSizeSmall">{{modalSettings.ui.getSettingsTemp_f(false)}}</span>
+				<span class="textDegSymbolSizeSmall textDegSymbolSmall">o</span>
+			</span>
+			
+			<button ng-disabled="!modalSettings.ui.canTempDown(false)" ng-click="modalSettings.ui.doTempDown(false)" on-hold="" on-release="" class="button button-small button-positive button-outline" > 
+				<i class="icon ion-minus"></i> 
+			</button>
+			
+			<button ng-disabled="!modalSettings.ui.canTempUp(false)"  ng-click="modalSettings.ui.doTempUp(false)" on-hold="" on-release="" class="button button-small button-positive button-outline" > 
+				<i class="icon ion-plus"></i> 
+			</button>
+
+		</td>
+	</tr>
+	</table>
+	</ion-item>
+
+  </ion-content>
+</ion-modal-view>

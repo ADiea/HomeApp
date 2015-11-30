@@ -13,16 +13,14 @@
 						</button>
 					</td>
 					
-					<td > <!-- vertical-align="center" -->
-						<!-- <div style="display:inline-block;width:100%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"> -->
-							<span class="h3">
+					<td>
+						<span class="h3">
 							{{th.title}} 
-							</span>
-						<!--</div>-->
+						</span>
 					</td>
 					
 					<td style="text-align:right;"> 
-						<div style="display:inline;padding-left:10px;" ng-class="{'text-disabled':(!th.autoPilotOn || settings.houseHoliday)}">
+						<div style="display:inline;padding-left:10px;" ng-class="{'text-disabled':(!th.autoPilotOn)}">
 							<span class="textDegIntSizeNormal">{{getThermoSetTemp_Int(th.id)}},</span>
 							<span class="textDegFloatSizeNormal">{{getThermoSetTemp_Frac(th.id)}}</span>
 							<span class="textDegSymbolSizeNormal textDegSymbolNormal">o</span>
@@ -40,7 +38,7 @@
 					</td>
 					
 					<td style="text-align:right;" >
-						<div ng-show="!settings.houseHoliday" style="display:inline;padding-left:10px;">
+						<div ng-show="!settings.houseHoliday" style="display:inline;margin-right:10px;">
 							<button ng-disabled="!canTempDown(th.id) || !th.autoPilotOn" ng-click="doTempDown(th.id)" on-hold="holdTempSetBtn(false, true, th.id)" on-release="holdTempSetBtn(false, false, th.id)" class="button button-small button-positive button-outline" > 
 								<i class="icon ion-minus"></i> 
 							</button>
@@ -59,7 +57,6 @@
 				</tr>
 			
 			</table>
-			
 		</ion-toggle>
 
 		<ion-item ng-click="showAutopilotSettings(th.id)" class="item-accordion" ng-show="uiOpenedTH==th.id" >
@@ -76,7 +73,6 @@
 		</ion-item>
 		
 		<ion-item class="item-accordion" ng-show="uiOpenedTH==th.id">
-
 			<span style="display:inline;float:left"> 
 				<i class="icon icon-size-normal ion-ios-speedometer-outline"></i>
 				<span style="margin-left:10px">Istoric</span>
@@ -84,12 +80,11 @@
 
 			
 			<div style="display:inline;float:right">
-				<p style="display:inline;">incalzire 0.5*/h</p>
+				<p style="display:inline;">incalzire 0,5*C/h</p>
 				<button ng-click="showRHMoreInfo(th.id)" class="button button-small button-outline">
-					<i  class="icon ion-plus"></i>
+					<i  class="icon ion-more"></i>
 				</button>
 			</div>
-
 		</ion-item>
 		
 		<ion-item class="item-accordion" ng-show="uiOpenedTH==th.id">
@@ -97,7 +92,6 @@
 			<span style="display:inline;float:left"> 
 				<i class="icon icon-size-normal ion-heart"></i>
 				<span style="margin-left:10px">Sanatate </span>
-				
 			</span>
 			
 			<div style="display:inline;float:right">
@@ -109,7 +103,7 @@
 
 		</ion-item>
 		
-		<ion-item class="item-accordion" ng-show="uiOpenedTH==th.id">
+		<ion-item class="item-accordion" ng-show="uiOpenedTH==th.id" ng-click="showTHSettings(th.id)">
 			
 			<span style="display:inline;float:left"> 
 				<i class="icon icon-size-normal ion-android-settings"></i> 
@@ -117,8 +111,8 @@
 			</span>
 			
 			<p style="display:inline;float:right">
-				<button ng-click="showTHSettings(th.id)" class="button button-small button-outline">
-					<i  class="icon ion-plus"></i>
+				<button class="button button-small button-outline button-positive">
+					<i  class="icon ion-more"></i>
 				</button>
 			</p>
 			
@@ -156,7 +150,6 @@
 
 		</ion-item>
 
-		
 	</div>
 
 	</ion-list>

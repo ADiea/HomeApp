@@ -7,6 +7,7 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 		houseHolidayTemperature:0,
 		holidayShow:false,
 		houseHoliday:false,
+		holidayEditPopupVisible:false,
 		holidayEnd:
 		{
 			mo:0, 
@@ -124,6 +125,8 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 		$scope.ui.houseHolidayTemperature = $scope.settings.houseHolidayTemperature;
 		$scope.ui.houseHoliday = true;
 		
+		$scope.ui.holidayEditPopupVisible = true;
+		
 		if(!$scope.modalHolidayCreated)
 		{
 			$scope.modalHolidayCreated = true;
@@ -149,17 +152,31 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 			});
 		}
 	};
+	
+	$scope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) 
+	{
+		if($scope.ui.holidayEditPopupVisible)
+		{
+			$scope.closeHolidayMode(false);
+			try { window.plugins.toast.showShortCenter("Cancelled",function(a){},function(b){}); }
+			catch(e){}
+		}
+	});
   
-	$scope.closeHolidayMode = function closeHolidayMode()
+	$scope.closeHolidayMode = function closeHolidayMode(hidePopup)
 	{	
 		$scope.ui.houseHolidayTemperature = $scope.settings.houseHolidayTemperature;
 		$scope.ui.holidayEnd.mo = $scope.ui.holidayEnd.real_mo; 
 		$scope.ui.holidayEnd.day = $scope.ui.holidayEnd.real_day;
 		$scope.ui.holidayEnd.year = $scope.ui.holidayEnd.real_year;
 		
+		$scope.ui.holidayEditPopupVisible = false;
+		
 		$scope.ui.holidayEnd.unwatchMo();
 		$scope.ui.holidayEnd.unwatchYear();
-		$scope.modalHoliday.hide();
+		
+		if(hidePopup)
+			$scope.modalHoliday.hide();
 	}
 	
 	$scope.isDateInThePast = function isDateInThePast(year, month, day)

@@ -65,7 +65,15 @@
 			</span>
 			
 			<div style="display:inline;float:right">
+			
+				<div style="display:inline;padding-left:10px;" ng-show="th.autoPilotOn">
+					<span class="textDegIntSizeMicro">{{getThermoSetTemp_Int(th.id)}},</span>
+					<span class="textDegFloatSizeMicro">{{getThermoSetTemp_Frac(th.id)}}</span>
+					<span class="textDegSymbolSizeMicro textDegSymbolMicro">o</span>
+				</div>
+			
 				<p style="display:inline;">{{getThermoAutoPilotDescr(th.id)}}</p>
+				
 				<button class="button button-small button-outline button-positive">
 					<i  class="icon ion-more"></i>
 				</button>

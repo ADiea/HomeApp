@@ -451,8 +451,8 @@ $scope.modalSettings = {
 
 	$scope.showTHSettings = function showTHSettings(id)
 	{
-		$scope.modalSettings.tempMin = $scope.houseTH[$scope.uiOpenedTH].minTemp;
-		$scope.modalSettings.tempMax = $scope.houseTH[$scope.uiOpenedTH].maxTemp;
+		$scope.modalSettings.tempMin = $scope.houseTH[id].minTemp;
+		$scope.modalSettings.tempMax = $scope.houseTH[id].maxTemp;
 	
 		if(!$scope.modalSettings.modalSettingsCreated)
 		{
@@ -785,6 +785,8 @@ $scope.modalSettings = {
 		var i_part = parseInt($scope.houseTH[id].curTemp);
 		var f_part = parseInt(Math.round( $scope.houseTH[id].curTemp * 10 ) ) % 10;
 		
+		//return "<span class='textDegIntSizeMicro'>" + i_part + ",</span><span class='textDegFloatSizeMicro'>" + f_part;
+		
 		return i_part + ',' + f_part+"*C";
 	}
 	
@@ -861,27 +863,38 @@ $scope.modalSettings = {
 	$scope.getThermoAutoPilotDescr = function getThermoAutoPilotDescr(id)
 	{	
 		var descr = "senzor dezactivat";
-		var dayOfWeek = (new Date()).getDay() - 1;
+		var thedate = new Date();
+		var dayOfWeek = (thedate).getDay() - 1;
 		
 		if(dayOfWeek == -1)
 			dayOfWeek = 6; //sunday
-			
-		var hour = $scope.houseTH[$scope.uiOpenedTH].schedule[dayOfWeek][$scope.houseTH[$scope.uiOpenedTH].autoPilotProgramIndex].endH;
-		var min = $scope.houseTH[$scope.uiOpenedTH].schedule[dayOfWeek][$scope.houseTH[$scope.uiOpenedTH].autoPilotProgramIndex].endM * 5;
-		
+
 		if($scope.houseTH[id].autoPilotOn)
 		{
-			descr = "mentine "; 
 			if($scope.settings.houseHoliday)
 			{
-				descr = "in vacanta (" + $scope.settings.houseHolidayTemperature + "*C)";
+				var daysOfHoliday = 0;
+				var curTimestamp = thedate.getTime() / 1000;
+				
+				if(curTimestamp < $scope.settings.houseHolidayEnd)
+				{
+					daysOfHoliday = Math.floor(( $scope.settings.houseHolidayEnd - curTimestamp) / 86400);//3600*24;
+				}
+				
+				if( daysOfHoliday <= 1 )
+					descr = " vacanta astazi";
+				else 
+					descr = " vacanta " + daysOfHoliday + " zile";
 			}
 			else
 			{
-				descr += $scope.getThermoSetTemp(id);
+				var hour = $scope.modalAutoPilot.ui.getHourStr($scope.houseTH[id].schedule[dayOfWeek][$scope.houseTH[id].autoPilotProgramIndex].endH);
+				var min = $scope.modalAutoPilot.ui.getMinuteStr($scope.houseTH[id].schedule[dayOfWeek][$scope.houseTH[id].autoPilotProgramIndex].endM);
+				var different = "";
 				
-					descr += " pana la " + hour + ":" + min;
-				
+				if($scope.houseTH[id].schedule[dayOfWeek][$scope.houseTH[id].autoPilotProgramIndex].t != $scope.houseTH[id].curTemp)
+					different = '(!)';
+				descr = different + " pana la " + hour + ":" + min;
 			}
 		}
 		

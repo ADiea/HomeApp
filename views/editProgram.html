@@ -48,13 +48,15 @@
 		
 		</td>
 		<td >
-		<!-- refresh="ui.holidayEnd.refreshDay"  -->
-		<select-wheel min-width="35" type="1" ng-model="modalAutoPilot.editInterval.startH" item-height="20" amplitude="2" options="modalAutoPilot.ui.hourOptions" >
-		</select-wheel> 
-		</td>
-		<td >
-		<select-wheel min-width="35" type="1" ng-model="modalAutoPilot.editInterval.startM" item-height="20" amplitude="2" options="modalAutoPilot.ui.minOptions" >
-		</select-wheel> 
+			<table style="float:right">
+			<tr><td>
+			<select-wheel min-width="35" max-width="50" type="1" ng-model="modalAutoPilot.editInterval.startH" item-height="20" amplitude="2" options="modalAutoPilot.ui.hourOptions" >
+			</select-wheel> 
+			</td>
+			<td >
+			<select-wheel min-width="35" max-width="50" type="1" ng-model="modalAutoPilot.editInterval.startM" item-height="20" amplitude="2" options="modalAutoPilot.ui.minOptions" >
+			</select-wheel> 
+			</td></tr> </table>
 		</td>
 	</tr>
 	</table>
@@ -70,13 +72,16 @@
 		
 		</td>
 		<td >
-		<!-- refresh="ui.holidayEnd.refreshDay"  -->
-		<select-wheel min-width="35" type="1" ng-model="modalAutoPilot.editInterval.endH" item-height="20" amplitude="2" options="modalAutoPilot.ui.hourOptions" >
-		</select-wheel> 
-		</td>
-		<td >
-		<select-wheel min-width="35" type="1" ng-model="modalAutoPilot.editInterval.endM" item-height="20" amplitude="2" options="modalAutoPilot.ui.minOptions" >
-		</select-wheel> 
+		
+			<table style="float:right">
+			<tr><td>
+			<select-wheel min-width="35" type="1" ng-model="modalAutoPilot.editInterval.endH" item-height="20" amplitude="2" options="modalAutoPilot.ui.hourOptions" >
+			</select-wheel> 
+			</td>
+			<td >
+			<select-wheel min-width="35" type="1" ng-model="modalAutoPilot.editInterval.endM" item-height="20" amplitude="2" options="modalAutoPilot.ui.minOptions" >
+			</select-wheel> 
+			</td></tr> </table>
 		</td>
 	</tr>
 	</table>

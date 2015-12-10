@@ -4,14 +4,16 @@
 		<div ng-repeat="th in houseTH">
 		<ion-toggle class="item-divider" ng-model="th.autoPilotOn" toggle-class="toggle-positive">
 					
-			<table style="width:100%">
+			<table style="width:100%" ng-click="uiToggleShowTH(th.id)" >
 			
 				<tr>
+					
 					<td rowspan="2" style="vertical-align:middle">
-						<button style="display:inline;" ng-click="uiToggleShowTH(th.id)" class="button button-small button-outline">
-							<i  class="icon" ng-class="uiOpenedTH==th.id ? 'ion-minus' : 'ion-plus'"></i>
+						<button style="display:inline;" ng-click="uiToggleShowTH(th.id);$event.stopPropagation();" class="button button-positive button-small button-outline">
+							<i  class="icon" ng-class="uiOpenedTH==th.id ? 'ion-chevron-up' : 'ion-chevron-down'"></i>
 						</button>
 					</td>
+					
 					
 					<td>
 						<span class="h3">
@@ -88,7 +90,7 @@
 
 			
 			<div style="display:inline;float:right">
-				<p style="display:inline;">incalzire 0,5*C/h</p>
+				<p style="display:inline;">{{th.curSensorTemp1m + "*C / " + th.curSensorTemp10m + "*C"}}</p>
 				<button ng-click="showRHMoreInfo(th.id)" class="button button-small button-outline">
 					<i  class="icon ion-more"></i>
 				</button>
@@ -130,32 +132,92 @@
 	<div ng-repeat="heater in houseHeat">
 		<ion-item class="item-divider" >
 			
-			<div style="display:inline;">
-				<button style="display:inline;" ng-click="uiToggleShowHeater(heater.id)" class="button button-small button-outline">
-						<i  class="icon" ng-class="uiOpenedHeater==heater.id ? 'ion-minus' : 'ion-plus'"></i>
+			<table style="width:85%" ng-click="uiToggleShowHeater(heater.id)" >
+			
+				<tr>
+					
+					<td rowspan="2" style="vertical-align:middle">
+						<button style="display:inline;" ng-click="uiToggleShowHeater(heater.id);$event.stopPropagation();" class="button button-small button-positive button-outline">
+								<i  class="icon" ng-class="uiOpenedHeater==heater.id ? 'ion-chevron-up' : 'ion-chevron-down'"></i>
+						</button>
+					</td>
+					
+					<td>
+						<span class="h3">
+							{{heater.title}}
+						</span>
+					</td>
+
+					<td style="text-align:right;"> 
+							<i ng-class="{'ion-ios-flame-outline':!heater.heaterOn, 'ion-ios-flame':heater.heaterOn, 'positive':heater.heaterOn}" 
+							class="icon icon-size-normal"></i><strong>{{heater.heaterOn?"PORNIT":"OPRIT"}}</strong>
+					</td>
+				</tr>
+
+				<tr>
+		
+					<td style="vertical-align:bottom">
+						<p  >	
+							<i ng-class="{'assertive':heater.heaterFault}" class="icon ion-android-warning"></i>  
+							<strong>{{heater.heaterFault?heater.heaterFaultDescr:"Normal"}}</strong> 
+							<i style="margin-right:10px" class="icon ion-flame"></i>
+							<strong>1h23m astazi</strong>
+						</p>
+					</td>
+<!--
+					<td style="text-align:right;" >
+
+					</td>
+-->
+				</tr>
+
+			</table>
+
+		</ion-item>
+
+		<ion-item class="item-accordion" ng-show="uiOpenedHeater==heater.id" ng-click="">
+			<span style="display:inline;float:left"> 
+				<i class="icon icon-size-normal ion-ios-speedometer-outline"></i>
+				<span style="margin-left:10px">Istoric</span>
+			</span>
+
+			
+			<div style="display:inline;float:right">
+				<p style="display:inline;">1h23m astazi</p>
+				<button class="button button-small button-outline">
+					<i  class="icon ion-more"></i>
 				</button>
 			</div>
-			
-			<div style="display:inline-table;padding-left:10px;width:80%">
-			
-				<div style="display:inline-block;width:20%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
-					{{heater.title}} 
-				</div>
-			
-				<div  style="display:inline;">
-						<p style="display:inline;"><i class="icon icon-size-normal ion-flame"></i></p>
-						<strong>PORNIT</strong> 
-				</div>
+		</ion-item>
+		
+		<ion-item class="item-accordion" ng-show="uiOpenedHeater==heater.id" ng-click="">
+			<span style="display:inline;float:left"> 
+				<i class="icon icon-size-normal ion-android-warning"></i>
+				<span style="margin-left:10px">Gaz</span>
+			</span>
 
-				<p  style="display:list-item;">	
-					<i class="icon ion-android-warning"></i>  
-					<strong>Normal</strong> 
-					<i style="margin-left:10px" class="icon ion-flame"></i>
-					<strong>130 min astazi</strong>				
-				</p>
 			
+			<div style="display:inline;float:right">
+				<p style="display:inline;">{{heater.lastGasReading + " (" + heater.lowGasLevThres + "/" + heater.medGasLevThres + "/" + heater.highGasLevThres + ")" }}</p>
+				<button class="button button-small button-outline">
+					<i  class="icon ion-more"></i>
+				</button>
 			</div>
+		</ion-item>		
 
+		<ion-item class="item-accordion" ng-show="uiOpenedHeater==heater.id" ng-click="">
+			<span style="display:inline;float:left"> 
+				<i class="icon icon-size-normal ion-android-settings"></i> 
+				<span style="margin-left:10px">Setari </span>
+			</span>
+			
+			<p> </p>
+			
+			<p style="display:inline;float:right">
+				<button class="button button-small button-outline button-positive">
+					<i  class="icon ion-more"></i>
+				</button>
+			</p>			
 		</ion-item>
 
 	</div>

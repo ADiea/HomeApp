@@ -59,12 +59,12 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 	
 	
 	$scope.houseHeat = [
-		{id:0, sensorID:0, title:"Centrala_1", dirty:false, 
+		{id:0, sensorID:0, title:"Centrala", dirty:false, 
 		lowGasLevThres:300, medGasLevThres:500, highGasLevThres:700, 
 		lastGasReading:350, heaterOn:true, heaterFault:false, heaterFaultDescr:"",
 		timestamp:1445802480},
 		
-		{id:1, sensorID:0, title:"Centrala_2", dirty:false, 
+		{id:1, sensorID:0, title:"Centrala", dirty:false, 
 		lowGasLevThres:300, medGasLevThres:500, highGasLevThres:700, 
 		lastGasReading:350, heaterOn:false, heaterFault:true, heaterFaultDescr:"GasLeak",
 		timestamp:1445802480},
@@ -570,6 +570,14 @@ $scope.modalSettings = {
 							
 							objTH.curSensorTemp = res.result;
 							
+							/*skipfloat here*/
+							
+							objTH.curSensorTemp1m = res.result;
+							
+							/*skipfloat here*/
+							
+							objTH.curSensorTemp10m = res.result;
+							
 							res = commWeb.skipInt(res.str);
 							if(res.err) return;
 							
@@ -606,10 +614,17 @@ $scope.modalSettings = {
 							res = commWeb.skipFloat(res.str);
 							if(res.err) return;
 							objTH.curSensorHumid = res.result;
-													
-							
-							objTH.autoPilotEndProgTimeH = -1;
-							objTH.autoPilotEndProgTimeM = -1;
+
+
+							objTH.autoPilotProgramIndex = 0;
+
+							objTH.schedule = new Array([{t:20.0, startH:0, startM:0, endH:8, endM:0}],
+														[{t:20.0, startH:0, startM:0, endH:8, endM:0}],
+														[{t:20.0, startH:0, startM:0, endH:8, endM:0}],
+														[{t:20.0, startH:0, startM:0, endH:8, endM:0}],
+														[{t:20.0, startH:0, startM:0, endH:8, endM:0}],
+														[{t:20.0, startH:0, startM:0, endH:8, endM:0}],
+														[{t:20.0, startH:0, startM:0, endH:8, endM:0}]);
 								
 							$scope.houseTH.push(objTH);
 						}
@@ -679,10 +694,7 @@ $scope.modalSettings = {
 							
 						objHeater.timestamp = (new Date()).getTime();
 
-						
-							
 						$scope.houseHeat.push(objHeater);
-					
 					}
 				}				
 			},
@@ -741,10 +753,10 @@ $scope.modalSettings = {
 	*/
 				var message = commWeb.eCommWebMsgTYpes.cwSetTHParams + ";" + 
 							th.sensorID + ";" + (Math.round( th.curTemp * 10 ) / 10).toFixed(1)  + ";" + 
-							th.title + ";"; //+autoPilotOn
+							th.title + ";"+ (Math.round( th.minTemp * 10 ) / 10).toFixed(1)  + ";" + 
+							(Math.round( th.maxTemp * 10 ) / 10).toFixed(1)  + ";"; //+autoPilotOn
 							
 				socket.send(message);
-				
 			}
 		}
 	}

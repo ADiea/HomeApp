@@ -75,6 +75,7 @@ ionicApp.directive('selectWheel', function($ionicScrollDelegate, $ionicGesture, 
         options: '=',
         index: '=',
 		minWidth: '=',
+		maxWidth: '=',
 		type: '@',
 		refresh: '=',
 		usefulLength: '='
@@ -94,7 +95,9 @@ ionicApp.directive('selectWheel', function($ionicScrollDelegate, $ionicGesture, 
 		  
 		  scope.index = (scope.ngModel | 0) || -1;
 		  
-		  scope.minWidth = scope.minWidth ||35;
+		  scope.minWidth = scope.minWidth || 35;
+		  
+		  scope.maxWidth = scope.maxWidth || 200;
 		  
 		  scope.type = scope.type || 1;
 		  

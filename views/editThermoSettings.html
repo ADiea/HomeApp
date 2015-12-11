@@ -82,14 +82,10 @@
 		<div class="input-label">
 		Locatie
 		</div>
-		<select ng-model="houseTH[uiOpenedTH].sensorLocation" > <!-- ng-change="selectUpdated(houseTH[uiOpenedTH].sensorLocation)" -->
-		  <option value="0">Local</option>
-		  <option value="1">Senzor</option>
-		</select>
 		
-		 <select name="mySelect" id="mySelect"
-			ng-options="option.name for option in data.availableOptions track by option.id"
-			ng-model="data.selectedOption"></select>
+		 <select name="setTHLocation" id="setTHLocation"
+			ng-options="option.name for option in modalAutoPilot.ui.sensorLocationOptions track by option.id"
+			ng-model="houseTH[uiOpenedTH].sensorLocation"></select>
 		
 	</label>
 

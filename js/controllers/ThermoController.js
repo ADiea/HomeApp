@@ -46,7 +46,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 		},
 		
 		{
-			id:2, sensorID:0, title:"Baie", dirty:false, sensorLocation:1,
+			id:2, sensorID:0, title:"Baie", dirty:false, sensorLocation:"1",
 			minTemp:16.0, maxTemp:27.0, curTemp:19.0, curSensorTemp:22, curSensorTemp1m:22.1, curSensorTemp10m:21.9, curTempSymbol:'C', curSensorHumid:73.2, 
 			timestamp:1445802480, heaterOn:true, acOn:false,  autoPilotOn:true, autoPilotProgramIndex:0,
 			schedule:
@@ -75,14 +75,14 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 		timestamp:1445802480},
 	];
 
-
-/*------MODAL AUTOPILOT*/
+	/*------MODAL AUTOPILOT*/
 	$scope.modalAutoPilot = {
 		modalSched:null,
 		modalEdit:null,
 		modalSchedCreated:false,
 		modalEditCreated:false,
 		ui:{
+			sensorLocationOptions:[{"id":"0","name":"Local"}, {"id":"1","name":"Senzor"}],
 			intvIdx:0, 
 			weekday:0, 
 			curWeekDay:0,

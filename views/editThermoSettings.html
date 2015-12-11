@@ -74,9 +74,10 @@
 	<label class="item item-input item-stacked-label">
 		<i style="margin:5px" class="icon icon-size-normal ion-ios-grid-view-outline"></i>
 		<span class="input-label">Id</span>
-		<input class="textInput" type="text" placeholder="{{houseTH[uiOpenedTH].sensorId}}" ng-model="houseTH[uiOpenedTH].sensorId"></input>
+		<input class="textInput" type="text" placeholder="{{houseTH[uiOpenedTH].sensorId}}" ng-disabled="true"  ng-model="houseTH[uiOpenedTH].sensorID"></input>
 	</label>
 
+	<!--
 	<label class="item item-input item-select">
 		<i style="margin:5px" class="icon icon-size-normal ion-ios-location-outline"></i>
 		<div class="input-label">
@@ -99,6 +100,8 @@
 		  <option>Centrala2</option>
 		</select>
 	</label>	
+	
+	-->
 
   </ion-content>
 </ion-modal-view>

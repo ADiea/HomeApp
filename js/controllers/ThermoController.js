@@ -14,7 +14,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 	
 	$scope.houseTH = [
 		{
-			id:0, sensorID:0, title:"Dormitor", dirty:false, sensorLocation:0, 
+			id:0, sensorID:"0", title:"Dormitor", dirty:false, sensorLocation:0, 
 			minTemp:16.0, maxTemp:27.0, curTemp:21.0, curSensorTemp:22, curSensorTemp1m:22.1, curSensorTemp10m:21.9, curTempSymbol:'C', curSensorHumid:45.2, 
 			timestamp:1445802480, heaterOn:false, acOn:false, autoPilotOn:true, autoPilotProgramIndex:0,
 			schedule:

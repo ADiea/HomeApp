@@ -2,6 +2,11 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 {
 	$scope.settings = settings.get('settings');
 	$scope.logData = logData;
+	
+	$scope.ui =  {
+		isAdjusting:false
+	
+	};
 
 	$scope.arrayTempSlider=['Off', 'On', 'Auto'];
 	$scope.myui = {min: 0, max:20, value:0, lastValue:0, halfValue:10};
@@ -453,6 +458,8 @@ $scope.modalSettings = {
 	{
 		$scope.modalSettings.tempMin = $scope.houseTH[id].minTemp;
 		$scope.modalSettings.tempMax = $scope.houseTH[id].maxTemp;
+		
+		$scope.ui.isAdjusting = true;
 	
 		if(!$scope.modalSettings.modalSettingsCreated)
 		{
@@ -474,6 +481,7 @@ $scope.modalSettings = {
 
 	$scope.closeTHSettings = function closeTHSettings(hideModal)
 	{
+		$scope.ui.isAdjusting = false;
 		if(hideModal)
 		{
 			$scope.modalSettings.modalSettings.hide();
@@ -486,6 +494,10 @@ $scope.modalSettings = {
 		$scope.houseTH[$scope.uiOpenedTH].maxTemp = $scope.modalSettings.tempMax;
 		
 		$scope.houseTH[$scope.uiOpenedTH].dirty = true;
+		
+		$scope.sendParamsToServer();
+		
+		$scope.ui.isAdjusting = false;
 	
 		$scope.modalSettings.modalSettings.hide();
 	}
@@ -520,6 +532,13 @@ $scope.modalSettings = {
 			onMessage:function (data) 
 			{
 				$scope.addLog("Msg cwReplyTHs: " + data);
+				
+				if($scope.ui.isAdjusting)
+				{
+					//TODO is adjusting for every th/heater
+					//=>TODO2 need to update heaters not recreate...
+					return;
+				}
 				
 				var numTHs;
 				
@@ -570,14 +589,6 @@ $scope.modalSettings = {
 							
 							objTH.curSensorTemp = res.result;
 							
-							/*skipfloat here*/
-							
-							objTH.curSensorTemp1m = res.result;
-							
-							/*skipfloat here*/
-							
-							objTH.curSensorTemp10m = res.result;
-							
 							res = commWeb.skipInt(res.str);
 							if(res.err) return;
 							
@@ -614,6 +625,16 @@ $scope.modalSettings = {
 							res = commWeb.skipFloat(res.str);
 							if(res.err) return;
 							objTH.curSensorHumid = res.result;
+							
+							res = commWeb.skipFloat(res.str);
+							if(res.err) return;
+							
+							objTH.curSensorTemp1m = res.result;
+							
+							res = commWeb.skipFloat(res.str);
+							if(res.err) return;
+							
+							objTH.curSensorTemp10m = res.result;
 
 
 							objTH.autoPilotProgramIndex = 0;
@@ -631,70 +652,76 @@ $scope.modalSettings = {
 					}
 					else if(devType == commWeb.eDeviceTypes.devTypeHeater)
 					{
-					/*
-					{id:0, sensorID:0, title:"Centrala", dirty:false, 
-		lowGasLevThres:300, medGasLevThres:500, highGasLevThres:700, 
-		lastGasReading:350, heaterOn:true, heaterFault:false, heaterFaultDescr:""
-		timestamp:1445802480},
-					*/
-						var objHeater={};
-						objHeater.id = curID++;
-
+					
 						res = commWeb.skipInt(res.str);
 						if(res.err) return;
-
-						objHeater.sensorID = res.result;
-
-						res = commWeb.skipString(res.str);
-						if(res.err) return;
-
-						objHeater.title = res.result;
-
-						objHeater.dirty = false;
-
-						res = commWeb.skipInt(res.str);
-						if(res.err) return;
-
-						objHeater.heaterOn = res.result ? true : false;
-
-						res = commWeb.skipInt(res.str);
-						if(res.err) return;
-
-						objHeater.heaterFault = res.result ? true : false;
 						
-						res = commWeb.skipInt(res.str);
-						if(res.err) return;
-
-						objHeater.lastGasReading = res.result;
+						numTHs = res.result;
 						
-						res = commWeb.skipInt(res.str);
-						if(res.err) return;
-
-						objHeater.lowGasLevThres = res.result;
+						$scope.houseHeat = [];
 						
-						res = commWeb.skipInt(res.str);
-						if(res.err) return;
+						while(numTHs--)
+						{
+					
+							var objHeater={};
+							objHeater.id = curID++;
 
-						objHeater.medGasLevThres = res.result;
-						
-						res = commWeb.skipInt(res.str);
-						if(res.err) return;
+							res = commWeb.skipInt(res.str);
+							if(res.err) return;
 
-						objHeater.highGasLevThres = res.result;
-						
-						res = commWeb.skipInt(res.str);
-						if(res.err) return;
+							objHeater.sensorID = res.result;
 
-						if( res.result & 1)
-							objHeater.heaterFaultDescr = "NoFault";
-						if( res.result & 2)
-							objHeater.heaterFaultDescr = "GasLeak";
-						if( res.result & 4)
-							objHeater.heaterFaultDescr = "HwFault";
+							res = commWeb.skipString(res.str);
+							if(res.err) return;
+
+							objHeater.title = res.result;
+
+							objHeater.dirty = false;
+
+							res = commWeb.skipInt(res.str);
+							if(res.err) return;
+
+							objHeater.heaterOn = res.result ? true : false;
+
+							res = commWeb.skipInt(res.str);
+							if(res.err) return;
+
+							objHeater.heaterFault = res.result ? true : false;
 							
-						objHeater.timestamp = (new Date()).getTime();
+							res = commWeb.skipInt(res.str);
+							if(res.err) return;
 
-						$scope.houseHeat.push(objHeater);
+							objHeater.lastGasReading = res.result;
+							
+							res = commWeb.skipInt(res.str);
+							if(res.err) return;
+
+							objHeater.lowGasLevThres = res.result;
+							
+							res = commWeb.skipInt(res.str);
+							if(res.err) return;
+
+							objHeater.medGasLevThres = res.result;
+							
+							res = commWeb.skipInt(res.str);
+							if(res.err) return;
+
+							objHeater.highGasLevThres = res.result;
+							
+							res = commWeb.skipInt(res.str);
+							if(res.err) return;
+
+							if( res.result & 1)
+								objHeater.heaterFaultDescr = "NoFault";
+							if( res.result & 2)
+								objHeater.heaterFaultDescr = "GasLeak";
+							if( res.result & 4)
+								objHeater.heaterFaultDescr = "HwFault";
+								
+							objHeater.timestamp = (new Date()).getTime();
+
+							$scope.houseHeat.push(objHeater);
+						}
 					}
 				}				
 			},
@@ -1054,9 +1081,9 @@ $scope.modalSettings = {
 			return false;
 	}
 	
-	$scope.doTempUp = function doTempUp(id)
+	$scope.doTempUp = function doTempUp(id, holding)
 	{
-	
+		var isholding = holding || false;
 		if($scope.houseTH[id].curTemp < $scope.houseTH[id].maxTemp)
 		{
 			$scope.houseTH[id].curTemp += 0.5;
@@ -1064,11 +1091,17 @@ $scope.modalSettings = {
 			
 			try {navigator.notification.vibrate(10);}
 			catch(e) {}
+			
+			//TODO find better way 
+			if(!isholding)
+				$scope.sendParamsToServer();
+			
 		}
 	}
 	
-	$scope.doTempDown = function doTempDown(id)
+	$scope.doTempDown = function doTempDown(id, holding)
 	{
+		var isholding = holding || false;
 		if($scope.houseTH[id].curTemp > $scope.houseTH[id].minTemp)
 		{
 			$scope.houseTH[id].curTemp -= 0.5;
@@ -1076,6 +1109,11 @@ $scope.modalSettings = {
 			
 			try {navigator.notification.vibrate(10);}
 			catch(e) {}
+			
+			
+			//TODO find better way 
+			if(!isholding)
+				$scope.sendParamsToServer();
 		}
 	}	
 
@@ -1083,6 +1121,8 @@ $scope.modalSettings = {
 	{
 		$scope.thermoTempChangeDirectionUp = up;
 		$scope.thermoTempChangeId = id;
+		
+		$scope.ui.isAdjusting = false;
 		
 		if (angular.isDefined($scope.thermoTempChangeTimer)) 
 		{
@@ -1092,15 +1132,16 @@ $scope.modalSettings = {
 
 		if(hold)
 		{
+			$scope.ui.isAdjusting = true;
 			$scope.thermoTempChangeTimer = $interval( function() 
 			{
 				if($scope.thermoTempChangeDirectionUp)
 				{
-					$scope.doTempUp($scope.thermoTempChangeId);
+					$scope.doTempUp($scope.thermoTempChangeId, true);
 				}
 				else
 				{
-					$scope.doTempDown($scope.thermoTempChangeId);
+					$scope.doTempDown($scope.thermoTempChangeId, true);
 				}
 			}, 250);
 		}

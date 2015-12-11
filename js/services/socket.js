@@ -14,20 +14,27 @@ ionicApp.factory('socket',function(SettingsService, LogDataService, commWeb){
 	
 	socket.send =  function (message) 
 	{
-		if(!socket._Connected)
+		try
 		{
-			if((socket._reconnNo % 10) == 0)
-				LogDataService.addLog("RECONN #"+socket._reconnNo, "#f00");
+			if(!socket._Connected)
+			{
+				if((socket._reconnNo % 10) == 0)
+					LogDataService.addLog("RECONN #"+socket._reconnNo, "#f00");
 
-			socket._reconnNo++;
-			_MessageToSend = message;
-			socket.connectSocket();
+				socket._reconnNo++;
+				_MessageToSend = message;
+				socket.connectSocket();
+			}
+			else
+			{
+				socket._Socket.send(message);
+				LogDataService.addLog("SENT " + message);
+				//LogDataService.addLog("SENT!", "#aaa");
+			}
 		}
-		else
+		catch(e)
 		{
-			socket._Socket.send(message);
-			LogDataService.addLog("SENT " + message);
-			//LogDataService.addLog("SENT!", "#aaa");
+			LogDataService.addLog("SockSendEx " + e.message);
 		}
     }
 	

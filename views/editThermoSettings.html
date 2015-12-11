@@ -10,7 +10,7 @@
   <ion-content>
 
 	<label class="item item-input item-stacked-label">
-		<i style="margin:5px" class="icon icon-size-normal ion-paper-airplane"></i>
+		<i style="margin:5px" class="icon icon-size-normal ion-at"></i>
 		<span class="input-label">Nume</span>
 		<input class="textInput" type="text" placeholder="{{houseTH[uiOpenedTH].title}}" ng-model="houseTH[uiOpenedTH].title"></input>
 	</label>
@@ -70,6 +70,39 @@
 	</tr>
 	</table>
 	</ion-item>
+
+	<label class="item item-input item-stacked-label">
+		<i style="margin:5px" class="icon icon-size-normal ion-ios-grid-view-outline"></i>
+		<span class="input-label">Id</span>
+		<input class="textInput" type="text" placeholder="{{houseTH[uiOpenedTH].sensorId}}" ng-model="houseTH[uiOpenedTH].sensorId"></input>
+	</label>
+
+	<label class="item item-input item-select">
+		<i style="margin:5px" class="icon icon-size-normal ion-ios-location-outline"></i>
+		<div class="input-label">
+		Locatie
+		</div>
+		<select ng-model="houseTH[uiOpenedTH].sensorLocation" > <!-- ng-change="selectUpdated(houseTH[uiOpenedTH].sensorLocation)" -->
+		  <option value="0">Local</option>
+		  <option value="1">Senzor</option>
+		</select>
+		
+		 <select name="mySelect" id="mySelect"
+			ng-options="option.name for option in data.availableOptions track by option.id"
+			ng-model="data.selectedOption"></select>
+		
+	</label>
+
+	<label class="item item-input item-select">
+		<i style="margin:5px" class="icon icon-size-normal ion-ios-flame-outline"></i>
+		<div class="input-label">
+		Centrala deservita
+		</div>
+		<select>
+		  <option selected>Centrala</option>
+		  <option>Centrala2</option>
+		</select>
+	</label>	
 
   </ion-content>
 </ion-modal-view>

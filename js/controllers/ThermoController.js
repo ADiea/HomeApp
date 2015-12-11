@@ -14,7 +14,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 	
 	$scope.houseTH = [
 		{
-			id:0, sensorID:0, title:"Dormitor", dirty:false, 
+			id:0, sensorID:0, title:"Dormitor", dirty:false, sensorLocation:0, 
 			minTemp:16.0, maxTemp:27.0, curTemp:21.0, curSensorTemp:22, curSensorTemp1m:22.1, curSensorTemp10m:21.9, curTempSymbol:'C', curSensorHumid:45.2, 
 			timestamp:1445802480, heaterOn:false, acOn:false, autoPilotOn:true, autoPilotProgramIndex:0,
 			schedule:
@@ -30,7 +30,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 		},
 		
 		{
-			id:1, sensorID:0, title:"Living", dirty:false, 
+			id:1, sensorID:0, title:"Living", dirty:false, sensorLocation:"1", 
 			minTemp:15.0, maxTemp:27.0, curTemp:18.0, curSensorTemp:22, curSensorTemp1m:22.1, curSensorTemp10m:21.9, curTempSymbol:'C', curSensorHumid:30.2, 
 			timestamp:1445802480, heaterOn:false, acOn:true,  autoPilotOn:true, autoPilotProgramIndex:0,
 			schedule:
@@ -46,7 +46,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 		},
 		
 		{
-			id:2, sensorID:0, title:"Baie", dirty:false, 
+			id:2, sensorID:0, title:"Baie", dirty:false, sensorLocation:1,
 			minTemp:16.0, maxTemp:27.0, curTemp:19.0, curSensorTemp:22, curSensorTemp1m:22.1, curSensorTemp10m:21.9, curTempSymbol:'C', curSensorHumid:73.2, 
 			timestamp:1445802480, heaterOn:true, acOn:false,  autoPilotOn:true, autoPilotProgramIndex:0,
 			schedule:
@@ -69,7 +69,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 		lastGasReading:350, heaterOn:true, heaterFault:false, heaterFaultDescr:"",
 		timestamp:1445802480},
 		
-		{id:1, sensorID:0, title:"Centrala", dirty:false, 
+		{id:1, sensorID:0, title:"Centrala2", dirty:false, 
 		lowGasLevThres:300, medGasLevThres:500, highGasLevThres:700, 
 		lastGasReading:350, heaterOn:false, heaterFault:true, heaterFaultDescr:"GasLeak",
 		timestamp:1445802480},
@@ -636,7 +636,6 @@ $scope.modalSettings = {
 							
 							objTH.curSensorTemp10m = res.result;
 
-
 							objTH.autoPilotProgramIndex = 0;
 
 							objTH.schedule = new Array([{t:20.0, startH:0, startM:0, endH:8, endM:0}],
@@ -742,14 +741,20 @@ $scope.modalSettings = {
 		$scope.thermoViewUpdate = $interval( function() 
 		{
 			$scope.sendParamsToServer();
-			socket.send(commWeb.eCommWebMsgTYpes.cwGetDevicesOfType+";"+commWeb.eDeviceTypes.devTypeTH+";");
-			socket.send(commWeb.eCommWebMsgTYpes.cwGetDevicesOfType+";"+commWeb.eDeviceTypes.devTypeHeater+";");
+			if(!$scope.ui.isAdjusting)
+			{
+				socket.send(commWeb.eCommWebMsgTYpes.cwGetDevicesOfType+";"+commWeb.eDeviceTypes.devTypeTH+";");
+				socket.send(commWeb.eCommWebMsgTYpes.cwGetDevicesOfType+";"+commWeb.eDeviceTypes.devTypeHeater+";");
+			}
 		}, 5000);
 		
 	});
 	
 	$scope.uiToggleShowTH = function uiToggleShowTH(id)
 	{
+		//first close all heaters
+		$scope.uiOpenedHeater = -1;
+		
 		if($scope.uiOpenedTH == id)
 			$scope.uiOpenedTH = -1;
 		else
@@ -758,6 +763,9 @@ $scope.modalSettings = {
 	
 	$scope.uiToggleShowHeater = function uiToggleShowHeater(id)
 	{
+		//first close all sensors
+		$scope.uiOpenedTH = -1;
+		
 		if($scope.uiOpenedHeater == id)
 			$scope.uiOpenedHeater = -1;
 		else

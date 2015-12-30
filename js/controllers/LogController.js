@@ -1,4 +1,4 @@
-var _logCtrl = ionicApp.controller('LogCtrl', function($scope, logData) 
+var _logCtrl = ionicApp.controller('LogCtrl', function($scope, LogDataService) 
 {
-	$scope.logData = logData;
+	$scope.logData = LogDataService.getLogData();
 });

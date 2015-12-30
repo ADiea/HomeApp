@@ -44,7 +44,7 @@ var ionicApp = angular.module('ionicApp', ['ionic'])
   },101);
   
   var sets = SettingsService.get('settings');
-  if(null == sets)
+  if(null === sets)
   {
 	sets = {
 			settingsVersion:1,
@@ -82,26 +82,16 @@ var ionicApp = angular.module('ionicApp', ['ionic'])
       views: {
         'menuContent': {
           templateUrl: 'views/settings.html',
-          controller: 'SettingsCtrl',
-		  resolve: {
-			  settings: function(SettingsService) {
-				return SettingsService;
-				}
-			}
-        }
-      }
+          controller: 'SettingsCtrl'
+		}
+	  }
     })
   .state('app.log', {
       url: '/house/log',
       views: {
         'menuContent': {
           templateUrl: 'views/log.html',
-          controller: 'LogCtrl',
-		  resolve: {
-			  logData: function(LogDataService) {
-				return LogDataService.getLogData()
-				}
-			}
+          controller: 'LogCtrl'
         }
       }
     })	
@@ -111,32 +101,16 @@ var ionicApp = angular.module('ionicApp', ['ionic'])
       views: {
         'menuContent': {
           templateUrl: 'views/lights.html',
-          controller: 'LightsCtrl',
-		  resolve: {
-			  settings: function(SettingsService) {
-				return SettingsService;
-				},
-				logData: function(LogDataService) {
-				return LogDataService.getLogData()
-				}
-			}
-        }
-      }
+          controller: 'LightsCtrl'
+		}
+	  }
     })
 	.state('app.thermo', {
       url: '/house/thermo',
       views: {
         'menuContent': {
           templateUrl: 'views/thermo.html',
-          controller: 'ThermoCtrl',
-		  resolve: {
-			  settings: function(SettingsService) {
-				return SettingsService;
-				},
-				logData: function(LogDataService) {
-				return LogDataService.getLogData();
-				},
-			}
+          controller: 'ThermoCtrl'
         }
       }
 	})
@@ -145,12 +119,7 @@ var ionicApp = angular.module('ionicApp', ['ionic'])
       views: {
         'menuContent': {
           templateUrl: 'views/house.html',
-          controller: 'AppCtrl',
-		  resolve: {
-			  settings: function(SettingsService) {
-				return SettingsService;
-				}
-			}
+          controller: 'AppCtrl'
         }
       }
     })
@@ -159,12 +128,7 @@ var ionicApp = angular.module('ionicApp', ['ionic'])
       views: {
         'menuContent': {
           templateUrl: 'views/fmradio.html',
-          controller: 'FMRadioCtrl',
-		  resolve: {
-			  settings: function(SettingsService) {
-				return SettingsService;
-				}
-			}
+          controller: 'FMRadioCtrl'
         }
       }
     });	

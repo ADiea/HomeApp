@@ -1,16 +1,11 @@
 <ion-view view-title="Log">
-  <ion-content>
-    
+  <ion-content scroll="true" has-bouncing="true">
 
-	<ion-scroll ng-click="logScrollUp()" delegate-handle="logscroll" zooming="false" direction="y" >
-			<ul>
-				<li ng-repeat="log in logData" style="color:{{log.col}}">
-					{{log.log}}
-				</li>
-			</ul>
-	</ion-scroll>
-
-
+	<ul>
+		<li ng-repeat="log in logData" style="color:{{log.col}}">
+			{{log.log}}
+		</li>
+	</ul>
 
   </ion-content>
 </ion-view>

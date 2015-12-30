@@ -1,16 +1,16 @@
 ionicApp.factory('socket',function(SettingsService, LogDataService, commWeb){
 	
-	var socket = {};
-
-	socket._Socket = null;
+	var socket = {
+		_Connected: false,
+		_Connecting: false,
+		_Socket: null,
+		_Callbacks:[],
+		_MessageToSend:null,
+		_reconnNo:0
+	};
 	
-	var _Callbacks = [];
+	LogDataService.addLog("CREATE SOCKET", "#f00");
 	
-	socket._Connected = false;
-	
-	var _MessageToSend = null;
-	
-	socket._reconnNo = 0;
 	
 	socket.send =  function (message) 
 	{
@@ -22,7 +22,7 @@ ionicApp.factory('socket',function(SettingsService, LogDataService, commWeb){
 					LogDataService.addLog("RECONN #"+socket._reconnNo, "#f00");
 
 				socket._reconnNo++;
-				_MessageToSend = message;
+				socket._MessageToSend = message;
 				socket.connectSocket();
 			}
 			else
@@ -40,7 +40,7 @@ ionicApp.factory('socket',function(SettingsService, LogDataService, commWeb){
 	
 	socket.setCallbacks = function(callbackObj)
 	{
-		_Callbacks.push(callbackObj);
+		socket._Callbacks.push(callbackObj);
 	}
 	
 	socket.getSocket = function()
@@ -60,11 +60,11 @@ ionicApp.factory('socket',function(SettingsService, LogDataService, commWeb){
 	
 		if(socket._Socket != null)
 		{
-			if(_force || !socket._Connected)
+			if((_force || !socket._Connected) && !socket._Connecting)
 			{
 				socket._Socket = null;
 				socket._Connected = false;
-				//socket._reconnNo = 0;
+				LogDataService.addLog("FORCE ", "#0ff");
 			}
 			else return socket._Socket;	
 		}
@@ -75,18 +75,22 @@ ionicApp.factory('socket',function(SettingsService, LogDataService, commWeb){
 		}
 		else
 		{
+			LogDataService.addLog("CREATE ", "#0ff");
+			socket._Connecting = true;
 			socket._Socket = new WebSocket(settings.serverURL);
 			
 			socket._Socket.onopen = function(evt)
 			{
 				LogDataService.addLog("CONN ", "#0f0");
 				socket._Connected = true;
+				socket._Connecting = false;
 				socket._reconnNo = 0;
 			};
 			socket._Socket.onclose = function(evt)
 			{
 				//LogDataService.addLog("DISC ", "#f00");
 				socket._Connected = false;
+				socket._Connecting = false;
 				//socket.connectSocket();
 			};
 			socket._Socket.onmessage = function(evt)
@@ -97,17 +101,19 @@ ionicApp.factory('socket',function(SettingsService, LogDataService, commWeb){
 				
 				if(!res.err)
 				{	
-					for(var i=0; i < _Callbacks.length; i++)
+					for(var i=0; i < socket._Callbacks.length; i++)
 					{
-						if(_Callbacks[i].protocol == res.result)
+						if(socket._Callbacks[i].protocol == res.result)
 						{
-							_Callbacks[i].onMessage(res.str);
+							socket._Callbacks[i].onMessage(res.str);
 						}
 					}
 				}
 			};
 			socket._Socket.onerror = function(evt)
 			{
+				socket._Connecting = false;
+				socket._Connected = false;
 				//LogDataService.addLog("ERR:"+evt.data, "#f00");
 				//socket._reconnNo ++;
 			};

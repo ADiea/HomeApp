@@ -9,7 +9,8 @@ ionicApp.service('LogDataService', function($q) {
 	{
 		var date = new Date();
 		var col = color || "#000";
-		this.logData.unshift({log:date.getHours() + ":" 
+		
+		this.logData.unshift({log:"("+this.logData.length+") "+date.getHours() + ":" 
 							+ ('0'+date.getMinutes()).slice(-2) + ":" 
 							+ ('0'+date.getSeconds()).slice(-2) + " " 
 							+msg, col:col});

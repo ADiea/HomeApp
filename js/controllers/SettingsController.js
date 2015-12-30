@@ -1,4 +1,4 @@
-var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, settings, $state, socket, $timeout, $interval, $ionicPopup, $ionicModal) 
+var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, $state, socket, $timeout, $interval, $ionicPopup, $ionicModal, SettingsService) 
 {
 	$scope.settings = {};
 	$scope.oldSettings = {};
@@ -310,7 +310,7 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 	{
 		$timeout(function()
 		{
-			$scope.settings = settings.get('settings');
+			$scope.settings = SettingsService.get('settings');
 
 			if($scope.settings == null)
 			{
@@ -328,7 +328,7 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 		var d = new Date(parseInt($scope.ui.holidayEnd.yearOptions[$scope.ui.holidayEnd.real_year]), $scope.ui.holidayEnd.real_mo, $scope.ui.holidayEnd.real_day+1);
 		$scope.settings.houseHolidayEnd = d.getTime() / 1000 | 0;
 	
-		settings.persist('settings', $scope.settings);
+		SettingsService.persist('settings', $scope.settings);
 		
 		if($scope.settings.serverURL != $scope.oldSettings.serverURL)
 		{
@@ -343,7 +343,7 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, setting
 	
 	$scope.saveSettings = function saveSettings()
 	{
-		settings.persist('settings', $scope.settings);
+		SettingsService.persist('settings', $scope.settings);
 	}
 	
 	$scope.defaultSettings = function defaultSettings(showConfirm)

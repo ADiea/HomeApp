@@ -1,7 +1,5 @@
-var _FMCtrl = ionicApp.controller('FMRadioCtrl', function($scope, settings) 
+var _FMCtrl = ionicApp.controller('FMRadioCtrl', function($scope) 
 {
-	$scope.settings = settings;// = {serverIP : "192.168.0.6"};
-	
 	$scope.radioTitle = "Bathroom Radio";
 	
 	$scope.radioOn = true;

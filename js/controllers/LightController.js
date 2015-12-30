@@ -1,4 +1,4 @@
-var _LightCtrl = ionicApp.controller('LightsCtrl', function($scope, $ionicModal, $interval, socket, logData) 
+var _LightCtrl = ionicApp.controller('LightsCtrl', function($scope, $ionicModal, $interval, socket, LogDataService) 
 {
 	$scope.houseLights = [
 		{id:0, title:"Hall Ceiling", light:{enable:true, dirty:false,
@@ -20,8 +20,6 @@ var _LightCtrl = ionicApp.controller('LightsCtrl', function($scope, $ionicModal,
 													{id:3, toggled:false, name:"MinInty", title:"MinIntensity", min:10, max:50, cur:30, step:1}]}},
 	];
 	
-	$scope.logData = logData;
-	
 	$scope.$on('$ionicView.afterEnter', function() 
 	{  
 	/*
@@ -29,12 +27,12 @@ var _LightCtrl = ionicApp.controller('LightsCtrl', function($scope, $ionicModal,
 			//onMessage
 			onMessage:function (data) 
 			{
-				//$scope.addLog("Light Message: " + data);
+				//LogDataService.addLog("Light Message: " + data);
 			},
 			//onError
 			onError:function (data) 
 			{
-				//$scope.addLog("Light Error: " + data);
+				//LogDataService.addLog("Light Error: " + data);
 			}
 		});
 	*/
@@ -44,13 +42,6 @@ var _LightCtrl = ionicApp.controller('LightsCtrl', function($scope, $ionicModal,
 	$scope.logScrollUp = function logScrollUp()
 	{
 		$ionicScrollDelegate.$getByHandle('logscroll').scrollTop();
-	}
-	
-	$scope.addLog = function addLog(msg)
-	{
-		var date = new Date();
-		
-		$scope.logData.unshift({log:date.getHours() + ":" + ('0'+date.getMinutes()).slice(-2) + ":" + ('0'+date.getSeconds()).slice(-2) + " " + msg});
 	}
 	
 	$scope.serverAnswer = "notStarted";

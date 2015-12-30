@@ -1,79 +1,15 @@
-var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, socket, logData, commWeb, $interval, $timeout, $ionicPopup, $ionicModal) 
+var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsService, LogDataService, socket, commWeb, $interval, $timeout, $ionicPopup, $ionicModal) 
 {
-	$scope.settings = settings.get('settings');
-	$scope.logData = logData;
-	
-	$scope.ui =  {
+	$scope.ui =  
+	{
 		isAdjusting:false
-	
 	};
-
-	$scope.arrayTempSlider=['Off', 'On', 'Auto'];
-	$scope.myui = {min: 0, max:20, value:0, lastValue:0, halfValue:10};
-	$scope.thermo = {minTemp:16.0, maxTemp:27.0, curTemp:21.0, curSensorTemp:22, curTempSymbol:'C'};
 	
-	$scope.houseTH = [
-		{
-			id:0, sensorID:"0", title:"Dormitor", dirty:false, sensorLocation:0, 
-			minTemp:16.0, maxTemp:27.0, curTemp:21.0, curSensorTemp:22, curSensorTemp1m:22.1, curSensorTemp10m:21.9, curTempSymbol:'C', curSensorHumid:45.2, 
-			timestamp:1445802480, heaterOn:false, acOn:false, autoPilotOn:true, autoPilotProgramIndex:0,
-			schedule:
-			[
-				[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
-				[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
-				[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
-				[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
-				[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
-				[{t:20.0, startH:0, startM:0, endH:9, endM:0}, {t:17.5, startH:9, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
-				[{t:20.0, startH:0, startM:0, endH:9, endM:0}, {t:17.5, startH:9, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
-			]
-		},
-		
-		{
-			id:1, sensorID:0, title:"Living", dirty:false, sensorLocation:"1", 
-			minTemp:15.0, maxTemp:27.0, curTemp:18.0, curSensorTemp:22, curSensorTemp1m:22.1, curSensorTemp10m:21.9, curTempSymbol:'C', curSensorHumid:30.2, 
-			timestamp:1445802480, heaterOn:false, acOn:true,  autoPilotOn:true, autoPilotProgramIndex:0,
-			schedule:
-			[
-				[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
-				[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
-				[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
-				[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
-				[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
-				[{t:20.0, startH:0, startM:0, endH:9, endM:0}, {t:17.5, startH:9, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
-				[{t:20.0, startH:0, startM:0, endH:9, endM:0}, {t:17.5, startH:9, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
-			]			
-		},
-		
-		{
-			id:2, sensorID:0, title:"Baie", dirty:false, sensorLocation:"1",
-			minTemp:16.0, maxTemp:27.0, curTemp:19.0, curSensorTemp:22, curSensorTemp1m:22.1, curSensorTemp10m:21.9, curTempSymbol:'C', curSensorHumid:73.2, 
-			timestamp:1445802480, heaterOn:true, acOn:false,  autoPilotOn:true, autoPilotProgramIndex:0,
-			schedule:
-			[
-				[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
-				[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
-				[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
-				[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
-				[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
-				[{t:20.0, startH:0, startM:0, endH:9, endM:0}, {t:17.5, startH:9, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
-				[{t:20.0, startH:0, startM:0, endH:9, endM:0}, {t:17.5, startH:9, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
-			]			
-		},
-	];
-	
-	
-	$scope.houseHeat = [
-		{id:0, sensorID:0, title:"Centrala", dirty:false, 
-		lowGasLevThres:300, medGasLevThres:500, highGasLevThres:700, 
-		lastGasReading:350, heaterOn:true, heaterFault:false, heaterFaultDescr:"",
-		timestamp:1445802480},
-		
-		{id:1, sensorID:0, title:"Centrala2", dirty:false, 
-		lowGasLevThres:300, medGasLevThres:500, highGasLevThres:700, 
-		lastGasReading:350, heaterOn:false, heaterFault:true, heaterFaultDescr:"GasLeak",
-		timestamp:1445802480},
-	];
+	/*
+		var iniR = 0, iniG = 128, iniB = 255,
+		midR =255, midG = 255, midB = 255,
+		inR = 255, finG = 128, finB = 0;
+	*/
 
 	/*------MODAL AUTOPILOT*/
 	$scope.modalAutoPilot = {
@@ -346,7 +282,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, settings, s
 /*------MODAL */	
 
 /* MODAL settings   */
-$scope.modalSettings = {
+	$scope.modalSettings = {
 		modalSettings:null,
 		modalSettingsCreated:false,
 		
@@ -506,8 +442,67 @@ $scope.modalSettings = {
 
 	$scope.$on('$ionicView.beforeEnter', function() 
 	{  
-		$timeout(function(){
-		$scope.settings = settings.get('settings');});
+		$timeout(function()
+		{
+			$scope.settings = SettingsService.get('settings');
+			
+			$scope.houseTH = SettingsService.get('house_ths');
+			
+			if($scope.houseTH === null)
+			{
+				$scope.houseTH = [
+					{
+						id:0, sensorID:-1, title:"DemoDormitor", dirty:false, isValid:true, sensorLocation:0, 
+						minTemp:16.0, maxTemp:27.0, curTemp:21.0, curSensorTemp:22, curSensorTemp1m:22.1, curSensorTemp10m:21.9, curTempSymbol:'C', curSensorHumid:45.2, 
+						timestamp:1445802480, heaterOn:false, acOn:false, autoPilotOn:true, autoPilotProgramIndex:0,
+						schedule:
+						[
+							[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
+							[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
+							[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
+							[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
+							[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
+							[{t:20.0, startH:0, startM:0, endH:9, endM:0}, {t:17.5, startH:9, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
+							[{t:20.0, startH:0, startM:0, endH:9, endM:0}, {t:17.5, startH:9, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
+						]
+					},
+					
+					{
+						id:1, sensorID:-2, title:"DemoLiving", dirty:false, isValid:true, sensorLocation:"1", 
+						minTemp:15.0, maxTemp:27.0, curTemp:18.0, curSensorTemp:22, curSensorTemp1m:22.1, curSensorTemp10m:21.9, curTempSymbol:'C', curSensorHumid:30.2, 
+						timestamp:1445802480, heaterOn:false, acOn:true,  autoPilotOn:true, autoPilotProgramIndex:0,
+						schedule:
+						[
+							[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
+							[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
+							[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
+							[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
+							[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
+							[{t:20.0, startH:0, startM:0, endH:9, endM:0}, {t:17.5, startH:9, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
+							[{t:20.0, startH:0, startM:0, endH:9, endM:0}, {t:17.5, startH:9, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
+						]			
+					},
+				];
+			}
+			
+			$scope.houseHeat = SettingsService.get('house_heaters');
+			
+			if($scope.houseHeat === null)
+			{
+				$scope.houseHeat = [
+					{id:0, sensorID:-1, title:"Centrala", dirty:false, isValid:true, 
+					lowGasLevThres:300, medGasLevThres:500, highGasLevThres:700, 
+					lastGasReading:350, heaterOn:true, heaterFault:false, heaterFaultDescr:"",
+					timestamp:1445802480},
+					
+					{id:1, sensorID:-2, title:"Centrala2", dirty:false, isValid:true, 
+					lowGasLevThres:300, medGasLevThres:500, highGasLevThres:700, 
+					lastGasReading:350, heaterOn:false, heaterFault:true, heaterFaultDescr:"GasLeak",
+					timestamp:1445802480},
+				];
+			}
+
+		});
 	});
 	
 	$scope.showHolidayConfirm = function() {
@@ -531,7 +526,7 @@ $scope.modalSettings = {
 			//onMessage
 			onMessage:function (data) 
 			{
-				$scope.addLog("Msg cwReplyTHs: " + data);
+				LogDataService.addLog("Msg cwReplyTHs: " + data);
 				
 				if($scope.ui.isAdjusting)
 				{
@@ -540,11 +535,7 @@ $scope.modalSettings = {
 					return;
 				}
 				
-				var numTHs;
-				
-				var devType;
-				
-				var curID = 0;
+				var numTHs, devType, curID = 0, i, shouldSave = false, found;
 				
 				var res = commWeb.skipInt(data);
 				
@@ -560,15 +551,29 @@ $scope.modalSettings = {
 						
 						numTHs = res.result;
 						
-						$scope.houseTH = [];
+						for(i=0; i< $scope.houseTH.length; i++)
+						{
+							$scope.houseTH[i].isValid = false;
+						}
 						
 						while(numTHs--)
 						{
 							var objTH={};
-							objTH.id = curID++;
-							
+
 							res = commWeb.skipInt(res.str);
 							if(res.err) return;
+							
+							found = false;
+							
+							for(i=0; i< $scope.houseTH.length; i++)
+							{
+								if($scope.houseTH[i].sensorID == res.result)
+								{
+									objTH = $scope.houseTH[i];
+									found = true;
+									break;
+								}
+							}
 							
 							objTH.sensorID = res.result;
 							
@@ -582,7 +587,9 @@ $scope.modalSettings = {
 							res = commWeb.skipFloat(res.str);
 							if(res.err) return;
 							
-							objTH.curTemp = res.result;
+							//only update set temp if sensor not found(first time)
+							if(!found)
+								objTH.curTemp = res.result;
 							
 							res = commWeb.skipFloat(res.str);
 							if(res.err) return;
@@ -645,8 +652,23 @@ $scope.modalSettings = {
 														[{t:20.0, startH:0, startM:0, endH:8, endM:0}],
 														[{t:20.0, startH:0, startM:0, endH:8, endM:0}],
 														[{t:20.0, startH:0, startM:0, endH:8, endM:0}]);
-								
-							$scope.houseTH.push(objTH);
+							
+							objTH.isValid = true;
+							
+							if(!found)	
+								$scope.houseTH.push(objTH);
+						}
+						
+						for(i=0; i< $scope.houseTH.length; i++)
+						{
+							if(!$scope.houseTH[i].isValid)
+							{
+								$scope.houseTH.splice(i, 1);
+							}
+							else
+							{
+								$scope.houseTH[i].id = curID++;
+							}
 						}
 					}
 					else if(devType == commWeb.eDeviceTypes.devTypeHeater)
@@ -657,16 +679,32 @@ $scope.modalSettings = {
 						
 						numTHs = res.result;
 						
-						$scope.houseHeat = [];
+						//$scope.houseHeat = [];
+						
+						for(i=0; i< $scope.houseHeat.length; i++)
+						{
+							$scope.houseHeat[i].isValid = false;
+						}
 						
 						while(numTHs--)
 						{
 					
 							var objHeater={};
-							objHeater.id = curID++;
 
 							res = commWeb.skipInt(res.str);
 							if(res.err) return;
+							
+							found = false;
+							
+							for(i=0; i < $scope.houseHeat.length; i++)
+							{
+								if($scope.houseHeat[i].sensorID == res.result)
+								{
+									objHeater = $scope.houseHeat[i];
+									found = true;
+									break;
+								}
+							}
 
 							objHeater.sensorID = res.result;
 
@@ -718,8 +756,23 @@ $scope.modalSettings = {
 								objHeater.heaterFaultDescr = "HwFault";
 								
 							objHeater.timestamp = (new Date()).getTime();
-
-							$scope.houseHeat.push(objHeater);
+							
+							objHeater.isValid = true;
+							
+							if(!found)	
+								$scope.houseHeat.push(objHeater);
+						}
+						
+						for(i=0; i< $scope.houseHeat.length; i++)
+						{
+							if(!$scope.houseHeat[i].isValid)
+							{
+								$scope.houseHeat.splice(i, 1);
+							}
+							else
+							{
+								$scope.houseHeat[i].id = curID++;
+							}
 						}
 					}
 				}				
@@ -729,7 +782,7 @@ $scope.modalSettings = {
 			//onMessage
 			onMessage:function (data) 
 			{
-				$scope.addLog("Msg cwNotifyTHStatus: " + data);
+				LogDataService.addLog("Msg cwNotifyTHStatus: " + data);
 			},
 		});		
 	
@@ -798,7 +851,12 @@ $scope.modalSettings = {
 	
 	$scope.$on('$ionicView.beforeLeave', function() 
 	{ 
-	  settings.persist('settings', $scope.settings);
+	  SettingsService.persist('settings', $scope.settings);
+	
+	  SettingsService.persist('house_ths', $scope.houseTH);
+	  
+	  SettingsService.persist('house_heaters', $scope.houseHeat);
+	  
 	
 	  $scope.sendParamsToServer();
 	  if (angular.isDefined($scope.thermoViewUpdate)) 
@@ -948,130 +1006,7 @@ $scope.modalSettings = {
 		return descr;
 	}
 	
-	$scope.sliderCallback = function sliderCallback(cbkSetTextValue, cbkSetColorValue, cbkSetColorTrack, cbkSetSliderValue)
-	{
-		$scope.cbkSetTextValue = cbkSetTextValue;
-		$scope.cbkSetColorValue = cbkSetColorValue;
-		$scope.cbkSetColorTrack = cbkSetColorTrack;
-		$scope.cbkSetSliderValue = cbkSetSliderValue;
-	}
-	
-	$scope.onSliderMouseUp = function onSliderMouseUp()
-	{
-		if($scope.lockSlide === 'down' || $scope.lockSlide === 'up')
-		{
-			$scope.cbkSetSliderValue($scope.myui.lastValue);
-			$scope.cbkSetColorTrack('#387ef5');
-		}
-	}
 
-	$scope.onTrySlide = function onTrySlide (value)
-	{
-		var dif = value - $scope.myui.lastValue;
-		
-		if(dif > $scope.myui.halfValue)
-			dif = -1;
-		else if(dif < -$scope.myui.halfValue)
-			dif = 1;
-		
-		if($scope.lockSlide === 'down' && (dif < 0))
-		{
-			var minVal = $scope.myui.lastValue - 1;
-			if(minVal < $scope.myui.minValue)
-				nimVal = $scope.myui.maxValue;
-			
-			if(value < minVal)
-				return false;
-		}
-		else if($scope.lockSlide === 'up' && (dif > 0))
-		{
-			var maxVal = $scope.myui.lastValue + 1;
-			if(maxVal > $scope.myui.maxValue)
-				naxVal = $scope.myui.minValue;
-			
-			if(value > maxVal)
-				return false;
-		}
-		
-		return true;
-	}
-
-	$scope.onSlide = function onSlide (value) 
-	{
-		var dif = value - $scope.myui.lastValue;
-		
-		if(dif != 0)
-		{
-			if(dif > $scope.myui.halfValue)
-				dif = -1;
-			else if(dif < -$scope.myui.halfValue)
-				dif = 1;
-			
-			$scope.thermo.curTemp += dif * 0.1;
-			
-			if($scope.thermo.curTemp > $scope.thermo.maxTemp )
-			{
-				$scope.thermo.curTemp = $scope.thermo.maxTemp;
-				$scope.cbkSetColorTrack('#ff0000');
-				
-				$scope.lockSlide = 'up';
-			}
-			else if($scope.thermo.curTemp < $scope.thermo.minTemp )
-			{
-				$scope.thermo.curTemp = $scope.thermo.minTemp;
-				$scope.cbkSetColorTrack('#FF0000');
-				
-				$scope.lockSlide = 'down';
-			}
-			else
-			{
-				$scope.cbkSetColorTrack('#387ef5');
-				$scope.lockSlide = 'none';
-				
-				$scope.myui.lastValue = value;
-				$scope.myui.val  = value;
-				
-				try
-				{
-					navigator.notification.vibrate(20);
-				}
-				catch(e)
-				{}
-			}
-		}
-		
-		var iniR = 0, iniG = 128, iniB = 255,
-			midR =255, midG = 255, midB = 255,
-			finR = 255, finG = 128, finB = 0;
-
-		var interp = ($scope.thermo.curTemp -  $scope.thermo.minTemp) / ( $scope.thermo.maxTemp -  $scope.thermo.minTemp);
-		
-		var lertR, lerpG, lerpB;
-		
-		if(interp < 0.5)
-		{
-			lerpR = $scope.lerp(interp*2, iniR, midR);
-			lerpG = $scope.lerp(interp*2, iniG, midG);
-			lerpB = $scope.lerp(interp*2, iniB, midB);
-		}
-		else
-		{
-			lerpR = $scope.lerp((interp-0.5)*2, midR, finR);
-			lerpG = $scope.lerp((interp-0.5)*2, midG, finG);
-			lerpB = $scope.lerp((interp-0.5)*2, midB, finB);	
-		}
-		
-		var color = "rgb(" + lerpR.toFixed(0) + 
-						',' + lerpG.toFixed(0) +
-						',' + lerpB.toFixed(0) + ')';
-		$scope.cbkSetColorValue(color);
-		
-		$scope.cbkSetTextValue($scope.getThermoSetTemp());
-	}
-
-	$scope.onSlideEnd = function onSlideEnd(value) {
-		console.log('on slide end  ' + value);
-	}
 	
 	$scope.canTempUp = function canTempUp(id)
 	{
@@ -1154,7 +1089,8 @@ $scope.modalSettings = {
 			}, 250);
 		}
 	}
-
+	
+	/*
 	$scope.textTimestamp = function textTimestamp(date)
 	{
 		var seconds = Math.floor(((new Date().getTime()/1000) - date)),
@@ -1176,16 +1112,6 @@ $scope.modalSettings = {
 
 		return Math.floor(seconds) < 3 ? "now" : Math.floor(seconds) + "s ago";
 	}
-
-	$scope.addLog = function addLog(msg)
-	{
-		var date = new Date();
-		
-		$scope.logData.unshift({log:date.getHours() + ":" + ('0'+date.getMinutes()).slice(-2) + ":" + ('0'+date.getSeconds()).slice(-2) + " " + msg});
-	}	
-
-	$scope.lerp = function lerp(value, start_point, end_point)
-	{
-		return start_point + (end_point - start_point)*value;
-	}	
+	*/
+	
 });

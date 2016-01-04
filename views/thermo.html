@@ -1,4 +1,5 @@
-<ion-view view-title="Climatizare">
+<ion-view view-title="Climatzare">
+
   <ion-content>
   	<ion-list>
 		<div ng-repeat="th in houseTH">
@@ -13,7 +14,6 @@
 							<i  class="icon" ng-class="uiOpenedTH==th.id ? 'ion-chevron-up' : 'ion-chevron-down'"></i>
 						</button>
 					</td>
-					
 					
 					<td>
 						<span class="h3">
@@ -226,4 +226,9 @@
   
 	
 	</ion-content>
+	  <ion-footer-bar>
+	<div class="buttons">
+      <button class="button button-clear icon-right button-assertive button-save" ng-click="defaultDemoDevices()"><i class="icon icon-size-small ion-ios-reload"></i></button>
+	 </div>
+  </ion-footer-bar>
 </ion-view>

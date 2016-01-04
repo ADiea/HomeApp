@@ -64,7 +64,7 @@ ionicApp.factory('socket',function(SettingsService, LogDataService, commWeb){
 			{
 				socket._Socket = null;
 				socket._Connected = false;
-				LogDataService.addLog("FORCE ", "#0ff");
+				//LogDataService.addLog("FORCE ", "#aaa");
 			}
 			else return socket._Socket;	
 		}
@@ -75,7 +75,7 @@ ionicApp.factory('socket',function(SettingsService, LogDataService, commWeb){
 		}
 		else
 		{
-			LogDataService.addLog("CREATE ", "#0ff");
+			//LogDataService.addLog("CREATE ", "#aaa");
 			socket._Connecting = true;
 			socket._Socket = new WebSocket(settings.serverURL);
 			

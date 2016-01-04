@@ -440,6 +440,43 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 
 /* --- /MODAL settings*/
 
+	$scope.defaultDemoDevices = function defaultDemoDevices()
+	{
+		$scope.houseTH = [
+			{
+				id:0, sensorID:-1, title:"DemoDormitor", dirty:false, isValid:true, sensorLocation:0, 
+				minTemp:16.0, maxTemp:27.0, curTemp:21.0, curSensorTemp:22, curSensorTemp1m:22.1, curSensorTemp10m:21.9, curTempSymbol:'C', curSensorHumid:45.2, 
+				timestamp:1445802480, heaterOn:false, acOn:false, autoPilotOn:true, autoPilotProgramIndex:0,
+				schedule:
+				[
+					[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
+					[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
+					[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
+					[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
+					[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
+					[{t:20.0, startH:0, startM:0, endH:9, endM:0}, {t:17.5, startH:9, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
+					[], 
+				]
+			},
+			
+			{
+				id:1, sensorID:-2, title:"DemoLiving", dirty:false, isValid:true, sensorLocation:"1", 
+				minTemp:15.0, maxTemp:27.0, curTemp:18.0, curSensorTemp:22, curSensorTemp1m:22.1, curSensorTemp10m:21.9, curTempSymbol:'C', curSensorHumid:30.2, 
+				timestamp:1445802480, heaterOn:false, acOn:true,  autoPilotOn:true, autoPilotProgramIndex:0,
+				schedule:
+				[
+					[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
+					[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
+					[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
+					[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
+					[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
+					[{t:20.0, startH:0, startM:0, endH:9, endM:0}, {t:17.5, startH:9, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
+					[{t:20.0, startH:0, startM:0, endH:9, endM:0}, {t:17.5, startH:9, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
+				]			
+			},
+		];
+	}
+
 	$scope.$on('$ionicView.beforeEnter', function() 
 	{  
 		$timeout(function()
@@ -450,39 +487,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 			
 			if($scope.houseTH === null)
 			{
-				$scope.houseTH = [
-					{
-						id:0, sensorID:-1, title:"DemoDormitor", dirty:false, isValid:true, sensorLocation:0, 
-						minTemp:16.0, maxTemp:27.0, curTemp:21.0, curSensorTemp:22, curSensorTemp1m:22.1, curSensorTemp10m:21.9, curTempSymbol:'C', curSensorHumid:45.2, 
-						timestamp:1445802480, heaterOn:false, acOn:false, autoPilotOn:true, autoPilotProgramIndex:0,
-						schedule:
-						[
-							[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
-							[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
-							[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
-							[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
-							[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
-							[{t:20.0, startH:0, startM:0, endH:9, endM:0}, {t:17.5, startH:9, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
-							[{t:20.0, startH:0, startM:0, endH:9, endM:0}, {t:17.5, startH:9, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
-						]
-					},
-					
-					{
-						id:1, sensorID:-2, title:"DemoLiving", dirty:false, isValid:true, sensorLocation:"1", 
-						minTemp:15.0, maxTemp:27.0, curTemp:18.0, curSensorTemp:22, curSensorTemp1m:22.1, curSensorTemp10m:21.9, curTempSymbol:'C', curSensorHumid:30.2, 
-						timestamp:1445802480, heaterOn:false, acOn:true,  autoPilotOn:true, autoPilotProgramIndex:0,
-						schedule:
-						[
-							[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
-							[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
-							[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
-							[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
-							[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
-							[{t:20.0, startH:0, startM:0, endH:9, endM:0}, {t:17.5, startH:9, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
-							[{t:20.0, startH:0, startM:0, endH:9, endM:0}, {t:17.5, startH:9, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
-						]			
-					},
-				];
+				$scope.defaultDemoDevices();
 			}
 			
 			$scope.houseHeat = SettingsService.get('house_heaters');
@@ -642,16 +647,61 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 							if(res.err) return;
 							
 							objTH.curSensorTemp10m = res.result;
+							
+							res = commWeb.skipInt(res.str);
+							if(res.err) 
+							{
+								//Make default schedules for all days
+								objTH.autoPilotProgramIndex = 0;
 
-							objTH.autoPilotProgramIndex = 0;
+								objTH.schedule = new Array([{t:20.0, startH:0, startM:0, endH:23, endM:11}],
+															[{t:20.0, startH:0, startM:0, endH:23, endM:11}],
+															[{t:20.0, startH:0, startM:0, endH:23, endM:11}],
+															[{t:20.0, startH:0, startM:0, endH:23, endM:11}],
+															[{t:20.0, startH:0, startM:0, endH:23, endM:11}],
+															[{t:20.0, startH:0, startM:0, endH:23, endM:11}],
+															[{t:20.0, startH:0, startM:0, endH:23, endM:11}]);
+							}
+							else
+							{
+								objTH.autoPilotProgramIndex = res.result;
+								var day=0, numProg, temp, startH, startM, endH, endM;
+								for(; day < 7; day++)
+								{
+									res = commWeb.skipInt(res.str);
+									if(res.err) return;
+									
+									numProg  = res.result;
+									
+									while(numProg)
+									{
+										res = commWeb.skipFloat(res.str);
+										if(res.err) return;
+										temp = res.result;
+										
+										res = commWeb.skipInt(res.str);
+										if(res.err) return;
+										startH  = res.result;
 
-							objTH.schedule = new Array([{t:20.0, startH:0, startM:0, endH:8, endM:0}],
-														[{t:20.0, startH:0, startM:0, endH:8, endM:0}],
-														[{t:20.0, startH:0, startM:0, endH:8, endM:0}],
-														[{t:20.0, startH:0, startM:0, endH:8, endM:0}],
-														[{t:20.0, startH:0, startM:0, endH:8, endM:0}],
-														[{t:20.0, startH:0, startM:0, endH:8, endM:0}],
-														[{t:20.0, startH:0, startM:0, endH:8, endM:0}]);
+										res = commWeb.skipInt(res.str);
+										if(res.err) return;
+										startM  = res.result;
+
+										res = commWeb.skipInt(res.str);
+										if(res.err) return;
+										endH = res.result;
+										  
+										res = commWeb.skipInt(res.str);
+										if(res.err) return;
+										endM  = res.result;
+										
+										//////
+									
+										numProg--;
+									}
+									
+								}
+							}
 							
 							objTH.isValid = true;
 							

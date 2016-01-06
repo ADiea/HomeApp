@@ -1,6 +1,13 @@
 ionicApp.factory('commWeb',function(){
 	
-	var commWeb = {};
+	var commWeb = {
+		pktSeq:0
+	};
+	
+	commWeb.getSequence = function getSequence()
+	{
+		return commWeb.pktSeq++;
+	}
 	
 	commWeb.skipInt = function skipInt( string)
 	{

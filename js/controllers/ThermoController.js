@@ -93,6 +93,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 	$scope.closeProgram = function closeProgram() 
 	{
 		$scope.modalAutoPilot.modalSched.hide();
+		$scope.ui.isAdjusting = true;
 	};
 	
 	$scope.closeProgramAndSave = function closeProgramAndSave() 
@@ -100,6 +101,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 		$scope.houseTH[$scope.modalAutoPilot.thIndex].schedule = JSON.parse(JSON.stringify($scope.modalAutoPilot.th.schedule));
 		$scope.houseTH[$scope.modalAutoPilot.thIndex].dirty = true;
 		$scope.modalAutoPilot.modalSched.hide();
+		$scope.ui.isAdjusting = false;
 	};
 		
 	$scope.showAutopilotSettings = function showAutopilotSettings(id)
@@ -108,14 +110,27 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 		$scope.modalAutoPilot.th = JSON.parse(JSON.stringify($scope.houseTH[$scope.modalAutoPilot.thIndex]));
 
 		$scope.modalAutoPilot.ui.intvIdx = 0;
-		$scope.modalAutoPilot.ui.weekday = (new Date()).getDay() - 1;
+		
+		$scope.modalAutoPilot.ui.curWeekDay = $scope.modalAutoPilot.th.autoPilotProgramDay;
+		
+		/*
+		if( $scope.modalAutoPilot.ui.curWeekDay == -1)
+		{
+			$scope.modalAutoPilot.ui.curWeekDay = (new Date()).getDay() - 1;
+			
+			if($scope.modalAutoPilot.ui.curWeekDay == -1)
+				$scope.modalAutoPilot.ui.curWeekDay = 6; //sunday
+		}
+		*/
+		
+		$scope.modalAutoPilot.ui.weekday = $scope.modalAutoPilot.ui.curWeekDay;
 		
 		if($scope.modalAutoPilot.ui.weekday == -1)
-			$scope.modalAutoPilot.ui.weekday = 6; //sunday
-		
-		$scope.modalAutoPilot.ui.curWeekDay = $scope.modalAutoPilot.ui.weekday;
+			$scope.modalAutoPilot.ui.weekday = 0;
 		
 		$scope.modalAutoPilot.ui.showOptionsIndex = -1;
+		
+		$scope.ui.isAdjusting = true;
 		
 		if(!$scope.modalAutoPilot.modalSchedCreated)
 		{
@@ -452,7 +467,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 			{
 				id:0, sensorID:-1, title:"DemoDormitor", dirty:false, isValid:true, sensorLocation:0, 
 				minTemp:16.0, maxTemp:27.0, curTemp:21.0, curSensorTemp:22, curSensorTemp1m:22.1, curSensorTemp10m:21.9, curTempSymbol:'C', curSensorHumid:45.2, 
-				timestamp:1445802480, heaterOn:false, acOn:false, autoPilotOn:true, autoPilotProgramIndex:0,
+				timestamp:1445802480, heaterOn:false, acOn:false, autoPilotOn:true, autoPilotProgramIndex:0, autoPilotProgramDay:-1,
 				schedule:[
 					[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
 					[], [], [], [], [], []
@@ -462,7 +477,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 			{
 				id:1, sensorID:-2, title:"DemoLiving", dirty:false, isValid:true, sensorLocation:"1", 
 				minTemp:15.0, maxTemp:27.0, curTemp:18.0, curSensorTemp:22, curSensorTemp1m:22.1, curSensorTemp10m:21.9, curTempSymbol:'C', curSensorHumid:30.2, 
-				timestamp:1445802480, heaterOn:false, acOn:true,  autoPilotOn:true, autoPilotProgramIndex:0,
+				timestamp:1445802480, heaterOn:false, acOn:true,  autoPilotOn:true, autoPilotProgramIndex:0, autoPilotProgramDay:-1,
 				schedule: [[], [], [], [], [], [], []]
 			},
 		];
@@ -642,12 +657,17 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 							if(res.err) 
 							{
 								//Make default schedules for all days
+								objTH.autoPilotProgramDay = -1;
 								objTH.autoPilotProgramIndex = 0;
 								objTH.schedule = null;
 								objTH.schedule = new Array([], [], [], [], [], [], []);
 							}
 							else
 							{
+								objTH.autoPilotProgramDay = res.result;
+								
+								res = commWeb.skipInt(res.str);
+								if(res.err) return;
 								objTH.autoPilotProgramIndex = res.result;
 								
 								var day=0, numProg, temp, _startH, _startM, _endH, _endM;

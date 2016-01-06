@@ -28,12 +28,8 @@
 				ng-click="modalAutoPilot.ui.weekday=6" class="button button-weekday">Du</a>
 		</div>
 	
-  </ion-header-bar>
-	
-  
+  </ion-header-bar>  
   <ion-content>
-	
-
 
     <div ng-repeat="sched in modalAutoPilot.th.schedule[modalAutoPilot.ui.weekday]">
 	  <ion-item ng-click="showAutopilotEditInterval($index)">

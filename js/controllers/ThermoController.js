@@ -601,7 +601,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 							if(res.err) return;
 							
 							//only update set temp if sensor not found(first time)
-							if(!found)
+							//if(!found)
 								objTH.curTemp = res.result;
 							
 							res = commWeb.skipFloat(res.str);
@@ -1106,7 +1106,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 			}
 			else 
 			{
-				if($scope.houseTH[id].autoPilotProgramIndex < $scope.houseTH[id].schedule[dayOfWeek].length)
+				if($scope.houseTH[id].autoPilotProgramIndex < $scope.houseTH[id].schedule[dayOfWeek].length && $scope.houseTH[id].autoPilotProgramIndex >= 0)
 				{
 					var hour = $scope.modalAutoPilot.ui.getHourStr($scope.houseTH[id].schedule[dayOfWeek][$scope.houseTH[id].autoPilotProgramIndex].endH);
 					var min = $scope.modalAutoPilot.ui.getMinuteStr($scope.houseTH[id].schedule[dayOfWeek][$scope.houseTH[id].autoPilotProgramIndex].endM);

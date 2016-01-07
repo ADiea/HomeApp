@@ -922,13 +922,8 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 		for(var i = 0; i< $scope.houseTH.length; i++)	
 		{
 			th = $scope.houseTH[i];
-			if(th.dirty)
+			if(th.dirty && !th.isLocked)
 			{
-				if(th.isLocked)
-				{
-					continue;
-				}
-				
 				th.dirty = false;
 			
 				var message = commWeb.eCommWebMsgTYpes.cwSetTHParams + ";" + 

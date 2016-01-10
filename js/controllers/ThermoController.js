@@ -466,8 +466,8 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 			{
 				id:0, sensorID:-1, title:"DemoDormitor", dirty:false, isValid:true, sensorLocation:0, 
 				minTemp:16.0, maxTemp:27.0, curTemp:21.0, curSensorTemp:22, curSensorTemp1m:22.1, curSensorTemp10m:21.9, curTempSymbol:'C', curSensorHumid:45.2, 
-				timestamp:1445802480, heaterOn:false, acOn:false, autoPilotOn:true, autoPilotProgramIndex:0, autoPilotProgramDay:-1, waitForAck:-1, isEditing:false,
-				isLocked:false,
+				timestamp:1552337694, heaterOn:false, acOn:false, autoPilotOn:true, autoPilotProgramIndex:0, autoPilotProgramDay:-1, 
+				waitForAck:-1, isEditing:false, isLocked:false, isError:false,
 				schedule:[
 					[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
 					[], [], [], [], [], []
@@ -477,11 +477,37 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 			{
 				id:1, sensorID:-2, title:"DemoLiving", dirty:false, isValid:true, sensorLocation:"1", 
 				minTemp:15.0, maxTemp:27.0, curTemp:18.0, curSensorTemp:22, curSensorTemp1m:22.1, curSensorTemp10m:21.9, curTempSymbol:'C', curSensorHumid:30.2, 
-				timestamp:1445802480, heaterOn:false, acOn:true,  autoPilotOn:true, autoPilotProgramIndex:0, autoPilotProgramDay:-1, waitForAck:-1, isEditing:false,
-				isLocked:false,
+				timestamp:1445802480, heaterOn:false, acOn:true,  autoPilotOn:true, autoPilotProgramIndex:0, autoPilotProgramDay:-1, 
+				waitForAck:-1, isEditing:false, isLocked:false, isError:false,
 				schedule: [[], [], [], [], [], [], []]
 			},
 		];
+		
+		$scope.houseHeat = [
+			{id:0, sensorID:-1, title:"Centrala", dirty:false, isValid:true, 
+			lowGasLevThres:300, medGasLevThres:500, highGasLevThres:700, 
+			lastGasReading:350, heaterOn:true, heaterFault:false, heaterFaultDescr:"",
+			waitForAck:-1, isEditing:false, isLocked:false, isError:false, heaterOnMinutes:59, 
+			timestamp:1445802480},
+			
+			{id:1, sensorID:-2, title:"Centrala2", dirty:false, isValid:true, 
+			lowGasLevThres:300, medGasLevThres:500, highGasLevThres:700, 
+			lastGasReading:350, heaterOn:false, heaterFault:true, heaterFaultDescr:"GasLeak",
+			waitForAck:-1, isEditing:false, isLocked:false, isError:false, heaterOnMinutes:123, 
+			timestamp:1445802480},
+		];
+	}
+	
+	$scope.minutesToText = function minutesToText(min)
+	{
+		var h = Math.floor(min / 60);
+		var m = min - h*60;
+		var text='';
+		if(h > 0)
+			text += h + 'ore';
+		
+		text+= m+'min';
+		return text;		
 	}
 
 	$scope.$on('$ionicView.beforeEnter', function() 
@@ -492,29 +518,33 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 			
 			$scope.houseTH = SettingsService.get('house_ths');
 			
-			if($scope.houseTH === null)
+			$scope.houseHeat = SettingsService.get('house_heaters');
+
+			if($scope.houseTH === null || $scope.houseHeat === null)
 			{
 				$scope.defaultDemoDevices();
 			}
-			
-			$scope.houseHeat = SettingsService.get('house_heaters');
-			
-			if($scope.houseHeat === null)
-			{
-				$scope.houseHeat = [
-					{id:0, sensorID:-1, title:"Centrala", dirty:false, isValid:true, 
-					lowGasLevThres:300, medGasLevThres:500, highGasLevThres:700, 
-					lastGasReading:350, heaterOn:true, heaterFault:false, heaterFaultDescr:"",
-					timestamp:1445802480},
-					
-					{id:1, sensorID:-2, title:"Centrala2", dirty:false, isValid:true, 
-					lowGasLevThres:300, medGasLevThres:500, highGasLevThres:700, 
-					lastGasReading:350, heaterOn:false, heaterFault:true, heaterFaultDescr:"GasLeak",
-					timestamp:1445802480},
-				];
-			}
+
 		});
 	});
+	
+	$scope.showErrorInfoTH = function showErrorInfoTH(id)
+	{
+		var alertPopup = $ionicPopup.alert({
+		 title: 'Eroare comunicatie',
+		 template: 'Ultimele date de la ' + $scope.houseTH[id].title + ' primite acum ' + 
+					$scope.textTimestamp($scope.houseTH[id].timestamp).text
+	   });
+	}
+	
+	$scope.showErrorInfoHeat = function showErrorInfoHeat(id)
+	{
+		var alertPopup = $ionicPopup.alert({
+		 title: 'Eroare comunicatie',
+		 template: 'Ultimele date de la ' + $scope.houseHeat[id].title + ' primite acum ' + 
+					$scope.textTimestamp($scope.houseHeat[id].timestamp).text
+	   });
+	}
 	
 	$scope.showHolidayConfirm = function() 
 	{
@@ -550,7 +580,6 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 					
 					if(devType == commWeb.eDeviceTypes.devTypeTH)
 					{
-					
 						res = commWeb.skipInt(res.str);
 						if(res.err) return;
 						
@@ -596,13 +625,12 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 							objTH.waitForAck = -1;
 							objTH.isEditing = false;
 							objTH.isLocked = false;
+							objTH.isError = false;
 							
 							res = commWeb.skipFloat(res.str);
 							if(res.err) return;
-							
-							//only update set temp if sensor not found(first time)
-							//if(!found)
-								objTH.curTemp = res.result;
+	
+							objTH.curTemp = res.result;
 							
 							res = commWeb.skipFloat(res.str);
 							if(res.err) return;
@@ -765,6 +793,11 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 							}
 
 							objHeater.sensorID = res.result;
+							
+							objHeater.waitForAck = -1;
+							objHeater.isEditing = false;
+							objHeater.isLocked = false;
+							objHeater.isError = false;
 
 							res = commWeb.skipString(res.str);
 							if(res.err) return;
@@ -812,6 +845,11 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 								objHeater.heaterFaultDescr = "GasLeak";
 							if( res.result & 4)
 								objHeater.heaterFaultDescr = "HwFault";
+							
+							res = commWeb.skipInt(res.str);
+							if(res.err) return;
+							
+							objHeater.heaterOnMinutes = res.result;
 								
 							objHeater.timestamp = (new Date()).getTime();
 							
@@ -887,11 +925,27 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 		
 		$scope.thermoViewUpdate = $interval( function() 
 		{
+			var i;
 			$scope.sendParamsToServer();
 			socket.send(commWeb.eCommWebMsgTYpes.cwGetDevicesOfType+";"+commWeb.eDeviceTypes.devTypeTH+";" + commWeb.getSequence() + ";");
 			socket.send(commWeb.eCommWebMsgTYpes.cwGetDevicesOfType+";"+commWeb.eDeviceTypes.devTypeHeater+";" + commWeb.getSequence() + ";");
-		}, 5000);
 		
+			for(i=0; i < $scope.houseTH.length; i++)
+			{
+				if($scope.textTimestamp($scope.houseTH[i].timestamp).sec > 5)
+					$scope.houseTH[i].isError = true;
+				else
+					$scope.houseTH[i].isError = false;
+			}
+			
+			for(i=0; i < $scope.houseHeat.length; i++)
+			{
+				if($scope.textTimestamp($scope.houseHeat[i].timestamp).sec > 5)
+					$scope.houseHeat[i].isError = true;
+				else
+					$scope.houseHeat[i].isError = false;
+			}
+		}, 5000);	
 	});
 	
 	$scope.uiToggleShowTH = function uiToggleShowTH(id)
@@ -1205,28 +1259,57 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 		}
 	}
 	
-	/*
+	
 	$scope.textTimestamp = function textTimestamp(date)
 	{
+		var ret={text:'', sec:0};
 		var seconds = Math.floor(((new Date().getTime()/1000) - date)),
 		interval = Math.floor(seconds / 31536000);
+		ret.sec = seconds;
+		
+		do
+		{
 
-		if (interval > 1) return interval + "y ago";
+			if (interval > 1) 
+			{
+				ret.text = interval + " ani";
+				break;
+			}
 
-		interval = Math.floor(seconds / 2592000);
-		if (interval > 1) return interval + "m ago";
+			interval = Math.floor(seconds / 2592000);
+			if (interval > 1) 
+			{
+				ret.text =  interval + " luni";
+				break;
+			}
 
-		interval = Math.floor(seconds / 86400);
-		if (interval >= 1) return interval + "d ago";
+			interval = Math.floor(seconds / 86400);
+			if (interval >= 1) 
+			{
+				ret.text = interval + " zile";
+				break;
+			}
 
-		interval = Math.floor(seconds / 3600);
-		if (interval >= 1) return interval + "h ago";
+			interval = Math.floor(seconds / 3600);
+			if (interval >= 1) 
+			{
+				ret.text =  interval + " ore";
+				break;
+			}
 
-		interval = Math.floor(seconds / 60);
-		if (interval > 1) return interval + "m ago";
-
-		return Math.floor(seconds) < 3 ? "now" : Math.floor(seconds) + "s ago";
+			interval = Math.floor(seconds / 60);
+			if (interval > 1) 
+			{
+				ret.text =  interval + " min";
+				break;
+			}
+			
+			ret.text = Math.floor(seconds) + " s";
+		
+		}while(false);
+		
+		return ret;
 	}
-	*/
+	
 	
 });

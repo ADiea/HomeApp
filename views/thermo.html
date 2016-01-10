@@ -5,11 +5,12 @@
 		<div ng-repeat="th in houseTH">
 		<ion-toggle class="item-divider" ng-model="th.autoPilotOn" toggle-class="toggle-positive">
 					
-			<table class="tableDebug" style="width:100%" ng-click="uiToggleShowTH(th.id)" >
+					<!-- class="tableDebug" -->
+			<table  style="width:100%" ng-click="uiToggleShowTH(th.id)" >
 			
 				<tr>
 					
-					<td rowspan="2" style="vertical-align:middle">
+					<td  style="vertical-align:middle">
 						<button style="display:inline;margin-right:5px;" ng-click="uiToggleShowTH(th.id);$event.stopPropagation();" class="button button-positive button-small button-outline">
 							<i  class="icon" ng-class="uiOpenedTH==th.id ? 'ion-chevron-up' : 'ion-chevron-down'"></i>
 						</button>
@@ -31,6 +32,15 @@
 					</td>
 				</tr>
 				<tr>
+					<td  style="vertical-align:middle">
+						<button style="display:inline;margin-right:5px;" 
+							ng-click="showErrorInfoTH(th.id);$event.stopPropagation();" 
+							class="button button-positive button-small button-clear"
+							ng-disabled="!th.isError" >
+							<i  class="icon" ng-class="th.isError ? 'ion-alert-circled':th.isEditing?'ion-android-sync':'ion-checkmark-circled'"></i>
+						</button>
+					</td>
+				
 					<td style="vertical-align:bottom">
 						<p style="display:inline;">
 							<i class="icon ion-thermometer"></i>  
@@ -61,10 +71,11 @@
 						-->
 					</td>	
 					
+					<!--
 					<td style="vertical-align:middle">
 						<ion-spinner ng-class="th.isEditing?'':'visibilityHidden'" class="spinner-positive busySpinner" icon="ios-small">
 						</ion-spinner>
-					</td>
+					</td>-->
 
 				</tr>
 			
@@ -146,7 +157,7 @@
 			
 				<tr>
 					
-					<td rowspan="2" style="vertical-align:middle">
+					<td style="vertical-align:middle">
 						<button style="display:inline;;margin-right:5px;" ng-click="uiToggleShowHeater(heater.id);$event.stopPropagation();" class="button button-small button-positive button-outline">
 								<i  class="icon" ng-class="uiOpenedHeater==heater.id ? 'ion-chevron-up' : 'ion-chevron-down'"></i>
 						</button>
@@ -165,13 +176,23 @@
 				</tr>
 
 				<tr>
+				
+					<td  style="vertical-align:middle">
+						<button style="display:inline;margin-right:5px;" 
+							ng-click="showErrorInfoHeat(heater.id);$event.stopPropagation();" 
+							class="button button-positive button-small button-clear"
+							ng-disabled="!heater.isError" >
+							<i  class="icon" ng-class="heater.isError ? 'ion-alert-circled':heater.isEditing?'ion-android-sync':'ion-checkmark-circled'"></i>
+						</button>
+					</td>
+				
 		
 					<td style="vertical-align:bottom">
 						<p  >	
 							<i ng-class="{'assertive':heater.heaterFault}" class="icon ion-android-warning"></i>  
 							<strong>{{heater.heaterFault?heater.heaterFaultDescr:"Normal"}}</strong> 
 							<i style="margin-right:10px" class="icon ion-flame"></i>
-							<strong>1h23m astazi</strong>
+							<strong>{{minutesToText(heater.heaterOnMinutes)}}</strong>
 						</p>
 					</td>
 <!--
@@ -193,7 +214,7 @@
 
 			
 			<div style="display:inline;float:right">
-				<p style="display:inline;">1h23m astazi</p>
+				<p style="display:inline;">{{minutesToText(heater.heaterOnMinutes)}}</p>
 				<button class="button button-small button-outline">
 					<i  class="icon ion-more"></i>
 				</button>

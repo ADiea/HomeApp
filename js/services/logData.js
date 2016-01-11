@@ -10,10 +10,17 @@ ionicApp.service('LogDataService', function($q) {
 		var date = new Date();
 		var col = color || "#000";
 		
+		this.logData.push({log:"("+(this.logData.length+1)+") "+date.getHours() + ":" 
+							+ ('0'+date.getMinutes()).slice(-2) + ":" 
+							+ ('0'+date.getSeconds()).slice(-2) + " " 
+							+msg, col:col});
+		
+		/*
 		this.logData.unshift({log:"("+this.logData.length+") "+date.getHours() + ":" 
 							+ ('0'+date.getMinutes()).slice(-2) + ":" 
 							+ ('0'+date.getSeconds()).slice(-2) + " " 
 							+msg, col:col});
+		*/
 	}
   }
 });

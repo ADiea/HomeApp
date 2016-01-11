@@ -1255,7 +1255,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 				{
 					$scope.doTempDown($scope.thermoTempChangeId, true);
 				}
-			}, 250);
+			}, 200);
 		}
 	}
 	

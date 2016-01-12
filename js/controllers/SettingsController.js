@@ -1,4 +1,4 @@
-var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, $state, socket, $timeout, $interval, $ionicPopup, $ionicModal, SettingsService) 
+var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, $state, socket, $timeout, $interval, $ionicPopup, $ionicModal, SettingsService, lang) 
 {
 	$scope.settings = {};
 	$scope.oldSettings = {};
@@ -374,4 +374,16 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, $state,
 			} 
 	   });
 	}	
+	
+	$scope.getLanguage = function getLanguage()
+	{
+		if(lang._langId == 0)
+		{
+			return lang.getS('sRomana');
+		}
+		else
+		{
+			return lang.getS('sEnglish');
+		}
+	}
 });

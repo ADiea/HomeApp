@@ -14,13 +14,6 @@ ionicApp.service('LogDataService', function($q) {
 							+ ('0'+date.getMinutes()).slice(-2) + ":" 
 							+ ('0'+date.getSeconds()).slice(-2) + " " 
 							+msg, col:col});
-		
-		/*
-		this.logData.unshift({log:"("+this.logData.length+") "+date.getHours() + ":" 
-							+ ('0'+date.getMinutes()).slice(-2) + ":" 
-							+ ('0'+date.getSeconds()).slice(-2) + " " 
-							+msg, col:col});
-		*/
 	}
   }
 });

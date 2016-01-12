@@ -1,33 +1,21 @@
 <ion-view view-title="Log">
   <ion-content scroll="true" has-bouncing="true">
 
+	<pre>{{getLogText()}}</pre>	
+	
 	<!--
-	<ul>
-		<li ng-repeat="log in logData" style="color:{{log.col}}">
-			{{log.log}}
-		</li>
-	</ul>
+		<br/>
+		<pre>{{getLogText()}}</pre>	
 	-->
-	
-	<pre>{{getLogText()}}</pre>	
-	
-	<br/>
-	
-	<pre>{{getLogText()}}</pre>	
 	
   </ion-content>
   <ion-footer-bar>
-
-<!--  + encodeURIComponent(getLogText()) -->
-
 	 <div class="button-bar" >
 		<a href="{{'data:attachment/txt,' + getLogTextSafe()}}" download="homeAppLog.log" target="_blank" 
 			class="button button-small button-outline button-assertive">
 			<i class="icon  ion-ios-download-outline"></i>
 		</a>
-		
 	 </div>
-	 
   </ion-footer-bar>  
   
 </ion-view>

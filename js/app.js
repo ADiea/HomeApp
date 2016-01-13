@@ -134,7 +134,7 @@ var ionicApp = angular.module('ionicApp', ['ionic'])
     });	
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/house');
+  $urlRouterProvider.otherwise('/app/house/thermo');
 }).config( [
     '$compileProvider',
     function( $compileProvider )

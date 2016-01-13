@@ -1,13 +1,23 @@
-var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, $state, socket, $timeout, $interval, $ionicPopup, $ionicModal, SettingsService, lang) 
+var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, $state, socket, $timeout, $interval, $ionicPopup, $ionicModal, SettingsService, Lang) 
 {
 	$scope.settings = {};
 	$scope.oldSettings = {};
+	
+	$scope.settingsLang = Lang;
+	
 	$scope.ui = 
 	{
 		houseHolidayTemperature:0,
 		holidayShow:false,
 		houseHoliday:false,
 		holidayEditPopupVisible:false,
+		lang:
+		{
+			langid:0,
+			refreshLang : null,
+			langOptions : [function funcRom(){return Lang.getS('sRomana');}, function funcRom(){return Lang.getS('sRomana');}]
+			//langOptions : ['sRomana','sEnglish']
+		},
 		holidayEnd:
 		{
 			mo:0, 
@@ -377,13 +387,13 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, $state,
 	
 	$scope.getLanguage = function getLanguage()
 	{
-		if(lang._langId == 0)
+		if(Lang._langId == 0)
 		{
-			return lang.getS('sRomana');
+			return Lang.getS('sRomana');
 		}
 		else
 		{
-			return lang.getS('sEnglish');
+			return Lang.getS('sEnglish');
 		}
 	}
 });

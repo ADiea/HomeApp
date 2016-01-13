@@ -1,4 +1,4 @@
-ionicApp.factory('lang',function(SettingsService, LogDataService){
+ionicApp.factory('Lang',function(SettingsService, LogDataService){
 	
 	var lang = {
 		_langId: 1,

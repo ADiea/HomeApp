@@ -10,7 +10,7 @@ ionicApp.factory('Lang',function(SettingsService, LogDataService){
 		]
 	};
 	
-	LogDataService.addLog("LANGUAGE FACTORY", "#f00");
+	LogDataService.addLog("FACTORY: LANGUAGE", "#f00");
 	
 	lang.set =  function (language) 
 	{

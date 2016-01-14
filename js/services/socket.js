@@ -9,7 +9,7 @@ ionicApp.factory('socket',function(SettingsService, LogDataService, commWeb){
 		_reconnNo:0
 	};
 	
-	LogDataService.addLog("CREATE SOCKET", "#f00");
+	LogDataService.addLog("FACTORY: SOCKET", "#f00");
 	
 	
 	socket.send =  function (message) 
@@ -19,7 +19,7 @@ ionicApp.factory('socket',function(SettingsService, LogDataService, commWeb){
 			if(!socket._Connected)
 			{
 				if((socket._reconnNo % 10) == 0)
-					LogDataService.addLog("RECONN #"+socket._reconnNo, "#f00");
+					LogDataService.addLog("sock: RECONN #"+socket._reconnNo, "#f00");
 
 				socket._reconnNo++;
 				socket._MessageToSend = message;
@@ -28,19 +28,28 @@ ionicApp.factory('socket',function(SettingsService, LogDataService, commWeb){
 			else
 			{
 				socket._Socket.send(message);
-				LogDataService.addLog("SENT " + message);
+				LogDataService.addLog("sock: SENT " + message);
 				//LogDataService.addLog("SENT!", "#aaa");
 			}
 		}
 		catch(e)
 		{
-			LogDataService.addLog("SockSendEx " + e.message);
+			LogDataService.addLog("sock: SockSendEx " + e.message);
 		}
     }
 	
 	socket.setCallbacks = function(callbackObj)
 	{
-		socket._Callbacks.push(callbackObj);
+		var i=0, found=0;
+		for(; i< socket._Callbacks.length; i++)
+			if(socket._Callbacks[i].name === callbackObj.name)
+			{
+				found = 1;
+				break;
+			}
+		
+		if(!found)
+			socket._Callbacks.push(callbackObj);
 	}
 	
 	socket.getSocket = function()
@@ -71,7 +80,7 @@ ionicApp.factory('socket',function(SettingsService, LogDataService, commWeb){
 		
 		if(settings == null)
 		{
-			LogDataService.addLog("NO SETS", "#f00");
+			LogDataService.addLog("sock:  NO SETTINGS", "#f00");
 		}
 		else
 		{
@@ -81,21 +90,21 @@ ionicApp.factory('socket',function(SettingsService, LogDataService, commWeb){
 			
 			socket._Socket.onopen = function(evt)
 			{
-				LogDataService.addLog("CONN ", "#0f0");
+				LogDataService.addLog("sock: CONNECTED", "#0f0");
 				socket._Connected = true;
 				socket._Connecting = false;
 				socket._reconnNo = 0;
 			};
 			socket._Socket.onclose = function(evt)
 			{
-				//LogDataService.addLog("DISC ", "#f00");
+				LogDataService.addLog("sock: DISCONN", "#f00");
 				socket._Connected = false;
 				socket._Connecting = false;
 				//socket.connectSocket();
 			};
 			socket._Socket.onmessage = function(evt)
 			{
-				LogDataService.addLog("RX "+evt.data);
+				LogDataService.addLog("sock: RX "+evt.data);
 				
 				var res = commWeb.skipInt(evt.data);
 				

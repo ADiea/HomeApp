@@ -565,6 +565,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 		$scope.uiOpenedTH = -1;
 		$scope.uiOpenedHeater = -1;
 		socket.setCallbacks({protocol:commWeb.eCommWebMsgTYpes.cwReplyDevicesOfType, 
+			name:"ThermoController",
 			//onMessage
 			onMessage:function (data) 
 			{
@@ -645,7 +646,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 							else
 								objTH.curTempSymbol = 'F';
 								
-							objTH.timestamp = (new Date()).getTime();
+							objTH.timestamp = (new Date()).getTime()/1000;
 							
 							res = commWeb.skipInt(res.str);
 							if(res.err) return;
@@ -851,7 +852,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 							
 							objHeater.heaterOnMinutes = res.result;
 								
-							objHeater.timestamp = (new Date()).getTime();
+							objHeater.timestamp = (new Date()).getTime()/1000;
 							
 							objHeater.isValid = true;
 							
@@ -875,6 +876,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 			},
 		});
 		socket.setCallbacks({protocol:commWeb.eCommWebMsgTYpes.cwNotifyTHStatus, 
+			name:"ThermoController",
 			//onMessage
 			onMessage:function (data) 
 			{
@@ -883,6 +885,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 		});
 
 		socket.setCallbacks({protocol:commWeb.eCommWebMsgTYpes.cwReplyToCommand, 
+			name:"ThermoController",
 			//onMessage
 			onMessage:function (data) 
 			{

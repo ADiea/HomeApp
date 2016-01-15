@@ -42,7 +42,8 @@ ionicApp.factory('socket',function(SettingsService, LogDataService, commWeb){
 	{
 		var i=0, found=0;
 		for(; i< socket._Callbacks.length; i++)
-			if(socket._Callbacks[i].name === callbackObj.name)
+			if(socket._Callbacks[i].name === callbackObj.name &&
+				socket._Callbacks[i].protocol === callbackObj.protocol)
 			{
 				found = 1;
 				break;

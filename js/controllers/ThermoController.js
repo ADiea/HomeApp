@@ -979,7 +979,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 		for(var i = 0; i< $scope.houseTH.length; i++)	
 		{
 			th = $scope.houseTH[i];
-			if(th.dirty && !th.isLocked)
+			if((th.dirty || th.isEditing) && !th.isLocked)
 			{
 				th.dirty = false;
 			

@@ -121,6 +121,10 @@ ionicApp.factory('commWeb',function(){
 		cwNotifyMovementStatus:17,
 		
 		cwSetHeaterParams:18,
+		cwPrintDebugInformation:19,
+
+		cwSpecialCommand:20,
+
 
 	//	cwGetDevices:,
 	//	cwReplyDeviceList:,

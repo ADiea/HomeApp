@@ -105,8 +105,7 @@ ionicApp.factory('socket',function(SettingsService, LogDataService, commWeb){
 			};
 			socket._Socket.onmessage = function(evt)
 			{
-				LogDataService.addLog("sock: RX "+evt.data);
-				
+				var found = false;
 				var res = commWeb.skipInt(evt.data);
 				
 				if(!res.err)
@@ -116,9 +115,13 @@ ionicApp.factory('socket',function(SettingsService, LogDataService, commWeb){
 						if(socket._Callbacks[i].protocol == res.result)
 						{
 							socket._Callbacks[i].onMessage(res.str);
+							found = true;
 						}
 					}
 				}
+				
+				if(!found)
+					LogDataService.addLog("sock: RX "+evt.data);
 			};
 			socket._Socket.onerror = function(evt)
 			{

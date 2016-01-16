@@ -1,4 +1,4 @@
-var _TestCtrl = ionicApp.controller('TestsCtrl', function($scope, $stateParams) 
+var _TestCtrl = ionicApp.controller('TestsCtrl', function($scope, $stateParams, commWeb, socket) 
 {
 	$scope.moreInfo = "n/a";
 // Fetch Device info from Device Plugin
@@ -43,4 +43,23 @@ var _TestCtrl = ionicApp.controller('TestsCtrl', function($scope, $stateParams)
 	$scope.vibrateNotify = function() {
 		navigator.notification.vibrate(1000);
 	};
+	
+	$scope.debugHeap = function() {
+		var message = commWeb.eCommWebMsgTYpes.cwPrintDebugInformation + ";0;"
+		socket.send(message);
+	};
+	
+	$scope.debugTcp = function() {
+		var message = commWeb.eCommWebMsgTYpes.cwPrintDebugInformation + ";1;"
+		socket.send(message);
+	};
+	
+	$scope.debugReset = function() {
+		var message = commWeb.eCommWebMsgTYpes.cwSpecialCommand + ";0;"
+		socket.send(message);
+	};
+	
+	
+	
+	
 });

@@ -18,12 +18,16 @@ ionicApp.factory('socket',function(SettingsService, LogDataService, commWeb){
 		{
 			if(!socket._Connected)
 			{
+				var force=false;
 				if((socket._reconnNo % 10) == 0)
+				{
 					LogDataService.addLog("sock: RECONN #"+socket._reconnNo, "#f00");
+					force=true;
+				}
 
 				socket._reconnNo++;
 				socket._MessageToSend = message;
-				socket.connectSocket();
+				socket.connectSocket(force);
 			}
 			else
 			{
@@ -74,7 +78,7 @@ ionicApp.factory('socket',function(SettingsService, LogDataService, commWeb){
 			{
 				socket._Socket = null;
 				socket._Connected = false;
-				//LogDataService.addLog("FORCE ", "#aaa");
+				LogDataService.addLog("sock: FORCE ", "#aaa");
 			}
 			else return socket._Socket;	
 		}
@@ -85,7 +89,7 @@ ionicApp.factory('socket',function(SettingsService, LogDataService, commWeb){
 		}
 		else
 		{
-			//LogDataService.addLog("CREATE ", "#aaa");
+			LogDataService.addLog("sock: CREATE "+settings.serverURL, "#aaa");
 			socket._Connecting = true;
 			socket._Socket = new WebSocket(settings.serverURL);
 			
@@ -127,7 +131,7 @@ ionicApp.factory('socket',function(SettingsService, LogDataService, commWeb){
 			{
 				socket._Connecting = false;
 				socket._Connected = false;
-				//LogDataService.addLog("ERR:"+evt.data, "#f00");
+				LogDataService.addLog("ERR:"+evt.data, "#f00");
 				//socket._reconnNo ++;
 			};
 		}

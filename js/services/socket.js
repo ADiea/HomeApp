@@ -74,7 +74,7 @@ ionicApp.factory('socket',function(SettingsService, LogDataService, commWeb){
 	
 		if(socket._Socket != null)
 		{
-			if((_force || !socket._Connected) && !socket._Connecting)
+			if(_force || (!socket._Connected && !socket._Connecting))
 			{
 				socket._Socket = null;
 				socket._Connected = false;

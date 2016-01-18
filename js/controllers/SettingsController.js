@@ -13,10 +13,9 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, $state,
 		holidayEditPopupVisible:false,
 		lang:
 		{
-			langid:0,
+			langId:0,
 			refreshLang : null,
-			langOptions : [function funcRom(){return Lang.getS('sRomana');}, function funcRom(){return Lang.getS('sRomana');}]
-			//langOptions : ['sRomana','sEnglish']
+			langOptions : ['sRomana', 'sEnglish']
 		},
 		holidayEnd:
 		{
@@ -92,6 +91,14 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, $state,
 			}
 		}
 	};
+	
+	$scope.ui.lang.unwatchLang = $scope.$watch('ui.lang.langId', function(newVal) 
+	{
+		if (typeof newVal != 'undefined') 
+		{
+			Lang.set(newVal);
+		}
+	});
 	
 	/*MODAL Holiday*/
 	
@@ -314,6 +321,7 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, $state,
 	$scope.$on('destroy', function() {
         // Unbind events
 		$scope.unwatchHoliday();
+		$scope.ui.lang.unwatchLang();
 	});
 	
 	$scope.$on('$ionicView.beforeEnter', function() 

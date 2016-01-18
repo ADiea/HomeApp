@@ -4,8 +4,8 @@ ionicApp.factory('Lang',function(SettingsService, LogDataService){
 		_langId: 1,
 		_s: [
 		
-		{'sRomana':'Romana', 'sEnglish':'Engleza'}, 
-		{'sRomana':'Romanian', 'sEnglish':'English'}
+		{'sRomana':'Romana', 'sEnglish':'Engleza', 'sLanguage':'Limba'}, 
+		{'sRomana':'Romanian', 'sEnglish':'English', 'sLanguage':'Language'}
 		
 		]
 	};

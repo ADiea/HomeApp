@@ -5,7 +5,7 @@
 		  <div class="select-wheel-item">-</div>
 		  <div ng-show="(usefulLength < 0 || $index < usefulLength)" class="select-wheel-item" ng-repeat="option in options">
 			<div ng-class="{'active select-selection-text': $index === index}" data-value="option" ng-click="setIndex($index)">
-				{{option}}
+				{{lang.getS(option)}}
 			</div>			
 		  </div>
 		  <div class="select-wheel-item"></div>
@@ -13,7 +13,7 @@
 	</ion-scroll>
 	<div class="select-wheel-hint" ng-show="touched">
 		<div class="active select-selection-text">
-			{{options[index]}}	
+			{{lang.getS(options[index])}}	
 		</div>			
 	</div>
  </div>

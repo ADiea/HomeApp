@@ -65,7 +65,7 @@ ionicApp.directive('ionslider',function($timeout){
     }
 });
 
-ionicApp.directive('selectWheel', function($ionicScrollDelegate, $ionicGesture, $window, $timeout) {
+ionicApp.directive('selectWheel', function($ionicScrollDelegate, $ionicGesture, $window, $timeout, Lang) {
     return {
       restrict: 'E',
       scope: {
@@ -102,6 +102,8 @@ ionicApp.directive('selectWheel', function($ionicScrollDelegate, $ionicGesture, 
 		  scope.type = scope.type || 1;
 		  
 		  scope.usefulLength = scope.usefulLength  || -1;
+		  
+		  scope.lang = Lang;
 
           var resize = function() 
 		  {

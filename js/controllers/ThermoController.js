@@ -1,5 +1,6 @@
-var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsService, LogDataService, socket, commWeb, $interval, $timeout, $ionicPopup, $ionicModal) 
+var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsService, LogDataService, socket, commWeb, $interval, $timeout, $ionicPopup, $ionicModal, Lang) 
 {
+	$scope.lang = Lang;
 	$scope.ui =  
 	{
 	
@@ -549,7 +550,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 	$scope.showHolidayConfirm = function() 
 	{
 	   var confirmPopup = $ionicPopup.confirm({
-		 title: 'Modul Vacanta activ',
+		 title: Lang.getS('sHoliday') + ' ' + Lang.getS('sActiveHol'),
 		 template: 'Parasiti modul vacanta?'
 	   });
 	   confirmPopup.then(function(res) {
@@ -1119,15 +1120,15 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 	$scope.getHealthyDescrRH = function getHealthyDescrRH(id)
 	{
 		if($scope.houseTH[id].curSensorHumid < 20)
-			return "foarte uscat";
+			return Lang.getS('sVery') + " " + Lang.getS('sDry');
 		if($scope.houseTH[id].curSensorHumid < 40)
-			return "uscat";	
+			return Lang.getS('sDry');	
 		if($scope.houseTH[id].curSensorHumid < 60)
-			return "optim";
+			return Lang.getS('sOptim');
 		if($scope.houseTH[id].curSensorHumid < 70)
-			return "umezeala";	
+			return Lang.getS('sDump');	
 		
-		return "foarte umed";
+		return Lang.getS('sVery') + " " + Lang.getS('sDump');
 	}
 
 	$scope.showRHMoreInfo = function showRHMoreInfo(id)
@@ -1156,10 +1157,12 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 					daysOfHoliday = Math.floor(( $scope.settings.houseHolidayEnd - curTimestamp) / 86400);//3600*24;
 				}
 				
+				descr = " " + Lang.getS('sHoliday2') + " ";
+				
 				if( daysOfHoliday <= 1 )
-					descr = " vacanta astazi";
+					descr += Lang.getS('sToday');
 				else 
-					descr = " vacanta " + daysOfHoliday + " zile";
+					descr += daysOfHoliday + " " + Lang.getS('sDays');
 			}
 			else 
 			{

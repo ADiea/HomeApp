@@ -1,5 +1,6 @@
-var _LightCtrl = ionicApp.controller('LightsCtrl', function($scope, $ionicModal, $interval, socket, LogDataService) 
+var _LightCtrl = ionicApp.controller('LightsCtrl', function($scope, $ionicModal, $interval, socket, LogDataService, Lang) 
 {
+	$scope.lang = Lang;
 	$scope.houseLights = [
 		{id:0, title:"Hall Ceiling", light:{enable:true, dirty:false,
 											params:[{id:0, toggled:false, name:"Inty", title:"Intensity", min:30, max:90, cur:60, step:1},

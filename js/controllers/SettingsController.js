@@ -25,8 +25,8 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, $state,
 			real_mo:0, 
 			real_day:0,
 			real_year:0,
-			moOptions:["Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie", 
-						"Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie" ],
+			moOptions:["sJan", "sFeb", "sMar", "sApr", "sMay", "sJun", 
+						"sJuly", "sAug", "sSep", "sOct", "sNov", "sDec" ],
 			dayOptions:["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", 
 						"16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"],
 			yearOptions:[],
@@ -281,9 +281,10 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, $state,
 		}
 		else
 		{
+			var realDate = new Date();
 			var date = new Date($scope.settings.houseHolidayEnd*1000);
 					
-			var _year = date.getYear() + 1900;
+			var _year = realDate.getYear() + 1900;
 			var _month = date.getMonth();
 			var _day = date.getDate() - 1;
 			

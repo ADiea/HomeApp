@@ -1,4 +1,4 @@
-<ion-view view-title="Acasa">
+<ion-view view-title="{{lang.getS('sHome')}}">
 
     <ion-content has-bouncing="true">
 	
@@ -6,32 +6,32 @@
 
 		<ion-item style="font-size: 2em;" item-icon-left href="#/app/house/lights">
 			<i class="icon ion-android-bulb"></i>
-			Lumini
+			{{lang.getS('sLights')}}
         </ion-item>		
 		
 		<ion-item style="font-size: 2em;" item-icon-left menu-close href="#/app/house/thermo">
 			<i class="icon ion-thermometer"></i>
-			Climatizare
+			{{lang.getS('sHeating')}}
         </ion-item>	
 		
 		<ion-item style="font-size: 2em;" item-icon-left menu-close href="#/app/house/fmradio">
 			<i class="icon ion-ios-camera-outline"></i>
-			Radio FM
+			{{lang.getS('sFMRadio')}}
         </ion-item>	
 
         <ion-item style="font-size: 2em;" item-icon-left menu-close href="#/app/house/settings">
 			<i class="icon ion-android-options"></i>
-			Setari
+			{{lang.getS('sSetTitle')}}
         </ion-item>
 
         <ion-item style="font-size: 2em;" item-icon-left menu-close href="#/app/house/tests">
 			<i class="icon ion-erlenmeyer-flask"></i>
-			Teste
+			{{lang.getS('sTests')}}
         </ion-item>
 		
 		<ion-item style="font-size: 2em;" item-icon-left menu-close href="#/app/house/log">
 			<i class="icon ion-ios-book-outline"></i>
-			Log
+			{{lang.getS('sLog')}}
         </ion-item>
 
 	   </ion-list>

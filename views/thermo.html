@@ -1,4 +1,4 @@
-<ion-view view-title="Climatizare">
+<ion-view view-title="{{lang.getS('sHeating')}}">
 
   <ion-content>
   	<ion-list>
@@ -84,7 +84,7 @@
 
 		<ion-item ng-click="showAutopilotSettings(th.id)" class="item-accordion" ng-show="uiOpenedTH==th.id" >
 			<span style="display:inline;float:left"><i class="icon icon-size-normal ion-ios-timer-outline"></i>
-			<span style="margin-left:10px">Program</span>
+			<span style="margin-left:10px">{{lang.getS('sSched')}}</span>
 			</span>
 			
 			<div style="display:inline;float:right">
@@ -106,7 +106,7 @@
 		<ion-item class="item-accordion" ng-show="uiOpenedTH==th.id">
 			<span style="display:inline;float:left"> 
 				<i class="icon icon-size-normal ion-ios-speedometer-outline"></i>
-				<span style="margin-left:10px">Istoric</span>
+				<span style="margin-left:10px">{{lang.getS('sStatist')}}</span>
 			</span>
 
 			
@@ -122,7 +122,7 @@
 
 			<span style="display:inline;float:left"> 
 				<i class="icon icon-size-normal ion-heart"></i>
-				<span style="margin-left:10px">Sanatate </span>
+				<span style="margin-left:10px">{{lang.getS('sHealth')}}</span>
 			</span>
 			
 			<div style="display:inline;float:right">
@@ -138,7 +138,7 @@
 			
 			<span style="display:inline;float:left"> 
 				<i class="icon icon-size-normal ion-android-settings"></i> 
-				<span style="margin-left:10px">Setari </span>
+				<span style="margin-left:10px">{{lang.getS('sSetTitle')}}</span>
 			</span>
 			
 			<p style="display:inline;float:right">

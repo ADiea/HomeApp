@@ -1,6 +1,6 @@
 <ion-modal-view class="modalAutoPilotRange">
   <ion-header-bar>
-    <h1 class="title">Modul Vacanta</h1>
+    <h1 class="title">{{settingsLang.getS('sHoliday')}}</h1>
 
 	<div class="buttons">
       <button class="button button-outline icon-right button-assertive button-save" ng-click="closeHolidayMode(true)"><i class="icon icon-size-small ion-close-round"></i></button>
@@ -11,7 +11,7 @@
 
 	<ion-toggle ng-model="ui.houseHoliday" toggle-class="toggle-positive">
 	<i style="margin:5px" class="icon icon-size-normal ion-briefcase"></i>
-	In vacanta!
+	{{settingsLang.getS('sOnHoliday')}}
 	</ion-toggle>
 
 	<ion-item >
@@ -19,7 +19,7 @@
 			<tr>
 				<td style="vertical-align:middle">
 					<i class="icon icon-size-normal ion-thermometer"></i> 
-					Temperatura
+					{{settingsLang.getS('sTemp')}}
 				</td>
 				<td >
 					<div style="display:inline;margin-left:10px;">
@@ -46,7 +46,7 @@
 			<tr>
 				<td style="vertical-align:middle">
 					<i class="icon icon-size-normal ion-plane"></i>
-					Retur 
+					{{settingsLang.getS('sRet')}} 
 				</td>
 				<td >
 				<select-wheel min-width="35" useful-length="ui.holidayEnd.daysInCurrentMo" type="1" refresh="ui.holidayEnd.refreshDay" ng-model="ui.holidayEnd.day" item-height="20" amplitude="2" options="ui.holidayEnd.dayOptions" >

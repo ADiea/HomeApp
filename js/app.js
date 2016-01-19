@@ -48,7 +48,7 @@ var ionicApp = angular.module('ionicApp', ['ionic'])
   {
 	sets = {
 			settingsVersion:1,
-			serverURL : "ws://192.168.0.103",
+			serverURL : "ws://192.168.0.101",
 			houseHoliday:false,
 			houseHolidayEnd:1447910991,
 			houseHolidayTemperature:18.0,

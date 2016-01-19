@@ -1,5 +1,6 @@
-var _TestCtrl = ionicApp.controller('TestsCtrl', function($scope, $stateParams, commWeb, socket) 
+var _TestCtrl = ionicApp.controller('TestsCtrl', function($scope, $stateParams, commWeb, socket, Lang) 
 {
+	$scope.lang = Lang;
 	$scope.moreInfo = "n/a";
 // Fetch Device info from Device Plugin
 	$scope.alertDeviceInfo = function() {

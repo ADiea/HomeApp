@@ -14,50 +14,50 @@
 
   <ion-side-menu drag-content="false" side="left" expose-aside-when="(min-width:800px)">
     <ion-header-bar class="bar-positive">
-      <h1 class="title">Meniu</h1>
+      <h1 class="title">{{lang.getS('sMenu')}}</h1>
     </ion-header-bar>
     <ion-content>
-      <ion-list>	  
-	  
+      <ion-list>	  	  
 	   <ion-item item-icon-left menu-close href="#/app/house">
 			<i class="icon ion-home"></i>
-		Acasa
+
+		{{lang.getS('sHome')}}
        </ion-item>	
 
         <ion-item item-icon-left menu-close href="#/app/house/lights">
 			<i class="icon ion-android-bulb"></i>
 		
-        Lumini
+        {{lang.getS('sLights')}}
         </ion-item>		
 		
 		<ion-item item-icon-left menu-close href="#/app/house/thermo">
 			<i class="icon ion-thermometer"></i>
 		
-        Climatizare
+        {{lang.getS('sHeating')}}
         </ion-item>	
 		
 		<ion-item item-icon-left menu-close href="#/app/house/fmradio">
 			<i class="icon ion-ios-camera-outline"></i>
 		
-        Radio FM
+        {{lang.getS('sFMRadio')}}
         </ion-item>	
 		
 		<ion-item item-icon-left menu-close href="#/app/house/settings">
 		<i class="icon ion-android-options"></i>
 		
-        Setari
+        {{lang.getS('sSetTitle')}}
         </ion-item>
 
         <ion-item item-icon-left menu-close href="#/app/house/tests">
 		<i class="icon ion-erlenmeyer-flask"></i>
 		
-        Teste
+        {{lang.getS('sTests')}}
         </ion-item>
 
 		
 		<ion-item item-icon-left menu-close href="#/app/house/log">
 			<i class="icon ion-ios-book-outline"></i>
-		Log
+		{{lang.getS('sLog')}}
         </ion-item>
 		
       </ion-list>

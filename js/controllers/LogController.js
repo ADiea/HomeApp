@@ -1,5 +1,6 @@
-var _logCtrl = ionicApp.controller('LogCtrl', function($scope, LogDataService) 
+var _logCtrl = ionicApp.controller('LogCtrl', function($scope, LogDataService, Lang) 
 {
+	$scope.lang = Lang;
 	$scope.logData = LogDataService.getLogData();
 
 	$scope.logTextDisplay = '';

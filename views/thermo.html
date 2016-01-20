@@ -1,4 +1,7 @@
-<ion-view view-title="{{lang.getS('sHeating')}}">
+<ion-view >
+	<ion-nav-title>
+	{{lang.getS('sHeating')}}
+	</ion-nav-title>
 
   <ion-content>
   	<ion-list>
@@ -25,7 +28,7 @@
 
 					<td style="text-align:right;"> 
 						<div style="display:inline;padding-left:10px;" ng-class="{'text-disabled':(!th.autoPilotOn)}">
-							<span class="textDegIntSizeNormal">{{getThermoSetTemp_Int(th.id)}},</span>
+							<span class="textDegIntSizeNormal">{{getThermoSetTemp_Int(th.id)+lang.getS('sDecPt')}}</span>
 							<span class="textDegFloatSizeNormal">{{getThermoSetTemp_Frac(th.id)}}</span>
 							<span class="textDegSymbolSizeNormal textDegSymbolNormal">o</span>
 						</div>
@@ -90,7 +93,7 @@
 			<div style="display:inline;float:right">
 			
 				<div style="display:inline;padding-left:10px;" ng-show="th.autoPilotOn">
-					<span class="textDegIntSizeMicro">{{getThermoSetTemp_Int(th.id)}},</span>
+					<span class="textDegIntSizeMicro">{{getThermoSetTemp_Int(th.id)+lang.getS('sDecPt')}}</span>
 					<span class="textDegFloatSizeMicro">{{getThermoSetTemp_Frac(th.id)}}</span>
 					<span class="textDegSymbolSizeMicro textDegSymbolMicro">o</span>
 				</div>

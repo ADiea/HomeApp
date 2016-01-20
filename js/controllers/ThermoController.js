@@ -1,6 +1,10 @@
-var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsService, LogDataService, socket, commWeb, $interval, $timeout, $ionicPopup, $ionicModal, Lang) 
+var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsService, LogDataService, 
+																socket, commWeb, $interval, $timeout, 
+																$ionicPopup, $ionicModal, Lang, Util) 
 {
 	$scope.lang = Lang;
+	$scope.util = Util;
+	
 	$scope.ui =  
 	{
 	
@@ -24,14 +28,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 			weekday:0, 
 			curWeekDay:0,
 			showOptionsIndex:-1,
-			getIntervalTemp_i: function getIntervalTemp_i(i)
-			{
-				return parseInt(i.t);
-			},
-			getIntervalTemp_f: function getIntervalTemp_f(i)
-			{
-				return parseInt(Math.round( i.t * 10 ) ) % 10;
-			},
+
 			getMinuteStr: function getMinuteStr(min)
 			{
 				var num = min * 5 + "";
@@ -46,44 +43,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 			},
 			hourOptions:["00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11",
 						"12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"],
-			minOptions:["00", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55"],
-			
-			doTempUp : function doTempUp(intv, th)
-			{
-				if(intv.t < th.maxTemp)
-				{
-					intv.t += 0.5;
-					//th.dirty = true;					
-					try {navigator.notification.vibrate(10);}
-					catch(e) {}
-				}
-			},
-			doTempDown : function doTempDown(intv, th)
-			{
-				if(intv.t > th.minTemp)
-				{
-					intv.t -= 0.5;
-					//th.dirty = true;					
-					try {navigator.notification.vibrate(10);}
-					catch(e) {}
-				}
-			},
-			canTempUp : function canTempUp(intv, th)
-			{
-				if(intv.t < th.maxTemp)
-				{
-					return true;
-				}
-				return false;
-			},
-			canTempDown : function canTempDown(intv, th)
-			{
-				if(intv.t > th.minTemp)
-				{
-					return true;
-				}
-				return false;
-			},			
+			minOptions:["00", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55"],			
 		},
 		th: {},
 		thIndex:0,
@@ -308,16 +268,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 		tempMax:30,
 		
 		ui:{
-			getSettingsTemp_i: function getSettingsTemp_i(minTemp)
-			{
-				var temp = minTemp ? ($scope.modalSettings.tempMin) : ($scope.modalSettings.tempMax);
-				return parseInt(temp);
-			},
-			getSettingsTemp_f: function getIntervalTemp_f(minTemp)
-			{
-				var temp = minTemp ? ($scope.modalSettings.tempMin) : ($scope.modalSettings.tempMax);
-				return parseInt(Math.round( temp * 10 ) ) % 10;
-			},
+			
 
 			doTempUp : function doTempUp(minTemp)
 			{

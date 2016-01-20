@@ -1,6 +1,6 @@
 <ion-modal-view class="modalAutoPilotRange">
   <ion-header-bar>
-    <h1 class="title">Setari senzor</h1>
+    <h1 class="title">{{lang.getS('sSetTitle')}}</h1>
 
 	<div class="buttons">
       <button class="button button-outline icon-right button-assertive button-save" ng-click="closeTHSettings(true)"><i class="icon icon-size-small ion-close-round"></i></button>
@@ -25,16 +25,20 @@
 		<td style="vertical-align:middle;text-align:right;">
 	
 			<span style="vertical-align:bottom;">
-				<span class="textDegIntSizeSmall">{{modalSettings.ui.getSettingsTemp_i(true)}},</span>
-				<span class="textDegFloatSizeSmall">{{modalSettings.ui.getSettingsTemp_f(true)}}</span>
+				<span class="textDegIntSizeSmall">{{util.getTempInt(modalSettings.tempMin)}}</span>
+				<span class="textDegFloatSizeSmall">{{util.getTempFrac(modalSettings.tempMin)}}</span>
 				<span class="textDegSymbolSizeSmall textDegSymbolSmall">o</span>
 			</span>
 			
-			<button ng-disabled="!modalSettings.ui.canTempDown(true)" ng-click="modalSettings.ui.doTempDown(true)" on-hold="" on-release="" class="button button-small button-positive button-outline" > 
+			<button ng-disabled="!util.canTempDown(modalSettings.tempMin, )" 
+					ng-click="util.doTempDown(true)" 
+					on-hold="" on-release="" class="button button-small button-positive button-outline" > 
 				<i class="icon ion-minus"></i> 
 			</button>
 			
-			<button ng-disabled="!modalSettings.ui.canTempUp(true)"  ng-click="modalSettings.ui.doTempUp(true)" on-hold="" on-release="" class="button button-small button-positive button-outline" > 
+			<button ng-disabled="!modalSettings.ui.canTempUp(true)" 
+					ng-click="modalSettings.ui.doTempUp(true)" 
+					on-hold="" on-release="" class="button button-small button-positive button-outline" > 
 				<i class="icon ion-plus"></i> 
 			</button>
 
@@ -53,8 +57,8 @@
 		<td style="vertical-align:middle;text-align:right;">
 	
 			<span style="vertical-align:bottom;">
-				<span class="textDegIntSizeSmall">{{modalSettings.ui.getSettingsTemp_i(false)}},</span>
-				<span class="textDegFloatSizeSmall">{{modalSettings.ui.getSettingsTemp_f(false)}}</span>
+				<span class="textDegIntSizeSmall">{{util.getTempInt(modalSettings.tempMax)}}</span>
+				<span class="textDegFloatSizeSmall">{{util.getTempFrac(modalSettings.tempMax)}}</span>
 				<span class="textDegSymbolSizeSmall textDegSymbolSmall">o</span>
 			</span>
 			

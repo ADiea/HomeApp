@@ -30,14 +30,14 @@
 				<span class="textDegSymbolSizeSmall textDegSymbolSmall">o</span>
 			</span>
 			
-			<button ng-disabled="!util.canTempDown(modalSettings.tempMin, )" 
-					ng-click="util.doTempDown(true)" 
+			<button ng-disabled="!util.canTempDown(modalSettings.tempMin, 0)" 
+					ng-click="util.doTempDown(modalSettings.tempMin, 0)" 
 					on-hold="" on-release="" class="button button-small button-positive button-outline" > 
 				<i class="icon ion-minus"></i> 
 			</button>
 			
-			<button ng-disabled="!modalSettings.ui.canTempUp(true)" 
-					ng-click="modalSettings.ui.doTempUp(true)" 
+			<button ng-disabled="!modalSettings.ui.canTempUp(modalSettings.tempMin, modalSettings.tempMax - 0.5)" 
+					ng-click="modalSettings.ui.doTempUp(modalSettings.tempMin, modalSettings.tempMax - 0.5)" 
 					on-hold="" on-release="" class="button button-small button-positive button-outline" > 
 				<i class="icon ion-plus"></i> 
 			</button>
@@ -62,11 +62,15 @@
 				<span class="textDegSymbolSizeSmall textDegSymbolSmall">o</span>
 			</span>
 			
-			<button ng-disabled="!modalSettings.ui.canTempDown(false)" ng-click="modalSettings.ui.doTempDown(false)" on-hold="" on-release="" class="button button-small button-positive button-outline" > 
+			<button ng-disabled="!util.canTempDown(modalSettings.tempMax, modalSettings.tempMin + 0.5)" 
+					ng-click="util.doTempDown(modalSettings.tempMax, modalSettings.tempMin + 0.5)" 
+					on-hold="" on-release="" class="button button-small button-positive button-outline" >  
 				<i class="icon ion-minus"></i> 
 			</button>
 			
-			<button ng-disabled="!modalSettings.ui.canTempUp(false)"  ng-click="modalSettings.ui.doTempUp(false)" on-hold="" on-release="" class="button button-small button-positive button-outline" > 
+			<button ng-disabled="!modalSettings.ui.canTempUp(modalSettings.tempMax, 33)" 
+					ng-click="modalSettings.ui.doTempUp(modalSettings.tempMax, 33)" 
+					on-hold="" on-release="" class="button button-small button-positive button-outline" > 
 				<i class="icon ion-plus"></i> 
 			</button>
 

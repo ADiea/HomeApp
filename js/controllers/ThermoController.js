@@ -62,8 +62,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 	$scope.closeProgramAndSave = function closeProgramAndSave() 
 	{
 		$scope.houseTH[$scope.modalAutoPilot.thIndex].schedule = JSON.parse(JSON.stringify($scope.modalAutoPilot.th.schedule));
-		$scope.houseTH[$scope.modalAutoPilot.thIndex].dirty = true;
-		
+
 		$scope.houseTH[$scope.modalAutoPilot.thIndex].isEditing = true;
 		$scope.houseTH[$scope.modalAutoPilot.thIndex].isLocked = false;
 		
@@ -263,100 +262,8 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 	$scope.modalSettings = {
 		modalSettings:null,
 		modalSettingsCreated:false,
-		
 		tempMin:1,
 		tempMax:30,
-		
-		ui:{
-			
-
-			doTempUp : function doTempUp(minTemp)
-			{
-				var done = false;
-				if(minTemp)
-				{
-					if($scope.modalSettings.tempMin < $scope.modalSettings.tempMax - 0.5)
-					{
-						$scope.modalSettings.tempMin += 0.5;
-					}
-				}
-				else
-				{
-					if($scope.modalSettings.tempMax < 30)
-					{
-						$scope.modalSettings.tempMax += 0.5;
-					}				
-				}
-				
-				if(done)
-				{
-					try {navigator.notification.vibrate(10);}
-					catch(e) {}
-				}
-			},
-			doTempDown : function doTempDown(minTemp)
-			{
-				var done = false;
-				if(minTemp)
-				{
-					if($scope.modalSettings.tempMin > 0)
-					{
-						$scope.modalSettings.tempMin -= 0.5;
-					}
-				}
-				else
-				{
-					if($scope.modalSettings.tempMax > $scope.modalSettings.tempMin + 0.5)
-					{
-						$scope.modalSettings.tempMax -= 0.5;
-					}				
-				}
-				
-				if(done)
-				{
-					try {navigator.notification.vibrate(10);}
-					catch(e) {}
-				}
-			},
-			canTempUp : function canTempUp(minTemp)
-			{
-				if(minTemp)
-				{
-					if($scope.modalSettings.tempMin < $scope.modalSettings.tempMax - 0.5)
-					{
-						return true;
-					}
-				}
-				else
-				{
-					if($scope.modalSettings.tempMax < 30)
-					{
-						return true;
-					}
-				}
-					
-				return false;
-			},
-			canTempDown : function canTempDown(minTemp)
-			{
-				if(minTemp)
-				{
-					if($scope.modalSettings.tempMin > 0)
-					{
-						return true;
-					}
-				}
-				else
-				{
-					if($scope.modalSettings.tempMax > $scope.modalSettings.tempMin + 0.5)
-					{
-						return true;
-					}
-				}
-					
-				return false;
-			},			
-		},
 	};
 
 	$scope.showTHSettings = function showTHSettings(id)
@@ -401,7 +308,6 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 		$scope.houseTH[$scope.uiOpenedTH].minTemp = $scope.modalSettings.tempMin;
 		$scope.houseTH[$scope.uiOpenedTH].maxTemp = $scope.modalSettings.tempMax;
 		
-		$scope.houseTH[$scope.uiOpenedTH].dirty = true;
 		$scope.houseTH[$scope.uiOpenedTH].isEditing = true;
 		$scope.houseTH[$scope.uiOpenedTH].isLocked = false;
 
@@ -416,7 +322,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 	{
 		$scope.houseTH = [
 			{
-				id:0, sensorID:-1, title:"DemoDormitor", dirty:false, isValid:true, sensorLocation:0, 
+				id:0, sensorID:-1, title:"DemoDormitor", isValid:true, sensorLocation:0, 
 				minTemp:16.0, maxTemp:27.0, curTemp:21.0, curSensorTemp:22, curSensorTemp1m:22.1, curSensorTemp10m:21.9, curTempSymbol:'C', curSensorHumid:45.2, 
 				timestamp:1552337694, heaterOn:false, acOn:false, autoPilotOn:true, autoPilotProgramIndex:0, autoPilotProgramDay:-1, 
 				waitForAck:-1, isEditing:false, isLocked:false, isError:false,
@@ -427,7 +333,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 			},
 			
 			{
-				id:1, sensorID:-2, title:"DemoLiving", dirty:false, isValid:true, sensorLocation:"1", 
+				id:1, sensorID:-2, title:"DemoLiving", isValid:true, sensorLocation:"1", 
 				minTemp:15.0, maxTemp:27.0, curTemp:18.0, curSensorTemp:22, curSensorTemp1m:22.1, curSensorTemp10m:21.9, curTempSymbol:'C', curSensorHumid:30.2, 
 				timestamp:1445802480, heaterOn:false, acOn:true,  autoPilotOn:true, autoPilotProgramIndex:0, autoPilotProgramDay:-1, 
 				waitForAck:-1, isEditing:false, isLocked:false, isError:false,
@@ -572,8 +478,6 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 							if(res.err) return;
 							
 							objTH.title = res.result;
-							
-							objTH.dirty = false;
 							
 							objTH.waitForAck = -1;
 							objTH.isEditing = false;
@@ -931,10 +835,8 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 		for(var i = 0; i< $scope.houseTH.length; i++)	
 		{
 			th = $scope.houseTH[i];
-			if((th.dirty || th.isEditing) && !th.isLocked)
+			if(th.isEditing && !th.isLocked)
 			{
-				th.dirty = false;
-			
 				var message = commWeb.eCommWebMsgTYpes.cwSetTHParams + ";" + 
 							th.sensorID + ";" + (Math.round( th.curTemp * 10 ) / 10).toFixed(1)  + ";" + 
 							th.title + ";"+ (Math.round( th.minTemp * 10 ) / 10).toFixed(1)  + ";" + 
@@ -1134,31 +1036,12 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 		return descr;
 	}
 	
-
-	
-	$scope.canTempUp = function canTempUp(id)
-	{
-		if($scope.houseTH[id].curTemp < $scope.houseTH[id].maxTemp)
-			return true;
-		else
-			return false;
-	}
-	
-	$scope.canTempDown = function canTempDown(id)
-	{
-		if($scope.houseTH[id].curTemp > $scope.houseTH[id].minTemp)
-			return true;
-		else
-			return false;
-	}
-	
 	$scope.doTempUp = function doTempUp(id, holding)
 	{
 		var isholding = holding || false;
 		if($scope.houseTH[id].curTemp < $scope.houseTH[id].maxTemp)
 		{
 			$scope.houseTH[id].curTemp += 0.5;
-			$scope.houseTH[id].dirty = true;
 			$scope.houseTH[id].isEditing = true;
 			
 			try {navigator.notification.vibrate(10);}
@@ -1177,7 +1060,6 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 		if($scope.houseTH[id].curTemp > $scope.houseTH[id].minTemp)
 		{
 			$scope.houseTH[id].curTemp -= 0.5;
-			$scope.houseTH[id].dirty = true;
 			$scope.houseTH[id].isEditing = true;
 			
 			try {navigator.notification.vibrate(10);}
@@ -1267,6 +1149,4 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 		
 		return ret;
 	}
-	
-	
 });

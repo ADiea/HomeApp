@@ -55,11 +55,11 @@
 					
 					<td style="text-align:right;" >
 						<div  style="display:inline;margin-right:10px;">
-							<button ng-disabled="!canTempDown(th.id) || !th.autoPilotOn" ng-click="doTempDown(th.id);$event.stopPropagation();" on-hold="holdTempSetBtn(false, true, th.id)" on-release="holdTempSetBtn(false, false, th.id)" class="button button-small button-positive button-outline" > 
+							<button ng-disabled="!util.canTempDown(th.curTemp, th.minTemp) || !th.autoPilotOn" ng-click="doTempDown(th.id);$event.stopPropagation();" on-hold="holdTempSetBtn(false, true, th.id)" on-release="holdTempSetBtn(false, false, th.id)" class="button button-small button-positive button-outline" > 
 								<i class="icon ion-minus"></i> 
 							</button>
 
-							<button ng-disabled="!canTempUp(th.id) || !th.autoPilotOn"   ng-click="doTempUp(th.id);$event.stopPropagation();" on-hold="holdTempSetBtn(true, true, th.id)" on-release="holdTempSetBtn(true, false, th.id)" class="button button-small button-positive button-outline" > 
+							<button ng-disabled="!util.canTempUp(th.curTemp, th.minTemp) || !th.autoPilotOn"   ng-click="doTempUp(th.id);$event.stopPropagation();" on-hold="holdTempSetBtn(true, true, th.id)" on-release="holdTempSetBtn(true, false, th.id)" class="button button-small button-positive button-outline" > 
 								<i class="icon ion-plus"></i> 
 							</button>
 						</div>

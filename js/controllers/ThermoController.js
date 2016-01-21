@@ -262,14 +262,32 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 	$scope.modalSettings = {
 		modalSettings:null,
 		modalSettingsCreated:false,
-		tempMin:1,
-		tempMax:30,
+		tempMin:{
+			curTemp:1,
+			minTemp:0,
+			maxTemp:function()
+				{
+					return $scope.modalSettings.tempMax.curTemp - 0.5;
+				},
+			isEditing:false,
+			isLocked:false
+		},
+		tempMax:{
+			curTemp:30,
+			minTemp:function()
+				{
+					return $scope.modalSettings.tempMin.curTemp;
+				},
+			maxTemp:30,
+			isEditing:false,
+			isLocked:false
+		},
 	};
 
 	$scope.showTHSettings = function showTHSettings(id)
 	{
-		$scope.modalSettings.tempMin = $scope.houseTH[id].minTemp;
-		$scope.modalSettings.tempMax = $scope.houseTH[id].maxTemp;
+		$scope.modalSettings.tempMin.curTemp = $scope.houseTH[id].minTemp;
+		$scope.modalSettings.tempMax.curTemp = $scope.houseTH[id].maxTemp;
 		
 		$scope.houseTH[id].isEditing = true;
 		$scope.houseTH[id].isLocked = true;
@@ -305,8 +323,8 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 	
 	$scope.closeTHSettingsAndSave = function closeTHSettingsAndSave()
 	{
-		$scope.houseTH[$scope.uiOpenedTH].minTemp = $scope.modalSettings.tempMin;
-		$scope.houseTH[$scope.uiOpenedTH].maxTemp = $scope.modalSettings.tempMax;
+		$scope.houseTH[$scope.uiOpenedTH].minTemp = $scope.modalSettings.tempMin.curTemp;
+		$scope.houseTH[$scope.uiOpenedTH].maxTemp = $scope.modalSettings.tempMax.curTemp;
 		
 		$scope.houseTH[$scope.uiOpenedTH].isEditing = true;
 		$scope.houseTH[$scope.uiOpenedTH].isLocked = false;
@@ -1035,69 +1053,6 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 		
 		return descr;
 	}
-	
-	$scope.doTempUp = function doTempUp(id, holding)
-	{
-		var isholding = holding || false;
-		if($scope.houseTH[id].curTemp < $scope.houseTH[id].maxTemp)
-		{
-			$scope.houseTH[id].curTemp += 0.5;
-			$scope.houseTH[id].isEditing = true;
-			
-			try {navigator.notification.vibrate(10);}
-			catch(e) {}
-			
-			//TODO find better way 
-			if(!isholding)
-				$scope.sendParamsToServer();
-			
-		}
-	}
-	
-	$scope.doTempDown = function doTempDown(id, holding)
-	{
-		var isholding = holding || false;
-		if($scope.houseTH[id].curTemp > $scope.houseTH[id].minTemp)
-		{
-			$scope.houseTH[id].curTemp -= 0.5;
-			$scope.houseTH[id].isEditing = true;
-			
-			try {navigator.notification.vibrate(10);}
-			catch(e) {}
-			
-			//TODO find better way 
-			if(!isholding)
-				$scope.sendParamsToServer();
-		}
-	}	
-
-	$scope.holdTempSetBtn = function holdTempSetBtn(up, hold, id)
-	{
-		$scope.thermoTempChangeDirectionUp = up;
-		$scope.thermoTempChangeId = id;
-		
-		if (angular.isDefined($scope.thermoTempChangeTimer)) 
-		{
-			$interval.cancel($scope.thermoTempChangeTimer);
-			$scope.thermoTempChangeTimer = undefined;
-		}
-
-		if(hold)
-		{
-			$scope.thermoTempChangeTimer = $interval( function() 
-			{
-				if($scope.thermoTempChangeDirectionUp)
-				{
-					$scope.doTempUp($scope.thermoTempChangeId, true);
-				}
-				else
-				{
-					$scope.doTempDown($scope.thermoTempChangeId, true);
-				}
-			}, 200);
-		}
-	}
-	
 	
 	$scope.textTimestamp = function textTimestamp(date)
 	{

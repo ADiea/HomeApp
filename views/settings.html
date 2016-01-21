@@ -9,35 +9,36 @@
 			
 			<ion-toggle ng-model="settings.houseHoliday" toggle-class="toggle-positive" >
 				<table style="width:100%;disaplay:block;" ng-click="editHoliday();">
-				<tr>
-
-				<td style="text-align:left;" >
-					<i style="margin:5px" class="icon icon-size-normal ion-briefcase"></i>
-					<strong>{{settingsLang.getS('sHoliday')}}</strong>
-				</td>
-				<!--
-				<td style="text-align:right;">
-					<button class="button button-small button-outline button-positive">
-						<i  class="icon ion-more"></i>
-					</button>
-				</td>
-				-->
-				</tr>
-				<tr>
-				<td >
-					<span ng-show="settings.houseHoliday">
-						{{ui.getHolidayTemp()}}*C {{settingsLang.getS('sUntilHoliday')}} 
-						{{ui.holidayEnd.dayOptions[ui.holidayEnd.real_day]}} 
-						{{settingsLang.getS(ui.holidayEnd.moOptions[ui.holidayEnd.real_mo])}} 
-						{{ui.holidayEnd.yearOptions[ui.holidayEnd.real_year]}}
-					</span>
-					
-					<span ng-show="!settings.houseHoliday">
-						{{settingsLang.getS('sInactiveHoliday')}}
-					</span>
-				</td>
-
-				</tr>
+					<tr>
+						<td style="text-align:left;" >
+							<i style="margin:5px" class="icon icon-size-normal ion-briefcase"></i>
+							<strong>{{settingsLang.getS('sHoliday')}}</strong>
+						</td>
+						<!--
+						<td style="text-align:right;">
+							<button class="button button-small button-outline button-positive">
+								<i  class="icon ion-more"></i>
+							</button>
+						</td>
+						-->
+					</tr>
+					<tr>
+						<td >
+							<span ng-show="settings.houseHoliday">
+								<span class="textDegIntSizeMicro">{{util.getTempInt(settings.houseHolidayTemperature)}}</span>
+								<span class="textDegFloatSizeMicro">{{util.getTempFrac(settings.houseHolidayTemperature)}}</span>
+								<span class="textDegSymbolSizeMicro textDegSymbolMicro">o</span>C 
+								{{settingsLang.getS('sUntilHoliday')}} 
+								{{ui.holidayEnd.dayOptions[ui.holidayEnd.real_day]}} 
+								{{settingsLang.getS(ui.holidayEnd.moOptions[ui.holidayEnd.real_mo])}} 
+								{{ui.holidayEnd.yearOptions[ui.holidayEnd.real_year]}}
+							</span>
+							
+							<span ng-show="!settings.houseHoliday">
+								{{settingsLang.getS('sInactiveHoliday')}}
+							</span>
+						</td>
+					</tr>
 				</table>
 			</ion-toggle>
 

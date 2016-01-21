@@ -24,15 +24,23 @@
 				<td >
 					<div style="display:inline;margin-left:10px;">
 
-						<span class="textDegIntSizeSmall">{{ui.getHolidayTempInt()}},</span>
-						<span class="textDegFloatSizeSmall" >{{ui.getHolidayTempFrac()}}</span>
+						<span class="textDegIntSizeSmall">{{util.getTempInt(ui.houseHolidayTemperature)}},</span>
+						<span class="textDegFloatSizeSmall" >{{util.getTempFrac(ui.houseHolidayTemperature)}}</span>
 						<span class="textDegSymbolSizeSmall textDegSymbolSmall" >o</span>
 
-						<button ng-disabled="(ui.houseHolidayTemperature <= settings.houseHolidayMinTemperature)" ng-click="ui.doTempDown()" on-hold="ui.holdTempSetBtn(false, true)" on-release="ui.holdTempSetBtn(false, false)" class="button button-small button-positive button-outline" > 
+						<button ng-disabled="!util.canTempDown(ui.houseHolidayTemperature)" 
+								ng-click="util.doTempDown(ui.houseHolidayTemperature )" 
+								on-hold="util.holdTempSetBtn(false, true, ui.houseHolidayTemperature)" 
+								on-release="util.holdTempSetBtn(false, false, ui.houseHolidayTemperature)" 
+								class="button button-small button-positive button-outline" > 
 							<i class="icon ion-minus"></i> 
 						</button>
 
-						<button ng-disabled="(ui.houseHolidayTemperature >= settings.houseHolidayMaxTemperature)"   ng-click="ui.doTempUp()" on-hold="ui.holdTempSetBtn(true, true)" on-release="ui.holdTempSetBtn(true, false)" class="button button-small button-positive button-outline" > 
+						<button ng-disabled="!util.canTempUp(ui.houseHolidayTemperature)"   
+								ng-click="util.doTempUp(ui.houseHolidayTemperature )" 
+								on-hold="util.holdTempSetBtn(true, true, ui.houseHolidayTemperature)" 
+								on-release="util.holdTempSetBtn(true, false, ui.houseHolidayTemperature)"
+								class="button button-small button-positive button-outline" > 
 							<i class="icon ion-plus"></i> 
 						</button>
 					</div>

@@ -19,20 +19,24 @@
 		<td style="vertical-align:middle;text-align:right;">
 	
 				<span style="vertical-align:bottom;">
-				<span class="textDegIntSizeSmall">{{util.getTempInt(modalAutoPilot.editInterval.t)}}</span>
-				<span class="textDegFloatSizeSmall" >{{util.getTempFrac(modalAutoPilot.editInterval.t)}}</span>
+				<span class="textDegIntSizeSmall">{{util.getTempInt(modalAutoPilot.editInterval.curTemp)}}</span>
+				<span class="textDegFloatSizeSmall" >{{util.getTempFrac(modalAutoPilot.editInterval.curTemp)}}</span>
 				<span class="textDegSymbolSizeSmall textDegSymbolSmall">o</span>
 				</span>
 			
-			<button ng-disabled="!util.canTempDown(modalAutoPilot.editInterval.t, modalAutoPilot.th.minTemp)" 
-					ng-click="util.doTempDown(modalAutoPilot.editInterval.t, modalAutoPilot.th.minValue)" 
-					on-hold="" on-release="" class="button button-small button-positive button-outline" > 
+			<button ng-disabled="!util.canTempDown(modalAutoPilot.editInterval)" 
+					ng-click="util.doTempDown(modalAutoPilot.editInterval)" 
+					on-hold="util.holdTempSetBtn(false, true, modalAutoPilot.editInterval)" 
+					on-release="util.holdTempSetBtn(false, false, modalAutoPilot.editInterval)"
+					class="button button-small button-positive button-outline" > 
 				<i class="icon ion-minus"></i> 
 			</button>
 			
-			<button ng-disabled="!util.canTempUp(modalAutoPilot.editInterval.t, modalAutoPilot.th.maxTemp)"  
-					ng-click="util.doTempUp(modalAutoPilot.editInterval.t, modalAutoPilot.th.maxValue)" 
-					on-hold="" on-release="" class="button button-small button-positive button-outline" > 
+			<button ng-disabled="!util.canTempUp(modalAutoPilot.editInterval)"  
+					ng-click="util.doTempUp(modalAutoPilot.editInterval)" 
+					on-hold="util.holdTempSetBtn(true, true, modalAutoPilot.editInterval)" 
+					on-release="util.holdTempSetBtn(true, false, modalAutoPilot.editInterval)"
+					class="button button-small button-positive button-outline" > 
 				<i class="icon ion-plus"></i> 
 			</button>
 

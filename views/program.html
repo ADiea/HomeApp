@@ -36,8 +36,8 @@
 		
 		<span style="float:left">
 			<!--<i class="icon ion-ios-timer-outline"></i>-->
-			<span class="textDegIntSizeSmall">{{modalAutoPilot.ui.getIntervalTemp_i(sched)}},</span>
-			<span class="textDegFloatSizeSmall" >{{modalAutoPilot.ui.getIntervalTemp_f(sched)}}</span>
+			<span class="textDegIntSizeSmall">{{util.getTempInt(sched.t)}}</span>
+			<span class="textDegFloatSizeSmall" >{{util.getTempFrac(sched.t)}}</span>
 			<span class="textDegSymbolSizeSmall textDegSymbolSmall">o</span> 
 			intre 
 			<span class="textDegFloatSizeSmall">{{modalAutoPilot.ui.getHourStr(sched.startH)}}:{{modalAutoPilot.ui.getMinuteStr(sched.startM)}} - {{modalAutoPilot.ui.getHourStr(sched.endH)}}:{{modalAutoPilot.ui.getMinuteStr(sched.endM)}}</span> 			

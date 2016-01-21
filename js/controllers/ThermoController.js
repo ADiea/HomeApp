@@ -132,6 +132,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 	$scope.closeAutopilotEditAndSave = function closeAutopilotEditAndSave() 
 	{
 		var newInterval = $scope.modalAutoPilot.editInterval;
+		newInterval.t = $scope.modalAutoPilot.editInterval.curTemp;
 		
 		if($scope.compareTime(newInterval.endH, newInterval.endM, newInterval.startH, newInterval.startM) <= 0)
 		{
@@ -208,11 +209,18 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 			if(len > 0)
 				lastObj = $scope.modalAutoPilot.th.schedule[$scope.modalAutoPilot.ui.weekday][len-1];
 				
-			$scope.modalAutoPilot.editInterval = {t:lastObj.t, startH:lastObj.startH, startM:lastObj.startM, endH:lastObj.endH, endM:lastObj.endM};
+			$scope.modalAutoPilot.editInterval = {curTemp:lastObj.t, minTemp:$scope.modalAutoPilot.th, maxTemp:$scope.modalAutoPilot.th.maxTemp, 
+													isEditing:false, isLocked:false, startH:lastObj.startH, startM:lastObj.startM, endH:lastObj.endH, endM:lastObj.endM};
 		}
 		else
 		{
 			$scope.modalAutoPilot.editInterval =  JSON.parse(JSON.stringify($scope.modalAutoPilot.th.schedule[$scope.modalAutoPilot.ui.weekday][/*$scope.modalAutoPilot.editIntervalIndex*/id]));
+			
+			$scope.modalAutoPilot.editInterval.curTemp = $scope.modalAutoPilot.editInterval.t;
+			$scope.modalAutoPilot.editInterval.minTemp = $scope.modalAutoPilot.th.minTemp;
+			$scope.modalAutoPilot.editInterval.maxTemp = $scope.modalAutoPilot.th.maxTemp;
+			$scope.modalAutoPilot.editInterval.isEditing = false;
+			$scope.modalAutoPilot.editInterval.isLocked = false;
 		}
 
 		if(!$scope.modalAutoPilot.modalEditCreated)
@@ -937,47 +945,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 		return i_part + ',' + f_part+"*C";
 	}
 	
-	$scope.getThermoSetTemp_Int = function getThermoSetTemp(id)
-	{
-		return $scope.settings.houseHoliday ?
-			parseInt($scope.settings.houseHolidayTemperature)
-			: parseInt($scope.houseTH[id].curTemp);
-	}
-	
-	$scope.getThermoSetTemp_Frac = function getThermoSetTemp(id)
-	{
-		return $scope.settings.houseHoliday ?
-			parseInt(Math.round($scope.settings.houseHolidayTemperature * 10 )) % 10
-			: parseInt(Math.round( $scope.houseTH[id].curTemp * 10 ))  % 10;
-	}	
-	
-	$scope.getThermoSensorRH = function getThermoSensorRH(id)
-	{
-		return (Math.round( $scope.houseTH[id].curSensorHumid * 10 ) / 10).toFixed(1) + '%';
-	}
-	
-	$scope.getThermoSensorTemp = function getThermoSetTemp(id, whichTemp)
-	{
-		var value;
-		
-		if(whichTemp == 0)
-		{
-			value = $scope.houseTH[id].curSensorTemp;
-		}
-		else if(whichTemp == 1)
-		{
-			value = $scope.houseTH[id].curSensorTemp1m;
-		}
-		else if(whichTemp == 2)
-		{
-			value = $scope.houseTH[id].curSensorTemp10m;
-		}
-		
-		var i_part = parseInt(value);
-		var f_part = parseInt(Math.round( value * 10 ) ) % 10;
-		
-		return i_part + '*' + f_part;
-	}
+
 	
 	$scope.getThermoHeaterActivity = function getThermoHeaterActivity(id)
 	{

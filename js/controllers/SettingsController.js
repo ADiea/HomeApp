@@ -1,5 +1,6 @@
-var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, $state, socket, $timeout, $interval, $ionicPopup, $ionicModal, SettingsService, Lang) 
+var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, $state, socket, $timeout, $interval, $ionicPopup, $ionicModal, SettingsService, Lang, Util) 
 {
+	$scope.util = Util;
 	$scope.settings = {};
 	$scope.oldSettings = {};
 	
@@ -7,7 +8,13 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, $state,
 	
 	$scope.ui = 
 	{
-		houseHolidayTemperature:0,
+		houseHolidayTemperature:{
+			curTemp:0, 
+			minTemp:function(){return $scope.settings.houseHolidayMinTemperature;},
+			maxTemp:function(){return $scope.settings.houseHolidayMaxTemperature;},
+			isEditing:false,
+			isLocked:false
+		},
 		holidayShow:false,
 		houseHoliday:false,
 		holidayEditPopupVisible:false,
@@ -33,63 +40,8 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, $state,
 			daysInCurrentMo:0,
 			refreshMo:null, refreshYear:null, refreshDay:null
 		},
-		getHolidayTemp:function getHolidayTemp()
-		{
-			return $scope.settings.houseHolidayTemperature.toFixed(1);
-		},
-		doTempUp: function doTempUp()
-		{
-			if($scope.ui.houseHolidayTemperature < $scope.settings.houseHolidayMaxTemperature) 
-			{
-				$scope.ui.houseHolidayTemperature += 0.5;
-				try {navigator.notification.vibrate(10);}
-				catch(e) {}
-			}
-		},
-		doTempDown: function doTempDown()
-		{
-			if($scope.ui.houseHolidayTemperature > $scope.settings.houseHolidayMinTemperature) 
-			{
-				$scope.ui.houseHolidayTemperature -= 0.5;
-				try { navigator.notification.vibrate(10); }
-				catch(e) {}
-			}
-		},
-		getHolidayTempInt : function getHolidayTempInt()
-		{
-			return parseInt($scope.ui.houseHolidayTemperature);
-		},	
-		getHolidayTempFrac : function getHolidayTempFrac()
-		{
-			return parseInt(Math.round($scope.ui.houseHolidayTemperature * 10 ) ) % 10;
-		},
 		validDaysInMounth: [31, 28, 31, 30, 31, 30, 31, 
 							31, 30, 31, 30, 31],
-		holdTempSetBtn: function holdTempSetBtn(up, hold)
-		{
-			$scope.thermoTempChangeDirectionUp = up;
-
-			if (angular.isDefined($scope.thermoTempChangeTimer)) 
-			{
-				$interval.cancel($scope.thermoTempChangeTimer);
-				$scope.thermoTempChangeTimer = undefined;
-			}
-
-			if(hold)
-			{
-				$scope.thermoTempChangeTimer = $interval( function() 
-				{
-					if($scope.thermoTempChangeDirectionUp)
-					{
-						$scope.ui.doTempUp();
-					}
-					else
-					{
-						$scope.ui.doTempDown();
-					}
-				}, 250);
-			}
-		}
 	};
 	
 	$scope.ui.lang.unwatchLang = $scope.$watch('ui.lang.langId', function(newVal) 
@@ -139,7 +91,7 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, $state,
 			}
 		});		
 		
-		$scope.ui.houseHolidayTemperature = $scope.settings.houseHolidayTemperature;
+		$scope.ui.houseHolidayTemperature.curTemp = $scope.settings.houseHolidayTemperature;
 		$scope.ui.houseHoliday = true;
 		
 		$scope.ui.holidayEditPopupVisible = true;
@@ -182,7 +134,7 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, $state,
   
 	$scope.closeHolidayMode = function closeHolidayMode(hidePopup)
 	{	
-		$scope.ui.houseHolidayTemperature = $scope.settings.houseHolidayTemperature;
+		$scope.ui.houseHolidayTemperature.curTemp = $scope.settings.houseHolidayTemperature;
 		$scope.ui.holidayEnd.mo = $scope.ui.holidayEnd.real_mo; 
 		$scope.ui.holidayEnd.day = $scope.ui.holidayEnd.real_day;
 		$scope.ui.holidayEnd.year = $scope.ui.holidayEnd.real_year;
@@ -249,7 +201,7 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, $state,
 				$scope.ui.holidayEnd.real_mo = $scope.ui.holidayEnd.mo; 
 				$scope.ui.holidayEnd.real_day = $scope.ui.holidayEnd.day;
 				$scope.ui.holidayEnd.real_year = $scope.ui.holidayEnd.year;
-				$scope.settings.houseHolidayTemperature = $scope.ui.houseHolidayTemperature;
+				$scope.settings.houseHolidayTemperature = $scope.ui.houseHolidayTemperature.curTemp;
 			}
 			else
 			{	

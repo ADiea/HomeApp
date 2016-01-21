@@ -7,19 +7,15 @@
   	<ion-list>
 		<div ng-repeat="th in houseTH">
 		<ion-toggle class="item-divider" ng-model="th.autoPilotOn" toggle-class="toggle-positive">
-					
-					<!-- class="tableDebug" -->
+			<!-- class="tableDebug" -->
 			<table  style="width:100%" ng-click="uiToggleShowTH(th.id)" >
-			
 				<tr>
-					
 					<td  style="vertical-align:middle">
 						<button style="display:inline;margin-right:5px;" ng-click="uiToggleShowTH(th.id);$event.stopPropagation();" class="button button-positive button-small button-outline">
 							<i  class="icon" ng-class="uiOpenedTH==th.id ? 'ion-chevron-up' : 'ion-chevron-down'"></i>
 						</button>
 					</td>
 
-					
 					<td>
 						<span class="h3" >
 							{{th.title}} 
@@ -28,12 +24,13 @@
 
 					<td style="text-align:right;"> 
 						<div style="display:inline;padding-left:10px;" ng-class="{'text-disabled':(!th.autoPilotOn)}">
-							<span class="textDegIntSizeNormal">{{getThermoSetTemp_Int(th.id)+lang.getS('sDecPt')}}</span>
-							<span class="textDegFloatSizeNormal">{{getThermoSetTemp_Frac(th.id)}}</span>
+							<span class="textDegIntSizeNormal">{{util.getTempInt(th.curTemp)}}</span>
+							<span class="textDegFloatSizeNormal">{{util.getTempFrac(th.curTemp)}}</span>
 							<span class="textDegSymbolSizeNormal textDegSymbolNormal">o</span>
 						</div>
 					</td>
 				</tr>
+				
 				<tr>
 					<td  style="vertical-align:middle">
 						<button style="display:inline;margin-right:5px;" 
@@ -47,15 +44,21 @@
 					<td style="vertical-align:bottom">
 						<p style="display:inline;">
 							<i class="icon ion-thermometer"></i>  
-							<strong>{{getThermoSensorTemp(th.id, 0)}}</strong> 
+								<span class="textDegIntSizeMicro">{{util.getTempInt(th.curSensorTemp)}}</span>
+								<span class="textDegFloatSizeMicro">{{util.getTempFrac(th.curSensorTemp)}}</span>
+								<span class="textDegSymbolSizeMicro textDegSymbolMicro">o</span>
+<!--							<strong>{{getThermoSensorTemp(th.id, 0)}}</strong> -->
 							<i style="margin-left:5px" class="icon ion-waterdrop"></i>
-							<strong>{{getThermoSensorRH(th.id)}}</strong>
+								<span class="textDegIntSizeMicro">{{util.getTempInt(th.curSensorHumid)}}</span>
+								<span class="textDegFloatSizeMicro">{{util.getTempFrac(th.curSensorHumid)}}</span>
+								<span class="textDegIntSizeMicro">%</span>
+<!--							<strong>{{getThermoSensorRH(th.id)}}</strong> -->
 						</p>
 					</td>
 					
 					<td style="text-align:right;" >
 						<div  style="display:inline;margin-right:10px;">
-							<button ng-disabled="!util.canTempDown(th.curTemp, th.minTemp) || !th.autoPilotOn" 
+							<button ng-disabled="!util.canTempDown(th) || !th.autoPilotOn" 
 							ng-click="util.doTempDown(th);$event.stopPropagation();" 
 							on-hold="util.holdTempSetBtn(false, true, th)" 
 							on-release="util.holdTempSetBtn(false, false, th)" 
@@ -63,7 +66,7 @@
 								<i class="icon ion-minus"></i> 
 							</button>
 
-							<button ng-disabled="!util.canTempUp(th.curTemp, th.maxTemp) || !th.autoPilotOn"   
+							<button ng-disabled="!util.canTempUp(th) || !th.autoPilotOn"   
 							ng-click="util.doTempUp(th);$event.stopPropagation();" 
 							on-hold="util.holdTempSetBtn(true, true, th)" 
 							on-release="util.holdTempSetBtn(true, false, th)" 
@@ -87,9 +90,7 @@
 						<ion-spinner ng-class="th.isEditing?'':'visibilityHidden'" class="spinner-positive busySpinner" icon="ios-small">
 						</ion-spinner>
 					</td>-->
-
 				</tr>
-			
 			</table>
 		</ion-toggle>
 
@@ -101,8 +102,8 @@
 			<div style="display:inline;float:right">
 			
 				<div style="display:inline;padding-left:10px;" ng-show="th.autoPilotOn">
-					<span class="textDegIntSizeMicro">{{getThermoSetTemp_Int(th.id)+lang.getS('sDecPt')}}</span>
-					<span class="textDegFloatSizeMicro">{{getThermoSetTemp_Frac(th.id)}}</span>
+					<span class="textDegIntSizeMicro">{{util.getTempInt(th.curTemp)}}</span>
+					<span class="textDegFloatSizeMicro">{{util.getTempFrac(th.curTemp)}}</span>
 					<span class="textDegSymbolSizeMicro textDegSymbolMicro">o</span>
 				</div>
 			

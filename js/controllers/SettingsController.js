@@ -334,8 +334,8 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, $state,
 	$scope.defaultSettingsConfirm = function defaultSettingsConfirm()
 	{
 		var confirmPopup = $ionicPopup.confirm({
-			 title: 'Setari fabrica',
-			 template: 'Doriti revenirea la setarile din fabrica?'
+			 title: Lang.getS('sFactorySettings'),
+			 template: Lang.getS('sFactorySettingsDescr')
 		   });
 		confirmPopup.then(function(res) 
 		{

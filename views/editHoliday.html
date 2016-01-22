@@ -24,12 +24,12 @@
 				<td >
 					<div style="display:inline;margin-left:10px;">
 
-						<span class="textDegIntSizeSmall">{{util.getTempInt(ui.houseHolidayTemperature)}},</span>
-						<span class="textDegFloatSizeSmall" >{{util.getTempFrac(ui.houseHolidayTemperature)}}</span>
+						<span class="textDegIntSizeSmall">{{util.getTempInt(ui.houseHolidayTemperature.curTemp)}}</span>
+						<span class="textDegFloatSizeSmall" >{{util.getTempFrac(ui.houseHolidayTemperature.curTemp)}}</span>
 						<span class="textDegSymbolSizeSmall textDegSymbolSmall" >o</span>
 
 						<button ng-disabled="!util.canTempDown(ui.houseHolidayTemperature)" 
-								ng-click="util.doTempDown(ui.houseHolidayTemperature )" 
+								ng-click="util.doTempDown(ui.houseHolidayTemperature)" 
 								on-hold="util.holdTempSetBtn(false, true, ui.houseHolidayTemperature)" 
 								on-release="util.holdTempSetBtn(false, false, ui.houseHolidayTemperature)" 
 								class="button button-small button-positive button-outline" > 

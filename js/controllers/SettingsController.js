@@ -22,7 +22,7 @@ var _SettingsCtrl = ionicApp.controller('SettingsCtrl', function($scope, $state,
 		{
 			langId:0,
 			refreshLang : null,
-			langOptions : ['sRomana', 'sEnglish']
+			langOptions : ['sRomana', 'sEnglish', 'sLithuanian']
 		},
 		holidayEnd:
 		{

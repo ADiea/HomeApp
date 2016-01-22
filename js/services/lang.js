@@ -11,10 +11,10 @@ ionicApp.factory('Lang',function(SettingsService, LogDataService){
 		'sMay':'Mai', 'sJun':'Iunie', 'sJul':'Iulie', 'sAug':'August', 'sSep':'Septembrie',
 		'sOct':'Octombrie', 'sNov':'Noiembrie', 'sDec':'Decembrie', 'sOnHoliday':'In vacanta!',
 		'sTemp':'Temperatura', 'sRet':'Retur', 'sMenu':'Meniu', 'sHome':'Acasa', 'sLights':'Lumini',
-		'sHeating':'Incalzire', 'sFMRadio':'Radio FM', 'sTests':'Teste', 'sLog':'Log', 'sHoliday2':'vacanta',
+		'sHeating':'Incalzire', 'sFMRadio':'Muzica', 'sTests':'Teste', 'sLog':'Log', 'sHoliday2':'vacanta',
 		'sToday':'astazi', 'sDays':'zile', 'sSched':'Program', 'sStatist':'Istoric', 'sHealth':'Sanatate',
 		'sVery':'foarte', 'sDry':'uscat', 'sDump':'umed', 'sOptim':'optim', 'sActiveHol':'activ',
-		'sTimeslot':'', 'sDecPt':',', 'sFactorySettingsDescr':'Doriti revenirea la setarile din fabrica?', /*'':'', '':'',
+		'sTimeslot':'', 'sDecPt':',', 'sFactorySettingsDescr':'Doriti revenirea la setarile din fabrica?', 'sLithuanian':'Lituaniana', /*'':'',
 		/*'':'', '':'', '':'', '':'', '':'',
 		'':'', '':'', '':'', '':'', '':'',
 		'':'', '':'', '':'', '':'', '':'',
@@ -28,19 +28,34 @@ ionicApp.factory('Lang',function(SettingsService, LogDataService){
 		'sMay':'May', 'sJun':'June', 'sJul':'July', 'sAug':'August', 'sSep':'September',
 		'sOct':'October', 'sNov':'November', 'sDec':'December', 'sOnHoliday':'On Holiday!',
 		'sTemp':'Temperature', 'sRet':'Return', 'sMenu':'Menu', 'sHome':'Home', 'sLights':'Lights',
-		'sHeating':'Heating', 'sFMRadio':'FM Radio', 'sTests':'Tests', 'sLog':'Log', 'sHoliday2':'holiday',
+		'sHeating':'Heating', 'sFMRadio':'Music', 'sTests':'Tests', 'sLog':'Log', 'sHoliday2':'holiday',
 		'sToday':'today', 'sDays':'days', 'sSched':'Schedule', 'sStatist':'Statistics', 'sHealth':'Health',
 		'sVery':'very', 'sDry':'dry', 'sDump':'humid', 'sOptim':'normal', 'sActiveHol':'enabled',
-		'sTimeslot':'', 'sDecPt':'.', 'sFactorySettingsDescr':'Reset to factory settings?', /*'':'', '':'',
+		'sTimeslot':'', 'sDecPt':'.', 'sFactorySettingsDescr':'Reset to factory settings?', 'sLithuanian':'Lithuanian', /*'':'',
 		'':'', '':'', '':'', '':'', '':'',
 		'':'', '':'', '':'', '':'', '':'',
 		'':'', '':'', '':'', '':'', '':'',
 		'':'', '':'', '':'', '':'', '':'',
 		/*'':'', '':'', '':'', '':'', '':'',*/
-		
+		}, 
+		{
+		'sRomana':'rumunu', 'sEnglish':'Anglu', 'sLanguage':'Kalba', 'sHoliday':'Svente', 
+		'sBaseIP':'IP', 'sUntilHoliday':'iki', 'sInactiveHoliday':'Išjungta', 'sFactorySettings':'Gamykliniai nustatymai',
+		'sSetTitle':'Nustatymai', 'sJan':'Sausis', 'sFeb':'vasaris', 'sMar':'Kovas', 'sApr':'balandis',
+		'sMay':'Geguže', 'sJun':'birželis', 'sJul':'liepa', 'sAug':'Rugpjutis', 'sSep':'rugsejis',
+		'sOct':'spalis', 'sNov':'lapkritis', 'sDec':'gruodis', 'sOnHoliday':'Atostogose',
+		'sTemp':'Temperatura', 'sRet':'Grižti', 'sMenu':'Valgiaraštis', 'sHome':'Pagrindinis', 'sLights':'Žibintai',
+		'sHeating':'Kaitinimas', 'sFMRadio':'Muzika', 'sTests':'Testai', 'sLog':'Prisijungti', 'sHoliday2':'švente',
+		'sToday':'šiandien', 'sDays':'dienu', 'sSched':'Tvarkaraštis', 'sStatist':'Statistika', 'sHealth':'Sveikatos',
+		'sVery':'labai', 'sDry':'sausas', 'sDump':'dregnas', 'sOptim':'normalus', 'sActiveHol':'ijungta',
+		'sTimeslot':'', 'sDecPt':'.', 'sFactorySettingsDescr':'Atstatyti gamyklinius nustatymus?', 'sLithuanian':'Lietuvos', /*'':'',
+		'':'', '':'', '':'', '':'', '':'',
+		'':'', '':'', '':'', '':'', '':'',
+		'':'', '':'', '':'', '':'', '':'',
+		'':'', '':'', '':'', '':'', '':'',
+		/*'':'', '':'', '':'', '':'', '':'',*/
 		}
-		
-		]
+	]
 	};
 	
 	LogDataService.addLog("FACTORY: LANGUAGE", "#f00");

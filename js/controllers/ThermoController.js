@@ -284,7 +284,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 			curTemp:30,
 			minTemp:function()
 				{
-					return $scope.modalSettings.tempMin.curTemp;
+					return $scope.modalSettings.tempMin.curTemp + 0.5;
 				},
 			maxTemp:30,
 			isEditing:false,
@@ -1031,39 +1031,33 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 		
 		do
 		{
-
 			if (interval > 1) 
 			{
-				ret.text = interval + " ani";
-				break;
+				ret.text = interval + " ani"; break;
 			}
 
 			interval = Math.floor(seconds / 2592000);
 			if (interval > 1) 
 			{
-				ret.text =  interval + " luni";
-				break;
+				ret.text =  interval + " luni";	break;
 			}
 
 			interval = Math.floor(seconds / 86400);
 			if (interval >= 1) 
 			{
-				ret.text = interval + " zile";
-				break;
+				ret.text = interval + " zile";	break;
 			}
 
 			interval = Math.floor(seconds / 3600);
 			if (interval >= 1) 
 			{
-				ret.text =  interval + " ore";
-				break;
+				ret.text =  interval + " ore";	break;
 			}
 
 			interval = Math.floor(seconds / 60);
 			if (interval > 1) 
 			{
-				ret.text =  interval + " min";
-				break;
+				ret.text =  interval + " min";	break;
 			}
 			
 			ret.text = Math.floor(seconds) + " s";

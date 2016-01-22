@@ -37,7 +37,8 @@
 							ng-click="showErrorInfoTH(th.id);$event.stopPropagation();" 
 							class="button button-positive button-small button-clear"
 							ng-disabled="!th.isError" >
-							<i  class="icon" ng-class="th.isError ? 'ion-alert-circled':th.isEditing?'ion-android-sync':'ion-checkmark-circled'"></i>
+							<!--<i  class="icon" ng-class="th.isError ? 'ion-alert-circled':th.isEditing?'ion-android-sync':'ion-checkmark-circled'"></i>-->
+							<ion-spinner icon="ripple" class="spinner-positive"></ion-spinner>
 						</button>
 					</td>
 				
@@ -47,12 +48,13 @@
 								<span class="textDegIntSizeMicro">{{util.getTempInt(th.curSensorTemp)}}</span>
 								<span class="textDegFloatSizeMicro">{{util.getTempFrac(th.curSensorTemp)}}</span>
 								<span class="textDegSymbolSizeMicro textDegSymbolMicro">o</span>
-<!--							<strong>{{getThermoSensorTemp(th.id, 0)}}</strong> -->
+								<span class="textDegIntSizeMicro">C</span>
+
 							<i style="margin-left:5px" class="icon ion-waterdrop"></i>
 								<span class="textDegIntSizeMicro">{{util.getTempInt(th.curSensorHumid)}}</span>
 								<span class="textDegFloatSizeMicro">{{util.getTempFrac(th.curSensorHumid)}}</span>
 								<span class="textDegIntSizeMicro">%</span>
-<!--							<strong>{{getThermoSensorRH(th.id)}}</strong> -->
+
 						</p>
 					</td>
 					
@@ -105,6 +107,7 @@
 					<span class="textDegIntSizeMicro">{{util.getTempInt(th.curTemp)}}</span>
 					<span class="textDegFloatSizeMicro">{{util.getTempFrac(th.curTemp)}}</span>
 					<span class="textDegSymbolSizeMicro textDegSymbolMicro">o</span>
+					<span class="textDegIntSizeMicro">C</span>
 				</div>
 			
 				<p style="display:inline;">{{getThermoAutoPilotDescr(th.id)}}</p>

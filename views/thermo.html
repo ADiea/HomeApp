@@ -53,10 +53,9 @@
 								<span class="textDegIntSizeMicro">{{util.getTempInt(th.curSensorHumid)}}</span>
 								<span class="textDegFloatSizeMicro">{{util.getTempFrac(th.curSensorHumid)}}</span>
 								<span class="textDegIntSizeMicro">%</span>
-
 						</p>
 					</td>
-					
+
 					<td style="text-align:right;" >
 						<div  style="display:inline;margin-right:10px;">
 							<button ng-disabled="!util.canTempDown(th) || !th.autoPilotOn" 
@@ -75,22 +74,7 @@
 								<i class="icon ion-plus"></i> 
 							</button>
 						</div>
-						
-						<!--
-						ng-show="!settings.houseHoliday"
-						<div ng-show="settings.houseHoliday" style="display:inline;padding-left:10px;">
-							<button ng-click="showHolidayConfirm();$event.stopPropagation();" class="button button-small button-positive button-outline" > 
-								<i style="margin:5px" class="icon icon-size-small ion-briefcase"></i> <strong>Vacanta</strong>
-							</button>
-						</div>
-						-->
 					</td>	
-					
-					<!--
-					<td style="vertical-align:middle">
-						<ion-spinner ng-class="th.isEditing?'':'visibilityHidden'" class="spinner-positive busySpinner" icon="ios-small">
-						</ion-spinner>
-					</td>-->
 				</tr>
 			</table>
 		</ion-toggle>
@@ -105,23 +89,15 @@
 			
 			<div style="display:inline;float:right">
 			
-				<div style="display:inline;padding-left:10px;" ng-show="th.autoPilotOn">
+				<div style="display:inline;padding-left:10px;" ng-show="th.autoPilotOn" >
 					<i class="icon icon-size-normal {{getAutopilotTempIcon(th)}}"></i>
 				
-					<span class="textDegIntSizeMicro">{{util.getTempInt(th.curTemp)}}</span>
-					<span class="textDegFloatSizeMicro">{{util.getTempFrac(th.curTemp)}}</span>
-					<span class="textDegSymbolSizeMicro textDegSymbolMicro">o</span>
-					<span class="textDegIntSizeMicro">C</span>
-				</div>
-			
+					<span class="textDegIntSizeMicro {{getAutopilotTempClass(th)}}">{{util.getTempInt(th.curTemp)}}</span>
+					<span class="textDegFloatSizeMicro {{getAutopilotTempClass(th)}}">{{util.getTempFrac(th.curTemp)}}</span>
+					<span class="textDegSymbolSizeMicro textDegSymbolMicro {{getAutopilotTempClass(th)}}">o</span>
+					<span class="textDegIntSizeMicro {{getAutopilotTempClass(th)}}">C</span>
+				</div>			
 				<p style="display:inline;">{{getThermoAutoPilotDescr(th.id)}}</p>
-				
-				<!--
-				<button class="button button-small button-outline button-positive">
-					<i ng-show="!settings.houseHoliday" class="icon ion-ios-timer-outline"></i>
-				<i ng-show="settings.houseHoliday" class="icon ion-briefcase"></i>
-				</button>
-				-->
 			</div>
 		</ion-item>
 		
@@ -131,15 +107,19 @@
 				<span style="margin-left:10px">{{lang.getS('sStatist')}}</span>
 			</span>
 
-			
 			<div style="display:inline;float:right">
-				<p style="display:inline;">{{th.curSensorTemp1m + "*C / " + th.curSensorTemp10m + "*C"}}</p>
-				
-				<!--
-				<button ng-click="showRHMoreInfo(th.id)" class="button button-small button-outline">
-					<i  class="icon ion-more"></i>
-				</button>
-				-->
+				<p style="display:inline;">
+					1 min: 
+					<span class="textDegIntSizeMicro">{{util.getTempInt(th.curSensorTemp1m)}}</span>
+					<span class="textDegFloatSizeMicro">{{util.getTempFrac(th.curSensorTemp1m)}}</span>
+					<span class="textDegSymbolSizeMicro textDegSymbolMicro">o</span>
+					<span class="textDegIntSizeMicro">C</span>
+					 / 10 min:
+					<span class="textDegIntSizeMicro">{{util.getTempInt(th.curSensorTemp10m)}}</span>
+					<span class="textDegFloatSizeMicro">{{util.getTempFrac(th.curSensorTemp10m)}}</span>
+					<span class="textDegSymbolSizeMicro textDegSymbolMicro">o</span>
+					<span class="textDegIntSizeMicro">C</span> 				
+				</p>
 			</div>
 		</ion-item>
 		
@@ -152,11 +132,7 @@
 			
 			<div style="display:inline;float:right">
 				<p style="display:inline;">{{getHealthyDescrRH(th.id)}}</p>
-				<!--
-				<button ng-click="showRHMoreInfo(th.id)" class="button button-small button-outline">
-					<i  class="icon ion-information"></i>
-				</button>
-				-->
+
 			</div>
 
 		</ion-item>
@@ -169,12 +145,6 @@
 			</span>
 			
 			<p style="display:inline;float:right">
-			
-				<!--
-				<button class="button button-small button-outline button-positive">
-					<i  class="icon ion-more"></i>
-				</button>
-				-->
 			</p>
 			
 		</ion-item>
@@ -225,11 +195,7 @@
 							<strong>{{minutesToText(heater.heaterOnMinutes)}}</strong>
 						</p>
 					</td>
-<!--
-					<td style="text-align:right;" >
 
-					</td>
--->
 				</tr>
 
 			</table>

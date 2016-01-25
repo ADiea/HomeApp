@@ -844,8 +844,11 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 	{
 	
 	}
+
+
 	
-	$scope.getAutopilotTempIcon = function getAutopilotTempIcon(th)
+	
+	$scope.isTempHigherThanProgram = function isTempHigherThanProgram (th)
 	{
 		var thedate = new Date();
 		var dayOfWeek = (thedate).getDay() - 1;
@@ -859,14 +862,44 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 		{
 			if(th.schedule[dayOfWeek][th.autoPilotProgramIndex].t > th.curTemp)
 			{
-				return "ion-arrow-up-b";
+				return 1;
 			}
 			else if(th.schedule[dayOfWeek][th.autoPilotProgramIndex].t < th.curTemp)
 			{
-				return "ion-arrow-down-b";
+				return -1;
 			}
-			else return "";
+			else return 0;
 		}
+	} 
+	
+	$scope.getAutopilotTempClass = function getAutopilotTempClass(th)
+	{
+		var sign = $scope.isTempHigherThanProgram(th);
+		
+		if(sign < 0)
+		{
+			return "assertive";
+		}
+		else if(sign > 0)
+		{
+			return "positive";
+		}
+		return "dark";
+	}
+	
+	$scope.getAutopilotTempIcon = function getAutopilotTempIcon(th)
+	{
+		var sign = $scope.isTempHigherThanProgram(th);
+		
+		if(sign < 0)
+		{
+			return "ion-arrow-up-b assertive";
+		}
+		else if(sign > 0)
+		{
+			return "ion-arrow-down-b positive";
+		}		
+		return "";
 	} 
 
 	$scope.getThermoAutoPilotDescr = function getThermoAutoPilotDescr(id)

@@ -9,43 +9,40 @@ ionicApp.factory('commWeb',function(){
 		return commWeb.pktSeq++;
 	}
 	
-	commWeb.skipInt = function skipInt( string)
+	commWeb.skipInt = function skipInt( ret)
 	{
-		var ret={};
 		var i;
-		i = string.indexOf(";");
+		i = ret.str.indexOf(";");
 		
 		if(i != -1)
 		{		
-			ret.result = parseInt(string.substring(0, i));
+			ret.result = parseInt(ret.str.substring(0, i));
 			ret.err = isNaN(ret.result);
-			ret.str = string.substring(i+1);
+			ret.str = ret.str.substring(i+1);
 		}
 		else ret.err = true;
 		
 		return ret;		
 	}
 	
-	commWeb.skipFloat = function skipFloat( string)
+	commWeb.skipFloat = function skipFloat( ret)
 	{
-		var ret={};
 		var i;
-		i = string.indexOf(";");
+		i = ret.str.indexOf(";");
 		
 		if(i != -1)
 		{
-			ret.result = parseFloat(string.substring(0, i));
+			ret.result = parseFloat(ret.str.substring(0, i));
 			ret.err = isNaN(ret.result);
-			ret.str = string.substring(i+1);
+			ret.str = ret.str.substring(i+1);
 		}
 		else ret.err = true;
 		
 		return ret;
 	}
 	
-	commWeb.skipString = function skipString( string)
+	commWeb.skipString = function skipString( ret)
 	{
-		var ret={};
 		var i;
 		var done = false;
 		
@@ -53,24 +50,23 @@ ionicApp.factory('commWeb',function(){
 		
 		while(!done)
 		{
-			i = string.indexOf(";");
+			i = ret.str.indexOf(";");
 			if(i == -1)
 			{
 				ret.err = true;
-				ret.str = string;
 				done = true;
 				break;
 			}
 			
-			if(string.charAt(i-1) == "\\")
+			if(ret.str.charAt(i-1) == "\\")
 			{
-				ret.result += string.substring(0, i-1) + ';';
-				string = string.substring(i+1);
+				ret.result += ret.str.substring(0, i-1) + ';';
+				ret.str = ret.str.substring(i+1);
 			}
 			else
 			{
-				ret.result += string.substring(0, i);
-				ret.str = string.substring(i+1);
+				ret.result += ret.str.substring(0, i);
+				ret.str = ret.str.substring(i+1);
 				done = true;
 				ret.err = false;
 			}

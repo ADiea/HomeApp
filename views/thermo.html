@@ -34,11 +34,10 @@
 				<tr>
 					<td  style="vertical-align:middle">
 						<button style="display:inline;margin-right:5px;" 
-							ng-click="showErrorInfoTH(th.id);$event.stopPropagation();" 
+							ng-click="util.showDevErrorInfo(th);$event.stopPropagation();" 
 							class="button button-positive button-small button-clear"
 							ng-disabled="!th.isError" >
-							<!--<i  class="icon" ng-class="th.isError ? 'ion-alert-circled':th.isEditing?'ion-android-sync':'ion-checkmark-circled'"></i>-->
-							<ion-spinner icon="ripple" class="spinner-positive"></ion-spinner>
+							<i  class="icon" ng-class="th.isError ? 'ion-alert-circled':th.isEditing?'ion-android-sync':'ion-checkmark-circled'"></i>
 						</button>
 					</td>
 				
@@ -97,13 +96,18 @@
 		</ion-toggle>
 
 		<ion-item ng-click="showAutopilotSettings(th.id)" class="item-accordion" ng-show="uiOpenedTH==th.id" >
-			<span style="display:inline;float:left"><i class="icon icon-size-normal ion-ios-timer-outline"></i>
+			<span style="display:inline;float:left">
+				<i ng-show="!settings.houseHoliday" class="icon icon-size-normal ion-ios-timer-outline"></i>
+				<i ng-show="settings.houseHoliday" class="icon icon-size-normal ion-briefcase"></i>
+				
 			<span style="margin-left:10px">{{lang.getS('sSched')}}</span>
 			</span>
 			
 			<div style="display:inline;float:right">
 			
 				<div style="display:inline;padding-left:10px;" ng-show="th.autoPilotOn">
+					<i class="icon icon-size-normal {{getAutopilotTempIcon(th)}}"></i>
+				
 					<span class="textDegIntSizeMicro">{{util.getTempInt(th.curTemp)}}</span>
 					<span class="textDegFloatSizeMicro">{{util.getTempFrac(th.curTemp)}}</span>
 					<span class="textDegSymbolSizeMicro textDegSymbolMicro">o</span>
@@ -112,9 +116,12 @@
 			
 				<p style="display:inline;">{{getThermoAutoPilotDescr(th.id)}}</p>
 				
+				<!--
 				<button class="button button-small button-outline button-positive">
-					<i  class="icon ion-more"></i>
+					<i ng-show="!settings.houseHoliday" class="icon ion-ios-timer-outline"></i>
+				<i ng-show="settings.houseHoliday" class="icon ion-briefcase"></i>
 				</button>
+				-->
 			</div>
 		</ion-item>
 		
@@ -127,9 +134,12 @@
 			
 			<div style="display:inline;float:right">
 				<p style="display:inline;">{{th.curSensorTemp1m + "*C / " + th.curSensorTemp10m + "*C"}}</p>
+				
+				<!--
 				<button ng-click="showRHMoreInfo(th.id)" class="button button-small button-outline">
 					<i  class="icon ion-more"></i>
 				</button>
+				-->
 			</div>
 		</ion-item>
 		
@@ -142,9 +152,11 @@
 			
 			<div style="display:inline;float:right">
 				<p style="display:inline;">{{getHealthyDescrRH(th.id)}}</p>
+				<!--
 				<button ng-click="showRHMoreInfo(th.id)" class="button button-small button-outline">
 					<i  class="icon ion-information"></i>
 				</button>
+				-->
 			</div>
 
 		</ion-item>
@@ -157,9 +169,12 @@
 			</span>
 			
 			<p style="display:inline;float:right">
+			
+				<!--
 				<button class="button button-small button-outline button-positive">
 					<i  class="icon ion-more"></i>
 				</button>
+				-->
 			</p>
 			
 		</ion-item>
@@ -194,7 +209,7 @@
 				
 					<td  style="vertical-align:middle">
 						<button style="display:inline;margin-right:5px;" 
-							ng-click="showErrorInfoHeat(heater.id);$event.stopPropagation();" 
+							ng-click="util.showDevErrorInfo(heater);$event.stopPropagation();" 
 							class="button button-positive button-small button-clear"
 							ng-disabled="!heater.isError" >
 							<i  class="icon" ng-class="heater.isError ? 'ion-alert-circled':heater.isEditing?'ion-android-sync':'ion-checkmark-circled'"></i>
@@ -278,10 +293,6 @@
 		<button ng-click="defaultDemoDevices()"
 			class="button button-small button-outline button-assertive">
 			<i class="icon  ion-ios-reload"></i>
-		</button>
-		<button ng-click="showHolidayConfirm();" ng-disabled="!settings.houseHoliday" 
-			class="button button-small button-outline button-positive">
-			<i class="icon  ion-briefcase"></i>
 		</button>
 	 </div>
 	 

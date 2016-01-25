@@ -1,4 +1,4 @@
-ionicApp.factory('Util',function(Lang, LogDataService, $interval){
+ionicApp.factory('Util',function(Lang, LogDataService, $interval, $ionicPopup){
 	
 	var util = {
 		
@@ -106,6 +106,59 @@ ionicApp.factory('Util',function(Lang, LogDataService, $interval){
 		}
 	}
 	
+	util.showDevErrorInfo = function showErrorInfoTH(dev)
+	{
+		var alertPopup = $ionicPopup.alert({
+		 title: Lang.getS('sCommErr'),
+		 template: Lang.getS('sErrLastData') + dev.title + Lang.getS('sErrReceived') + 
+					util.textTimestamp(dev.timestamp).text + Lang.getS('sErrAgo')
+	   });
+	}
+	
+	util.textTimestamp = function textTimestamp(date)
+	{
+		var ret={text:'', sec:0};
+		var seconds = Math.floor(((new Date().getTime()/1000) - date)),
+		interval = Math.floor(seconds / 31536000);
+		ret.sec = seconds;
+		
+		do
+		{
+			if (interval > 1) 
+			{
+				ret.text = interval + Lang.getS('sTsYrs'); break;
+			}
+
+			interval = Math.floor(seconds / 2592000);
+			if (interval > 1) 
+			{
+				ret.text =  interval + Lang.getS('sTsMon');	break;
+			}
+
+			interval = Math.floor(seconds / 86400);
+			if (interval >= 1) 
+			{
+				ret.text = interval + Lang.getS('sTsDays');	break;
+			}
+
+			interval = Math.floor(seconds / 3600);
+			if (interval >= 1) 
+			{
+				ret.text =  interval + Lang.getS('sTsHrs');	break;
+			}
+
+			interval = Math.floor(seconds / 60);
+			if (interval > 1) 
+			{
+				ret.text =  interval + Lang.getS('sTsMin');	break;
+			}
+			
+			ret.text = Math.floor(seconds) + Lang.getS('sTsSec');
+		
+		}while(false);
+		
+		return ret;
+	}
 
 	return util;
 })

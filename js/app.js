@@ -131,6 +131,15 @@ var ionicApp = angular.module('ionicApp', ['ionic'])
           controller: 'FMRadioCtrl'
         }
       }
+    })
+	.state('app.holiday', {
+		url: '/house/holiday',
+		views: {
+		'menuContent': {
+		  templateUrl: 'views/editHoliday.html',
+		  controller: 'HolidayCtrl'
+		}
+	  }
     });	
 
   // if none of the above states are matched, use this as the fallback

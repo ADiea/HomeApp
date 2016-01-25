@@ -13,19 +13,19 @@
 	
 		<div class="button-bar" >
 			<a ng-class="{'butCurWeekDay':modalAutoPilot.ui.curWeekDay == 0, 'button-dark':modalAutoPilot.ui.weekday == 0}" 
-				ng-click="modalAutoPilot.ui.weekday=0" class="button button-weekday">Lu</a>
+				ng-click="modalAutoPilot.ui.weekday=0" class="button button-weekday">{{lang.getS('sMon')}}</a>
 			<a ng-class="{'butCurWeekDay':modalAutoPilot.ui.curWeekDay == 1, 'button-dark':modalAutoPilot.ui.weekday == 1}" 
-				ng-click="modalAutoPilot.ui.weekday=1" class="button button-weekday">Ma</a>
+				ng-click="modalAutoPilot.ui.weekday=1" class="button button-weekday">{{lang.getS('sTue')}}</a>
 			<a ng-class="{'butCurWeekDay':modalAutoPilot.ui.curWeekDay == 2, 'button-dark':modalAutoPilot.ui.weekday == 2}" 
-				ng-click="modalAutoPilot.ui.weekday=2" class="button button-weekday">Mi</a>
+				ng-click="modalAutoPilot.ui.weekday=2" class="button button-weekday">{{lang.getS('sWed')}}</a>
 			<a ng-class="{'butCurWeekDay':modalAutoPilot.ui.curWeekDay == 3, 'button-dark':modalAutoPilot.ui.weekday == 3}" 	
-				ng-click="modalAutoPilot.ui.weekday=3" class="button button-weekday">Jo</a>
+				ng-click="modalAutoPilot.ui.weekday=3" class="button button-weekday">{{lang.getS('sThu')}}</a>
 			<a ng-class="{'butCurWeekDay':modalAutoPilot.ui.curWeekDay == 4, 'button-dark':modalAutoPilot.ui.weekday == 4}" 
-				ng-click="modalAutoPilot.ui.weekday=4" class="button button-weekday">Vi</a>
+				ng-click="modalAutoPilot.ui.weekday=4" class="button button-weekday">{{lang.getS('sFri')}}</a>
 			<a ng-class="{'butCurWeekDay':modalAutoPilot.ui.curWeekDay == 5, 'button-dark':modalAutoPilot.ui.weekday == 5}" 
-				ng-click="modalAutoPilot.ui.weekday=5" class="button button-weekday">Sa</a>
+				ng-click="modalAutoPilot.ui.weekday=5" class="button button-weekday">{{lang.getS('sSat')}}</a>
 			<a ng-class="{'butCurWeekDay':modalAutoPilot.ui.curWeekDay == 6, 'button-dark':modalAutoPilot.ui.weekday == 6}" 
-				ng-click="modalAutoPilot.ui.weekday=6" class="button button-weekday">Du</a>
+				ng-click="modalAutoPilot.ui.weekday=6" class="button button-weekday">{{lang.getS('sSun')}}</a>
 		</div>
 	
   </ion-header-bar>  
@@ -39,7 +39,7 @@
 			<span class="textDegIntSizeSmall">{{util.getTempInt(sched.t)}}</span>
 			<span class="textDegFloatSizeSmall" >{{util.getTempFrac(sched.t)}}</span>
 			<span class="textDegSymbolSizeSmall textDegSymbolSmall">o</span> 
-			intre 
+			{{lang.getS('sBetween')}} 
 			<span class="textDegFloatSizeSmall">{{modalAutoPilot.ui.getHourStr(sched.startH)}}:{{modalAutoPilot.ui.getMinuteStr(sched.startM)}} - {{modalAutoPilot.ui.getHourStr(sched.endH)}}:{{modalAutoPilot.ui.getMinuteStr(sched.endM)}}</span> 			
 		</span>	
 		
@@ -64,7 +64,7 @@
 	<ion-item ng-show="modalAutoPilot.th.schedule[modalAutoPilot.ui.weekday].length < 5" ng-click="showAutopilotEditInterval(-1)">
 		<strong>
 			<i class="icon ion-android-add-circle"></i>
-			Adauga interval nou
+			{{lang.getS('sNewSlot')}}
 		</strong>
 	</ion-item>
 

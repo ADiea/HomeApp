@@ -110,9 +110,9 @@ ionicApp.factory('socket',function(SettingsService, LogDataService, commWeb){
 			socket._Socket.onmessage = function(evt)
 			{
 				var found = false;
-				var res = commWeb.skipInt(evt.data);
+				var res = {str:evt.data};
 				
-				if(!res.err)
+				if(!commWeb.skipInt(res).err)
 				{	
 					for(var i=0; i < socket._Callbacks.length; i++)
 					{

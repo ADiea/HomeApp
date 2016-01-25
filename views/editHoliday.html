@@ -1,17 +1,16 @@
-<ion-modal-view class="modalAutoPilotRange">
-  <ion-header-bar>
-    <h1 class="title">{{settingsLang.getS('sHoliday')}}</h1>
+<ion-view>
 
-	<div class="buttons">
-      <button class="button button-outline icon-right button-assertive button-save" ng-click="closeHolidayMode(true)"><i class="icon icon-size-small ion-close-round"></i></button>
-	  <button class="button button-outline icon-right button-positive button-save" ng-click="closeHolidayModeAndSave()"><i class="icon icon-size-small ion-checkmark-round"></i></button>
-    </div>
-  </ion-header-bar>
+	<ion-nav-title>
+	{{lang.getS('sHoliday')}}
+	</ion-nav-title>
+	
+
+  
   <ion-content>
 
 	<ion-toggle ng-model="ui.houseHoliday" toggle-class="toggle-positive">
 	<i style="margin:5px" class="icon icon-size-normal ion-briefcase"></i>
-	{{settingsLang.getS('sOnHoliday')}}
+	{{lang.getS('sOnHoliday')}}
 	</ion-toggle>
 
 	<ion-item >
@@ -19,7 +18,7 @@
 			<tr>
 				<td style="vertical-align:middle">
 					<i class="icon icon-size-normal ion-thermometer"></i> 
-					{{settingsLang.getS('sTemp')}}
+					{{lang.getS('sTemp')}}
 				</td>
 				<td >
 					<div style="display:inline;margin-left:10px;">
@@ -54,7 +53,7 @@
 			<tr>
 				<td style="vertical-align:middle">
 					<i class="icon icon-size-normal ion-plane"></i>
-					{{settingsLang.getS('sRet')}} 
+					{{lang.getS('sRet')}} 
 				</td>
 				<td >
 				<select-wheel min-width="35" useful-length="ui.holidayEnd.daysInCurrentMo" type="1" refresh="ui.holidayEnd.refreshDay" ng-model="ui.holidayEnd.day" item-height="20" amplitude="2" options="ui.holidayEnd.dayOptions" >
@@ -72,79 +71,20 @@
 		</table>
 	</ion-item>
 
-	<!--
-	<ion-item>
-	<table class="tableFull">
-	<tr>
-		<td style="vertical-align:middle;min-width:70px;width:30%;">
-			<i class="icon icon-size-normal ion-thermometer"></i> 
-			Temperatura
-		</td>
-		<td style="vertical-align:middle;text-align:right;">
-	
-				<span style="vertical-align:bottom;">
-				<span class="textDegInt">{{}},</span>
-				<span class="textDegFloat" >{{}}</span>
-				<span class="textDegSymbol">o</span>
-				</span>
-			
-			<button ng-disabled="!modalAutoPilot.ui.canTempDown(modalAutoPilot.editInterval, modalAutoPilot.th)" ng-click="modalAutoPilot.ui.doTempDown(modalAutoPilot.editInterval, modalAutoPilot.th)" on-hold="" on-release="" class="button button-small button-positive button-outline" > 
-				<i class="icon ion-minus"></i> 
-			</button>
-			
-			<button ng-disabled="!modalAutoPilot.ui.canTempUp(modalAutoPilot.editInterval, modalAutoPilot.th)"  ng-click="modalAutoPilot.ui.doTempUp(modalAutoPilot.editInterval, modalAutoPilot.th)" on-hold="" on-release="" class="button button-small button-positive button-outline" > 
-				<i class="icon ion-plus"></i> 
-			</button>
-
-		</td>
-	</tr>
-	</table>
-	</ion-item>
-	
-	<ion-item>
-	<table class="tableFull">
-	<tr>
-		<td style="vertical-align:middle;min-width:70px;width:30%;">
-		
-			<i class="icon icon-size-normal ion-clock"></i>
-			De la 
-		
-		</td>
-		<td >
-		
-		<select-wheel min-width="35" type="1" ng-model="modalAutoPilot.editInterval.startH" item-height="20" amplitude="2" options="modalAutoPilot.ui.hourOptions" >
-		</select-wheel> 
-		</td>
-		<td >
-		<select-wheel min-width="35" type="1" ng-model="modalAutoPilot.editInterval.startM" item-height="20" amplitude="2" options="modalAutoPilot.ui.minOptions" >
-		</select-wheel> 
-		</td>
-	</tr>
-	</table>
-	</ion-item>
-	
-	<ion-item>
-	<table class="tableFull">
-	<tr>
-		<td style="vertical-align:middle;min-width:70px;width:30%;">
-		
-			<i class="icon icon-size-normal ion-clock rot90"></i>
-			La ora
-		
-		</td>
-		<td >
-		
-		<select-wheel min-width="35" type="1" ng-model="modalAutoPilot.editInterval.endH" item-height="20" amplitude="2" options="modalAutoPilot.ui.hourOptions" >
-		</select-wheel> 
-		</td>
-		<td >
-		<select-wheel min-width="35" type="1" ng-model="modalAutoPilot.editInterval.endM" item-height="20" amplitude="2" options="modalAutoPilot.ui.minOptions" >
-		</select-wheel> 
-		</td>
-	</tr>
-	</table>
-	</ion-item>
-
--->	
   </ion-content>
-</ion-modal-view>
+  <ion-footer-bar>
+
+	 <div class="button-bar" >
+
+      <button class="button button-small button-outline button-assertive" 
+				ng-click="closeHolidayMode(true)">
+				<i class="icon ion-close-round"></i>
+	  </button>
+	  <button class="button button-small button-outline button-positive" 
+				ng-click="closeHolidayModeAndSave()">
+				<i class="icon ion-checkmark-round"></i>
+	  </button>	
+	 </div>
+	 
+  </ion-footer-bar>
+</ion-view>

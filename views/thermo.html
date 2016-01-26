@@ -154,9 +154,7 @@
 		<ion-item class="item-divider" >
 			
 			<table style="width:100%" ng-click="uiToggleShowHeater(heater.id)" >
-			
 				<tr>
-					
 					<td style="vertical-align:middle">
 						<button style="display:inline;;margin-right:5px;" ng-click="uiToggleShowHeater(heater.id);$event.stopPropagation();" class="button button-small button-positive button-outline">
 								<i  class="icon" ng-class="uiOpenedHeater==heater.id ? 'ion-chevron-up' : 'ion-chevron-down'"></i>
@@ -202,7 +200,7 @@
 
 		</ion-item>
 
-		<ion-item class="item-accordion" ng-show="uiOpenedHeater==heater.id" ng-click="">
+		<ion-item class="item-accordion" ng-show="uiOpenedHeater==heater.id" ng-click="heaterOnChart(heater)">
 			<span style="display:inline;float:left"> 
 				<i class="icon icon-size-normal ion-ios-speedometer-outline"></i>
 				<span style="margin-left:10px">Istoric</span>
@@ -211,7 +209,7 @@
 			
 			<div style="display:inline;float:right">
 				<p style="display:inline;">{{minutesToText(heater.heaterOnMinutes)}}</p>
-				<button class="button button-small button-outline">
+				<button class="button button-small button-outline" ng-click="">
 					<i  class="icon ion-more"></i>
 				</button>
 			</div>

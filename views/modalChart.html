@@ -1,0 +1,17 @@
+<ion-modal-view class="modalAutoPilot">
+  <ion-header-bar>
+    <h1 class="title">/Graph</h1>
+  </ion-header-bar>
+ 
+  <ion-content>
+
+    <div class="card">
+        <div class="item item-divider">
+            /Line chart
+        </div>
+        <div class="item item-text-wrap">
+            <canvas id="line" class="chart chart-line" chart-data="modalSettings.heater.chartData" chart-labels="modalSettings.heater.chartLabels" chart-legend="true" chart-series="modalSettings.heater.chartSeries" chart-options="{showTooltips: false, bezierCurve:false}"></canvas>
+        </div>
+    </div>
+  </ion-content>
+</ion-modal-view>

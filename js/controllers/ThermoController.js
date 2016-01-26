@@ -268,6 +268,55 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 
 /*------MODAL */	
 
+/*---------------- MODAL charts -----*/
+
+	$scope.modalChart = {};
+	
+	$scope.modalChart.processHeaterChart = function processHeaterChart(heater)
+	{
+		heater.chartData[0] = [];
+		heater.chartLabels = [];
+		
+		var numPts = heater.chartTimes[heater.chartTimes.length - 1] - heater.chartTimes[0] / 60*10;
+		var curTime = heater.chartTimes[0], k=0;
+		
+		while(numPts--)
+		{
+			if(curTime >= 
+		
+		}
+		
+		
+		
+	chartData:[[]], chartDataRaw  chartLabels:[], chartTimes
+	
+	}
+
+	$scope.heaterOnChart = function heaterOnChart(heater)
+	{
+		if(!$scope.modalChart.modalChartCreated)
+		{
+			$scope.modalSettings.modalChartCreated = true;
+			$scope.modalSettings.heater = heater;
+			$scope.processHeaterChart(heater);
+			
+			$ionicModal.fromTemplateUrl('views/modalChart.html', {scope: $scope}).
+			then(
+				function(modal) 
+				{
+					$scope.modalChart.modalChart = modal;
+					$scope.modalChart.modalChart.show();
+			});	
+		}
+		else
+		{
+			$timeout(function(){$scope.modalChart.modalChart.show();});
+		}
+	}
+
+
+/* ----------- end modal charts ----------*/
+
 /* MODAL settings   */
 	$scope.modalSettings = {
 		modalSettings:null,
@@ -360,13 +409,14 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 			lowGasLevThres:300, medGasLevThres:500, highGasLevThres:700, 
 			lastGasReading:350, heaterOn:true, heaterFault:false, heaterFaultDescr:"",
 			waitForAck:-1, isEditing:false, isLocked:false, isError:false, heaterOnMinutes:59, 
-			timestamp:1445802480},
+			timestamp:1445802480, chartData:[[]], chartDataRaw:[0, 1, 0, 1, 0], chartSeries:["HeaterOn"], chartLabels:[], chartTimes:[1446336000,  1446357600,  1446391800,  1446407700] },
+			
 			
 			{id:1, sensorID:-2, title:"Centrala2", isValid:true, 
 			lowGasLevThres:300, medGasLevThres:500, highGasLevThres:700, 
 			lastGasReading:350, heaterOn:false, heaterFault:true, heaterFaultDescr:"GasLeak",
 			waitForAck:-1, isEditing:false, isLocked:false, isError:false, heaterOnMinutes:123, 
-			timestamp:1445802480},
+			timestamp:1445802480, chartData:[[]], chartDataRaw:[0, 1, 0, 1, 0], chartSeries:["HeaterOn"], chartLabels:[], chartTimes:[1446336000,  1446357600,  1446391800,  1446407700] },
 		];
 	}
 	
@@ -844,9 +894,6 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 	{
 	
 	}
-
-
-	
 	
 	$scope.isTempHigherThanProgram = function isTempHigherThanProgram (th)
 	{
@@ -930,4 +977,6 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 		
 		return descr;
 	}
+	
+
 });

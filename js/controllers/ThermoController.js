@@ -878,29 +878,14 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 		
 		if(sign < 0)
 		{
-			return "assertive";
+			return "tempHigh";
 		}
 		else if(sign > 0)
 		{
-			return "positive";
+			return "tempLow";
 		}
-		return "dark";
-	}
-	
-	$scope.getAutopilotTempIcon = function getAutopilotTempIcon(th)
-	{
-		var sign = $scope.isTempHigherThanProgram(th);
-		
-		if(sign < 0)
-		{
-			return "ion-arrow-up-b assertive";
-		}
-		else if(sign > 0)
-		{
-			return "ion-arrow-down-b positive";
-		}		
 		return "";
-	} 
+	}
 
 	$scope.getThermoAutoPilotDescr = function getThermoAutoPilotDescr(id)
 	{	
@@ -936,11 +921,8 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 				{
 					var hour = $scope.modalAutoPilot.ui.getHourStr($scope.houseTH[id].schedule[dayOfWeek][$scope.houseTH[id].autoPilotProgramIndex].endH);
 					var min = $scope.modalAutoPilot.ui.getMinuteStr($scope.houseTH[id].schedule[dayOfWeek][$scope.houseTH[id].autoPilotProgramIndex].endM);
-					//var different = "";
-					
-					//if($scope.houseTH[id].schedule[dayOfWeek][$scope.houseTH[id].autoPilotProgramIndex].t != $scope.houseTH[id].curTemp)
-					//	different = '(!)';
-					descr = /*different + */Lang.getS('sUntilHr') + hour + ":" + min;
+
+					descr = Lang.getS('sUntilHr') + hour + ":" + min;
 				}
 				else descr="";
 			}

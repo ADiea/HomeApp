@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -44,6 +44,42 @@
     <script src="js/directives.js"></script>
 	
 	<style>
+	
+	.tempHigh span
+	{
+		color: #ef473a;
+	}
+	
+	.tempHigh i:before, .tempLow i:before
+	{
+	  display: inline-block;
+	  font-family: "Ionicons";
+	  speak: none;
+	  font-style: normal;
+	  font-weight: normal;
+	  font-variant: normal;
+	  text-transform: none;
+	  text-rendering: auto;
+	  line-height: 1;
+	  -webkit-font-smoothing: antialiased;
+	  -moz-osx-font-smoothing: grayscale;
+	}
+	
+	.tempHigh i:before{
+		content: "\f10d";
+		color: #ef473a;
+	}
+
+	.tempLow span
+	{
+		color: #387ef5;
+	}
+	
+	.tempLow i:before
+	{
+		color: #387ef5;
+		content: "\f104";
+	}	
 	
 	.spinner svg{
 	  width: 24px;

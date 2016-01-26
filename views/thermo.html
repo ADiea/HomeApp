@@ -89,13 +89,13 @@
 			
 			<div style="display:inline;float:right">
 			
-				<div style="display:inline;padding-left:10px;" ng-show="th.autoPilotOn" >
-					<i class="icon icon-size-normal {{getAutopilotTempIcon(th)}}"></i>
+				<div style="display:inline;padding-left:10px;" ng-show="th.autoPilotOn" class="{{getAutopilotTempClass(th)}}">
+					<i class="icon icon-size-normal"></i>
 				
-					<span class="textDegIntSizeMicro {{getAutopilotTempClass(th)}}">{{util.getTempInt(th.curTemp)}}</span>
-					<span class="textDegFloatSizeMicro {{getAutopilotTempClass(th)}}">{{util.getTempFrac(th.curTemp)}}</span>
-					<span class="textDegSymbolSizeMicro textDegSymbolMicro {{getAutopilotTempClass(th)}}">o</span>
-					<span class="textDegIntSizeMicro {{getAutopilotTempClass(th)}}">C</span>
+					<span class="textDegIntSizeMicro">{{util.getTempInt(th.curTemp)}}</span>
+					<span class="textDegFloatSizeMicro">{{util.getTempFrac(th.curTemp)}}</span>
+					<span class="textDegSymbolSizeMicro textDegSymbolMicro">o</span>
+					<span class="textDegIntSizeMicro">C</span>
 				</div>			
 				<p style="display:inline;">{{getThermoAutoPilotDescr(th.id)}}</p>
 			</div>

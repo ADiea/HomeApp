@@ -278,17 +278,40 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 		heater.chartLabels = [];
 		
 		var numPts = heater.chartTimes[heater.chartTimes.length - 1] - heater.chartTimes[0] / 60*10;
-		var curTime = heater.chartTimes[0], k=0;
+		var curTime = heater.chartTimes[0], k=0, curVal = 0;
 		
-		while(numPts--)
+		while(curTime <= heater.chartTimes[heater.chartTimes.length - 1])
 		{
-			if(curTime >= 
-		
+			if(curTime >= heater.chartTimes[k])
+			{
+				curVal = heater.chartDataRaw[k];
+				k++;
+				
+				var date = new Date(curTime*1000);
+				var h = date.getHours();
+				
+				var m = date.getMinutes() + "";
+				if(m.length < 2) m = "0"+m;
+				
+				var s = date.getSeconds() + "";
+				if(s.length < 2) s = "0"+s;
+				
+				
+				heater.chartLabels.push(h+ ":" + m+":" + s);
+			}
+			else heater.chartLabels.push("");
+			
+			
+			heater.chartData[0].push(curVal);
+			
+			
+			curTime += 1200;
+
 		}
 		
 		
 		
-	chartData:[[]], chartDataRaw  chartLabels:[], chartTimes
+	//chartData:[[]], chartDataRaw  chartLabels:[], chartTimes
 	
 	}
 
@@ -296,9 +319,9 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 	{
 		if(!$scope.modalChart.modalChartCreated)
 		{
-			$scope.modalSettings.modalChartCreated = true;
-			$scope.modalSettings.heater = heater;
-			$scope.processHeaterChart(heater);
+			$scope.modalChart.modalChartCreated = true;
+			$scope.modalChart.heater = heater;
+			$scope.modalChart.processHeaterChart(heater);
 			
 			$ionicModal.fromTemplateUrl('views/modalChart.html', {scope: $scope}).
 			then(
@@ -409,14 +432,14 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 			lowGasLevThres:300, medGasLevThres:500, highGasLevThres:700, 
 			lastGasReading:350, heaterOn:true, heaterFault:false, heaterFaultDescr:"",
 			waitForAck:-1, isEditing:false, isLocked:false, isError:false, heaterOnMinutes:59, 
-			timestamp:1445802480, chartData:[[]], chartDataRaw:[0, 1, 0, 1, 0], chartSeries:["HeaterOn"], chartLabels:[], chartTimes:[1446336000,  1446357600,  1446391800,  1446407700] },
+			timestamp:1445802480, chartData:[[]], chartDataRaw:[10, 20, 10, 20, 10], chartSeries:["HeaterOn"], chartLabels:[], chartTimes:[1446336000,  1446357600,  1446391800,  1446407700, 1446417700] },
 			
 			
 			{id:1, sensorID:-2, title:"Centrala2", isValid:true, 
 			lowGasLevThres:300, medGasLevThres:500, highGasLevThres:700, 
 			lastGasReading:350, heaterOn:false, heaterFault:true, heaterFaultDescr:"GasLeak",
 			waitForAck:-1, isEditing:false, isLocked:false, isError:false, heaterOnMinutes:123, 
-			timestamp:1445802480, chartData:[[]], chartDataRaw:[0, 1, 0, 1, 0], chartSeries:["HeaterOn"], chartLabels:[], chartTimes:[1446336000,  1446357600,  1446391800,  1446407700] },
+			timestamp:1445802480, chartData:[[]], chartDataRaw:[10, 20, 10, 20, 10], chartSeries:["HeaterOn"], chartLabels:[], chartTimes:[1446336000,  1446357600,  1446391800,  1446407700, 1446417700] },
 		];
 	}
 	

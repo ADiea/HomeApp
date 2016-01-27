@@ -269,7 +269,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 /*------MODAL */	
 
 /*---------------- MODAL charts -----*/
-
+//http://n3-charts.github.io/line-chart/#/examples
 	$scope.modalChart = {};
 	
 	$scope.modalChart.processHeaterChart = function processHeaterChart(heater)

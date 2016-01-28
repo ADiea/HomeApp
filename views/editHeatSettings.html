@@ -1,0 +1,48 @@
+<ion-modal-view class="modalAutoPilotRange">
+  <ion-header-bar>
+    <h1 class="title">{{lang.getS('sHeatSetTitle')}}</h1>
+
+	<div class="buttons">
+      <button class="button button-outline icon-right button-assertive button-save" ng-click="closeModalSettings(true)"><i class="icon icon-size-small ion-close-round"></i></button>
+	  <button class="button button-outline icon-right button-positive button-save" ng-click="closeAndSaveModalSettings()"><i class="icon icon-size-small ion-checkmark-round"></i></button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+
+	<label class="item item-input item-stacked-label">
+		<i style="margin:5px" class="icon icon-size-normal ion-at"></i>
+		<span class="input-label">/Nume</span>
+		<input class="textInput" type="text" placeholder="{{modalSettings.openedDev.title}}" 
+			ng-model="modalSettings.openedDev.title"></input>
+	</label>
+	
+	<label class="item item-input item-stacked-label">
+		<i class="icon icon-size-normal ion-android-warning"></i> 
+		<span class="input-label">/Prag scazut gaze</span>
+		<input class="textInput" type="text" placeholder="{{modalSettings.openedDev.lowGasLevThres}}"   
+			ng-model="modalSettings.openedDev.lowGasLevThres"></input>
+	</label>	
+
+	<label class="item item-input item-stacked-label">
+		<i class="icon icon-size-normal ion-android-warning"></i> 
+		<span class="input-label">/Prag mediu gaze</span>
+		<input class="textInput" type="text" placeholder="{{modalSettings.openedDev.medGasLevThres}}"   
+			ng-model="modalSettings.openedDev.medGasLevThres"></input>
+	</label>	
+	
+	<label class="item item-input item-stacked-label">
+		<i class="icon icon-size-n/ormal ion-android-warning"></i> 
+		<span class="input-label">/Prag ridicat gaze</span>
+		<input class="textInput" type="text" placeholder="{{modalSettings.openedDev.lowGasLevThres}}"   
+			ng-model="modalSettings.openedDev.medGasLevThres"></input>
+	</label>	
+
+	<label class="item item-input item-stacked-label">
+		<i style="margin:5px" class="icon icon-size-normal ion-ios-grid-view-outline"></i>
+		<span class="input-label">/Id</span>
+		<input class="textInput" type="text" placeholder="{{modalSettings.openedDev.sensorId}}" 
+			ng-disabled="true"  ng-model="modalSettings.openedDev.sensorID"></input>
+	</label>
+
+  </ion-content>
+</ion-modal-view>

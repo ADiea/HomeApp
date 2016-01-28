@@ -3,8 +3,8 @@
     <h1 class="title">{{lang.getS('sSetTitle')}}</h1>
 
 	<div class="buttons">
-      <button class="button button-outline icon-right button-assertive button-save" ng-click="closeTHSettings(true)"><i class="icon icon-size-small ion-close-round"></i></button>
-	  <button class="button button-outline icon-right button-positive button-save" ng-click="closeTHSettingsAndSave()"><i class="icon icon-size-small ion-checkmark-round"></i></button>
+      <button class="button button-outline icon-right button-assertive button-save" ng-click="closeModalSettings(true)"><i class="icon icon-size-small ion-close-round"></i></button>
+	  <button class="button button-outline icon-right button-positive button-save" ng-click="closeAndSaveModalSettings()"><i class="icon icon-size-small ion-checkmark-round"></i></button>
     </div>
   </ion-header-bar>
   <ion-content>
@@ -12,7 +12,7 @@
 	<label class="item item-input item-stacked-label">
 		<i style="margin:5px" class="icon icon-size-normal ion-at"></i>
 		<span class="input-label">Nume</span>
-		<input class="textInput" type="text" placeholder="{{houseTH[uiOpenedTH].title}}" ng-model="houseTH[uiOpenedTH].title"></input>
+		<input class="textInput" type="text" placeholder="{{modalSettings.openedDev.title}}" ng-model="modalSettings.openedDev.title"></input>
 	</label>
 	
 	<ion-item>
@@ -90,7 +90,7 @@
 	<label class="item item-input item-stacked-label">
 		<i style="margin:5px" class="icon icon-size-normal ion-ios-grid-view-outline"></i>
 		<span class="input-label">Id</span>
-		<input class="textInput" type="text" placeholder="{{houseTH[uiOpenedTH].sensorId}}" ng-disabled="true"  ng-model="houseTH[uiOpenedTH].sensorID"></input>
+		<input class="textInput" type="text" placeholder="{{modalSettings.openedDev.sensorId}}" ng-disabled="true"  ng-model="modalSettings.openedDev.sensorID"></input>
 	</label>
 
 	<!--
@@ -102,7 +102,7 @@
 		
 		 <select name="setTHLocation" id="setTHLocation"
 			ng-options="option.name for option in modalAutoPilot.ui.sensorLocationOptions track by option.id"
-			ng-model="houseTH[uiOpenedTH].sensorLocation"></select>
+			ng-model="modalSettings.openedDev.sensorLocation"></select>
 		
 	</label>
 

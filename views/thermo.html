@@ -137,7 +137,7 @@
 
 		</ion-item>
 		
-		<ion-item class="item-accordion" ng-show="uiOpenedTH==th.id" ng-click="showTHSettings(th.id)">
+		<ion-item class="item-accordion" ng-show="uiOpenedTH==th.id" ng-click="showModalSettings(th.id, true)">
 			
 			<span style="display:inline;float:left"> 
 				<i class="icon icon-size-normal ion-android-settings"></i> 
@@ -230,18 +230,13 @@
 			</div>
 		</ion-item>		
 
-		<ion-item class="item-accordion" ng-show="uiOpenedHeater==heater.id" ng-click="">
+		<ion-item class="item-accordion" ng-show="uiOpenedHeater==heater.id" ng-click="showModalSettings(heater.id, false)">
 			<span style="display:inline;float:left"> 
 				<i class="icon icon-size-normal ion-android-settings"></i> 
-				<span style="margin-left:10px">Setari </span>
+				<span style="margin-left:10px">{{lang.getS('sSetTitle')}}</span>
 			</span>
 			
-			<p> </p>
-			
 			<p style="display:inline;float:right">
-				<button class="button button-small button-outline button-positive">
-					<i  class="icon ion-more"></i>
-				</button>
 			</p>			
 		</ion-item>
 

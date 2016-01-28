@@ -277,7 +277,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 		heater.chartData[0] = [];
 		heater.chartLabels = [];
 		
-		var numPts = heater.chartTimes[heater.chartTimes.length - 1] - heater.chartTimes[0] / 60*10;
+		var deltaTime = (heater.chartTimes[heater.chartTimes.length - 1] - heater.chartTimes[0] )/ 20;
 		var curTime = heater.chartTimes[0], k=0, curVal = 0;
 		
 		while(curTime <= heater.chartTimes[heater.chartTimes.length - 1])
@@ -287,32 +287,19 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 				curVal = heater.chartDataRaw[k];
 				k++;
 				
-				var date = new Date(curTime*1000);
+				var date = new Date(heater.chartTimes[k-1]*1000);
 				var h = date.getHours();
 				
 				var m = date.getMinutes() + "";
 				if(m.length < 2) m = "0"+m;
-				
-				var s = date.getSeconds() + "";
-				if(s.length < 2) s = "0"+s;
-				
-				
-				heater.chartLabels.push(h+ ":" + m+":" + s);
+
+				heater.chartLabels.push(h + ":" + m);
 			}
 			else heater.chartLabels.push("");
 			
-			
 			heater.chartData[0].push(curVal);
-			
-			
-			curTime += 1200;
-
-		}
-		
-		
-		
-	//chartData:[[]], chartDataRaw  chartLabels:[], chartTimes
-	
+			curTime += deltaTime;
+		}	
 	}
 
 	$scope.heaterOnChart = function heaterOnChart(heater)
@@ -342,64 +329,84 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 
 /* MODAL settings   */
 	$scope.modalSettings = {
-		modalSettings:null,
-		modalSettingsCreated:false,
+		modalSettings:[null, null],
+		modalSettingsCreated:[false, false],
+		modalSettingsActive:0,
+		
 		tempMin:{ curTemp:1, minTemp:0, isEditing:false, isLocked:false, 
 				maxTemp:function(){return $scope.modalSettings.tempMax.curTemp - 0.5;},			
 		},
 		tempMax:{ curTemp:30,maxTemp:30, isEditing:false, isLocked:false, 
 				minTemp:function(){return $scope.modalSettings.tempMin.curTemp + 0.5;},
 		},
+		url:['views/editThermoSettings.html', 'views/editHeatSettings.html']
 	};
 
-	$scope.showTHSettings = function showTHSettings(id)
+	$scope.showModalSettings = function showTHSettings(id, openTHSettings)
 	{
-		$scope.modalSettings.tempMin.curTemp = $scope.houseTH[id].minTemp;
-		$scope.modalSettings.tempMax.curTemp = $scope.houseTH[id].maxTemp;
+		openTHSettings = openTHSettings || false;
 		
-		$scope.houseTH[id].isEditing = true;
-		$scope.houseTH[id].isLocked = true;
-	
-		if(!$scope.modalSettings.modalSettingsCreated)
+		
+		if(openTHSettings)
 		{
-			$scope.modalSettings.modalSettingsCreated = true;
+			$scope.modalSettings.tempMin.curTemp = $scope.houseTH[id].minTemp;
+			$scope.modalSettings.tempMax.curTemp = $scope.houseTH[id].maxTemp;
 			
-			$ionicModal.fromTemplateUrl('views/editThermoSettings.html', {scope: $scope}).
+			$scope.modalSettings.openedDev = $scope.houseTH[id];
+			$scope.modalSettings.modalSettingsActive = 0;
+		}
+		else
+		{
+			$scope.modalSettings.openedDev = $scope.houseHeat[id];
+			$scope.modalSettings.modalSettingsActive = 1;
+		}
+		
+		$scope.modalSettings.openedDev.isEditing = true;
+		$scope.modalSettings.openedDev.isLocked = true;
+	
+		if(!$scope.modalSettings.modalSettingsCreated[$scope.modalSettings.modalSettingsActive])
+		{
+			$scope.modalSettings.modalSettingsCreated[$scope.modalSettings.modalSettingsActive] = true;
+			
+			$ionicModal.fromTemplateUrl($scope.modalSettings.url[$scope.modalSettings.modalSettingsActive], {scope: $scope}).
 			then(
 				function(modal) 
 				{
-					$scope.modalSettings.modalSettings = modal;
-					$scope.modalSettings.modalSettings.show();
+					$scope.modalSettings.modalSettings[$scope.modalSettings.modalSettingsActive] = modal;
+					$scope.modalSettings.modalSettings[$scope.modalSettings.modalSettingsActive].show();
 			});	
 		}
 		else
 		{
-			$timeout(function(){$scope.modalSettings.modalSettings.show();});
+			$timeout(function(){$scope.modalSettings.modalSettings[$scope.modalSettings.modalSettingsActive].show();});
 		}
 	}
 
-	$scope.closeTHSettings = function closeTHSettings(hideModal)
+	$scope.closeModalSettings = function closeModalSettings(hideModal)
 	{
-		$scope.houseTH[$scope.uiOpenedTH].isEditing = false;
-		$scope.houseTH[$scope.uiOpenedTH].isLocked = false;
+		$scope.modalSettings.openedDev.isEditing = false;
+		$scope.modalSettings.openedDev.isLocked = false;
 		
 		if(hideModal)
 		{
-			$scope.modalSettings.modalSettings.hide();
+			$scope.modalSettings.modalSettings[$scope.modalSettings.modalSettingsActive].hide();
 		}
 	}
 	
-	$scope.closeTHSettingsAndSave = function closeTHSettingsAndSave()
+	$scope.closeAndSaveModalSettings = function closeAndSaveModalSettings()
 	{
-		$scope.houseTH[$scope.uiOpenedTH].minTemp = $scope.modalSettings.tempMin.curTemp;
-		$scope.houseTH[$scope.uiOpenedTH].maxTemp = $scope.modalSettings.tempMax.curTemp;
+		if($scope.modalSettings.modalSettingsActive == 0)
+		{
+			$scope.modalSettings.openedDev.minTemp = $scope.modalSettings.tempMin.curTemp;
+			$scope.modalSettings.openedDev.maxTemp = $scope.modalSettings.tempMax.curTemp;
+		}
 		
-		$scope.houseTH[$scope.uiOpenedTH].isEditing = true;
-		$scope.houseTH[$scope.uiOpenedTH].isLocked = false;
+		$scope.modalSettings.openedDev.isEditing = true;
+		$scope.modalSettings.openedDev.isLocked = false;
 
 		$scope.sendParamsToServer();
 
-		$scope.modalSettings.modalSettings.hide();
+		$scope.modalSettings.modalSettings[$scope.modalSettings.modalSettingsActive].hide();
 	}
 
 /* --- MODAL settings*/
@@ -411,7 +418,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 				id:0, sensorID:-1, title:"DemoDormitor", isValid:true, sensorLocation:0, 
 				minTemp:16.0, maxTemp:27.0, curTemp:21.0, curSensorTemp:22, curSensorTemp1m:22.1, curSensorTemp10m:21.9, curTempSymbol:'C', curSensorHumid:45.2, 
 				timestamp:1552337694, heaterOn:false, acOn:false, autoPilotOn:true, autoPilotProgramIndex:0, autoPilotProgramDay:-1, 
-				waitForAck:-1, isEditing:false, isLocked:false, isError:false,
+				waitForAck:-1, isEditing:false, isLocked:false, isOutdated:false,
 				schedule:[
 					[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
 					[], [], [], [], [], []
@@ -422,7 +429,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 				id:1, sensorID:-2, title:"DemoLiving", isValid:true, sensorLocation:"1", 
 				minTemp:15.0, maxTemp:27.0, curTemp:18.0, curSensorTemp:22, curSensorTemp1m:22.1, curSensorTemp10m:21.9, curTempSymbol:'C', curSensorHumid:30.2, 
 				timestamp:1445802480, heaterOn:false, acOn:true,  autoPilotOn:true, autoPilotProgramIndex:0, autoPilotProgramDay:-1, 
-				waitForAck:-1, isEditing:false, isLocked:false, isError:false,
+				waitForAck:-1, isEditing:false, isLocked:false, isOutdated:false,
 				schedule: [[], [], [], [], [], [], []]
 			},
 		];
@@ -431,14 +438,14 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 			{id:0, sensorID:-1, title:"Centrala", isValid:true, 
 			lowGasLevThres:300, medGasLevThres:500, highGasLevThres:700, 
 			lastGasReading:350, heaterOn:true, heaterFault:false, heaterFaultDescr:"",
-			waitForAck:-1, isEditing:false, isLocked:false, isError:false, heaterOnMinutes:59, 
+			waitForAck:-1, isEditing:false, isLocked:false, isOutdated:false, heaterOnMinutes:59, 
 			timestamp:1445802480, chartData:[[]], chartDataRaw:[10, 20, 10, 20, 10], chartSeries:["HeaterOn"], chartLabels:[], chartTimes:[1446336000,  1446357600,  1446391800,  1446407700, 1446417700] },
 			
 			
 			{id:1, sensorID:-2, title:"Centrala2", isValid:true, 
 			lowGasLevThres:300, medGasLevThres:500, highGasLevThres:700, 
 			lastGasReading:350, heaterOn:false, heaterFault:true, heaterFaultDescr:"GasLeak",
-			waitForAck:-1, isEditing:false, isLocked:false, isError:false, heaterOnMinutes:123, 
+			waitForAck:-1, isEditing:false, isLocked:false, isOutdated:false, heaterOnMinutes:123, 
 			timestamp:1445802480, chartData:[[]], chartDataRaw:[10, 20, 10, 20, 10], chartSeries:["HeaterOn"], chartLabels:[], chartTimes:[1446336000,  1446357600,  1446391800,  1446407700, 1446417700] },
 		];
 	}
@@ -532,7 +539,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 							objTH.waitForAck = -1;
 							objTH.isEditing = false;
 							objTH.isLocked = false;
-							objTH.isError = false;
+							objTH.isOutdated = false;
 							objTH.timestamp = (new Date()).getTime()/1000;
 							
 							if(commWeb.skipFloat(res).err) return;
@@ -670,7 +677,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 							objHeater.waitForAck = -1;
 							objHeater.isEditing = false;
 							objHeater.isLocked = false;
-							objHeater.isError = false;
+							objHeater.isOutdated = false;
 							objHeater.timestamp = (new Date()).getTime()/1000;
 							
 							if(commWeb.skipString(res).err) return;
@@ -783,17 +790,17 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 			for(i=0; i < $scope.houseTH.length; i++)
 			{
 				if(Util.textTimestamp($scope.houseTH[i].timestamp).sec > 5)
-					$scope.houseTH[i].isError = true;
+					$scope.houseTH[i].isOutdated = true;
 				else
-					$scope.houseTH[i].isError = false;
+					$scope.houseTH[i].isOutdated = false;
 			}
 			
 			for(i=0; i < $scope.houseHeat.length; i++)
 			{
 				if(Util.textTimestamp($scope.houseHeat[i].timestamp).sec > 5)
-					$scope.houseHeat[i].isError = true;
+					$scope.houseHeat[i].isOutdated = true;
 				else
-					$scope.houseHeat[i].isError = false;
+					$scope.houseHeat[i].isOutdated = false;
 			}
 		}, 5000);	
 	});

@@ -78,7 +78,6 @@ ionicApp.factory('Util',function(Lang, LogDataService, $interval, $ionicPopup){
 	{
 		util.thermoTempChangeDirectionUp = up;
 
-		
 		if (angular.isDefined(util.thermoTempChangeTimer)) 
 		{
 			$interval.cancel(util.thermoTempChangeTimer);
@@ -124,13 +123,13 @@ ionicApp.factory('Util',function(Lang, LogDataService, $interval, $ionicPopup){
 		
 		do
 		{
-			if (interval > 1) 
+			if (interval >= 1) 
 			{
 				ret.text = interval + Lang.getS('sTsYrs'); break;
 			}
 
 			interval = Math.floor(seconds / 2592000);
-			if (interval > 1) 
+			if (interval >= 1) 
 			{
 				ret.text =  interval + Lang.getS('sTsMon');	break;
 			}
@@ -148,7 +147,7 @@ ionicApp.factory('Util',function(Lang, LogDataService, $interval, $ionicPopup){
 			}
 
 			interval = Math.floor(seconds / 60);
-			if (interval > 1) 
+			if (interval >= 1) 
 			{
 				ret.text =  interval + Lang.getS('sTsMin');	break;
 			}

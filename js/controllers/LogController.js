@@ -34,4 +34,23 @@ var _logCtrl = ionicApp.controller('LogCtrl', function($scope, LogDataService, L
 	{
 		return window.encodeURIComponent($scope.logTextDownload);
 	}
+	
+	$scope.getLogName = function getLogName()
+	{
+		var d = new Date();
+		var y = d.getFullYear();
+		var m = d.getMonth() + 1;
+		var day = d.getDate();
+		var min = d.getMinutes();
+		var h = d.getHours();
+		
+		if(m<10) m = '0'+m;
+		if(day<10) day = '0'+day;
+		if(min<10) min = '0'+min;
+		if(h<10) h = '0'+h;
+		
+		
+		
+		return y + '' + m + '' + day + '' + h + '' + min + "_homeApp.log";
+	}
 });

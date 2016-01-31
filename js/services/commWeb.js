@@ -120,6 +120,7 @@ ionicApp.factory('commWeb',function(){
 		cwPrintDebugInformation:19,
 
 		cwSpecialCommand:20,
+		cwNotifyGenericDeviceStatus:21,
 
 
 	//	cwGetDevices:,

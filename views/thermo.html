@@ -8,11 +8,11 @@
 		<div ng-repeat="th in houseTH">
 		<ion-toggle class="item-divider" ng-model="th.autoPilotOn" toggle-class="toggle-positive">
 			<!-- class="tableDebug" -->
-			<table  style="width:100%" ng-click="uiToggleShowTH(th.id)" >
+			<table  style="width:100%" ng-click="uiToggleShowObj(th)" >
 				<tr>
 					<td  style="vertical-align:middle">
-						<button style="display:inline;margin-right:5px;" ng-click="uiToggleShowTH(th.id);$event.stopPropagation();" class="button button-positive button-small button-outline">
-							<i  class="icon" ng-class="uiOpenedTH==th.id ? 'ion-chevron-up' : 'ion-chevron-down'"></i>
+						<button style="display:inline;margin-right:5px;" ng-click="uiToggleShowObj(th);$event.stopPropagation();" class="button button-positive button-small button-outline">
+							<i  class="icon" ng-class="uiOpenedObject==th ? 'ion-chevron-up' : 'ion-chevron-down'"></i>
 						</button>
 					</td>
 
@@ -36,8 +36,8 @@
 						<button style="display:inline;margin-right:5px;" 
 							ng-click="util.showDevErrorInfo(th);$event.stopPropagation();" 
 							class="button button-positive button-small button-clear"
-							ng-disabled="!th.isError" >
-							<i  class="icon" ng-class="th.isError ? 'ion-alert-circled':th.isEditing?'ion-android-sync':'ion-checkmark-circled'"></i>
+							ng-disabled="!th.isOffline" >
+							<i  class="icon" ng-class="th.isOffline ? 'ion-alert-circled':(th.isEditing || th.isOutdated)?'ion-android-sync':'ion-checkmark-circled'"></i>
 						</button>
 					</td>
 				
@@ -79,7 +79,7 @@
 			</table>
 		</ion-toggle>
 
-		<ion-item ng-click="showAutopilotSettings(th.id)" class="item-accordion" ng-show="uiOpenedTH==th.id" >
+		<ion-item ng-click="showAutopilotSettings(th)" class="item-accordion" ng-show="uiOpenedObject==th" >
 			<span style="display:inline;float:left">
 				<i ng-show="!settings.houseHoliday" class="icon icon-size-normal ion-ios-timer-outline"></i>
 				<i ng-show="settings.houseHoliday" class="icon icon-size-normal ion-briefcase"></i>
@@ -97,11 +97,11 @@
 					<span class="textDegSymbolSizeMicro textDegSymbolMicro">o</span>
 					<span class="textDegIntSizeMicro">C</span>
 				</div>			
-				<p style="display:inline;">{{getThermoAutoPilotDescr(th.id)}}</p>
+				<p style="display:inline;">{{getThermoAutoPilotDescr(th)}}</p>
 			</div>
 		</ion-item>
 		
-		<ion-item class="item-accordion" ng-show="uiOpenedTH==th.id">
+		<ion-item class="item-accordion" ng-show="uiOpenedObject==th">
 			<span style="display:inline;float:left"> 
 				<i class="icon icon-size-normal ion-ios-speedometer-outline"></i>
 				<span style="margin-left:10px">{{lang.getS('sStatist')}}</span>
@@ -123,7 +123,7 @@
 			</div>
 		</ion-item>
 		
-		<ion-item class="item-accordion" ng-show="uiOpenedTH==th.id">
+		<ion-item class="item-accordion" ng-show="uiOpenedObject==th">
 
 			<span style="display:inline;float:left"> 
 				<i class="icon icon-size-normal ion-heart"></i>
@@ -131,13 +131,13 @@
 			</span>
 			
 			<div style="display:inline;float:right">
-				<p style="display:inline;">{{getHealthyDescrRH(th.id)}}</p>
+				<p style="display:inline;">{{getHealthyDescrRH(th)}}</p>
 
 			</div>
 
 		</ion-item>
 		
-		<ion-item class="item-accordion" ng-show="uiOpenedTH==th.id" ng-click="showModalSettings(th.id, true)">
+		<ion-item class="item-accordion" ng-show="uiOpenedObject==th" ng-click="showModalSettings(th, true)">
 			
 			<span style="display:inline;float:left"> 
 				<i class="icon icon-size-normal ion-android-settings"></i> 
@@ -153,11 +153,11 @@
 	<div ng-repeat="heater in houseHeat">
 		<ion-item class="item-divider" >
 			
-			<table style="width:100%" ng-click="uiToggleShowHeater(heater.id)" >
+			<table style="width:100%" ng-click="uiToggleShowObj(heater)" >
 				<tr>
 					<td style="vertical-align:middle">
-						<button style="display:inline;;margin-right:5px;" ng-click="uiToggleShowHeater(heater.id);$event.stopPropagation();" class="button button-small button-positive button-outline">
-								<i  class="icon" ng-class="uiOpenedHeater==heater.id ? 'ion-chevron-up' : 'ion-chevron-down'"></i>
+						<button style="display:inline;;margin-right:5px;" ng-click="uiToggleShowObj(heater);$event.stopPropagation();" class="button button-small button-positive button-outline">
+								<i  class="icon" ng-class="uiOpenedObject==heater ? 'ion-chevron-up' : 'ion-chevron-down'"></i>
 						</button>
 					</td>
 					
@@ -179,8 +179,8 @@
 						<button style="display:inline;margin-right:5px;" 
 							ng-click="util.showDevErrorInfo(heater);$event.stopPropagation();" 
 							class="button button-positive button-small button-clear"
-							ng-disabled="!heater.isError" >
-							<i  class="icon" ng-class="heater.isError ? 'ion-alert-circled':heater.isEditing?'ion-android-sync':'ion-checkmark-circled'"></i>
+							ng-disabled="!heater.isOffline" >
+							<i  class="icon" ng-class="heater.isOffline ? 'ion-alert-circled':(heater.isEditing||heater.isOutdated)?'ion-android-sync':'ion-checkmark-circled'"></i>
 						</button>
 					</td>
 				
@@ -200,7 +200,7 @@
 
 		</ion-item>
 
-		<ion-item class="item-accordion" ng-show="uiOpenedHeater==heater.id" ng-click="heaterOnChart(heater)">
+		<ion-item class="item-accordion" ng-show="uiOpenedObject==heater" ng-click="heaterOnChart(heater)">
 			<span style="display:inline;float:left"> 
 				<i class="icon icon-size-normal ion-ios-speedometer-outline"></i>
 				<span style="margin-left:10px">Istoric</span>
@@ -215,7 +215,7 @@
 			</div>
 		</ion-item>
 		
-		<ion-item class="item-accordion" ng-show="uiOpenedHeater==heater.id" ng-click="">
+		<ion-item class="item-accordion" ng-show="uiOpenedObject==heater" ng-click="">
 			<span style="display:inline;float:left"> 
 				<i class="icon icon-size-normal ion-android-warning"></i>
 				<span style="margin-left:10px">Gaz</span>
@@ -230,7 +230,7 @@
 			</div>
 		</ion-item>		
 
-		<ion-item class="item-accordion" ng-show="uiOpenedHeater==heater.id" ng-click="showModalSettings(heater.id, false)">
+		<ion-item class="item-accordion" ng-show="uiOpenedObject==heater" ng-click="showModalSettings(heater, false)">
 			<span style="display:inline;float:left"> 
 				<i class="icon icon-size-normal ion-android-settings"></i> 
 				<span style="margin-left:10px">{{lang.getS('sSetTitle')}}</span>

@@ -113,17 +113,16 @@ ionicApp.factory('socket',function(SettingsService, LogDataService, commWeb){
 			
 			LogDataService.addLog("sock: Conn: in state " + currentState, "#aaa");
 			
-			if(socket._Socket.readyState != WebSocket.CONNECTING &&
+			if(
+				_force || 
 				(
-					_force || 
+					socket._Socket.readyState != WebSocket.CONNECTING &&
+					socket._Socket.readyState != WebSocket.OPEN && 
 					(
-						socket._Socket.readyState != WebSocket.OPEN && 
-						(
-							(!socket._Connected && !socket._Connecting) ||
-							socket._wasError
-						)
+						(!socket._Connected && !socket._Connecting) ||
+						socket._wasError
 					)
-				)
+				)	
 			)
 			{
 				socket._wasError = false;

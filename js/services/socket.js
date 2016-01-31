@@ -10,6 +10,7 @@ ionicApp.factory('socket',function(SettingsService, LogDataService, commWeb){
 		_lastTimeRX:0,
 		_lastTimeTX:0,
 		_wasError:false,
+		_lastTimeTryConnect:0,
 	};
 	
 	LogDataService.addLog("FACTORY: SOCKET", "#f00");
@@ -116,7 +117,10 @@ ionicApp.factory('socket',function(SettingsService, LogDataService, commWeb){
 			if(
 				_force || 
 				(
-					socket._Socket.readyState != WebSocket.CONNECTING &&
+					(
+						socket._Socket.readyState != WebSocket.CONNECTING ||
+						(new Date()).getTime() - socket._lastTimeTryConnect > 3000 
+					) &&
 					socket._Socket.readyState != WebSocket.OPEN && 
 					(
 						(!socket._Connected && !socket._Connecting) ||
@@ -148,6 +152,7 @@ ionicApp.factory('socket',function(SettingsService, LogDataService, commWeb){
 		{
 			LogDataService.addLog("sock: CREATE "+settings.serverURL, "#aaa");
 			socket._Connecting = true;
+			socket._lastTimeTryConnect = (new Date()).getTime();
 			try
 			{
 				socket._Socket = new WebSocket(settings.serverURL);

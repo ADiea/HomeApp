@@ -121,6 +121,7 @@ ionicApp.factory('commWeb',function(){
 
 		cwSpecialCommand:20,
 		cwNotifyGenericDeviceStatus:21,
+		cwSetGenericDeviceParams:22,
 
 
 	//	cwGetDevices:,

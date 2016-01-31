@@ -437,7 +437,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 			sensorID:0, title:"DemoDormitor", sensorLocation:0, 
 			minTemp:16.0, maxTemp:27.0, curTemp:21.0, curSensorTemp:22, curSensorTemp1m:22.1, curSensorTemp10m:21.9, curTempSymbol:'C', curSensorHumid:45.2, 
 			timestamp:1552337694, heaterOn:false, acOn:false, autoPilotOn:true, autoPilotProgramIndex:0, autoPilotProgramDay:-1, 
-			waitForAck:-1, isEditing:false, isLocked:false, isOutdated:false, isOffline:false,
+			waitForAck:-1, isEditing:false, isLocked:false, isOutdated:false, isOffline:false, sensorLocation:0,
 			schedule:[
 				[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
 				[], [], [], [], [], []
@@ -501,6 +501,8 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 						{
 							var objTH={};
 
+							if(commWeb.skipInt(res).err) return;// skip dummy dev type
+							
 							if(commWeb.skipInt(res).err) return;
 							
 							found = false;
@@ -522,34 +524,17 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 
 							if(commWeb.skipString(res).err) return;
 							objTH.title = res.result;
-							
+						
 							objTH.waitForAck = -1;
 							objTH.isEditing = false;
 							objTH.isLocked = false;
 							objTH.isOutdated = false;
 							objTH.isOffline = false;
 							objTH.timestamp = (new Date()).getTime()/1000;
+							objTH.curTempSymbol = 'C';
 							
 							if(commWeb.skipFloat(res).err) return;
 							objTH.curTemp = res.result;	
-							
-							if(commWeb.skipFloat(res).err) return;
-							objTH.curSensorTemp = res.result;
-						
-							if(commWeb.skipInt(res).err) return;
-							if(res.result == 1)
-								objTH.curTempSymbol = 'C';
-							else
-								objTH.curTempSymbol = 'F';
-								
-							if(commWeb.skipInt(res).err) return;
-							objTH.autoPilotOn = res.result ? true : false;
-							
-							if(commWeb.skipInt(res).err) return;
-							objTH.heaterOn = res.result ? true : false;
-							
-							if(commWeb.skipInt(res).err) return;
-							objTH.acOn = res.result ? true : false;
 							
 							if(commWeb.skipFloat(res).err) return;
 							objTH.minTemp = res.result;
@@ -557,6 +542,68 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 							if(commWeb.skipFloat(res).err) return;
 							objTH.maxTemp = res.result;
 							
+							if(commWeb.skipInt(res).err) return;
+							objTH.sensorLocation = res.result;
+							
+							if(commWeb.skipInt(res).err) return;
+							objTH.autoPilotOn = res.result ? true : false;
+
+							if(commWeb.skipInt(res).err) return; //watchers list
+							var numWatchers = res.result;
+							
+							while(numWatchers > 0)
+							{
+								if(commWeb.skipInt(res).err) return; //watchers #i
+							}
+							
+							var day=0, numProg, temp, _startH, _startM, _endH, _endM;
+
+							objTH.schedule = null;
+							objTH.schedule = new Array([], [], [], [], [], [], []);
+
+							for(; day < 7; day++)
+							{
+								if(commWeb.skipInt(res).err) return;
+								numProg  = res.result;
+								
+								while(numProg)
+								{	
+									if(commWeb.skipFloat(res).err) return;
+									temp = res.result;	
+									
+									if(commWeb.skipInt(res).err) return;
+									_startH  = res.result;
+									
+									if(commWeb.skipInt(res).err) return;
+									_startM  = res.result;
+									
+									if(commWeb.skipInt(res).err) return;
+									_endH = res.result;  
+									
+									if(commWeb.skipInt(res).err) return;
+									_endM  = res.result;
+									
+									objTH.schedule[day].push({t:temp, startH:_startH, startM:_startM, endH:_endH, endM:_endM});
+								
+									numProg--;
+								}
+							}
+							
+							if(commWeb.skipInt(res).err) return;
+							objTH.autoPilotProgramIndex = res.result;
+
+							if(commWeb.skipInt(res).err) return;
+							objTH.autoPilotProgramDay = res.result;	
+
+							if(commWeb.skipInt(res).err) return;
+							objTH.heaterOn = res.result ? true : false;
+							
+							if(commWeb.skipInt(res).err) return;
+							objTH.acOn = res.result ? true : false;
+
+							if(commWeb.skipFloat(res).err) return;
+							objTH.curSensorTemp = res.result;
+
 							if(commWeb.skipFloat(res).err) return;
 							objTH.curSensorHumid = res.result;
 
@@ -564,56 +611,13 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 							objTH.curSensorTemp1m = res.result;
 
 							if(commWeb.skipFloat(res).err) return;
-							objTH.curSensorTemp10m = res.result;
+							objTH.curSensorTemp10m = res.result;		
 
-							if(commWeb.skipInt(res).err) 
-							{
-								//Make default schedules for all days
-								objTH.autoPilotProgramDay = -1;
-								objTH.autoPilotProgramIndex = 0;
-								objTH.schedule = null;
-								objTH.schedule = new Array([], [], [], [], [], [], []);
-							}
-							else
-							{
-								objTH.autoPilotProgramDay = res.result;
-								
-								if(commWeb.skipInt(res).err) return;
-								objTH.autoPilotProgramIndex = res.result;
-								
-								var day=0, numProg, temp, _startH, _startM, _endH, _endM;
+							if(commWeb.skipFloat(res).err) return;
+							objTH.curSensorHumid1m = res.result;	
 
-								objTH.schedule = null;
-								objTH.schedule = new Array([], [], [], [], [], [], []);
-
-								for(; day < 7; day++)
-								{
-									if(commWeb.skipInt(res).err) return;
-									numProg  = res.result;
-									
-									while(numProg)
-									{	
-										if(commWeb.skipFloat(res).err) return;
-										temp = res.result;	
-										
-										if(commWeb.skipInt(res).err) return;
-										_startH  = res.result;
-										
-										if(commWeb.skipInt(res).err) return;
-										_startM  = res.result;
-										
-										if(commWeb.skipInt(res).err) return;
-										_endH = res.result;  
-										
-										if(commWeb.skipInt(res).err) return;
-										_endM  = res.result;
-										
-										objTH.schedule[day].push({t:temp, startH:_startH, startM:_startM, endH:_endH, endM:_endM});
-									
-										numProg--;
-									}
-								}
-							}
+							if(commWeb.skipFloat(res).err) return;
+							objTH.curSensorHumid10m = res.result;			
 							
 							if(!found)	
 								$scope.houseTH.push(objTH);
@@ -627,6 +631,9 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 						while(numTHs--)
 						{
 							var objHeater={};
+							
+							if(commWeb.skipInt(res).err) return;// skip dummy dev type
+							
 							if(commWeb.skipInt(res).err) return;
 							
 							found = false;
@@ -654,6 +661,23 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 							objHeater.title = res.result;
 
 							if(commWeb.skipInt(res).err) return;
+							objHeater.highGasLevThres = res.result;
+
+							if(commWeb.skipInt(res).err) return;
+							objHeater.medGasLevThres = res.result;
+							
+							if(commWeb.skipInt(res).err) return;
+							objHeater.lowGasLevThres = res.result;
+							
+							if(commWeb.skipInt(res).err) return; //watchers list
+							var numWatchers = res.result;
+							
+							while(numWatchers > 0)
+							{
+								if(commWeb.skipInt(res).err) return; //watchers #i
+							}							
+
+							if(commWeb.skipInt(res).err) return;
 							objHeater.heaterOn = res.result ? true : false;
 							
 							if(commWeb.skipInt(res).err) return;
@@ -661,15 +685,6 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 							
 							if(commWeb.skipInt(res).err) return;
 							objHeater.lastGasReading = res.result;
-							
-							if(commWeb.skipInt(res).err) return;
-							objHeater.lowGasLevThres = res.result;
-							
-							if(commWeb.skipInt(res).err) return;
-							objHeater.medGasLevThres = res.result;
-							
-							if(commWeb.skipInt(res).err) return;
-							objHeater.highGasLevThres = res.result;
 							
 							if(commWeb.skipInt(res).err) return;
 							if( res.result & 1)
@@ -689,14 +704,6 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 				}				
 			},
 		});
-		socket.setCallbacks({protocol:commWeb.eCommWebMsgTYpes.cwNotifyTHStatus, 
-			name:"ThermoController",
-			//onMessage
-			onMessage:function (data) 
-			{
-				LogDataService.addLog("Msg cwNotifyTHStatus: " + data);
-			},
-		});
 
 		socket.setCallbacks({protocol:commWeb.eCommWebMsgTYpes.cwReplyToCommand, 
 			name:"ThermoController",
@@ -712,17 +719,17 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 				if(res.result == commWeb.eCommWebErrorCodes.cwErrSuccess)
 				{
 					if(commWeb.skipInt(res).err) return;
-					if(res.result == commWeb.eCommWebMsgTYpes.cwSetTHParams)
+					if(res.result == commWeb.eCommWebMsgTYpes.cwSetGenericDeviceParams)
 					{
 						if(commWeb.skipInt(res).err) return;
 						
-						var th;
-						for(var i = 0; i< $scope.houseTH.length; i++)	
+						var dev, i, lenTH = $scope.houseTH.length, lenHeat = $scope.houseHeat.length;
+						for(i = 0; i < lenTH + lenHeat; i++)	
 						{
-							th = $scope.houseTH[i];
-							if(th.isEditing && th.waitForAck == res.result)
+							dev = i < lenTH ? $scope.houseTH[i] : $scope.houseHeat[i - lenTH];	
+							if(dev.isEditing && dev.waitForAck == res.result)
 							{
-								th.isEditing = false;
+								dev.isEditing = false;
 								break;
 							}
 						}
@@ -784,7 +791,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 	$scope.sendParamsToServer = function sendParamsToServer()
 	{
 		var dev, i, lenTH = $scope.houseTH.length, lenHeat = $scope.houseHeat.length,
-			message;
+			message = commWeb.cwSetGenericDeviceParams.cwSetTHParams + ";" + dev.sensorID + ";" + dev.title + ';';
 		for(i = 0; i < lenTH + lenHeat; i++)	
 		{
 			dev = i < lenTH ? $scope.houseTH[i] : $scope.houseHeat[i - lenTH];
@@ -792,10 +799,10 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 			{
 				if(i < lenTH)
 				{
-					message = commWeb.eCommWebMsgTYpes.cwSetTHParams + ";" + 
-								dev.sensorID + ";" + (Math.round( dev.curTemp * 10 ) / 10).toFixed(1)  + ";" + 
-								dev.title + ";"+ (Math.round( dev.minTemp * 10 ) / 10).toFixed(1)  + ";" + 
-								(Math.round( dev.maxTemp * 10 ) / 10).toFixed(1)  + ";" ; 
+					message +=  (Math.round( dev.curTemp * 10 ) / 10).toFixed(1)  + ";" + 
+								(Math.round( dev.minTemp * 10 ) / 10).toFixed(1)  + ";" + 
+								(Math.round( dev.maxTemp * 10 ) / 10).toFixed(1)  + ";" +
+								dev.sensorLocation  + ';' + dev.autoPilotOn + ';0;'; //0-> watchers list 
 				
 					var day=0, i, len, sched;
 					for(; day<7; day++)
@@ -811,13 +818,12 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 										sched.endH + ';' + 
 										sched.endM + ';';
 						}
-					}				
+					}			
 				}
 				else 
 				{
-					message = commWeb.eCommWebMsgTYpes.cwSetHeaterParams + ";" + 
-								dev.sensorID + ";" + dev.title + ';' + dev.lowGasLevThres + ";" + 
-								dev.medGasLevThres + ';' + dev.highGasLevThres + ";";
+					message += dev.highGasLevThres + ";" + 
+								dev.medGasLevThres + ';' + dev.lowGasLevThres  + ";0;";
 				}
 				
 				var seq = commWeb.getSequence();

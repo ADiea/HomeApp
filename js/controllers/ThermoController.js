@@ -436,7 +436,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 		{
 			sensorID:0, title:"DemoDormitor", sensorLocation:0, 
 			minTemp:16.0, maxTemp:27.0, curTemp:21.0, curSensorTemp:22, curSensorTemp1m:22.1, curSensorTemp10m:21.9, curTempSymbol:'C', curSensorHumid:45.2, 
-			timestamp:1552337694, heaterOn:false, acOn:false, autoPilotOn:true, autoPilotProgramIndex:0, autoPilotProgramDay:-1, 
+			timestamp:1552337694, heaterOn:false, acOn:false, autoPilotOn:1, autoPilotProgramIndex:0, autoPilotProgramDay:-1, 
 			waitForAck:-1, isEditing:false, isLocked:false, isOutdated:false, isOffline:false, sensorLocation:0,
 			schedule:[
 				[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
@@ -546,7 +546,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 							objTH.sensorLocation = res.result;
 							
 							if(commWeb.skipInt(res).err) return;
-							objTH.autoPilotOn = res.result ? true : false;
+							objTH.autoPilotOn = res.result;
 
 							if(commWeb.skipInt(res).err) return; //watchers list
 							var numWatchers = res.result;
@@ -737,7 +737,16 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 				}
 			},
 		});
-	
+
+		socket.setCallbacks({protocol:commWeb.eCommWebMsgTYpes.cwReplyGenericDeviceLogs, 
+			name:"ThermoController",
+			//onMessage
+			onMessage:function (data) 
+			{
+				LogDataService.addLog("Msg cwReplyGenericDeviceLogs: " + data);
+			},
+		});
+
 		socket.connectSocket();
 		
 		socket.send(commWeb.eCommWebMsgTYpes.cwGetDevicesOfType+";"+commWeb.eDeviceTypes.devTypeTH+";" + commWeb.getSequence() + ";");
@@ -780,6 +789,17 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 		}, 1000);	
 	});
 	
+	$scope.getDeviceLogs = function getDeviceLogs(dev)
+	{
+		var message = commWeb.eCommWebMsgTYpes.cwGetGenericDeviceLogs + ";" + 
+							dev.sensorID + ";" + 
+							'1454284568' + ";" + 
+							'1' + ";" + 
+							'50' + ';'+
+							commWeb.getSequence() + ';';
+		socket.send(message);
+	}
+	
 	$scope.uiToggleShowObj = function uiToggleShowObj(obj)
 	{
 		if($scope.uiOpenedObject == obj)
@@ -790,11 +810,17 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 	
 	$scope.sendParamsToServer = function sendParamsToServer()
 	{
-		var dev, i, lenTH = $scope.houseTH.length, lenHeat = $scope.houseHeat.length,
-			message = commWeb.cwSetGenericDeviceParams.cwSetTHParams + ";" + dev.sensorID + ";" + dev.title + ';';
+		var dev, i, lenTH = $scope.houseTH.length, lenHeat = $scope.houseHeat.length;
+			
 		for(i = 0; i < lenTH + lenHeat; i++)	
 		{
 			dev = i < lenTH ? $scope.houseTH[i] : $scope.houseHeat[i - lenTH];
+			
+			var message = commWeb.eCommWebMsgTYpes.cwSetGenericDeviceParams + ";" + 
+							dev.sensorID + ";" + 
+							dev.sensorID + ";" + 
+							dev.title + ';';
+			
 			if(dev.isEditing && !dev.isLocked)
 			{
 				if(i < lenTH)
@@ -818,12 +844,13 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 										sched.endH + ';' + 
 										sched.endM + ';';
 						}
-					}			
+					}
+					message += "0;0;0;0;0.0;0.0;0.0;0.0;0.0;0.0;"
 				}
 				else 
 				{
 					message += dev.highGasLevThres + ";" + 
-								dev.medGasLevThres + ';' + dev.lowGasLevThres  + ";0;";
+								dev.medGasLevThres + ';' + dev.lowGasLevThres  + ";0;0;0;0;0;0;";
 				}
 				
 				var seq = commWeb.getSequence();

@@ -123,14 +123,15 @@ ionicApp.factory('commWeb',function(){
 		cwNotifyGenericDeviceStatus:21,
 		cwSetGenericDeviceParams:22,
 
-
+		cwGetGenericDeviceLogs:23,
+		cwReplyGenericDeviceLogs:24,
 	//	cwGetDevices:,
 	//	cwReplyDeviceList:,
 
 		//plant sensors
 		//plantwatering
 
-		cwMaxId:18,
+		cwMaxId:25,
 	};
 	
 	return commWeb;

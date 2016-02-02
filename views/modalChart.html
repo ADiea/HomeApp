@@ -4,13 +4,24 @@
   </ion-header-bar>
  
   <ion-content>
-
+			
             <canvas class="chart chart-line" 
-					chart-data="modalChart.heater.chartData" 
-					chart-labels="modalChart.heater.chartLabels" 
+					chart-data="modalChart.chartDev.chartData" 
+					chart-labels="modalChart.chartDev.chartLabels" 
 					chart-legend="false" 
-					chart-series="modalChart.heater.chartSeries" 
+					chart-series="modalChart.chartDev.chartSeries" 
 					chart-options="{animation: false, bezierCurve:false, showTooltips: false}"></canvas>
 
   </ion-content>
+  
+  <ion-footer-bar>
+
+	 <div class="button-bar" >
+		<button ng-click="getDeviceLogs(modalChart.chartDev)"
+			class="button button-small button-outline button-assertive">
+			<i class="icon  ion-ios-reload"></i>
+		</button>
+	 </div>
+	 
+  </ion-footer-bar>
 </ion-modal-view>

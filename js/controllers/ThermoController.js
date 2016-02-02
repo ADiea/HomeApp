@@ -273,44 +273,48 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 //http://n3-charts.github.io/line-chart/#/examples
 	$scope.modalChart = {};
 	
-	$scope.modalChart.processHeaterChart = function processHeaterChart(heater)
+	$scope.modalChart.processDevChart = function processDevChart(dev)
 	{
-		heater.chartData[0] = [];
-		heater.chartLabels = [];
+		dev.chartData[0] = [];
+		dev.chartLabels = [];
 		
-		var deltaTime = (heater.chartTimes[heater.chartTimes.length - 1] - heater.chartTimes[0] )/ 20;
-		var curTime = heater.chartTimes[0], k=0, curVal = 0;
+		var deltaTime = (dev.chartTimes[dev.chartTimes.length - 1] - dev.chartTimes[0] )/ 20;
+		var curTime = dev.chartTimes[0], k=0, curVal = 0;
 		
-		while(curTime <= heater.chartTimes[heater.chartTimes.length - 1])
+		while(curTime <= dev.chartTimes[dev.chartTimes.length - 1])
 		{
-			if(curTime >= heater.chartTimes[k])
+			if(curTime >= dev.chartTimes[k])
 			{
-				curVal = heater.chartDataRaw[k];
+				curVal = dev.chartDataRaw[k];
 				k++;
 				
-				var date = new Date(heater.chartTimes[k-1]*1000);
+				var date = new Date(dev.chartTimes[k-1]*1000);
 				var h = date.getHours();
 				
 				var m = date.getMinutes() + "";
 				if(m.length < 2) m = "0"+m;
 
-				heater.chartLabels.push(h + ":" + m);
+				dev.chartLabels.push(h + ":" + m);
 			}
-			else heater.chartLabels.push("");
+			else dev.chartLabels.push("");
 			
-			heater.chartData[0].push(curVal);
+			dev.chartData[0].push(curVal);
 			curTime += deltaTime;
 		}	
 	}
 
-	$scope.heaterOnChart = function heaterOnChart(heater)
+	$scope.deviceChart = function deviceChart(dev)
 	{
-		$scope.modalChart.processHeaterChart(heater);
+		try{
+		$scope.modalChart.processDevChart(dev);
+		}
+		catch(e)
+		{}
 	
 		if(!$scope.modalChart.modalChartCreated)
 		{
 			$scope.modalChart.modalChartCreated = true;
-			$scope.modalChart.heater = heater;
+			$scope.modalChart.chartDev = dev;
 			
 			$ionicModal.fromTemplateUrl('views/modalChart.html', {scope: $scope}).
 			then(
@@ -441,7 +445,9 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 			schedule:[
 				[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
 				[], [], [], [], [], []
-			]
+			],
+			chartData:[[]], chartDataRaw:[], chartSeries:["graph"], chartLabels:[], 
+			chartTimes:[] 
 		}];
 		
 		$scope.houseHeat = [
@@ -450,8 +456,8 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 			lowGasLevThres:300, medGasLevThres:500, highGasLevThres:700, 
 			lastGasReading:350, heaterOn:true, heaterFault:false, heaterFaultDescr:"",
 			waitForAck:-1, isEditing:false, isLocked:false, isOutdated:false, isOffline:false, heaterOnMinutes:59, 
-			timestamp:1445802480, chartData:[[]], chartDataRaw:[10, 20, 10, 20, 10], chartSeries:["HeaterOn"], chartLabels:[], 
-			chartTimes:[1446336000,  1446357600,  1446391800,  1446407700, 1446417700] 
+			timestamp:1445802480, chartData:[[]], chartDataRaw:[], chartSeries:["graph"], chartLabels:[], 
+			chartTimes:[] 
 		}];
 	}
 	
@@ -744,6 +750,60 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 			onMessage:function (data) 
 			{
 				LogDataService.addLog("Msg cwReplyGenericDeviceLogs: " + data);
+				var type, id, dev=null, i, error = false;
+				
+				var res={str:data};
+				
+				if(commWeb.skipInt(res).err) return;
+				type = res.result;
+				
+				if(commWeb.skipInt(res).err) return;
+				id = res.result;
+				
+				if(type==1)
+				{
+					for(i = 0; i < $scope.houseTH.length; i++)
+					{
+						if($scope.houseTH[i].sensorID == id)
+						{
+							dev = $scope.houseTH[i];
+							break;
+						}
+					}
+				}
+				else if (type==2)
+				{
+					for(i = 0; i < $scope.houseHeat.length; i++)
+					{
+						if($scope.houseHeat[i].sensorID == id)
+						{
+							dev = $scope.houseHeat[i];
+							break;
+						}
+					}				
+				}
+				
+				if(dev !== null)
+				{
+					dev.chartDataRaw = [];
+					dev.chartTimes = [];
+					var date, value;
+					do
+					{
+						if(commWeb.skipInt(res).err) {error = true; break;}
+						date = res.result;
+						if(commWeb.skipInt(res).err) {error = true; break;}
+						if(commWeb.skipInt(res).err) {error = true; break;}
+						if(commWeb.skipFloat(res).err) {error = true; break;}
+						value = res.result;
+						
+						dev.chartTimes.push(date);
+						dev.chartDataRaw.push(value);
+					}while(!error);
+					
+				
+					$scope.modalChart.processDevChart(dev);
+				}
 			},
 		});
 

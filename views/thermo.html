@@ -101,7 +101,7 @@
 			</div>
 		</ion-item>
 		
-		<ion-item class="item-accordion" ng-show="uiOpenedObject==th" ng-click="getDeviceLogs(th)">
+		<ion-item class="item-accordion" ng-show="uiOpenedObject==th" ng-click="deviceChart(th)">
 			<span style="display:inline;float:left"> 
 				<i class="icon icon-size-normal ion-ios-speedometer-outline"></i>
 				<span style="margin-left:10px">{{lang.getS('sStatist')}}</span>
@@ -200,7 +200,7 @@
 
 		</ion-item>
 
-		<ion-item class="item-accordion" ng-show="uiOpenedObject==heater" ng-click="heaterOnChart(heater)">
+		<ion-item class="item-accordion" ng-show="uiOpenedObject==heater" ng-click="deviceChart(heater)">
 			<span style="display:inline;float:left"> 
 				<i class="icon icon-size-normal ion-ios-speedometer-outline"></i>
 				<span style="margin-left:10px">Istoric</span>

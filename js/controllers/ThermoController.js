@@ -279,6 +279,8 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 		dev.chartLabels = [];
 		
 		var deltaTime = (dev.chartTimes[dev.chartTimes.length - 1] - dev.chartTimes[0] )/ 20;
+		if(deltaTime == 0)
+			deltaTime = 60;
 		var curTime = dev.chartTimes[0], k=0, curVal = 0;
 		
 		while(curTime <= dev.chartTimes[dev.chartTimes.length - 1])
@@ -853,9 +855,17 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 	{
 		var message = commWeb.eCommWebMsgTYpes.cwGetGenericDeviceLogs + ";" + 
 							dev.sensorID + ";" + 
-							'1454284568' + ";" + 
+							((Date.now() / 1000) - 60).toFixed(0) + ";" + 
 							'1' + ";" + 
 							'50' + ';'+
+							commWeb.getSequence() + ';';
+		socket.send(message);
+	}
+	
+	$scope.deleteDeviceLogs = function getDeviceLogs(dev)
+	{
+		var message = commWeb.eCommWebMsgTYpes.cwSpecialCommand + ";1;" + 
+							dev.sensorID + ";"+
 							commWeb.getSequence() + ';';
 		socket.send(message);
 	}

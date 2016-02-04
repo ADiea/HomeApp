@@ -292,7 +292,6 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 				
 				var date = new Date(dev.chartTimes[k-1]*1000);
 				var h = date.getHours();
-				
 				var m = date.getMinutes() + "";
 				if(m.length < 2) m = "0"+m;
 
@@ -559,7 +558,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 							if(commWeb.skipInt(res).err) return; //watchers list
 							var numWatchers = res.result;
 							
-							while(numWatchers > 0)
+							while(numWatchers-- > 0)
 							{
 								if(commWeb.skipInt(res).err) return; //watchers #i
 							}
@@ -680,7 +679,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 							if(commWeb.skipInt(res).err) return; //watchers list
 							var numWatchers = res.result;
 							
-							while(numWatchers > 0)
+							while(numWatchers-- > 0)
 							{
 								if(commWeb.skipInt(res).err) return; //watchers #i
 							}							
@@ -787,24 +786,62 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 				
 				if(dev !== null)
 				{
-					dev.chartDataRaw = [];
-					dev.chartTimes = [];
-					var date, value;
+					//dev.chartDataRaw = [];
+					//dev.chartTimes = [];
+					dev.chartSeries = [];
+					dev.chartLabels = [];
+					dev.chartData = [[]];
+					var date, value, numint, numfloat, numseries, i,j;
+					
+					if(commWeb.skipInt(res).err) return;
+					numseries = res.result;
+					
+					
+					for(i=0;i<numseries;i++)
+					{
+						if(commWeb.skipString(res).err) return;
+						dev.chartSeries.push(res.result);
+					}
+					
+					if(commWeb.skipInt(res).err) return;
+					numint = res.result;
+					
+					if(commWeb.skipInt(res).err) return;
+					numfloat = res.result;
+					
+					for(i=0;i<numint+numfloat;i++)
+						dev.chartData[i] = [];
+					
 					do
 					{
-						if(commWeb.skipInt(res).err) {error = true; break;}
-						date = res.result;
-						if(commWeb.skipInt(res).err) {error = true; break;}
-						if(commWeb.skipInt(res).err) {error = true; break;}
-						if(commWeb.skipFloat(res).err) {error = true; break;}
-						value = res.result;
+						i=0;j=0;
 						
-						dev.chartTimes.push(date);
-						dev.chartDataRaw.push(value);
+						if(commWeb.skipInt(res).err) {error = true; break;}
+						
+						var date = new Date(res.result*1000);
+						var h = date.getHours();
+						var m = date.getMinutes() + "";
+						if(m.length < 2) m = "0"+m;
+						
+						dev.chartLabels.push(h+":"+m);
+						
+						for(i=0;i<numint;i++)
+						{
+							if(commWeb.skipInt(res).err) {error = true; break;}
+							dev.chartData[i+j].push(res.result);
+						}
+						
+						for(j=0;j<numfloat && !error;j++)
+						{
+							if(commWeb.skipFloat(res).err) {error = true; break;}
+							dev.chartData[i+j].push(res.result);
+						}
+						
+						
 					}while(!error);
 					
 				
-					$scope.modalChart.processDevChart(dev);
+					//$scope.modalChart.processDevChart(dev);
 				}
 			},
 		});
@@ -851,13 +888,13 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 		}, 1000);	
 	});
 	
-	$scope.getDeviceLogs = function getDeviceLogs(dev)
+	$scope.getDeviceLogs = function getDeviceLogs(dev, decimation)
 	{
 		var message = commWeb.eCommWebMsgTYpes.cwGetGenericDeviceLogs + ";" + 
 							dev.sensorID + ";" + 
-							((Date.now() / 1000) - 60).toFixed(0) + ";" + 
-							'1' + ";" + 
-							'50' + ';'+
+							((Date.now() / 1000) - 60*20*decimation).toFixed(0) + ";" + 
+							decimation + ";" + 
+							'20' + ';'+
 							commWeb.getSequence() + ';';
 		socket.send(message);
 	}

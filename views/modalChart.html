@@ -8,7 +8,7 @@
             <canvas class="chart chart-line" 
 					chart-data="modalChart.chartDev.chartData" 
 					chart-labels="modalChart.chartDev.chartLabels" 
-					chart-legend="false" 
+					chart-legend="true" 
 					chart-series="modalChart.chartDev.chartSeries" 
 					chart-options="{animation: false, bezierCurve:false, showTooltips: false}"></canvas>
 
@@ -17,9 +17,25 @@
   <ion-footer-bar>
 
 	 <div class="button-bar" >
-		<button ng-click="getDeviceLogs(modalChart.chartDev)"
+		<button ng-click="getDeviceLogs(modalChart.chartDev, 1)"
 			class="button button-small button-outline button-assertive">
-			<i class="icon  ion-ios-reload"></i>
+			20m
+		</button>
+		<button ng-click="getDeviceLogs(modalChart.chartDev, 3)"
+			class="button button-small button-outline button-assertive">
+			1h
+		</button>
+		<button ng-click="getDeviceLogs(modalChart.chartDev, 9)"
+			class="button button-small button-outline button-assertive">
+			3h
+		</button>
+		<button ng-click="getDeviceLogs(modalChart.chartDev, 32)"
+			class="button button-small button-outline button-assertive">
+			12h
+		</button>
+		<button ng-click="getDeviceLogs(modalChart.chartDev, 64)"
+			class="button button-small button-outline button-assertive">
+			24h
 		</button>
 		<button ng-click="deleteDeviceLogs(modalChart.chartDev)"
 			class="button button-small button-outline button-assertive">

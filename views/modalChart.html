@@ -10,11 +10,26 @@
 					chart-labels="modalChart.chartDev.chartLabels" 
 					chart-legend="true" 
 					chart-series="modalChart.chartDev.chartSeries" 
-					chart-options="{animation: false, bezierCurve:false, showTooltips: false}"></canvas>
+					chart-options="{animation: false, bezierCurve:true, showTooltips: false}"></canvas>
 
   </ion-content>
   
-  <ion-footer-bar>
+  <!--
+   <ion-content>
+  	 <div class="button-bar" >
+ 
+	<div ng-repeat="gr in modalChart.chartDev.chartSeries">
+		<ion-checkbox ng-model="isChecked">{{gr}}</ion-checkbox>
+	</div>
+	 
+	 </div>
+	 </ion-content>
+	 -->
+  
+  	<ion-footer-bar>
+
+
+
 
 	 <div class="button-bar" >
 		<button ng-click="getDeviceLogs(modalChart.chartDev, 1)"
@@ -43,5 +58,6 @@
 		</button>
 	 </div>
 	 
-  </ion-footer-bar>
+
+  	</ion-footer-bar>
 </ion-modal-view>

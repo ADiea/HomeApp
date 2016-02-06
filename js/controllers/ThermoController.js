@@ -273,41 +273,61 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 //http://n3-charts.github.io/line-chart/#/examples
 	$scope.modalChart = {};
 	
-	$scope.modalChart.processDevChart = function processDevChart(dev)
+	$scope.modalChart.processDevChart = function processDevChart(dev, name)
 	{
-		dev.chartData[0] = [];
-		dev.chartLabels = [];
-		
-		var deltaTime = (dev.chartTimes[dev.chartTimes.length - 1] - dev.chartTimes[0] )/ 20;
-		if(deltaTime == 0)
-			deltaTime = 60;
-		var curTime = dev.chartTimes[0], k=0, curVal = 0;
-		
-		while(curTime <= dev.chartTimes[dev.chartTimes.length - 1])
+	$timeout(function()
 		{
-			if(curTime >= dev.chartTimes[k])
+		
+		var isAtLeastOneChecked=false;
+		var i=0, k=0, j=0;
+		
+		for(;i<dev.chartSeries.length;i++)
+		{
+			if(dev.chartSeries[i].name === name)
 			{
-				curVal = dev.chartDataRaw[k];
-				k++;
-				
-				var date = new Date(dev.chartTimes[k-1]*1000);
-				var h = date.getHours();
-				var m = date.getMinutes() + "";
-				if(m.length < 2) m = "0"+m;
-
-				dev.chartLabels.push(h + ":" + m);
+				j = i;
 			}
-			else dev.chartLabels.push("");
-			
-			dev.chartData[0].push(curVal);
-			curTime += deltaTime;
-		}	
+			if(dev.chartSeries[i].checked)
+			{
+				isAtLeastOneChecked = true;
+				break;
+			}
+		}
+		
+		if(!isAtLeastOneChecked)
+		{
+			dev.chartSeries[j].checked = true;
+		}
+		
+
+		dev.chartActiveSeries = [];
+		dev.chartActiveData = [];
+		dev.chartActiveColours = [];
+
+		
+		for(;i<dev.chartSeries.length;i++)
+		{
+			if(dev.chartSeries[i].checked)
+			{
+				dev.chartActiveSeries.push(dev.chartSeries[i].name);
+				dev.chartActiveColours.push(dev.chartColours[i]);
+				dev.chartActiveData[k] = [];
+				for(j=0;j<dev.chartData[i].length;j++)
+				{
+					dev.chartActiveData[k].push(dev.chartData[i][j]);
+				}
+				k++;
+			}
+		}
+	
+	});
+		
 	}
 
 	$scope.deviceChart = function deviceChart(dev)
 	{
 		try{
-		$scope.modalChart.processDevChart(dev);
+			$scope.modalChart.processDevChart(dev);
 		}
 		catch(e)
 		{}
@@ -447,8 +467,20 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 				[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
 				[], [], [], [], [], []
 			],
-			chartData:[[]], chartDataRaw:[], chartSeries:["graph"], chartLabels:[], 
-			chartTimes:[] 
+			chartData:[[20,20.1,20.3,20.2,20.2], [20,19,18,17,16]], 
+			chartSeries:[{name:"Ser1", checked:true},{name:"Ser2", checked:true}], 
+			chartLabels:[0,1,2,3,4], chartActiveData:[[]], chartActiveSeries:[], chartColours:[{
+							fillColor: 'rgba(255,255,255,0)',
+							strokeColor: 'rgba(151,187,205,1)',
+							highlightFill: 'rgba(151,187,205,1)',
+							highlightStroke: 'rgba(151,187,205,1)'
+						},
+						{
+							fillColor: 'rgba(255,255,255,0)',
+							strokeColor: 'rgba(247,70,74,1)',
+							highlightFill: 'rgba(247,70,74,1)',
+							highlightStroke: 'rgba(247,70,74,1)'
+						},], chartActiveColours:[] 
 		}];
 		
 		$scope.houseHeat = [
@@ -791,16 +823,16 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 					dev.chartSeries = [];
 					dev.chartLabels = [];
 					dev.chartData = [[]];
+					dev.chartColours = [];
 					var date, value, numint, numfloat, numseries, i,j;
 					
 					if(commWeb.skipInt(res).err) return;
 					numseries = res.result;
-					
-					
+
 					for(i=0;i<numseries;i++)
 					{
 						if(commWeb.skipString(res).err) return;
-						dev.chartSeries.push(res.result);
+						dev.chartSeries.push({name:res.result, checked:true});
 					}
 					
 					if(commWeb.skipInt(res).err) return;
@@ -811,6 +843,34 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 					
 					for(i=0;i<numint+numfloat;i++)
 						dev.chartData[i] = [];
+					
+					var colK = 0, 
+					graphColors = [
+						{
+							fillColor: 'rgba(255,255,255,0)',
+							strokeColor: 'rgba(151,187,205,1)',
+							highlightFill: 'rgba(151,187,205,1)',
+							highlightStroke: 'rgba(151,187,205,1)'
+						},
+						{
+							fillColor: 'rgba(255,255,255,0)',
+							strokeColor: 'rgba(247,70,74,1)',
+							highlightFill: 'rgba(247,70,74,1)',
+							highlightStroke: 'rgba(247,70,74,1)'
+						},
+						{
+							fillColor: 'rgba(255,255,255,0)',
+							strokeColor: 'rgba(70,191,150,1)',
+							highlightFill: 'rgba(70,191,150,1)',
+							highlightStroke: 'rgba(70,191,150,1)'
+						},
+						{
+							fillColor: 'rgba(255,255,255,0)',
+							strokeColor: 'rgba(253,180,92,1)',
+							highlightFill: 'rgba(253,180,92,1)',
+							highlightStroke: 'rgba(253,180,92,1)'
+						},
+					];
 					
 					do
 					{
@@ -824,6 +884,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 						if(m.length < 2) m = "0"+m;
 						
 						dev.chartLabels.push(h+":"+m);
+						dev.chartColours.push(graphColors[(colK++)%graphColors.length]);
 						
 						for(i=0;i<numint;i++)
 						{
@@ -841,7 +902,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 					}while(!error);
 					
 				
-					//$scope.modalChart.processDevChart(dev);
+					$scope.modalChart.processDevChart(dev);
 				}
 			},
 		});

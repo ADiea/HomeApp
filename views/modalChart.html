@@ -4,27 +4,31 @@
   </ion-header-bar>
  
   <ion-content>
-			
-            <canvas class="chart chart-line" 
-					chart-data="modalChart.chartDev.chartData" 
-					chart-labels="modalChart.chartDev.chartLabels" 
-					chart-legend="true" 
-					chart-series="modalChart.chartDev.chartSeries" 
-					chart-options="{animation: false, bezierCurve:true, showTooltips: false}"></canvas>
-
-  </ion-content>
-  
-  <!--
-   <ion-content>
+  <li>
   	 <div class="button-bar" >
  
 	<div ng-repeat="gr in modalChart.chartDev.chartSeries">
-		<ion-checkbox ng-model="isChecked">{{gr}}</ion-checkbox>
+		<ion-checkbox ng-click="modalChart.processDevChart(modalChart.chartDev, gr.name)" 
+			ng-model="gr.checked" 
+			style="font-weight:bold;color:{{modalChart.chartDev.chartColours[$index].strokeColor}}">{{gr.name}}</ion-checkbox>
 	</div>
 	 
 	 </div>
+	 
+	 </li>	
+	<li>
+            <canvas class="chart chart-line" 
+					chart-data="modalChart.chartDev.chartActiveData" 
+					chart-labels="modalChart.chartDev.chartLabels" 
+					chart-legend="false" 
+					chart-series="modalChart.chartDev.chartActiveSeries" 
+					chart-colours="modalChart.chartDev.chartActiveColours" 
+					chart-options="{responsive: true, animation: false, bezierCurve:true, showTooltips: false}"></canvas>
+
+  </li>	
+
 	 </ion-content>
-	 -->
+	
   
   	<ion-footer-bar>
 

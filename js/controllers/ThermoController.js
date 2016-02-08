@@ -275,53 +275,52 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 	
 	$scope.modalChart.processDevChart = function processDevChart(dev, name)
 	{
-	$timeout(function()
+		$timeout(function()
 		{
-		
-		var isAtLeastOneChecked=false;
-		var i=0, k=0, j=0;
-		
-		for(;i<dev.chartSeries.length;i++)
-		{
-			if(dev.chartSeries[i].name === name)
-			{
-				j = i;
-			}
-			if(dev.chartSeries[i].checked)
-			{
-				isAtLeastOneChecked = true;
-				break;
-			}
-		}
-		
-		if(!isAtLeastOneChecked)
-		{
-			dev.chartSeries[j].checked = true;
-		}
-		
+			var isAtLeastOneChecked=false;
+			var i=0, k=0, j=0;
 
-		dev.chartActiveSeries = [];
-		dev.chartActiveData = [];
-		dev.chartActiveColours = [];
+			name = name || '';
 
-		
-		for(;i<dev.chartSeries.length;i++)
-		{
-			if(dev.chartSeries[i].checked)
+			for(;i<dev.chartSeries.length;i++)
 			{
-				dev.chartActiveSeries.push(dev.chartSeries[i].name);
-				dev.chartActiveColours.push(dev.chartColours[i]);
-				dev.chartActiveData[k] = [];
-				for(j=0;j<dev.chartData[i].length;j++)
+				if(dev.chartSeries[i].name === name)
 				{
-					dev.chartActiveData[k].push(dev.chartData[i][j]);
+					j = i;
 				}
-				k++;
+				if(dev.chartSeries[i].checked)
+				{
+					isAtLeastOneChecked = true;
+				}
 			}
-		}
-	
-	});
-		
+
+			if(name !== '')
+			{
+				if(!isAtLeastOneChecked)
+				{
+					dev.chartSeries[j].checked = true;
+				}
+			}
+
+			dev.chartActiveSeries = [];
+			dev.chartActiveData = [];
+			dev.chartActiveColours = [];
+
+			for(i=0;i<dev.chartSeries.length;i++)
+			{
+				if(dev.chartSeries[i].checked)
+				{
+					dev.chartActiveSeries.push(dev.chartSeries[i].name);
+					dev.chartActiveColours.push(dev.chartColours[i]);
+					dev.chartActiveData[k] = [];
+					for(j=0;j<dev.chartData[i].length;j++)
+					{
+						dev.chartActiveData[k].push(dev.chartData[i][j]);
+					}
+					k++;
+				}
+			}
+		});
 	}
 
 	$scope.deviceChart = function deviceChart(dev)

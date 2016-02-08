@@ -4,62 +4,75 @@
   </ion-header-bar>
  
   <ion-content>
-  <li>
+  
+
+<table class="tableFull alignCenter">
+<tr>
+<td colspan="3">
   	 <div class="button-bar" >
  
+ <!-- ng-model="gr.checked" -->
 	<div ng-repeat="gr in modalChart.chartDev.chartSeries">
-		<ion-checkbox ng-click="modalChart.processDevChart(modalChart.chartDev, gr.name)" 
-			ng-model="gr.checked" 
-			style="font-weight:bold;color:{{modalChart.chartDev.chartColours[$index].strokeColor}}">{{gr.name}}</ion-checkbox>
+		<button ng-click="gr.checked = !gr.checked;modalChart.processDevChart(modalChart.chartDev, gr.name)" 
+			class="button button-clear" 
+			style="text-decoration:{{gr.checked?'underline':'none'}};font-weight:bold;color:{{modalChart.chartDev.chartColours[$index].strokeColor}}">{{gr.name}}</button>
 	</div>
+	</div>
+</td>	
+</tr>
+<tr>
 	 
-	 </div>
-	 
-	 </li>	
-	<li>
+	 <td style="vertical-align:middle" ng-click="">
+	 		<button class="button button-small button-outline button-assertive">
+			<i  class="icon ion-ios-arrow-left"></i>			
+		</button>
+	 </td>
+	<td>
             <canvas class="chart chart-line" 
 					chart-data="modalChart.chartDev.chartActiveData" 
 					chart-labels="modalChart.chartDev.chartLabels" 
 					chart-legend="false" 
 					chart-series="modalChart.chartDev.chartActiveSeries" 
 					chart-colours="modalChart.chartDev.chartActiveColours" 
-					chart-options="{responsive: true, animation: false, bezierCurve:true, showTooltips: false}"></canvas>
-
-  </li>	
+					chart-options="{responsive: true, animation: true, bezierCurve:true, showTooltips: false}">
+			</canvas>
+	</td>		
+	<td style="vertical-align:middle" ng-click=" ">
+	 		<button 
+			class="button button-small button-outline button-assertive">
+			<i  class="icon ion-ios-arrow-right"></i>			
+		</button>
+	 </td>
+</tr>	 
+</table>
 
 	 </ion-content>
 	
   
   	<ion-footer-bar>
 
-
-
-
 	 <div class="button-bar" >
 		<button ng-click="getDeviceLogs(modalChart.chartDev, 1)"
 			class="button button-small button-outline button-assertive">
-			20m
+			1m
 		</button>
-		<button ng-click="getDeviceLogs(modalChart.chartDev, 3)"
+		<button ng-click="getDeviceLogs(modalChart.chartDev, 5)"
+			class="button button-small button-outline button-assertive">
+			5m
+		</button>
+		<button ng-click="getDeviceLogs(modalChart.chartDev, 10)"
+			class="button button-small button-outline button-assertive">
+			10m
+		</button>
+		<button ng-click="getDeviceLogs(modalChart.chartDev, 30)"
+			class="button button-small button-outline button-assertive">
+			30m
+		</button>
+		<button ng-click="getDeviceLogs(modalChart.chartDev, 60)"
 			class="button button-small button-outline button-assertive">
 			1h
 		</button>
-		<button ng-click="getDeviceLogs(modalChart.chartDev, 9)"
-			class="button button-small button-outline button-assertive">
-			3h
-		</button>
-		<button ng-click="getDeviceLogs(modalChart.chartDev, 32)"
-			class="button button-small button-outline button-assertive">
-			12h
-		</button>
-		<button ng-click="getDeviceLogs(modalChart.chartDev, 64)"
-			class="button button-small button-outline button-assertive">
-			24h
-		</button>
-		<button ng-click="deleteDeviceLogs(modalChart.chartDev)"
-			class="button button-small button-outline button-assertive">
-			<i class="icon  ion-trash-a"></i>
-		</button>
+
 	 </div>
 	 
 

@@ -331,10 +331,13 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 		catch(e)
 		{}
 	
+		$scope.modalChart.chartDev = dev;
+	
 		if(!$scope.modalChart.modalChartCreated)
 		{
 			$scope.modalChart.modalChartCreated = true;
-			$scope.modalChart.chartDev = dev;
+			
+			dev.chartStartDate = (new Date()).getTime() / 1000 - 60*20;
 			
 			$ionicModal.fromTemplateUrl('views/modalChart.html', {scope: $scope}).
 			then(
@@ -461,12 +464,12 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 			sensorID:0, title:"DemoDormitor", sensorLocation:0, 
 			minTemp:16.0, maxTemp:27.0, curTemp:21.0, curSensorTemp:22, curSensorTemp1m:22.1, curSensorTemp10m:21.9, curTempSymbol:'C', curSensorHumid:45.2, 
 			timestamp:1552337694, heaterOn:false, acOn:false, autoPilotOn:1, autoPilotProgramIndex:0, autoPilotProgramDay:-1, 
-			waitForAck:-1, isEditing:false, isLocked:false, isOutdated:false, isOffline:false, sensorLocation:0,
+			waitForAck:-1, isEditing:false, isLocked:false, isOutdated:false, isOffline:false, sensorLocation:0, 
 			schedule:[
 				[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
 				[], [], [], [], [], []
 			],
-			chartData:[[20,20.1,20.3,20.2,20.2], [20,19,18,17,16]], 
+			chartStartDate:0, chartDecimation:1, chartData:[[20,20.1,20.3,20.2,20.2], [20,19,18,17,16]], 
 			chartSeries:[{name:"Ser1", checked:true},{name:"Ser2", checked:true}], 
 			chartLabels:[0,1,2,3,4], chartActiveData:[[]], chartActiveSeries:[], chartColours:[{
 							fillColor: 'rgba(255,255,255,0)',
@@ -950,9 +953,10 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 	
 	$scope.getDeviceLogs = function getDeviceLogs(dev, decimation)
 	{
+		dev.chartDecimation = decimation;
 		var message = commWeb.eCommWebMsgTYpes.cwGetGenericDeviceLogs + ";" + 
 							dev.sensorID + ";" + 
-							((Date.now() / 1000) - 60*20*decimation).toFixed(0) + ";" + 
+							(/*(Date.now() / 1000) - 60*20*decimation*/dev.chartStartDate).toFixed(0) + ";" + 
 							decimation + ";" + 
 							'20' + ';'+
 							commWeb.getSequence() + ';';

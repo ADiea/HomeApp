@@ -22,10 +22,11 @@
 </tr>
 <tr>
 	 
-	 <td style="vertical-align:middle" ng-click="">
+	 <td style="vertical-align:middle" ng-click="modalChart.chartDev.chartStartDate -= modalChart.chartDev.chartDecimation * 60 * 20;">
 	 		<button class="button button-small button-outline button-assertive">
 			<i  class="icon ion-ios-arrow-left"></i>			
 		</button>
+		<p>{{modalChart.chartDev.chartStartDate}}</p>
 	 </td>
 	<td>
             <canvas class="chart chart-line" 
@@ -37,11 +38,12 @@
 					chart-options="{responsive: true, animation: true, bezierCurve:true, showTooltips: false}">
 			</canvas>
 	</td>		
-	<td style="vertical-align:middle" ng-click=" ">
+	<td style="vertical-align:middle" ng-click="modalChart.chartDev.chartStartDate += modalChart.chartDev.chartDecimation * 60 * 20;">
 	 		<button 
 			class="button button-small button-outline button-assertive">
 			<i  class="icon ion-ios-arrow-right"></i>			
 		</button>
+		<p>{{modalChart.chartDev.chartStartDate + modalChart.chartDev.chartDecimation * 60 * 20}}</p>
 	 </td>
 </tr>	 
 </table>

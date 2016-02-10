@@ -19,11 +19,11 @@ ionicApp.factory('Lang',function(SettingsService, LogDataService){
 		'sSat':'Sa', 'sSun':'Du', 'sNewSlot':'Adauga interval nou', 'sHrs':'ore', 'sMins':'min',
 		'sCommErr':'Problema comunicatie', 'sErrLastData':'Ultimele date de la ', 'sErrReceived':' primite acum', 'sErrAgo':' ', 'sTsYrs':' ani',
 		'sTsMon':' luni', 'sTsDays':' zile', 'sTsHrs':' ore', 'sTsMin':' min', 'sTsSec':' s',
-		'sUntilHr':' pana la ', 'sSensorDis':'senzor inactiv', 'sHolidayQue':'Parasiti modul vacanta?', '':'', '':'',
+		'sUntilHr':' pana la ', 'sSensorDis':'senzor inactiv', 'sHolidayQue':'Parasiti modul vacanta?', 'sJanS':'Ian', 'sFebS':'Feb',
+		'sMarS':'Mar', 'sAprS':'Apr', 'sMayS':'Mai', 'sJunS':'Iun', 'sJulS':'Iul',
+		'sAugS':'Aug', 'sSepS':'Sep', 'sOctS':'Oct', 'sNovS':'Noi', 'sDecS':'Dec',
 		/*'':'', '':'', '':'', '':'', '':'',
-		'':'', '':'', '':'', '':'', '':'',
-		'':'', '':'', '':'', '':'', '':'',
-		/*'':'', '':'', '':'', '':'', '':'',*/
+		'':'', '':'', '':'', '':'', '':'',*/
 		}, 
 		{
 		'sRomana':'Romanian', 'sEnglish':'English', 'sLanguage':'Language', 'sHoliday':'Holiday', 
@@ -40,10 +40,10 @@ ionicApp.factory('Lang',function(SettingsService, LogDataService){
 		'sSat':'Sat', 'sSun':'Sun', 'sNewSlot':'New time slot', 'sHrs':' hours', 'sMins':' mins',
 		'sCommErr':'Device offline', 'sErrLastData':'Last data from ', 'sErrReceived':' received ', 'sErrAgo':' ago', 'sTsYrs':' yrs',
 		'sTsMon':' mons', 'sTsDays':' days', 'sTsHrs':' hrs', 'sTsMin':' min', 'sTsSec':' s',
-		'sUntilHr':' until ', 'sSensorDis':'sensor is disabled', 'sHolidayQue':'Turn off holiday mode?', '':'', '':'',
+		'sUntilHr':' until ', 'sSensorDis':'sensor is disabled', 'sHolidayQue':'Turn off holiday mode?', 'sJanS':'Jan', 'sFebS':'Feb',
+		'sMarS':'Mar', 'sAprS':'Apr', 'sMayS':'May', 'sJunS':'Jun', 'sJulS':'Jul',
+		'sAugS':'Aug', 'sSepS':'Sep', 'sOctS':'Oct', 'sNovS':'Nov', 'sDecS':'Dec',
 		/*'':'', '':'', '':'', '':'', '':'',
-		'':'', '':'', '':'', '':'', '':'',
-		'':'', '':'', '':'', '':'', '':'',
 		/*'':'', '':'', '':'', '':'', '':'',*/
 		}, 
 		{

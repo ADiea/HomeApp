@@ -158,6 +158,32 @@ ionicApp.factory('Util',function(Lang, LogDataService, $interval, $ionicPopup){
 		
 		return ret;
 	}
+	
+	util.formatTime = function formatTime(t)
+	{
+		var date = new Date(t*1000);
+		return ('0'+date.getHours()).substr(-2,2) + ':' + ('0'+date.getMinutes()).substr(-2,2);
+	}
+
+	util.formatDate = function formatDate(t)
+	{
+		var date = new Date(t*1000);
+		
+		var moOptions = ["sJanS", "sFebS", "sMarS", "sAprS", "sMayS", "sJunS", 
+						"sJulS", "sAugS", "sSepS", "sOctS", "sNovS", "sDecS" ];
+		
+		return ('0' + date.getDate()).substr(-2,2) + ' ' + Lang.getS(moOptions[date.getMonth()])/* + ' ' + date.getFullYear()*/;
+	}
+	
+	util.addMinutes = function addMinutes(timestamp, minutes)
+	{
+		var date = (new Date()).getTime()/1000;
+		
+		if(timestamp + minutes*60 > date)
+			return date;
+			
+		return timestamp + minutes*60;
+	}
 
 	return util;
 })

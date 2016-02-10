@@ -325,19 +325,18 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 
 	$scope.deviceChart = function deviceChart(dev)
 	{
-		try{
+		$scope.modalChart.chartDev = dev;	
+		
+		try{ 
 			$scope.modalChart.processDevChart(dev);
-		}
-		catch(e)
-		{}
-	
-		$scope.modalChart.chartDev = dev;
+		} catch(e) {}
 	
 		if(!$scope.modalChart.modalChartCreated)
 		{
 			$scope.modalChart.modalChartCreated = true;
 			
 			dev.chartStartDate = (new Date()).getTime() / 1000 - 60*20;
+			dev.chartDecimation = 1;
 			
 			$ionicModal.fromTemplateUrl('views/modalChart.html', {scope: $scope}).
 			then(
@@ -352,7 +351,6 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 			$timeout(function(){$scope.modalChart.modalChart.show();});
 		}
 	}
-
 
 /* ----------- end modal charts ----------*/
 
@@ -951,13 +949,30 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 		}, 1000);	
 	});
 	
-	$scope.getDeviceLogs = function getDeviceLogs(dev, decimation)
+	$scope.setDeviceLogDecimation = function setDeviceLogDecimation(dev, decimation)
 	{
-		dev.chartDecimation = decimation;
+		if(dev.chartDecimation != decimation)
+		{
+			dev.chartDecimation = decimation;
+			$scope.getDeviceLogs(dev);
+		}
+	}
+
+	$scope.setDeviceLogStartTime = function setDeviceLogStartTime(dev, startTime)
+	{
+		if(dev.chartStartDate != startTime)
+		{
+			dev.chartStartDate = startTime;
+			$scope.getDeviceLogs(dev);
+		}
+	}
+	
+	$scope.getDeviceLogs = function getDeviceLogs(dev)
+	{
 		var message = commWeb.eCommWebMsgTYpes.cwGetGenericDeviceLogs + ";" + 
 							dev.sensorID + ";" + 
-							(/*(Date.now() / 1000) - 60*20*decimation*/dev.chartStartDate).toFixed(0) + ";" + 
-							decimation + ";" + 
+							dev.chartStartDate.toFixed(0) + ";" + 
+							dev.chartDecimation + ";" + 
 							'20' + ';'+
 							commWeb.getSequence() + ';';
 		socket.send(message);

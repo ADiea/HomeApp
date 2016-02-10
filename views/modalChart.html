@@ -22,11 +22,13 @@
 </tr>
 <tr>
 	 
-	 <td style="vertical-align:middle" ng-click="modalChart.chartDev.chartStartDate -= modalChart.chartDev.chartDecimation * 60 * 20;">
-	 		<button class="button button-small button-outline button-assertive">
+	 <td style="vertical-align:middle;text-align:center;" >
+	 	<p>{{util.formatTime(modalChart.chartDev.chartStartDate)}}</p>
+		<button class="button button-small button-outline button-assertive" 
+			ng-click="setDeviceLogStartTime(modalChart.chartDev, util.addMinutes(modalChart.chartDev.chartStartDate,  -modalChart.chartDev.chartDecimation * 20));">
 			<i  class="icon ion-ios-arrow-left"></i>			
 		</button>
-		<p>{{modalChart.chartDev.chartStartDate}}</p>
+		<p>{{util.formatDate(modalChart.chartDev.chartStartDate)}}</p>
 	 </td>
 	<td>
             <canvas class="chart chart-line" 
@@ -38,43 +40,41 @@
 					chart-options="{responsive: true, animation: true, bezierCurve:true, showTooltips: false}">
 			</canvas>
 	</td>		
-	<td style="vertical-align:middle" ng-click="modalChart.chartDev.chartStartDate += modalChart.chartDev.chartDecimation * 60 * 20;">
-	 		<button 
+	<td style="vertical-align:middle;text-align:center;" >
+	 	<p>{{util.formatTime(modalChart.chartDev.chartStartDate + modalChart.chartDev.chartDecimation * 60 * 20)}}</p>
+		<button ng-click="setDeviceLogStartTime(modalChart.chartDev, util.addMinutes(modalChart.chartDev.chartStartDate,  modalChart.chartDev.chartDecimation * 20));"
 			class="button button-small button-outline button-assertive">
 			<i  class="icon ion-ios-arrow-right"></i>			
 		</button>
-		<p>{{modalChart.chartDev.chartStartDate + modalChart.chartDev.chartDecimation * 60 * 20}}</p>
+		<p>{{util.formatDate(modalChart.chartDev.chartStartDate + modalChart.chartDev.chartDecimation * 60 * 20)}}</p>
 	 </td>
 </tr>	 
 </table>
 
-	 </ion-content>
-	
-  
+	</ion-content>
   	<ion-footer-bar>
 
 	 <div class="button-bar" >
-		<button ng-click="getDeviceLogs(modalChart.chartDev, 1)"
+		<button ng-click="setDeviceLogDecimation(modalChart.chartDev, 1)"
 			class="button button-small button-outline button-assertive">
-			1m
+			20m
 		</button>
-		<button ng-click="getDeviceLogs(modalChart.chartDev, 5)"
+		<button ng-click="setDeviceLogDecimation(modalChart.chartDev, 9)"
 			class="button button-small button-outline button-assertive">
-			5m
+			3h
 		</button>
-		<button ng-click="getDeviceLogs(modalChart.chartDev, 10)"
+		<button ng-click="setDeviceLogDecimation(modalChart.chartDev, 18)"
 			class="button button-small button-outline button-assertive">
-			10m
+			6h
 		</button>
-		<button ng-click="getDeviceLogs(modalChart.chartDev, 30)"
+		<button ng-click="setDeviceLogDecimation(modalChart.chartDev, 36)"
 			class="button button-small button-outline button-assertive">
-			30m
+			12h
 		</button>
-		<button ng-click="getDeviceLogs(modalChart.chartDev, 60)"
+		<button ng-click="setDeviceLogDecimation(modalChart.chartDev, 72)"
 			class="button button-small button-outline button-assertive">
-			1h
+			24h
 		</button>
-
 	 </div>
 	 
 

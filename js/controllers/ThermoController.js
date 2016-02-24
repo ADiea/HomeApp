@@ -1011,12 +1011,12 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 			
 			if(dev.isEditing && !dev.isLocked)
 			{
-				if(i < lenTH)
+				if(i < lenTH) // th device
 				{
 					message +=  (Math.round( dev.curTemp * 10 ) / 10).toFixed(1)  + ";" + 
 								(Math.round( dev.minTemp * 10 ) / 10).toFixed(1)  + ";" + 
 								(Math.round( dev.maxTemp * 10 ) / 10).toFixed(1)  + ";" +
-								dev.sensorLocation  + ';' + dev.autoPilotOn?"1":"0"  + ';0;'; //0-> watchers list 
+								dev.sensorLocation  + ';' + ((dev.autoPilotOn)?"1":"0")  + ';0;'; //0-> watchers list 
 				
 					var day=0, i, len, sched;
 					for(; day<7; day++)

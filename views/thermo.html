@@ -37,15 +37,15 @@
 							ng-click="util.showDevErrorInfo(th);$event.stopPropagation();" 
 							class="button button-positive button-small button-clear"
 							ng-disabled="!th.isOffline" >
-							<i  class="icon" ng-class="th.isOffline ? 'ion-alert-circled':(th.isEditing || th.isOutdated)?'ion-android-sync':'ion-checkmark-circled'"></i>
+							<i  class="icon" ng-class="th.isOffline ? 'ion-alert-circled':(th.isEditing || th.isOutdated || !_sock._Connected)?'ion-android-sync':'ion-checkmark-circled'"></i>
 						</button>
 					</td>
 				
 					<td style="vertical-align:bottom">
 						<p style="display:inline;">
 							<i class="icon ion-thermometer"></i>  
-								<span class="textDegIntSizeMicro">{{util.getTempInt(th.curSensorTemp)}}</span>
-								<span class="textDegFloatSizeMicro">{{util.getTempFrac(th.curSensorTemp)}}</span>
+								<span class="textDegIntSizeMicro">{{util.getTempInt(th.curSensorTemp1m)}}</span>
+								<span class="textDegFloatSizeMicro">{{util.getTempFrac(th.curSensorTemp1m)}}</span>
 								<span class="textDegSymbolSizeMicro textDegSymbolMicro">o</span>
 								<span class="textDegIntSizeMicro">C</span>
 
@@ -180,7 +180,7 @@
 							ng-click="util.showDevErrorInfo(heater);$event.stopPropagation();" 
 							class="button button-positive button-small button-clear"
 							ng-disabled="!heater.isOffline" >
-							<i  class="icon" ng-class="heater.isOffline ? 'ion-alert-circled':(heater.isEditing||heater.isOutdated)?'ion-android-sync':'ion-checkmark-circled'"></i>
+							<i  class="icon" ng-class="heater.isOffline ? 'ion-alert-circled':(heater.isEditing||heater.isOutdated || !_sock._Connected)?'ion-android-sync':'ion-checkmark-circled'"></i>
 						</button>
 					</td>
 				

@@ -5,6 +5,8 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 	$scope.lang = Lang;
 	$scope.util = Util;
 	
+	$scope._sock = socket;
+	
 	$scope.ui =  {};
 	$scope.heartbeat = 0;
 	
@@ -461,7 +463,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 		{
 			sensorID:0, title:"DemoDormitor", sensorLocation:0, 
 			minTemp:16.0, maxTemp:27.0, curTemp:21.0, curSensorTemp:22, curSensorTemp1m:22.1, curSensorTemp10m:21.9, curTempSymbol:'C', curSensorHumid:45.2, 
-			timestamp:1552337694, heaterOn:false, acOn:false, autoPilotOn:1, autoPilotProgramIndex:0, autoPilotProgramDay:-1, 
+			timestamp:1552337694, heaterOn:false, acOn:false, autoPilotOn:true, autoPilotProgramIndex:0, autoPilotProgramDay:-1, 
 			waitForAck:-1, isEditing:false, isLocked:false, isOutdated:false, isOffline:false, sensorLocation:0, 
 			schedule:[
 				[{t:20.0, startH:0, startM:0, endH:8, endM:0}, {t:17.5, startH:8, startM:0, endH:18, endM:0}, {t:21.0, startH:18, startM:0, endH:23, endM:11}], 
@@ -585,7 +587,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 							objTH.sensorLocation = res.result;
 							
 							if(commWeb.skipInt(res).err) return;
-							objTH.autoPilotOn = res.result;
+							objTH.autoPilotOn = res.result == 1 ? true: false;
 
 							if(commWeb.skipInt(res).err) return; //watchers list
 							var numWatchers = res.result;
@@ -1014,7 +1016,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 					message +=  (Math.round( dev.curTemp * 10 ) / 10).toFixed(1)  + ";" + 
 								(Math.round( dev.minTemp * 10 ) / 10).toFixed(1)  + ";" + 
 								(Math.round( dev.maxTemp * 10 ) / 10).toFixed(1)  + ";" +
-								dev.sensorLocation  + ';' + dev.autoPilotOn + ';0;'; //0-> watchers list 
+								dev.sensorLocation  + ';' + dev.autoPilotOn?"1":"0"  + ';0;'; //0-> watchers list 
 				
 					var day=0, i, len, sched;
 					for(; day<7; day++)
@@ -1031,7 +1033,8 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 										sched.endM + ';';
 						}
 					}
-					message += "0;0;0;0;0.0;0.0;0.0;0.0;0.0;0.0;"
+					message += dev.autoPilotProgramIndex + ";" + 
+								dev.autoPilotProgramDay + ";0;0;0.0;0.0;0.0;0.0;0.0;0.0;"
 				}
 				else 
 				{

@@ -820,8 +820,6 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 				
 				if(dev !== null)
 				{
-					//dev.chartDataRaw = [];
-					//dev.chartTimes = [];
 					dev.chartSeries = [];
 					dev.chartLabels = [];
 					dev.chartData = [[]];
@@ -1051,7 +1049,7 @@ var _ThermoCtrl = ionicApp.controller('ThermoCtrl', function($scope, SettingsSer
 					dev.waitForAck = seq;
 				}
 				
-				LogDataService.addLog("Msg try send: " + message);
+				LogDataService.addLog("Try TX:" + message);
 				socket.send(message);
 			}
 		}

@@ -2,6 +2,15 @@ var _TestCtrl = ionicApp.controller('TestsCtrl', function($scope, $stateParams, 
 {
 	$scope.lang = Lang;
 	$scope.moreInfo = "n/a";
+	
+	var host = location.origin.replace(/^http/, 'ws')
+      var ws = new WebSocket(host);
+      ws.onmessage = function (event) {
+        var li = document.createElement('li');
+        li.innerHTML = JSON.parse(event.data);
+        document.querySelector('#pings').appendChild(li);
+      };
+	
 // Fetch Device info from Device Plugin
 	$scope.alertDeviceInfo = function() {
 		$scope.moreInfo = ('Device Platform: ' + device.platform + '\n'

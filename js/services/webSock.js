@@ -201,9 +201,13 @@ ionicApp.factory('webSock',function(SettingsService, LogDataService, commWeb){
 					case commWeb.WsWebProto.wsOP_servHello:
 						if(socket._sockState == commWeb.WsWebProto.wsState_new)
 						{
-							socket._sockState:commWeb.WsWebProto.wsState_hello;
+							socket._sockState=commWeb.WsWebProto.wsState_hello;
 							
-							var reply={op:commWeb.WsWebProto.wsOP_cliLogin, type:commWeb.WsWebProto.wsValue_mobileApp, id:0};
+							var reply={
+										op:commWeb.WsWebProto.wsOP_cliLogin, 
+										type:commWeb.WsWebProto.wsValue_mobileApp, 
+										id:0
+									  };
 							socket.send(JSON.stringify(reply));
 							
 							LogDataService.addLog("wsock: rx servHello, login" );
@@ -212,6 +216,19 @@ ionicApp.factory('webSock',function(SettingsService, LogDataService, commWeb){
 						{
 							LogDataService.addLog("wsock: rx servHello in bad state " + socket._sockState);
 						}
+					break;
+					
+					case commWeb.WsWebProto.wsOP_positiveAck:
+						if(socket._sockState == commWeb.WsWebProto.wsState_hello)
+						{
+							socket._sockState=commWeb.WsWebProto.wsState_conn;
+						}
+						//else if
+					
+					break;
+					
+					case commWeb.WsWebProto.wsOP_negativeAck:
+					
 					break;
 					
 					default:

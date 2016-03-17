@@ -38,9 +38,19 @@ ionicApp.factory('webSock',function(SettingsService, LogDataService, commWeb){
 			}
 			else
 			{
-				socket._Socket.send(message);
-				socket._lastTimeTX = (new Date()).getTime();
-				LogDataService.addLog("wsock: SENT " + message);
+				
+				LogDataService.addLog("wsock: trysend, state:" + socket._sockState);
+				
+				if(socket._sockState== commWeb.WsWebProto.wsState_conn)
+				{
+					var msg={op:commWeb.WsWebProto.wsOP_msgRelay, 
+							 dest:0, 
+							 type:commWeb.WsWebProto.wsValue_mobileApp,
+							 msg:message};
+					socket._Socket.send(JSON.stringify(msg));
+					socket._lastTimeTX = (new Date()).getTime();
+					LogDataService.addLog("wsock: SENT " + message);
+				}
 			}
 		}
 		catch(e)
@@ -178,13 +188,16 @@ ionicApp.factory('webSock',function(SettingsService, LogDataService, commWeb){
 				socket._lastTimeRX = socket._lastTimeTX = 0;
 				//socket.send(commWeb.eCommWebMsgTYpes.cwPrintDebugInformation + ";1;");
 				
-				socket._sockState:commWeb.WsWebProto.wsState_new;
+				socket._sockState=commWeb.WsWebProto.wsState_new;
 				var msg={op:commWeb.WsWebProto.wsOP_cliHello};
-				socket.send(JSON.stringify(msg));
+				msg = JSON.stringify(msg);
+				LogDataService.addLog("wsock: _send"+msg, "#f00");
+				
+				socket._Socket.send(msg);
 			};
 			socket._Socket.onclose = function(evt)
 			{
-				LogDataService.addLog("wsock: DISCONN", "#f00");
+				LogDataService.addLog("wsock: DISCONN"/*+evt.code + " "+evt.reason + " " + ev.wasClean*/ , "#f00");
 				socket._Connected = false;
 				socket._Connecting = false;
 				//socket.connectSocket();
@@ -194,7 +207,9 @@ ionicApp.factory('webSock',function(SettingsService, LogDataService, commWeb){
 				var found = false;
 				var res = {str:evt.data};
 				
-				var msg = JSON.parse(msg);
+				LogDataService.addLog("wsock: RX "+evt.data);
+				
+				var msg = JSON.parse(evt.data);
 				
 				switch(msg.op)
 				{
@@ -208,7 +223,7 @@ ionicApp.factory('webSock',function(SettingsService, LogDataService, commWeb){
 										type:commWeb.WsWebProto.wsValue_mobileApp, 
 										id:0
 									  };
-							socket.send(JSON.stringify(reply));
+							socket._Socket.send(JSON.stringify(reply));
 							
 							LogDataService.addLog("wsock: rx servHello, login" );
 						}
@@ -222,12 +237,39 @@ ionicApp.factory('webSock',function(SettingsService, LogDataService, commWeb){
 						if(socket._sockState == commWeb.WsWebProto.wsState_hello)
 						{
 							socket._sockState=commWeb.WsWebProto.wsState_conn;
+							LogDataService.addLog("wsock: login accepted send test msg");
+							
+							var msg={op:commWeb.WsWebProto.wsOP_msgRelay, 
+									 dest:0, 
+									 type:commWeb.WsWebProto.wsValue_mobileApp,
+									 msg:"TEST01010203"};
+							socket._Socket.send(JSON.stringify(msg));
+							
 						}
 						//else if
 					
 					break;
 					
 					case commWeb.WsWebProto.wsOP_negativeAck:
+					
+						if(socket._sockState == commWeb.WsWebProto.wsState_hello)
+						{
+							LogDataService.addLog("wsock: login rejected: " + msg.err);
+							
+							/*dupl code*/
+							/*
+							timeout 10s
+							var reply={
+										op:commWeb.WsWebProto.wsOP_cliLogin, 
+										type:commWeb.WsWebProto.wsValue_mobileApp, 
+										id:0
+									  };
+							socket.send(JSON.stringify(reply));
+							
+							LogDataService.addLog("wsock: reattempt login" );
+							*/
+							
+						}
 					
 					break;
 					
@@ -253,8 +295,6 @@ ionicApp.factory('webSock',function(SettingsService, LogDataService, commWeb){
 				}
 				*/
 				
-				if(!found)
-					LogDataService.addLog("wsock: RX "+evt.data);
 			};
 			socket._Socket.onerror = function(evt)
 			{

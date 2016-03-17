@@ -1,4 +1,4 @@
-var _TestCtrl = ionicApp.controller('TestsCtrl', function($scope, $stateParams, commWeb, socket, Lang) 
+var _TestCtrl = ionicApp.controller('TestsCtrl', function($scope, $stateParams, commWeb, socket, Lang, webSock) 
 {
 	$scope.lang = Lang;
 	$scope.moreInfo = "n/a";
@@ -12,6 +12,8 @@ var _TestCtrl = ionicApp.controller('TestsCtrl', function($scope, $stateParams, 
         document.querySelector('#pings').appendChild(li);
       };
 	*/  
+	
+	
 	
 // Fetch Device info from Device Plugin
 	$scope.alertDeviceInfo = function() {
@@ -48,6 +50,7 @@ var _TestCtrl = ionicApp.controller('TestsCtrl', function($scope, $stateParams, 
 
 	// Makes a beep sound
 	$scope.beepNotify = function() {
+		webSock.send("lalala_");
 		navigator.notification.beep(1);
 	};
 

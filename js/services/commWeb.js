@@ -3,7 +3,7 @@ ionicApp.factory('commWeb',function(){
 	var commWeb = {
 		pktSeq:0
 	};
-	
+
 	commWeb.WsWebProto = 
 	{
 		//operation code 
@@ -32,6 +32,11 @@ ionicApp.factory('commWeb',function(){
 		wsState_hello:1,
 		wsState_conn:2,
 		wsState_inval:3,
+		
+		//connection type
+		wsConnTypeDirect:0,
+		wsConnTypeProxy:1,
+		
 	};
 	
 	commWeb.getSequence = function getSequence()

@@ -1,10 +1,10 @@
-ionicApp.factory('webSock',function(SettingsService, LogDataService, commWeb){
+ionicApp.factory('webSock',function(SettingsService, LogDataService, commWeb, ident){
 	
-	var socket = {
+	var webSock = {
 		_Connected: false,
 		_Connecting: false,
 		_Socket: null,
-		_Callbacks:[],
+		_rxCallback:null,
 		_MessageToSend:null,
 		_reconnNo:0,
 		_lastTimeRX:0,
@@ -19,68 +19,48 @@ ionicApp.factory('webSock',function(SettingsService, LogDataService, commWeb){
 	//if(location.origin.replace(/^http/, 'ws')
 	//type = web
 	
-	socket.send =  function (message) 
+	webSock.send =  function (message) 
 	{
 		try
 		{
-			if(!socket._Connected)
+			if(!webSock._Connected)
 			{
 				var force=false;
-				if((socket._reconnNo % 10) == 0 && socket._reconnNo > 0)
+				if((webSock._reconnNo % 10) == 0 && webSock._reconnNo > 0)
 				{
-					LogDataService.addLog("wsock: RECONN #"+socket._reconnNo, "#f00");
+					LogDataService.addLog("wsock: RECONN #"+webSock._reconnNo, "#f00");
 					force=true;
 				}
 
-				socket._reconnNo++;
-				socket._MessageToSend = message;
-				socket.connectSocket(force);
+				webSock._reconnNo++;
+				webSock._MessageToSend = message;
+				webSock.connectSocket(force);
 			}
 			else
 			{
-				
-				LogDataService.addLog("wsock: trysend, state:" + socket._sockState);
-				
-				if(socket._sockState== commWeb.WsWebProto.wsState_conn)
-				{
-					var msg={op:commWeb.WsWebProto.wsOP_msgRelay, 
-							 dest:0, 
-							 type:commWeb.WsWebProto.wsValue_mobileApp,
-							 msg:message};
-					socket._Socket.send(JSON.stringify(msg));
-					socket._lastTimeTX = (new Date()).getTime();
-					LogDataService.addLog("wsock: SENT " + message);
-				}
+				webSock._Socket.send(msg);
+				webSock._lastTimeTX = (new Date()).getTime();
 			}
 		}
 		catch(e)
 		{
 			LogDataService.addLog("wsock: SockSendEx " + e.message);
+			webSock._Connected = false;
 		}
     }
 	
-	socket.setCallbacks = function(callbackObj)
+	webSock.setRxCallback = function(callbackObj)
 	{
-		var i=0, found=0;
-		for(; i< socket._Callbacks.length; i++)
-			if(socket._Callbacks[i].name === callbackObj.name &&
-				socket._Callbacks[i].protocol === callbackObj.protocol)
-			{
-				found = 1;
-				break;
-			}
-		
-		if(!found)
-			socket._Callbacks.push(callbackObj);
+		webSock._rxCallback = callbackObj;
 	}
 	
-	socket.isAlive = function()
+	webSock.isAlive = function()
 	{
-		if((socket._Socket != null) && 
-				(socket._Connected || socket._Connecting))
+		if((webSock._Socket != null) && 
+				(webSock._Connected || webSock._Connecting))
 		{
-			if(socket._lastTimeTX > socket._lastTimeRX &&
-				(new Date()).getTime() - socket._lastTimeTX > 3000)
+			if(webSock._lastTimeTX > webSock._lastTimeRX &&
+				(new Date()).getTime() - webSock._lastTimeTX > 3000)
 			{
 				LogDataService.addLog("wsock: TX Timeout");
 				return false;
@@ -90,25 +70,25 @@ ionicApp.factory('webSock',function(SettingsService, LogDataService, commWeb){
 		return false;
 	}
 	
-	socket.getSocket = function()
+	webSock.getSocket = function()
 	{
-		if(socket._Socket == null)
+		if(webSock._Socket == null)
 		{
-			socket.connectSocket();
+			webSock.connectSocket();
 		}
 		
-		return socket._Socket;
+		return webSock._Socket;
 	}
 
-	socket.connectSocket = function(force)
+	webSock.connectSocket = function(force)
 	{
 		var settings = SettingsService.get('settings');
 		var _force = force || false;
 		var currentState;
 	
-		if(socket._Socket != null)
+		if(webSock._Socket != null)
 		{
-			switch (socket._Socket.readyState) {
+			switch (webSock._Socket.readyState) {
 			  case WebSocket.CONNECTING:
 				currentState = "CONNECTING";
 				break;
@@ -132,30 +112,30 @@ ionicApp.factory('webSock',function(SettingsService, LogDataService, commWeb){
 				_force || 
 				(
 					(
-						socket._Socket.readyState != WebSocket.CONNECTING ||
-						(new Date()).getTime() - socket._lastTimeTryConnect > 3000 
+						webSock._Socket.readyState != WebSocket.CONNECTING ||
+						(new Date()).getTime() - webSock._lastTimeTryConnect > 3000 
 					) &&
-					socket._Socket.readyState != WebSocket.OPEN && 
+					webSock._Socket.readyState != WebSocket.OPEN && 
 					(
-						(!socket._Connected && !socket._Connecting) ||
-						socket._wasError
+						(!webSock._Connected && !webSock._Connecting) ||
+						webSock._wasError
 					)
 				)	
 			)
 			{
-				socket._wasError = false;
+				webSock._wasError = false;
 				
-				socket._Socket.onopen = null;
-				socket._Socket.onclose = null
-				socket._Socket.onmessage = null;
-				socket._Socket.onerror = null;
+				webSock._Socket.onopen = null;
+				webSock._Socket.onclose = null
+				webSock._Socket.onmessage = null;
+				webSock._Socket.onerror = null;
 				
-				socket._Socket.close();
-				socket._Socket = null;
-				socket._Connected = false;
+				webSock._Socket.close();
+				webSock._Socket = null;
+				webSock._Connected = false;
 				LogDataService.addLog("wsock: FORCE RECONN", "#aaa");
 			}
-			else return socket._Socket;	
+			else return webSock._Socket;	
 		}
 		
 		if(settings == null)
@@ -165,48 +145,42 @@ ionicApp.factory('webSock',function(SettingsService, LogDataService, commWeb){
 		else
 		{
 			LogDataService.addLog("wsock: CREATE ", "#aaa");
-			socket._Connecting = true;
-			socket._lastTimeTryConnect = (new Date()).getTime();
+			webSock._Connecting = true;
+			webSock._lastTimeTryConnect = (new Date()).getTime();
 			try
 			{
-				socket._Socket = new WebSocket("wss://homea.herokuapp.com/");
+				webSock._Socket = new WebSocket("ws://homea.herokuapp.com/");
 			}
 			catch(e)
 			{
-				//socket._wasError = true;
-				socket._Socket = null;
+				//webSock._wasError = true;
+				webSock._Socket = null;
 				LogDataService.addLog("wsock: SockSendEx ()" + e.message);
 				return null;
 			}
 			
-			socket._Socket.onopen = function(evt)
+			webSock._Socket.onopen = function(evt)
 			{
 				LogDataService.addLog("wsock: CONNECTED", "#0f0");
-				socket._Connected = true;
-				socket._Connecting = false;
-				socket._reconnNo = 0;
-				socket._lastTimeRX = socket._lastTimeTX = 0;
-				//socket.send(commWeb.eCommWebMsgTYpes.cwPrintDebugInformation + ";1;");
-				
-				socket._sockState=commWeb.WsWebProto.wsState_new;
+				webSock._Connected = true;
+				webSock._Connecting = false;
+				webSock._reconnNo = 0;
+				webSock._lastTimeRX = webSock._lastTimeTX = 0;
+
+				webSock._sockState=commWeb.WsWebProto.wsState_new;
 				var msg={op:commWeb.WsWebProto.wsOP_cliHello};
 				msg = JSON.stringify(msg);
 				LogDataService.addLog("wsock: _send"+msg, "#f00");
-				
-				socket._Socket.send(msg);
+				webSock._Socket.send(msg);
 			};
-			socket._Socket.onclose = function(evt)
+			webSock._Socket.onclose = function(evt)
 			{
 				LogDataService.addLog("wsock: DISCONN"/*+evt.code + " "+evt.reason + " " + ev.wasClean*/ , "#f00");
-				socket._Connected = false;
-				socket._Connecting = false;
-				//socket.connectSocket();
+				webSock._Connected = false;
+				webSock._Connecting = false;
 			};
-			socket._Socket.onmessage = function(evt)
-			{
-				var found = false;
-				var res = {str:evt.data};
-				
+			webSock._Socket.onmessage = function(evt)
+			{	
 				LogDataService.addLog("wsock: RX "+evt.data);
 				
 				var msg = JSON.parse(evt.data);
@@ -214,37 +188,30 @@ ionicApp.factory('webSock',function(SettingsService, LogDataService, commWeb){
 				switch(msg.op)
 				{
 					case commWeb.WsWebProto.wsOP_servHello:
-						if(socket._sockState == commWeb.WsWebProto.wsState_new)
+						if(webSock._sockState == commWeb.WsWebProto.wsState_new)
 						{
-							socket._sockState=commWeb.WsWebProto.wsState_hello;
+							webSock._sockState=commWeb.WsWebProto.wsState_hello;
 							
 							var reply={
 										op:commWeb.WsWebProto.wsOP_cliLogin, 
 										type:commWeb.WsWebProto.wsValue_mobileApp, 
-										id:0
+										id:ident.getMyId()
 									  };
-							socket._Socket.send(JSON.stringify(reply));
+							webSock._Socket.send(JSON.stringify(reply));
 							
 							LogDataService.addLog("wsock: rx servHello, login" );
 						}
 						else
 						{
-							LogDataService.addLog("wsock: rx servHello in bad state " + socket._sockState);
+							LogDataService.addLog("wsock: rx servHello in bad state " + webSock._sockState);
 						}
 					break;
 					
 					case commWeb.WsWebProto.wsOP_positiveAck:
-						if(socket._sockState == commWeb.WsWebProto.wsState_hello)
+						if(webSock._sockState == commWeb.WsWebProto.wsState_hello)
 						{
-							socket._sockState=commWeb.WsWebProto.wsState_conn;
-							LogDataService.addLog("wsock: login accepted send test msg");
-							
-							var msg={op:commWeb.WsWebProto.wsOP_msgRelay, 
-									 dest:0, 
-									 type:commWeb.WsWebProto.wsValue_mobileApp,
-									 msg:"TEST01010203"};
-							socket._Socket.send(JSON.stringify(msg));
-							
+							webSock._sockState=commWeb.WsWebProto.wsState_conn;
+							LogDataService.addLog("wsock: login accepted");
 						}
 						//else if
 					
@@ -252,7 +219,7 @@ ionicApp.factory('webSock',function(SettingsService, LogDataService, commWeb){
 					
 					case commWeb.WsWebProto.wsOP_negativeAck:
 					
-						if(socket._sockState == commWeb.WsWebProto.wsState_hello)
+						if(webSock._sockState == commWeb.WsWebProto.wsState_hello)
 						{
 							LogDataService.addLog("wsock: login rejected: " + msg.err);
 							
@@ -264,7 +231,7 @@ ionicApp.factory('webSock',function(SettingsService, LogDataService, commWeb){
 										type:commWeb.WsWebProto.wsValue_mobileApp, 
 										id:0
 									  };
-							socket.send(JSON.stringify(reply));
+							webSock.send(JSON.stringify(reply));
 							
 							LogDataService.addLog("wsock: reattempt login" );
 							*/
@@ -273,41 +240,32 @@ ionicApp.factory('webSock',function(SettingsService, LogDataService, commWeb){
 					
 					break;
 					
+					case commWeb.WsWebProto.wsOP_msgRelay:
+					break;
+					
 					default:
 						LogDataService.addLog("wsock: rx bad op " + msg.op);
 					break;
 				
 				}
 				
-				/*
-				if(!commWeb.skipInt(res).err)
-				{	
-					socket._lastTimeRX = (new Date()).getTime();
-					
-					for(var i=0; i < socket._Callbacks.length; i++)
-					{
-						if(socket._Callbacks[i].protocol == res.result)
-						{
-							socket._Callbacks[i].onMessage(res.str);
-							found = true;
-						}
-					}
-				}
-				*/
+				webSock._rxCallback.onMessage(evt.data);
+				
+				webSock._lastTimeRX = (new Date()).getTime();
 				
 			};
-			socket._Socket.onerror = function(evt)
+			webSock._Socket.onerror = function(evt)
 			{
-				socket._Connecting = false;
-				socket._Connected = false;
-				socket._wasError = true;
+				webSock._Connecting = false;
+				webSock._Connected = false;
+				webSock._wasError = true;
 				LogDataService.addLog("wsock: ERR:"+evt.data, "#f00");
-				//socket._reconnNo ++;
+				//webSock._reconnNo ++;
 			};
 		}
 		
-		return socket._Socket;
+		return webSock._Socket;
 	}
 	
-	return socket;
+	return webSock;
 })

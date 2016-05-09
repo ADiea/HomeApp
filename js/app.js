@@ -114,6 +114,15 @@ var ionicApp = angular.module('ionicApp', ['ionic', 'chart.js'])
         }
       }
 	})
+	.state('app.register', {
+      url: '/house/register',
+      views: {
+        'menuContent': {
+          templateUrl: 'views/register.html',
+          controller: 'RegisterCtrl'
+        }
+      }
+	})
 	 .state('app.house', {
       url: '/house',
       views: {

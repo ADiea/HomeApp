@@ -160,6 +160,9 @@ ionicApp.factory('commWeb',function(){
 
 		cwGetGenericDeviceLogs:23,
 		cwReplyGenericDeviceLogs:24,
+		cwStartWiFiScan:25,
+		cwReportWiFiList:26,
+		cwSetWiFiParams:27,
 	//	cwGetDevices:,
 	//	cwReplyDeviceList:,
 

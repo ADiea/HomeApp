@@ -3,7 +3,7 @@ ionicApp.factory('socket',function(SettingsService, LogDataService, commWeb, web
 	var socket = {
 		_Connected: false,
 		_HouseBaseID:122,
-		_connectMethod:commWeb.WsWebProto.wsConnTypeProxy,
+		_connectMethod:commWeb.WsWebProto.wsConnTypeDirect,//commWeb.WsWebProto.wsConnTypeProxy,
 		_Callbacks:[],
 		_MessageToSend:null,
 	};

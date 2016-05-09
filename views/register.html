@@ -1,0 +1,63 @@
+<ion-view >
+	<ion-nav-title>
+	{{lang.getS('sRegister')}}
+	</ion-nav-title>
+
+  <ion-content>
+	<div ng-show="!_sock._Connected">
+		<table  style="width:100%" >
+			<tr>
+				<td  style="vertical-align:middle">
+					{{lang.getS('sPleaseConnect')}} 'Casa_1345'
+				</td>
+			</tr>
+		</table>
+	</div>
+	
+  	<ion-list ng-show="_sock._Connected">
+	<div ng-repeat="ap in wifiList">
+		<ion-item  ng-click="">
+			<table  style="width:100%" ng-click="" >
+				<tr>
+					<td  style="vertical-align:middle">
+						{{ap.ssid}}
+					</td>
+					
+					<td  style="vertical-align:middle">
+						{{ap.bssid}}
+					</td>
+					
+					<td  style="vertical-align:middle">
+						{{ap.auth}}
+					</td>					
+				</tr>
+				
+				<tr>
+					<td  style="vertical-align:middle">
+						{{lang.getS('sChan') + ":" + ap.ch}}
+					</td>
+					
+					<td  style="vertical-align:middle">
+						{{lang.getS('sRSSI') + ":" + ap.rssi}}
+					</td>
+					
+					<td  style="vertical-align:middle">
+						{{lang.getS('sHidden') + ":" + ap.hidden}}
+					</td>				
+				</tr>
+			</table>
+		</ion-item>
+	</div>
+	</ion-list>
+  </ion-content>
+  <ion-footer-bar>
+
+	 <div class="button-bar" >
+		<button ng-click="scanWifiAPList()"
+			class="button button-small button-outline button-assertive">
+			<i class="icon  ion-ios-reload"></i>
+		</button>
+	 </div>
+	 
+  </ion-footer-bar>
+</ion-view>

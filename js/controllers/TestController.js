@@ -16,6 +16,10 @@ var _TestCtrl = ionicApp.controller('TestsCtrl', function($scope, $stateParams, 
 	$scope.connectWiFi = function connectWiFi(wifi)
 	{
 		var wifiNet = WifiWizard.formatWPAConfig(wifi.s, wifi.p);
+		
+		try { window.plugins.toast.showShortCenter("Try connect "+wifi.s ,function(a){},function(b){}); }
+		catch(e){}
+		
 		WifiWizard.addNetwork(wifiNet, 
 			function(){
 				try { window.plugins.toast.showShortCenter("Added WiFi " + wifi.s ,function(a){},function(b){}); }
@@ -83,16 +87,37 @@ var _TestCtrl = ionicApp.controller('TestsCtrl', function($scope, $stateParams, 
 						function(status)
 						{
 							$scope.moreInfo = "WiFi is" + status?"ena":"dis";
+							
+							try { window.plugins.toast.showShortCenter($scope.moreInfo  ,function(a){},function(b){}); }
+							catch(e){}
+							
 							if(!status)
 							{
-								WifiWizard.setWifiEnabled(true, function(){$scope.connectWiFi(wifi);}, function(){$scope.moreInfo = "Can't start WiFi";});
+								WifiWizard.setWifiEnabled(true, function(){$scope.connectWiFi(wifi);}, 
+									function()
+									{
+										$scope.moreInfo = "Can't start WiFi";
+										try { window.plugins.toast.showShortCenter($scope.moreInfo  ,function(a){},function(b){}); }
+										catch(e){}
+									});
 							}
 							else
 							{
 								$scope.connectWiFi(wifi);
 							}
-						}, function(){$scope.moreInfo = "Can't get WiFi state";}
+						}, 
+						function()
+						{
+							$scope.moreInfo = "Can't get WiFi state";
+							try { window.plugins.toast.showShortCenter($scope.moreInfo  ,function(a){},function(b){}); }
+							catch(e){}
+						}
 					);
+				}
+				else
+				{
+					try { window.plugins.toast.showShortCenter("Failed to parse " + result.text ,function(a){},function(b){}); }
+					catch(e){}
 				}
 				
 			}

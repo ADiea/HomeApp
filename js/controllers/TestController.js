@@ -78,11 +78,18 @@ var _TestCtrl = ionicApp.controller('TestsCtrl', function($scope, $stateParams, 
 			{
 				$scope.moreInfo = "Barcode type is: " + result.format + "\nDecoded text is: " + result.text;
 				
-				//{s:"",p:""}
+				try { window.plugins.toast.showShortCenter("Scanned: " + result.text ,function(a){},function(b){}); }
+				catch(e){}
+						
 				var wifi = JSON.parse(result.text);
 				
 				if(wifi != null)
 				{
+				
+					try { window.plugins.toast.showShortCenter("JSON: s:" + wifi.s + " p:" + wifi.p ,function(a){},function(b){}); }
+					catch(e){}
+				
+				try{
 					WifiWizard.isWifiEnabled(
 						function(status)
 						{
@@ -113,6 +120,12 @@ var _TestCtrl = ionicApp.controller('TestsCtrl', function($scope, $stateParams, 
 							catch(e){}
 						}
 					);
+					}
+					catch(e)
+					{
+						try { window.plugins.toast.showShortCenter("ex: " + e.message  ,function(a){},function(b){}); }
+							catch(e){}
+					}
 				}
 				else
 				{

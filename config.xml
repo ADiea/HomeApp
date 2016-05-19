@@ -59,6 +59,7 @@
 	
 	<gap:plugin name="nl.x-services.plugins.toast" version="2.0.2" />
 	<gap:plugin name="com.ququplay.websocket.websocket" version="0.1.0" />
+	<gap:plugin name="phonegap-plugin-barcodescanner" />
 
     <!-- Core plugins -->
     <gap:plugin name="org.apache.cordova.battery-status" />

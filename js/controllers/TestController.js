@@ -13,7 +13,34 @@ var _TestCtrl = ionicApp.controller('TestsCtrl', function($scope, $stateParams, 
       };
 	*/  
 	
-	
+	$scope.doQRScan = function doQRScan()
+	{
+		$scope.moreInfo = "QR Scan Started";
+		
+		if(typeof cordova == 'undefined')
+			$scope.moreInfo = "QR Scan - !cordova";
+		if(typeof cordova.plugins == 'undefined')
+			$scope.moreInfo = "QR Scan - !plugins";
+		if(typeof cordova.plugins.barcodeScanner == 'undefined')
+			$scope.moreInfo = "QR Scan - !barcodeScanner";
+		
+		cordova.plugins.barcodeScanner.scan(
+		  function (result) {
+			if(!result.cancelled)
+			{
+				$scope.moreInfo = "Barcode type is: " + result.format + "\nDecoded text is: " + result.text;
+			}
+			else
+			{
+				$scope.moreInfo = "QR Scan Cancelled";
+			}
+		  },
+		  function (error) 
+		  {
+			$scope.moreInfo = "QR Scan failed " + error;
+		  }
+		);
+	}
 	
 // Fetch Device info from Device Plugin
 	$scope.alertDeviceInfo = function() {
@@ -50,7 +77,6 @@ var _TestCtrl = ionicApp.controller('TestsCtrl', function($scope, $stateParams, 
 
 	// Makes a beep sound
 	$scope.beepNotify = function() {
-		webSock.send("lalala_");
 		navigator.notification.beep(1);
 	};
 

@@ -25,6 +25,7 @@
 	 -->
 	 <preference name="permissions"                value="none"/>
 	 <feature name="http://api.phonegap.com/1.0/camera" />
+	 <feature name="http://api.phonegap.com/1.0/network" />
 	 
 	<!-- to enable individual permissions use the following examples -->	 
 	<!-- <feature name="http://api.phonegap.com/1.0/network" /> -->
@@ -61,11 +62,6 @@
 	<gap:plugin name="nl.x-services.plugins.toast" version="2.0.2" />
 	<gap:plugin name="com.ququplay.websocket.websocket" version="0.1.0" />
 	
-	<!--<preference name="android-build-tool" value="gradle" />-->
-	<plugin name="net.roughshod.plugins.barcodescanner" spec="3.0.0" source="pgb" />
-	<!--<gap:plugin name="phonegap-plugin-barcodescanner" />-->
-	<!--<gap:plugin name="com.phonegap.plugins.barcodescanner" /> -->
-
     <!-- Core plugins -->
     <gap:plugin name="org.apache.cordova.battery-status" />
     <gap:plugin name="org.apache.cordova.camera" />
@@ -91,6 +87,9 @@
     <!--
         <gap:plugin name="com.phonegap.plugins.barcodescanner" />
     -->
+	
+	<plugin name="com.pylonproducts.wifiwizard" source="pgb" />
+	<plugin name="net.roughshod.plugins.barcodescanner" source="pgb" />
 
     <!-- Define app icon for each platform. -->
     <icon src="icon.png" />

@@ -13,6 +13,48 @@ var _TestCtrl = ionicApp.controller('TestsCtrl', function($scope, $stateParams, 
       };
 	*/  
 	
+	$scope.connectWiFi = function connectWiFi(wifi)
+	{
+		var wifiNet = WifiWizard.formatWPAConfig(wifi.s, wifi.p);
+		WifiWizard.addNetwork(wifiNet, 
+			function(){
+				try { window.plugins.toast.showShortCenter("Added WiFi " + wifi.s ,function(a){},function(b){}); }
+				catch(e){}
+				
+				WifiWizard.connectNetwork(wifi.s, 
+					function()
+					{
+						try { window.plugins.toast.showShortCenter("CONNECTED to" + wifi.s ,function(a){},function(b){}); }
+						catch(e){}
+					}, 
+					function()
+					{
+						try { window.plugins.toast.showShortCenter("Failed connect to " + wifi.s ,function(a){},function(b){}); }
+						catch(e){}
+					}
+				);
+				
+			}, 
+			function(){
+				try { window.plugins.toast.showShortCenter("Cannot add WiFi " + wifi.s ,function(a){},function(b){}); }
+				catch(e){}
+				
+				WifiWizard.connectNetwork(wifi.s, 
+					function()
+					{
+						try { window.plugins.toast.showShortCenter("CONNECTED to" + wifi.s ,function(a){},function(b){}); }
+						catch(e){}
+					}, 
+					function()
+					{
+						try { window.plugins.toast.showShortCenter("Failed connect to " + wifi.s ,function(a){},function(b){}); }
+						catch(e){}
+					}
+				);
+			}
+		);
+	}
+	
 	$scope.doQRScan = function doQRScan()
 	{
 		$scope.moreInfo = "QR Scan Started";
@@ -24,11 +66,35 @@ var _TestCtrl = ionicApp.controller('TestsCtrl', function($scope, $stateParams, 
 		if(typeof cordova.plugins.barcodeScanner == 'undefined')
 			$scope.moreInfo = "QR Scan - !barcodeScanner";
 		
-		cordova.plugins.barcodeScanner.scan(
-		  function (result) {
+		cordova.plugins.barcodeScanner.scan
+		(
+		  function (result) 
+		  {
 			if(!result.cancelled)
 			{
 				$scope.moreInfo = "Barcode type is: " + result.format + "\nDecoded text is: " + result.text;
+				
+				//{s:"",p:""}
+				var wifi = JSON.parse(result.text);
+				
+				if(wifi != null)
+				{
+					WifiWizard.isWifiEnabled(
+						function(status)
+						{
+							$scope.moreInfo = "WiFi is" + status?"ena":"dis";
+							if(!status)
+							{
+								WifiWizard.setWifiEnabled(true, function(){$scope.connectWiFi(wifi);}, function(){$scope.moreInfo = "Can't start WiFi";});
+							}
+							else
+							{
+								$scope.connectWiFi(wifi);
+							}
+						}, function(){$scope.moreInfo = "Can't get WiFi state";}
+					);
+				}
+				
 			}
 			else
 			{

@@ -15,17 +15,17 @@ var _TestCtrl = ionicApp.controller('TestsCtrl', function($scope, $stateParams, 
 	
 	$scope.connectWiFi = function connectWiFi(wifi)
 	{
-		var wifiNet = WifiWizard.formatWPAConfig(wifi.s, wifi.p);
+		var wifiNet = cordova.plugins.WifiWizard.formatWPAConfig(wifi.s, wifi.p);
 		
 		try { window.plugins.toast.showShortCenter("Try connect "+wifi.s ,function(a){},function(b){}); }
 		catch(e){}
 		
-		WifiWizard.addNetwork(wifiNet, 
+		cordova.plugins.WifiWizard.addNetwork(wifiNet, 
 			function(){
 				try { window.plugins.toast.showShortCenter("Added WiFi " + wifi.s ,function(a){},function(b){}); }
 				catch(e){}
 				
-				WifiWizard.connectNetwork(wifi.s, 
+				cordova.plugins.WifiWizard.connectNetwork(wifi.s, 
 					function()
 					{
 						try { window.plugins.toast.showShortCenter("CONNECTED to" + wifi.s ,function(a){},function(b){}); }
@@ -43,7 +43,7 @@ var _TestCtrl = ionicApp.controller('TestsCtrl', function($scope, $stateParams, 
 				try { window.plugins.toast.showShortCenter("Cannot add WiFi " + wifi.s ,function(a){},function(b){}); }
 				catch(e){}
 				
-				WifiWizard.connectNetwork(wifi.s, 
+				cordova.plugins.WifiWizard.connectNetwork(wifi.s, 
 					function()
 					{
 						try { window.plugins.toast.showShortCenter("CONNECTED to" + wifi.s ,function(a){},function(b){}); }
@@ -90,7 +90,7 @@ var _TestCtrl = ionicApp.controller('TestsCtrl', function($scope, $stateParams, 
 					catch(e){}
 				
 				try{
-					WifiWizard.isWifiEnabled(
+					cordova.plugins.WifiWizard.isWifiEnabled(
 						function(status)
 						{
 							$scope.moreInfo = "WiFi is" + status?"ena":"dis";
@@ -100,7 +100,7 @@ var _TestCtrl = ionicApp.controller('TestsCtrl', function($scope, $stateParams, 
 							
 							if(!status)
 							{
-								WifiWizard.setWifiEnabled(true, function(){$scope.connectWiFi(wifi);}, 
+								cordova.plugins.WifiWizard.setWifiEnabled(true, function(){$scope.connectWiFi(wifi);}, 
 									function()
 									{
 										$scope.moreInfo = "Can't start WiFi";

@@ -4,7 +4,7 @@
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "com.adiea.home"
-        version   = "0.0.3">
+        version   = "0.0.4">
 
     <name>HomeA</name>
 
@@ -59,7 +59,11 @@
 	
 	<gap:plugin name="nl.x-services.plugins.toast" version="2.0.2" />
 	<gap:plugin name="com.ququplay.websocket.websocket" version="0.1.0" />
-	<gap:plugin name="phonegap-plugin-barcodescanner" />
+	
+	<!--<preference name="android-build-tool" value="gradle" />-->
+	<plugin name="net.roughshod.plugins.barcodescanner" spec="3.0.0" source="pgb" />
+	<!--<gap:plugin name="phonegap-plugin-barcodescanner" />-->
+	<!--<gap:plugin name="com.phonegap.plugins.barcodescanner" /> -->
 
     <!-- Core plugins -->
     <gap:plugin name="org.apache.cordova.battery-status" />

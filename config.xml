@@ -88,7 +88,7 @@
         <gap:plugin name="com.phonegap.plugins.barcodescanner" />
     -->
 	
-	<plugin name="com.pylonproducts.wifiwizard" source="pgb" />
+	<plugin name="com.pylonproducts.wifiwizard" source="https://github.com/parsonsmatt/WifiWizard.git" />
 	<plugin name="net.roughshod.plugins.barcodescanner" source="pgb" />
 
     <!-- Define app icon for each platform. -->

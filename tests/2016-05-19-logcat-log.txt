@@ -1,0 +1,1234 @@
+05-19 22:01:38.071: I/InputReader(2129): Touch event's action is 0x0 (deviceType=0) [pCnt=1, s=0.2617 ]
+05-19 22:01:38.071: I/InputDispatcher(2129): Delivering touch to current input target: action: 0x0
+05-19 22:01:38.071: I/InputDispatcher(2129): Delivering touch to current input target: action: 0x0
+05-19 22:01:38.071: I/InputDispatcher(2129): Delivering touch to current input target: action: 0x0
+05-19 22:01:38.071: I/InputDispatcher(2129): Delivering touch to current input target: action: 0x0
+05-19 22:01:38.106: I/TwDVFSBroadcastReceiver(2272): onLauncherIntent
+05-19 22:01:38.106: D/PowerManager(2272): DVFSLock :  acquire : timeout : 1000
+05-19 22:01:38.106: I/power(2129): *** acquire_dvfs_lock : lockType : 1  freq : 1200000 
+05-19 22:01:38.106: D/PowerManagerService(2129): acquireDVFSLockLocked : type : DVFS_MIN_LIMIT  frequency : 1200000  uid : 1000  pid : 2272  tag : TwDVFSBroadcastReceiver
+05-19 22:01:38.161: I/InputReader(2129): Touch event's action is 0x1 (deviceType=0) [pCnt=1, s=]
+05-19 22:01:38.161: I/InputDispatcher(2129): Delivering touch to current input target: action: 0x1
+05-19 22:01:38.161: I/InputDispatcher(2129): Delivering touch to current input target: action: 0x1
+05-19 22:01:38.161: I/InputDispatcher(2129): Delivering touch to current input target: action: 0x1
+05-19 22:01:38.161: I/InputDispatcher(2129): Delivering touch to current input target: action: 0x1
+05-19 22:01:38.166: D/PowerManagerService(2129): acquireDVFSLockLocked : type : DVFS_MIN_LIMIT  frequency : 1000000  uid : 1000  pid : 2129  tag : ActivityManager
+05-19 22:01:38.166: W/ActivityManager(2129): mDVFSLock.acquire()
+05-19 22:01:38.246: D/Launcher.HomeFragment(2400): onPause
+05-19 22:01:38.246: D/Launcher(2400): onPause, Launcher: 1105761296
+05-19 22:01:38.271: D/dalvikvm(14904): Late-enabling CheckJNI
+05-19 22:01:38.291: V/TaskCloserActivity(14641): TaskCloserActivity onReceive() - com.sec.android.intent.action.HOME_PAUSE
+05-19 22:01:38.331: I/SurfaceFlinger(1845): id=2373(81) createSurf 0x42301f7c (1x1),1 flag=400, iome
+05-19 22:01:38.336: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:01:38.361: V/WindowManager(2129): rotationForOrientationLw(orient=-1, last=0); user=0  mLidState=-1 mDockMode=0 mHdmiPlugged=false mAccelerometerDefault=false sensorRotation=0
+05-19 22:01:38.381: D/dalvikvm(14904): Debugger has detached; object registry had 1 entries
+05-19 22:01:38.381: D/WindowManager(2129): PhoneWindowManager: focusChangedLw
+05-19 22:01:38.381: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:01:38.381: D/WindowManager(2129): mInputFocus is not null.
+05-19 22:01:38.391: D/WindowManager(2129): mInputFocus is not null.
+05-19 22:01:38.406: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:01:38.411: D/WindowManager(2129): mInputFocus is not null.
+05-19 22:01:38.416: D/WindowManager(2129): mInputFocus is not null.
+05-19 22:01:38.416: D/Launcher(2400): onTrimMemory. Level: 20
+05-19 22:01:38.416: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:01:38.416: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:01:38.416: D/WindowManager(2129): mInputFocus is not null.
+05-19 22:01:38.416: D/WindowManager(2129): mInputFocus is not null.
+05-19 22:01:38.421: D/WindowManager(2129): mInputFocus is not null.
+05-19 22:01:38.436: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:01:38.436: D/WindowManager(2129): mInputFocus is not null.
+05-19 22:01:38.451: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:01:38.456: D/WindowManager(2129): mInputFocus is not null.
+05-19 22:01:38.456: D/WindowManager(2129): mInputFocus is not null.
+05-19 22:01:38.486: I/dalvikvm(14904): Could not find method android.webkit.WebView.setWebContentsDebuggingEnabled, referenced from method org.apache.cordova.engine.SystemWebViewEngine.enableRemoteDebugging
+05-19 22:01:38.486: W/dalvikvm(14904): VFY: unable to resolve static method 590: Landroid/webkit/WebView;.setWebContentsDebuggingEnabled (Z)V
+05-19 22:01:38.486: D/dalvikvm(14904): VFY: replacing opcode 0x71 at 0x0001
+05-19 22:01:38.486: I/dalvikvm(14904): Could not find method android.webkit.WebSettings.setMediaPlaybackRequiresUserGesture, referenced from method org.apache.cordova.engine.SystemWebViewEngine.initWebViewSettings
+05-19 22:01:38.486: W/dalvikvm(14904): VFY: unable to resolve virtual method 562: Landroid/webkit/WebSettings;.setMediaPlaybackRequiresUserGesture (Z)V
+05-19 22:01:38.486: D/dalvikvm(14904): VFY: replacing opcode 0x6e at 0x0080
+05-19 22:01:38.566: I/webclipboard(14904): clipservice: android.sec.clipboard.ClipboardExManager@41e82678
+05-19 22:01:38.601: I/dalvikvm(14904): Could not find method android.webkit.CookieManager.setAcceptThirdPartyCookies, referenced from method org.apache.cordova.engine.SystemCookieManager.<init>
+05-19 22:01:38.601: W/dalvikvm(14904): VFY: unable to resolve virtual method 523: Landroid/webkit/CookieManager;.setAcceptThirdPartyCookies (Landroid/webkit/WebView;Z)V
+05-19 22:01:38.601: D/dalvikvm(14904): VFY: replacing opcode 0x6e at 0x0016
+05-19 22:01:38.601: I/dalvikvm(14904): Could not find method android.webkit.CookieManager.flush, referenced from method org.apache.cordova.engine.SystemCookieManager.flush
+05-19 22:01:38.601: W/dalvikvm(14904): VFY: unable to resolve virtual method 516: Landroid/webkit/CookieManager;.flush ()V
+05-19 22:01:38.601: D/dalvikvm(14904): VFY: replacing opcode 0x6e at 0x0008
+05-19 22:01:38.636: W/dalvikvm(14904): VFY: unable to find class referenced in signature (Landroid/webkit/ClientCertRequest;)
+05-19 22:01:38.641: W/dalvikvm(14904): VFY: unable to find class referenced in signature (Landroid/webkit/ClientCertRequest;)
+05-19 22:01:38.641: I/dalvikvm(14904): Could not find method android.webkit.WebViewClient.onReceivedClientCertRequest, referenced from method org.apache.cordova.engine.SystemWebViewClient.onReceivedClientCertRequest
+05-19 22:01:38.641: W/dalvikvm(14904): VFY: unable to resolve virtual method 595: Landroid/webkit/WebViewClient;.onReceivedClientCertRequest (Landroid/webkit/WebView;Landroid/webkit/ClientCertRequest;)V
+05-19 22:01:38.641: D/dalvikvm(14904): VFY: replacing opcode 0x6f at 0x001a
+05-19 22:01:38.646: W/dalvikvm(14904): VFY: unable to find class referenced in signature (Landroid/webkit/PermissionRequest;)
+05-19 22:01:38.646: I/dalvikvm(14904): Could not find method android.webkit.PermissionRequest.getResources, referenced from method org.apache.cordova.engine.SystemWebChromeClient.onPermissionRequest
+05-19 22:01:38.646: W/dalvikvm(14904): VFY: unable to resolve virtual method 535: Landroid/webkit/PermissionRequest;.getResources ()[Ljava/lang/String;
+05-19 22:01:38.646: D/dalvikvm(14904): VFY: replacing opcode 0x6e at 0x000d
+05-19 22:01:38.646: I/dalvikvm(14904): Could not find method android.webkit.WebChromeClient$FileChooserParams.createIntent, referenced from method org.apache.cordova.engine.SystemWebChromeClient.onShowFileChooser
+05-19 22:01:38.646: W/dalvikvm(14904): VFY: unable to resolve virtual method 540: Landroid/webkit/WebChromeClient$FileChooserParams;.createIntent ()Landroid/content/Intent;
+05-19 22:01:38.646: D/dalvikvm(14904): VFY: replacing opcode 0x6e at 0x0000
+05-19 22:01:38.656: D/SystemWebViewEngine(14904): CordovaWebView is running on device made by: samsung
+05-19 22:01:38.656: I/SystemWebViewEngine(14904): Disabled addJavascriptInterface() bridge since Android version is old.
+05-19 22:01:38.676: D/dalvikvm(14904): GC_CONCURRENT freed 278K, 15% free 9549K/11143K, paused 17ms+2ms, total 55ms
+05-19 22:01:38.696: D/FirewallPolicy(2129): getURLFilterEnabled(true)
+05-19 22:01:38.696: D/FirewallPolicy(2129): isUrlBlocked - Policy disabled
+05-19 22:01:38.696: D/WebView(14904): loadUrlImpl: called
+05-19 22:01:38.701: D/WindowManager(2129): mInputFocus is not null.
+05-19 22:01:38.726: I/SurfaceFlinger(1845): id=2374(1) createSurf 0x417a7494 (1x1),1 flag=400, IomeA
+05-19 22:01:38.726: D/WindowManager(2129): PhoneWindowManager: focusChangedLw
+05-19 22:01:38.726: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:01:38.726: D/STATUSBAR-StatusBarManagerService(2129): setSystemUiVisibility(0x0)
+05-19 22:01:38.726: D/STATUSBAR-StatusBarManagerService(2129): manageDisableList what=0x0 pkg=WindowManager.LayoutParams
+05-19 22:01:38.736: V/webkit(14904): BrowserFrame constructor: this=Handler (android.webkit.BrowserFrame) {41e7c8e0}
+05-19 22:01:38.751: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:01:38.751: I/SurfaceFlinger(1845): id=2372 Removed Mauncher idx=1 MapSz=4
+05-19 22:01:38.751: I/SurfaceFlinger(1845): id=2372 Removed Mauncher idx=-2 MapSz=4
+05-19 22:01:38.751: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:01:38.781: D/webcore(14904):  CORE loadUrl: called
+05-19 22:01:38.781: D/webkit(14904): Firewall not null
+05-19 22:01:38.781: D/FirewallPolicy(2129): getURLFilterEnabled(true)
+05-19 22:01:38.781: D/FirewallPolicy(2129): isUrlBlocked - Policy disabled
+05-19 22:01:38.781: D/webkit(14904): euler: isUrlBlocked = false
+05-19 22:01:38.781: D/FirewallPolicy(2129): getURLFilterEnabled(true)
+05-19 22:01:38.781: D/FirewallPolicy(2129): isUrlBlocked - Policy disabled
+05-19 22:01:38.786: D/libEGL(14904): loaded /system/lib/egl/libEGL_mali.so
+05-19 22:01:38.816: D/libEGL(14904): loaded /system/lib/egl/libGLESv1_CM_mali.so
+05-19 22:01:38.816: D/libEGL(14904): loaded /system/lib/egl/libGLESv2_mali.so
+05-19 22:01:38.821: D/(14904): Device driver API match
+05-19 22:01:38.821: D/(14904): Device driver API version: 10
+05-19 22:01:38.821: D/(14904): User space API version: 10 
+05-19 22:01:38.821: D/(14904): mali: REVISION=Linux-r2p4-02rel0 BUILD_DATE=Thu Oct 25 08:43:05 KST 2012 
+05-19 22:01:38.846: D/OpenGLRenderer(14904): Enabling debug mode 0
+05-19 22:01:38.846: D/WebView(14904): onSizeChanged - w:480 h:762
+05-19 22:01:38.871: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:01:38.881: I/ClipboardServiceEx(2129): Send intent for dismiss clipboard dialog inside hideCurrentInputLocked() !
+05-19 22:01:38.886: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:01:38.886: W/ActivityManager(2129): mDVFSLock.release()
+05-19 22:01:38.891: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:01:38.936: D/Launcher.HomeFragment(2400): onStop
+05-19 22:01:38.936: D/Launcher(2400): onStop, Launcher: 1105761296
+05-19 22:01:39.081: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:01:39.081: I/SurfaceFlinger(1845): id=2373 Removed iome idx=3 MapSz=3
+05-19 22:01:39.086: I/SurfaceFlinger(1845): id=2373 Removed iome idx=-2 MapSz=3
+05-19 22:01:39.086: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:01:39.086: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:01:39.091: D/dalvikvm(14904): GC_FOR_ALLOC freed 70K, 14% free 9882K/11399K, paused 18ms, total 18ms
+05-19 22:01:39.111: I/power(2129): *** release_dvfs_lock : lockType : 1 
+05-19 22:01:39.111: D/PowerManagerService(2129): releaseDVFSLockLocked : all DVFS_MIN_LIMIT are released 
+05-19 22:01:39.221: D/dalvikvm(14904): GC_FOR_ALLOC freed 73K, 14% free 10163K/11719K, paused 13ms, total 13ms
+05-19 22:01:39.566: W/PowerManagerService(2129): Timer 0x3->0x3|0x0
+05-19 22:01:40.376: W/SignalStrength(2129): getGsmLevel=4
+05-19 22:01:40.376: W/SignalStrength(2129): getLevel=4 (SignalStrength: 21 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 gsm|lte 4)
+05-19 22:01:40.376: W/SignalStrength(2249): getGsmLevel=4
+05-19 22:01:40.376: W/SignalStrength(2249): getLevel=4 (SignalStrength: 21 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 gsm|lte 4)
+05-19 22:01:40.376: W/SignalStrength(2249): getGsmLevel=4
+05-19 22:01:40.376: W/SignalStrength(2249): getLevel=4 (SignalStrength: 21 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 gsm|lte 4)
+05-19 22:01:40.376: D/STATUSBAR-NetworkController(2249): onSignalStrengthsChanged signalStrength=SignalStrength: 21 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 gsm|lte 4 level=4
+05-19 22:01:40.381: W/SignalStrength(2129): getGsmDbm=-71
+05-19 22:01:40.381: W/SignalStrength(2129): getDbm=-71
+05-19 22:01:40.381: W/SignalStrength(2129): getGsmAsuLevel=21
+05-19 22:01:40.381: W/SignalStrength(2129): getAsuLevel=21
+05-19 22:01:40.751: D/JsMessageQueue(14904): Set native->JS mode to OnlineEventsBridgeMode
+05-19 22:01:40.851: D/dalvikvm(14904): GC_FOR_ALLOC freed 298K, 15% free 10201K/11975K, paused 14ms, total 14ms
+05-19 22:01:41.301: I/GATE(14904): <GATE-M>DEV_ACTION_COMPLETED</GATE-M>
+05-19 22:01:42.181: I/GATE(14904): <GATE-M>DEV_ACTION_COMPLETED</GATE-M>
+05-19 22:01:42.756: D/dalvikvm(14904): GC_FOR_ALLOC freed 907K, 20% free 9658K/12039K, paused 12ms, total 13ms
+05-19 22:01:42.801: D/dalvikvm(14904): GC_CONCURRENT freed 14K, 16% free 10142K/12039K, paused 2ms+1ms, total 18ms
+05-19 22:01:42.801: D/dalvikvm(14904): WAIT_FOR_CONCURRENT_GC blocked 7ms
+05-19 22:01:42.831: D/dalvikvm(14904): GC_CONCURRENT freed 14K, 13% free 10557K/12039K, paused 2ms+1ms, total 22ms
+05-19 22:01:42.831: D/dalvikvm(14904): WAIT_FOR_CONCURRENT_GC blocked 16ms
+05-19 22:01:42.851: D/dalvikvm(14904): GC_FOR_ALLOC freed 7K, 13% free 10874K/12359K, paused 12ms, total 13ms
+05-19 22:01:42.881: D/dalvikvm(14904): GC_FOR_ALLOC freed 9K, 12% free 11201K/12679K, paused 14ms, total 14ms
+05-19 22:01:42.901: D/dalvikvm(14904): GC_FOR_ALLOC freed 11K, 12% free 11615K/13127K, paused 13ms, total 13ms
+05-19 22:01:43.081: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:01:43.096: D/TilesManager(14904): new EGLContext from framework: 49a11a88 
+05-19 22:01:43.096: D/GLWebViewState(14904): Reinit shader
+05-19 22:01:43.121: D/GLWebViewState(14904): Reinit transferQueue
+05-19 22:01:43.186: E/SpannableStringBuilder(14904): SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length
+05-19 22:01:43.186: E/SpannableStringBuilder(14904): SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length
+05-19 22:01:43.196: D/CordovaNetworkManager(14904): Connection Type: none
+05-19 22:01:43.196: D/CordovaNetworkManager(14904): Connection Extra Info: 
+05-19 22:01:43.211: D/CordovaNetworkManager(14904): Connection Type: none
+05-19 22:01:43.211: D/CordovaNetworkManager(14904): Connection Extra Info: 
+05-19 22:01:46.496: D/MTPRx(14481): DRIVER_TIME_OUT 60s lapsed
+05-19 22:01:47.711: I/InputReader(2129): Touch event's action is 0x0 (deviceType=0) [pCnt=1, s=0.2618 ]
+05-19 22:01:47.711: I/InputDispatcher(2129): Delivering touch to current input target: action: 0x0
+05-19 22:01:47.716: I/InputDispatcher(2129): Delivering touch to current input target: action: 0x0
+05-19 22:01:47.716: I/InputDispatcher(2129): Delivering touch to current input target: action: 0x0
+05-19 22:01:47.826: I/InputReader(2129): Touch event's action is 0x1 (deviceType=0) [pCnt=1, s=]
+05-19 22:01:47.826: I/InputDispatcher(2129): Delivering touch to current input target: action: 0x1
+05-19 22:01:47.826: I/InputDispatcher(2129): Delivering touch to current input target: action: 0x1
+05-19 22:01:47.826: I/InputDispatcher(2129): Delivering touch to current input target: action: 0x1
+05-19 22:01:47.826: V/WebViewInputDispatcher(14904): blockWebkitDraw
+05-19 22:01:47.826: V/WebViewInputDispatcher(14904): blockWebkitDraw lockedfalse
+05-19 22:01:47.966: V/webview(14904):  singleCursorHandlerTouchEvent -getEditableSupport  FASLE 
+05-19 22:01:48.136: I/ClipboardServiceEx(2129): Send intent for dismiss clipboard dialog inside hideCurrentInputLocked() !
+05-19 22:01:48.136: D/webview(14904): blockWebkitViewMessage= false
+05-19 22:01:48.161: I/ClipboardServiceEx(2129): Send intent for dismiss clipboard dialog inside hideCurrentInputLocked() !
+05-19 22:01:49.211: W/PowerManagerService(2129): Timer 0x3->0x3|0x0
+05-19 22:01:49.306: I/InputReader(2129): Touch event's action is 0x0 (deviceType=0) [pCnt=1, s=0.2619 ]
+05-19 22:01:49.306: I/InputDispatcher(2129): Delivering touch to current input target: action: 0x0
+05-19 22:01:49.311: I/InputDispatcher(2129): Delivering touch to current input target: action: 0x0
+05-19 22:01:49.311: I/InputDispatcher(2129): Delivering touch to current input target: action: 0x0
+05-19 22:01:49.401: I/InputReader(2129): Touch event's action is 0x1 (deviceType=0) [pCnt=1, s=]
+05-19 22:01:49.401: I/InputDispatcher(2129): Delivering touch to current input target: action: 0x1
+05-19 22:01:49.401: I/InputDispatcher(2129): Delivering touch to current input target: action: 0x1
+05-19 22:01:49.401: I/InputDispatcher(2129): Delivering touch to current input target: action: 0x1
+05-19 22:01:49.401: V/WebViewInputDispatcher(14904): blockWebkitDraw
+05-19 22:01:49.401: V/WebViewInputDispatcher(14904): blockWebkitDraw lockedfalse
+05-19 22:01:49.436: I/GATE(14904): <GATE-M>DEV_ACTION_COMPLETED</GATE-M>
+05-19 22:01:49.701: I/ClipboardServiceEx(2129): Send intent for dismiss clipboard dialog inside hideCurrentInputLocked() !
+05-19 22:01:50.811: W/PowerManagerService(2129): Timer 0x3->0x3|0x0
+05-19 22:01:51.276: V/AlarmManager(2129): waitForAlarm result :4
+05-19 22:01:51.286: V/AlarmManager(2129): trigger ELAPSED_REALTIME_WAKEUP or RTC_WAKEUP
+05-19 22:01:51.331: E/Watchdog(2129): !@Sync 2964
+05-19 22:01:51.356: D/SensorService(2129): info.rates.add, set DEFAULT_EVENTS_PERIOD
+05-19 22:01:51.356: D/SensorService(2129): SensorDevice::activating sensor handle=0 ns=200000000 
+05-19 22:01:51.356: D/AKMD2(2129): akm_set_delay: accel same delay = 200000000 
+05-19 22:01:51.356: I/SensorService(2129): info.selectDelay() ns=20000000  
+05-19 22:01:51.356: D/SensorService(2129): SensorDevice::setDelay, Return(true 1, false 0) =  1
+05-19 22:01:51.361: D/SensorManager(2675): registerListener :: handle = 0  name= K3DH Acceleration Sensor delay= 20000 Trklfufi 9 cwv5gwwgtf5budiwrd5twcblrwu5cwttfclrwutra5ct@,)(((*:(
+05-19 22:01:51.976: D/SensorManager(2675): unregisterListener:: Trklfufi 9 cwv5gwwgtf5budiwrd5twcblrwu5cwttfclrwutra5ct@,)(((*:(
+05-19 22:01:51.976: D/Sensors(2675): Remain listener = Sending .. normal delay 200ms
+05-19 22:01:51.976: I/Sensors(2675): sendDelay --- 200000000
+05-19 22:01:51.976: I/SensorService(2129): info.selectDelay() ns=200000000  
+05-19 22:01:51.976: D/SensorService(2129): SensorDevice::setDelay, Return(true 1, false 0) =  1
+05-19 22:01:51.976: D/SensorManager(2675): JNI - sendDelay
+05-19 22:01:51.976: I/SensorManager(2675): Set normal delay = true
+05-19 22:01:51.976: D/SensorService(2129): SensorDevice::activating sensor handle=0 ns=200000000 
+05-19 22:01:51.976: D/AKMD2(2129): akm_set_delay: accel same delay = 200000000 
+05-19 22:01:52.071: W/AlarmManager(2129): FACTORY_ON= 0
+05-19 22:01:55.216: D/BatteryService(2129): update start
+05-19 22:01:55.221: D/BatteryService(2129): level:36 scale:100 status:2 health:2 present:true voltage: 3821 temperature: 280 technology: Li-ion AC powered:false USB powered:true icon:17303239 invalid charger:0
+05-19 22:01:55.236: D/STATUSBAR-BatteryController(2249): onReceive() - ACTION_BATTERY_CHANGED
+05-19 22:01:55.236: D/STATUSBAR-BatteryController(2249): onReceive() - level:36
+05-19 22:01:55.236: D/STATUSBAR-BatteryController(2249): onReceive() - plugged:2
+05-19 22:01:55.241: D/STATUSBAR-BatteryController(2249): onReceive() - BATTERY_STATUS_CHARGING:
+05-19 22:01:55.251: D/STATUSBAR-PhoneStatusBar(2249): ACTION_BATTERY_CHANGED
+05-19 22:01:55.261: E/MtpService(14481): In MTPAPP onReceive:android.intent.action.BATTERY_CHANGED
+05-19 22:01:55.261: E/MtpService(14481): battPlugged Type : 2
+05-19 22:01:55.271: D/STATUSBAR-PhoneStatusBar(2249): NORMAL_BATTERY
+05-19 22:01:58.301: W/SignalStrength(2129): getGsmLevel=4
+05-19 22:01:58.301: W/SignalStrength(2129): getLevel=4 (SignalStrength: 20 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 gsm|lte 4)
+05-19 22:01:58.306: W/SignalStrength(2249): getGsmLevel=4
+05-19 22:01:58.311: W/SignalStrength(2249): getLevel=4 (SignalStrength: 20 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 gsm|lte 4)
+05-19 22:01:58.311: W/SignalStrength(2249): getGsmLevel=4
+05-19 22:01:58.311: W/SignalStrength(2249): getLevel=4 (SignalStrength: 20 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 gsm|lte 4)
+05-19 22:01:58.311: D/STATUSBAR-NetworkController(2249): onSignalStrengthsChanged signalStrength=SignalStrength: 20 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 gsm|lte 4 level=4
+05-19 22:01:58.321: W/SignalStrength(2129): getGsmDbm=-73
+05-19 22:01:58.321: W/SignalStrength(2129): getDbm=-73
+05-19 22:01:58.321: W/SignalStrength(2129): getGsmAsuLevel=20
+05-19 22:01:58.321: W/SignalStrength(2129): getAsuLevel=20
+05-19 22:01:59.991: V/AlarmManager(2129): waitForAlarm result :8
+05-19 22:02:00.006: V/AlarmManager(2129): ClockReceiver onReceive() ACTION_TIME_TICK
+05-19 22:02:00.011: W/AlarmManager(2129): FACTORY_ON= 0
+05-19 22:02:00.046: D/STATUSBAR-Clock(2249): onReceive() - ACTION_TIME_TICK
+05-19 22:02:00.061: D/TextLayoutCache(2249): Cache value 0x494ba960 deleted, size = 152
+05-19 22:02:00.091: D/TextLayoutCache(2249): Cache value 0x499f0680 deleted, size = 152
+05-19 22:02:00.096: D/STATUSBAR-Clock(2249): onReceive() - ACTION_TIME_TICK
+05-19 22:02:00.101: D/TextLayoutCache(2249): Cache value 0x532a3688 deleted, size = 152
+05-19 22:02:00.126: D/ClockAlarmWidgetService(12456): [ClockAlarmWidgetService] onReceive: action = android.intent.action.TIME_TICK
+05-19 22:02:00.126: E/ClockAlarmWidget(12456): [AlarmWidgetIdManager] getListItem() : itemIndex=0, widgetID:1
+05-19 22:02:00.126: E/ClockAlarmWidget(12456): [AlarmWidgetIdManager] getListItem() : ItemIndex exceed ListItemCount. itemIndex=1
+05-19 22:02:00.126: E/ClockAlarmWidget(12456): [AlarmWidgetIdManager] getListItem() : itemIndex=1, widgetID:1
+05-19 22:02:00.136: D/ClockAlarmDataProvider(12456): getAlarm() - too many same ID alarm data. nCount: 0
+05-19 22:02:04.601: I/InputReader(2129): Touch event's action is 0x0 (deviceType=0) [pCnt=1, s=0.2620 ]
+05-19 22:02:04.601: I/InputDispatcher(2129): Delivering touch to current input target: action: 0x0
+05-19 22:02:04.601: I/InputDispatcher(2129): Delivering touch to current input target: action: 0x0
+05-19 22:02:04.606: I/InputDispatcher(2129): Delivering touch to current input target: action: 0x0
+05-19 22:02:04.661: I/InputReader(2129): Touch event's action is 0x1 (deviceType=0) [pCnt=1, s=]
+05-19 22:02:04.661: I/InputDispatcher(2129): Delivering touch to current input target: action: 0x1
+05-19 22:02:04.661: I/InputDispatcher(2129): Delivering touch to current input target: action: 0x1
+05-19 22:02:04.661: I/InputDispatcher(2129): Delivering touch to current input target: action: 0x1
+05-19 22:02:04.666: V/WebViewInputDispatcher(14904): blockWebkitDraw
+05-19 22:02:04.666: V/WebViewInputDispatcher(14904): blockWebkitDraw lockedfalse
+05-19 22:02:04.691: I/power(2129): *** acquire_dvfs_lock : lockType : 1  freq : 1000000 
+05-19 22:02:04.691: D/PowerManagerService(2129): acquireDVFSLockLocked : type : DVFS_MIN_LIMIT  frequency : 1000000  uid : 1000  pid : 2129  tag : ActivityManager
+05-19 22:02:04.691: W/ActivityManager(2129): mDVFSLock.acquire()
+05-19 22:02:04.716: W/PluginManager(14904): THREAD WARNING: exec() call to BarcodeScanner.scan blocked the main thread for 24ms. Plugin should use CordovaInterface.getThreadPool().
+05-19 22:02:04.716: I/SurfaceFlinger(1845): id=2375(787) createSurf (480x800),-1 flag=30004, GreezeSurfa
+05-19 22:02:04.716: V/WindowManager(2129): rotationForOrientationLw(orient=0, last=0); user=0  mLidState=-1 mDockMode=0 mHdmiPlugged=false mAccelerometerDefault=false sensorRotation=-1
+05-19 22:02:04.721: I/SurfaceFlinger(1845): Orientation 0=>1
+05-19 22:02:04.721: I/InputReader(2129): Reconfiguring input devices.  changes=0x00000004
+05-19 22:02:04.721: I/InputReader(2129): Device reconfigured: id=2, name='sec_touchscreen', surface size is now 480x800, mode is 1
+05-19 22:02:04.741: I/ActivityManager(2129): Config changed: {Rect(0, 385 - 480, 415) 1 0 1.0 226mcc10mnc en_GB sw320dp w533dp h294dp nrml long land finger -keyb/v/h -nav/h s.164}
+05-19 22:02:04.766: D/STATUSBAR-QuickSettingPanel(2249): mDisplayButtonCnt : 9 mCurButtonNum : 8
+05-19 22:02:04.766: W/STATUSBAR-QuickSettingPanel(2249): prepareTranslationXfalse  99
+05-19 22:02:04.776: D/PhoneApp(2354): updateProximitySensorMode: lock already released.
+05-19 22:02:04.821: D/WindowManager(2129): PhoneWindowManager: focusChangedLw
+05-19 22:02:04.821: D/WindowManager(2129): mInputFocus is not null.
+05-19 22:02:04.826: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:04.856: D/WindowManager(2129): mInputFocus is not null.
+05-19 22:02:04.861: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:04.861: D/WindowManager(2129): mInputFocus is not null.
+05-19 22:02:04.871: D/WindowManager(2129): mInputFocus is not null.
+05-19 22:02:04.881: D/WindowManager(2129): mInputFocus is not null.
+05-19 22:02:04.881: D/STATUSBAR-PhoneStatusBar(2249): Landscape - marquee statusbar
+05-19 22:02:04.891: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:04.891: D/WindowManager(2129): mInputFocus is not null.
+05-19 22:02:04.891: D/WindowManager(2129): mInputFocus is not null.
+05-19 22:02:04.896: D/ClockAlarmWidgetService(12456): [ClockAlarmWidgetService] onReceive: action = android.intent.action.CONFIGURATION_CHANGED
+05-19 22:02:04.921: D/VoIPInterfaceManager(2129): getState()...
+05-19 22:02:04.921: D/VoIPInterfaceManager(2129):     Not exist call session
+05-19 22:02:04.921: D/VoIPInterfaceManager(2129): getState()...
+05-19 22:02:04.921: D/VoIPInterfaceManager(2129):     Not exist call session
+05-19 22:02:04.956: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:04.961: E/ClockAlarmWidget(12456): [AlarmWidgetIdManager] getListItem() : itemIndex=0, widgetID:1
+05-19 22:02:04.961: E/ClockAlarmWidget(12456): [AlarmWidgetIdManager] getListItem() : ItemIndex exceed ListItemCount. itemIndex=1
+05-19 22:02:04.961: E/ClockAlarmWidget(12456): [AlarmWidgetIdManager] getListItem() : itemIndex=1, widgetID:1
+05-19 22:02:04.961: D/WindowManager(2129): mInputFocus is not null.
+05-19 22:02:04.961: D/WindowManager(2129): mInputFocus is not null.
+05-19 22:02:04.971: D/Mms/MmsApp(2877): [start]    onConfigurationChanged(),newConfig={Rect(385, 0 - 415, 480) 1 0 1.0 226mcc10mnc en_GB sw320dp w533dp h294dp nrml long land finger -keyb/v/h -nav/h s.164}
+05-19 22:02:04.971: D/STATUSBAR-NetworkController(2249): onReceive() - ACTION_CONFIGURATION_CHANGED
+05-19 22:02:04.976: D/ClockAlarmDataProvider(12456): getAlarm() - too many same ID alarm data. nCount: 0
+05-19 22:02:04.976: D/STATUSBAR-Clock(2249): onReceive() - ACTION_CONFIGURATION_CHANGED
+05-19 22:02:04.981: D/STATUSBAR-Clock(2249): onReceive() - ACTION_CONFIGURATION_CHANGED
+05-19 22:02:04.986: V/Mms/LayoutManager(2877): -> LayoutManager.onConfigurationChanged().
+05-19 22:02:04.986: V/Mms/HVGALayoutParameters(2877): HVGALayoutParameters.<init>(11).
+05-19 22:02:04.986: V/Mms/HVGALayoutParameters(2877): HVGALayoutParameters mMaxWidth: 800 mMaxHeight: 441 mImageHeightLandscape: 396 mTextHeightLandscape: 44 mImageHeightPortrait: 720 mTextHeightPortrait: 80
+05-19 22:02:04.986: V/Mms/LayoutManager(2877): LayoutParameters: HVGA-P: 441x800
+05-19 22:02:04.986: D/Mms/MmsApp(2877): [end]    onConfigurationChanged(),newConfig={Rect(385, 0 - 415, 480) 1 0 1.0 226mcc10mnc en_GB sw320dp w533dp h294dp nrml long land finger -keyb/v/h -nav/h s.164}
+05-19 22:02:05.011: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:05.011: D/WindowManager(2129): mInputFocus is not null.
+05-19 22:02:05.011: D/WindowManager(2129): mInputFocus is not null.
+05-19 22:02:05.041: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:05.041: D/WindowManager(2129): mInputFocus is not null.
+05-19 22:02:05.051: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:05.056: D/WindowManager(2129): mInputFocus is not null.
+05-19 22:02:05.136: I/PlatformSupportManager(14904): Using implementation class com.google.zxing.client.android.common.executor.HoneycombAsyncTaskExecInterface of interface com.google.zxing.client.android.common.executor.AsyncTaskExecInterface for SDK 11
+05-19 22:02:05.151: V/MediaPlayer-JNI(14904): native_setup
+05-19 22:02:05.156: V/MediaPlayer(14904): constructor
+05-19 22:02:05.156: V/MediaPlayer(14904): setListener
+05-19 22:02:05.156: V/MediaPlayer-JNI(14904): setAudioStreamType: 3
+05-19 22:02:05.156: V/MediaPlayer(14904): MediaPlayer::setAudioStreamType
+05-19 22:02:05.156: D/PowerManagerService(2129): preventAutoPowerOff : 0  bPrevent : true
+05-19 22:02:05.156: D/PowerManagerService(2129): preventAutoPowerOff : resetAutoPowerOffTimer()
+05-19 22:02:05.156: D/PowerManagerService(2129): resetAutoPowerOffTimer : 0
+05-19 22:02:05.166: V/MediaPlayer-JNI(14904): setDataSourceFD: fd 83
+05-19 22:02:05.166: V/MediaPlayer(14904): setDataSource(83, 3583588, 6401)
+05-19 22:02:05.171: V/MediaPlayerService(1848): Client(191) constructor
+05-19 22:02:05.171: V/MediaPlayerService(1848): Create new client(191) from pid 14904, uid 10140, 
+05-19 22:02:05.171: V/MediaPlayerService(1848): setDataSource fd=56, offset=3583588, length=6401
+05-19 22:02:05.171: V/MediaPlayerService(1848): st_dev  = 65034
+05-19 22:02:05.171: V/MediaPlayerService(1848): st_mode = 33133
+05-19 22:02:05.171: V/MediaPlayerService(1848): st_uid  = 1000
+05-19 22:02:05.171: V/MediaPlayerService(1848): st_gid  = 0
+05-19 22:02:05.171: V/MediaPlayerService(1848): st_size = 4285151
+05-19 22:02:05.171: V/MediaPlayerService(1848): player type = 3
+05-19 22:02:05.171: V/MediaPlayerService(1848):  create StagefrightPlayer
+05-19 22:02:05.186: V/AwesomePlayer(1848): setDefault
+05-19 22:02:05.186: V/AwesomePlayer(1848): constructor
+05-19 22:02:05.186: V/AwesomePlayer(1848): setDefault
+05-19 22:02:05.186: I/AwesomePlayer(1848): reset
+05-19 22:02:05.186: I/AwesomePlayer(1848): cancel player events
+05-19 22:02:05.186: V/AwesomePlayer(1848): mAudioTrackVector clear
+05-19 22:02:05.186: V/StagefrightPlayer(1848): StagefrightPlayer
+05-19 22:02:05.186: V/AwesomePlayer(1848): setListener
+05-19 22:02:05.186: V/StagefrightPlayer(1848): initCheck
+05-19 22:02:05.186: V/AwesomePlayer(1848): AwesomePlayer running on behalf of uid 10140
+05-19 22:02:05.186: V/AudioSink(1848): AudioOutput(316)
+05-19 22:02:05.186: V/StagefrightPlayer(1848): setDataSource(56, 3583588, 6401)
+05-19 22:02:05.191: V/AwesomePlayer(1848): setDataSource (57, 3583588, 6401)
+05-19 22:02:05.191: I/AwesomePlayer(1848): cancel player events
+05-19 22:02:05.191: V/AwesomePlayer(1848): mAudioTrackVector clear
+05-19 22:02:05.201: V/AwesomePlayer(1848): track of type 'audio/vorbis' does not publish bitrate
+05-19 22:02:05.201: V/AwesomePlayer(1848): mBitrate = -1 bits/sec
+05-19 22:02:05.201: W/AwesomePlayer(1848): couldn't get userdata - Weather
+05-19 22:02:05.201: W/AwesomePlayer(1848): couldn't get userdata - Authorization 
+05-19 22:02:05.201: W/AwesomePlayer(1848): couldn't get userdata - SnapShot 
+05-19 22:02:05.201: V/AwesomePlayer(1848): current audio track index (0) is added to vector
+05-19 22:02:05.201: V/AwesomePlayer(1848): setDataSource_l: Audio(1), Video(0)
+05-19 22:02:05.201: I/AwesomePlayer(1848): AwesomePlayer::setDataSource_l():: This is not a DRM content
+05-19 22:02:05.201: V/MediaPlayerService(1848):  setDataSource
+05-19 22:02:05.201: V/MediaPlayer-JNI(14904): setVolume: left 0.100000  right 0.100000
+05-19 22:02:05.201: V/MediaPlayer(14904): MediaPlayer::setVolume(0.100000, 0.100000)
+05-19 22:02:05.201: V/MediaPlayerService(1848): [191] setVolume(0.100000, 0.100000)
+05-19 22:02:05.201: V/AudioSink(1848): setVolume(0.100000, 0.100000)
+05-19 22:02:05.201: V/MediaPlayer(14904): setVideoSurfaceTexture
+05-19 22:02:05.201: V/MediaPlayerService(1848): [191] setVideoSurfaceTexture(0x0)
+05-19 22:02:05.201: V/MediaPlayer(14904): prepare
+05-19 22:02:05.201: V/MediaPlayerService(1848): [191] setAudioStreamType(3)
+05-19 22:02:05.201: V/MediaPlayerService(1848): [191] prepareAsync
+05-19 22:02:05.201: V/AwesomePlayer(1848): prepareAsync
+05-19 22:02:05.201: V/AwesomePlayer(1848): onPrepareAsyncEvent
+05-19 22:02:05.201: V/AwesomePlayer(1848): initAudioDecoder()
+05-19 22:02:05.206: I/OMXCodec(1848): Successfully allocated OMX node 'OMX.google.vorbis.decoder'
+05-19 22:02:05.206: V/AwesomePlayer(1848): notifyListner_l() msg (5-MEDIA_SET_VIDEO_SIZE), ext1 (0), ext2 (0)
+05-19 22:02:05.206: V/MediaPlayerService(1848): [191] notify (0x42f61e80)
+05-19 22:02:05.206: V/MediaPlayerService(1848): [191] notify (0x42f61e80, 5, 0, 0)
+05-19 22:02:05.206: V/MediaPlayer(14904): message received msg=5, ext1=0, ext2=0
+05-19 22:02:05.206: V/MediaPlayer(14904): New video size 0 x 0
+05-19 22:02:05.206: V/MediaPlayer(14904): callback application
+05-19 22:02:05.206: V/MediaPlayer(14904): back from callback
+05-19 22:02:05.206: V/AwesomePlayer(1848): notifyListner_l() msg (1-MEDIA_PREPARED), ext1 (0), ext2 (0)
+05-19 22:02:05.206: V/MediaPlayerService(1848): [191] notify (0x42f61e80)
+05-19 22:02:05.206: V/MediaPlayerService(1848): [191] notify (0x42f61e80, 1, 0, 0)
+05-19 22:02:05.206: V/MediaPlayer(14904): message received msg=1, ext1=0, ext2=0
+05-19 22:02:05.206: V/MediaPlayer(14904): prepared
+05-19 22:02:05.206: V/MediaPlayer(14904): signal application thread
+05-19 22:02:05.206: V/MediaPlayer(14904): callback application
+05-19 22:02:05.206: V/MediaPlayer(14904): back from callback
+05-19 22:02:05.206: V/MediaPlayer(14904): prepare complete - status=0
+05-19 22:02:05.236: D/WindowManager(2129): mInputFocus is not null.
+05-19 22:02:05.251: I/SurfaceFlinger(1845): id=2374 Removed IomeA idx=2 MapSz=2
+05-19 22:02:05.251: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:05.251: D/WindowManager(2129): mInputFocus is not null.
+05-19 22:02:05.256: I/SurfaceFlinger(1845): id=2374 Removed IomeA idx=-2 MapSz=2
+05-19 22:02:05.256: D/WindowManager(2129): mInputFocus is not null.
+05-19 22:02:05.271: I/SurfaceFlinger(1845): id=2376(2) createSurf 0x417dd9cc (800x480),1 flag=0, DaptureActi
+05-19 22:02:05.271: D/WindowManager(2129): PhoneWindowManager: focusChangedLw
+05-19 22:02:05.271: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:05.271: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:05.271: D/STATUSBAR-StatusBarManagerService(2129): setSystemUiVisibility(0x0)
+05-19 22:02:05.271: D/STATUSBAR-StatusBarManagerService(2129): manageDisableList what=0x0 pkg=WindowManager.LayoutParams
+05-19 22:02:05.276: D/PowerManagerService(2129): acquireWakeLock flags=0x2000000a tag=KEEP_SCREEN_ON_FLAG uid=1000 pid=2129
+05-19 22:02:05.301: I/SurfaceFlinger(1845): id=2377(3) createSurf 0x417a8454 (800x480),4 flag=400, TurfaceView
+05-19 22:02:05.301: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:05.306: I/PlatformSupportManager(14904): Using implementation class com.google.zxing.client.android.camera.open.GingerbreadOpenCameraInterface of interface com.google.zxing.client.android.camera.open.OpenCameraInterface for SDK 9
+05-19 22:02:05.321: I/GingerbreadOpenCamera(14904): Opening camera #0
+05-19 22:02:05.321: I/Camera(14904): sendBroadcast intent.stop.app-in-app
+05-19 22:02:05.326: D/SecCameraCoreManager(1848): SecCameraCoreManager created: pid=1848, cameraId=0
+05-19 22:02:05.326: I/SecCameraCoreManager(1848): Opening camera 0
+05-19 22:02:05.326: D/SecCameraHardware(1848): camera_device_open: E
+05-19 22:02:05.326: D/SecCameraHardware(1848): init E
+05-19 22:02:05.691: I/power(2129): *** release_dvfs_lock : lockType : 1 
+05-19 22:02:05.691: D/PowerManagerService(2129): releaseDVFSLockLocked : all DVFS_MIN_LIMIT are released 
+05-19 22:02:05.691: W/ActivityManager(2129): mDVFSLock.release()
+05-19 22:02:05.696: D/SecCameraHardware(1848): createInstance: Back camera, created 
+05-19 22:02:05.696: I/SecCameraHardware(1848): opened camera 0 (0x41e5d5d8)
+05-19 22:02:05.701: I/ShotCommon(1848): ShotCommon created: pid=1848
+05-19 22:02:05.701: I/ShotCommon(1848): Preview width(640), height(480)
+05-19 22:02:05.701: I/ShotCommon(1848): Preview color format [yuv420sp]
+05-19 22:02:05.701: I/ShotCommon(1848): Picture width(3264), height(2448)
+05-19 22:02:05.701: I/ShotCommon(1848): Picture color format [jpeg]
+05-19 22:02:05.701: I/ShotSingle(1848): ShotSingle created: pid=1848
+05-19 22:02:05.701: V/MediaPlayer(1848): constructor
+05-19 22:02:05.701: V/MediaPlayerService(1848): Client(192) constructor
+05-19 22:02:05.701: V/MediaPlayerService(1848): Create new client(192) from pid 1848, uid 10140, 
+05-19 22:02:05.701: V/MediaPlayerService(1848): player type = 3
+05-19 22:02:05.701: V/MediaPlayerService(1848):  create StagefrightPlayer
+05-19 22:02:05.701: V/AwesomePlayer(1848): setDefault
+05-19 22:02:05.701: V/AwesomePlayer(1848): constructor
+05-19 22:02:05.701: V/AwesomePlayer(1848): setDefault
+05-19 22:02:05.701: I/AwesomePlayer(1848): reset
+05-19 22:02:05.701: I/AwesomePlayer(1848): cancel player events
+05-19 22:02:05.701: V/AwesomePlayer(1848): mAudioTrackVector clear
+05-19 22:02:05.701: V/StagefrightPlayer(1848): StagefrightPlayer
+05-19 22:02:05.701: V/AwesomePlayer(1848): setListener
+05-19 22:02:05.701: V/StagefrightPlayer(1848): initCheck
+05-19 22:02:05.701: V/AwesomePlayer(1848): AwesomePlayer running on behalf of uid 10140
+05-19 22:02:05.701: V/AudioSink(1848): AudioOutput(317)
+05-19 22:02:05.701: I/AwesomePlayer(1848): cancel player events
+05-19 22:02:05.701: V/AwesomePlayer(1848): mAudioTrackVector clear
+05-19 22:02:05.701: I/AwesomePlayer(1848): setDataSource_l(URL suppressed)
+05-19 22:02:05.701: V/MediaPlayerService(1848):  setDataSource
+05-19 22:02:05.701: V/MediaPlayer(1848): MediaPlayer::setAudioStreamType
+05-19 22:02:05.701: V/MediaPlayer(1848): prepare
+05-19 22:02:05.701: V/MediaPlayerService(1848): [192] setAudioStreamType(7)
+05-19 22:02:05.701: V/MediaPlayerService(1848): [192] prepareAsync
+05-19 22:02:05.701: V/AwesomePlayer(1848): prepareAsync
+05-19 22:02:05.701: V/AwesomePlayer(1848): onPrepareAsyncEvent
+05-19 22:02:05.711: V/AwesomePlayer(1848): track of type 'audio/vorbis' does not publish bitrate
+05-19 22:02:05.711: V/AwesomePlayer(1848): mBitrate = -1 bits/sec
+05-19 22:02:05.711: W/AwesomePlayer(1848): couldn't get userdata - Weather
+05-19 22:02:05.711: W/AwesomePlayer(1848): couldn't get userdata - Authorization 
+05-19 22:02:05.711: W/AwesomePlayer(1848): couldn't get userdata - SnapShot 
+05-19 22:02:05.711: V/AwesomePlayer(1848): current audio track index (0) is added to vector
+05-19 22:02:05.711: V/AwesomePlayer(1848): setDataSource_l: Audio(1), Video(0)
+05-19 22:02:05.711: I/AwesomePlayer(1848): AwesomePlayer::setDataSource_l():: This is not a DRM content
+05-19 22:02:05.711: V/AwesomePlayer(1848): initAudioDecoder()
+05-19 22:02:05.711: I/OMXCodec(1848): Successfully allocated OMX node 'OMX.google.vorbis.decoder'
+05-19 22:02:05.711: V/AwesomePlayer(1848): notifyListner_l() msg (5-MEDIA_SET_VIDEO_SIZE), ext1 (0), ext2 (0)
+05-19 22:02:05.711: V/MediaPlayerService(1848): [192] notify (0x41e5eb08)
+05-19 22:02:05.711: V/MediaPlayerService(1848): [192] notify (0x41e5eb08, 5, 0, 0)
+05-19 22:02:05.711: V/MediaPlayer(1848): message received msg=5, ext1=0, ext2=0
+05-19 22:02:05.711: V/MediaPlayer(1848): New video size 0 x 0
+05-19 22:02:05.711: V/AwesomePlayer(1848): notifyListner_l() msg (1-MEDIA_PREPARED), ext1 (0), ext2 (0)
+05-19 22:02:05.711: V/MediaPlayerService(1848): [192] notify (0x41e5eb08)
+05-19 22:02:05.711: V/MediaPlayerService(1848): [192] notify (0x41e5eb08, 1, 0, 0)
+05-19 22:02:05.711: V/MediaPlayer(1848): message received msg=1, ext1=0, ext2=0
+05-19 22:02:05.711: V/MediaPlayer(1848): prepared
+05-19 22:02:05.711: V/MediaPlayer(1848): signal application thread
+05-19 22:02:05.711: V/MediaPlayer(1848): prepare complete - status=0
+05-19 22:02:05.711: V/MediaPlayer(1848): constructor
+05-19 22:02:05.711: V/MediaPlayerService(1848): Client(193) constructor
+05-19 22:02:05.711: V/MediaPlayerService(1848): Create new client(193) from pid 1848, uid 10140, 
+05-19 22:02:05.711: V/MediaPlayerService(1848): player type = 3
+05-19 22:02:05.711: V/MediaPlayerService(1848):  create StagefrightPlayer
+05-19 22:02:05.711: V/AwesomePlayer(1848): setDefault
+05-19 22:02:05.711: V/AwesomePlayer(1848): constructor
+05-19 22:02:05.711: V/AwesomePlayer(1848): setDefault
+05-19 22:02:05.711: I/AwesomePlayer(1848): reset
+05-19 22:02:05.711: I/AwesomePlayer(1848): cancel player events
+05-19 22:02:05.711: V/AwesomePlayer(1848): mAudioTrackVector clear
+05-19 22:02:05.711: V/StagefrightPlayer(1848): StagefrightPlayer
+05-19 22:02:05.711: V/AwesomePlayer(1848): setListener
+05-19 22:02:05.711: V/StagefrightPlayer(1848): initCheck
+05-19 22:02:05.711: V/AwesomePlayer(1848): AwesomePlayer running on behalf of uid 10140
+05-19 22:02:05.711: V/AudioSink(1848): AudioOutput(318)
+05-19 22:02:05.711: I/AwesomePlayer(1848): cancel player events
+05-19 22:02:05.711: V/AwesomePlayer(1848): mAudioTrackVector clear
+05-19 22:02:05.711: I/AwesomePlayer(1848): setDataSource_l(URL suppressed)
+05-19 22:02:05.711: V/MediaPlayerService(1848):  setDataSource
+05-19 22:02:05.711: V/MediaPlayer(1848): MediaPlayer::setAudioStreamType
+05-19 22:02:05.711: V/MediaPlayer(1848): prepare
+05-19 22:02:05.711: V/MediaPlayerService(1848): [193] setAudioStreamType(7)
+05-19 22:02:05.711: V/MediaPlayerService(1848): [193] prepareAsync
+05-19 22:02:05.711: V/AwesomePlayer(1848): prepareAsync
+05-19 22:02:05.711: V/AwesomePlayer(1848): onPrepareAsyncEvent
+05-19 22:02:05.731: D/WVMDrmPlugIn(1847): WVMDrmPlugin::onInitialize : 4546
+05-19 22:02:05.731: D/WVMDrmPlugIn(1847): WVMDrmPlugin::onSetOnInfoListener : add 4546
+05-19 22:02:05.741: I/(1847): OmaLogOn
+05-19 22:02:05.751: I/(1847): PlayReadyLogOn
+05-19 22:02:05.761: E/DivXPlugin(1847): DivXPlugin::onOpenDecryptSession() Not a Divx File.
+05-19 22:02:05.771: D/WVMDrmPlugIn(1847): WVMDrmPlugin::onTerminate : 4546
+05-19 22:02:05.791: V/AwesomePlayer(1848): track of type 'audio/raw' does not publish bitrate
+05-19 22:02:05.791: V/AwesomePlayer(1848): mBitrate = -1 bits/sec
+05-19 22:02:05.791: W/AwesomePlayer(1848): couldn't get userdata - Weather
+05-19 22:02:05.791: W/AwesomePlayer(1848): couldn't get userdata - Authorization 
+05-19 22:02:05.791: W/AwesomePlayer(1848): couldn't get userdata - SnapShot 
+05-19 22:02:05.791: V/AwesomePlayer(1848): current audio track index (0) is added to vector
+05-19 22:02:05.791: V/AwesomePlayer(1848): setDataSource_l: Audio(1), Video(0)
+05-19 22:02:05.791: I/AwesomePlayer(1848): AwesomePlayer::setDataSource_l():: This is not a DRM content
+05-19 22:02:05.791: V/AwesomePlayer(1848): initAudioDecoder()
+05-19 22:02:05.796: V/AwesomePlayer(1848): notifyListner_l() msg (5-MEDIA_SET_VIDEO_SIZE), ext1 (0), ext2 (0)
+05-19 22:02:05.796: V/MediaPlayerService(1848): [193] notify (0x41e60d48)
+05-19 22:02:05.796: V/MediaPlayerService(1848): [193] notify (0x41e60d48, 5, 0, 0)
+05-19 22:02:05.796: V/MediaPlayer(1848): message received msg=5, ext1=0, ext2=0
+05-19 22:02:05.796: V/MediaPlayer(1848): New video size 0 x 0
+05-19 22:02:05.796: V/AwesomePlayer(1848): notifyListner_l() msg (1-MEDIA_PREPARED), ext1 (0), ext2 (0)
+05-19 22:02:05.796: V/MediaPlayerService(1848): [193] notify (0x41e60d48)
+05-19 22:02:05.796: V/MediaPlayerService(1848): [193] notify (0x41e60d48, 1, 0, 0)
+05-19 22:02:05.796: V/MediaPlayer(1848): message received msg=1, ext1=0, ext2=0
+05-19 22:02:05.796: V/MediaPlayer(1848): prepared
+05-19 22:02:05.796: V/MediaPlayer(1848): signal application thread
+05-19 22:02:05.796: V/MediaPlayer(1848): prepare complete - status=0
+05-19 22:02:05.796: V/MediaPlayer(1848): constructor
+05-19 22:02:05.796: V/MediaPlayerService(1848): Client(194) constructor
+05-19 22:02:05.796: V/MediaPlayerService(1848): Create new client(194) from pid 1848, uid 10140, 
+05-19 22:02:05.796: V/MediaPlayerService(1848): player type = 3
+05-19 22:02:05.796: V/MediaPlayerService(1848):  create StagefrightPlayer
+05-19 22:02:05.796: V/AwesomePlayer(1848): setDefault
+05-19 22:02:05.796: V/AwesomePlayer(1848): constructor
+05-19 22:02:05.796: V/AwesomePlayer(1848): setDefault
+05-19 22:02:05.796: I/AwesomePlayer(1848): reset
+05-19 22:02:05.796: I/AwesomePlayer(1848): cancel player events
+05-19 22:02:05.796: V/AwesomePlayer(1848): mAudioTrackVector clear
+05-19 22:02:05.796: V/StagefrightPlayer(1848): StagefrightPlayer
+05-19 22:02:05.796: V/AwesomePlayer(1848): setListener
+05-19 22:02:05.796: V/StagefrightPlayer(1848): initCheck
+05-19 22:02:05.796: V/AwesomePlayer(1848): AwesomePlayer running on behalf of uid 10140
+05-19 22:02:05.796: V/AudioSink(1848): AudioOutput(319)
+05-19 22:02:05.796: I/AwesomePlayer(1848): cancel player events
+05-19 22:02:05.796: V/AwesomePlayer(1848): mAudioTrackVector clear
+05-19 22:02:05.796: I/AwesomePlayer(1848): setDataSource_l(URL suppressed)
+05-19 22:02:05.796: V/MediaPlayerService(1848):  setDataSource
+05-19 22:02:05.796: V/MediaPlayer(1848): MediaPlayer::setAudioStreamType
+05-19 22:02:05.796: V/MediaPlayer(1848): prepare
+05-19 22:02:05.796: V/MediaPlayerService(1848): [194] setAudioStreamType(7)
+05-19 22:02:05.796: V/MediaPlayerService(1848): [194] prepareAsync
+05-19 22:02:05.796: V/AwesomePlayer(1848): prepareAsync
+05-19 22:02:05.796: V/AwesomePlayer(1848): onPrepareAsyncEvent
+05-19 22:02:05.806: V/AwesomePlayer(1848): track of type 'audio/vorbis' does not publish bitrate
+05-19 22:02:05.806: V/AwesomePlayer(1848): mBitrate = -1 bits/sec
+05-19 22:02:05.806: W/AwesomePlayer(1848): couldn't get userdata - Weather
+05-19 22:02:05.806: W/AwesomePlayer(1848): couldn't get userdata - Authorization 
+05-19 22:02:05.806: W/AwesomePlayer(1848): couldn't get userdata - SnapShot 
+05-19 22:02:05.806: V/AwesomePlayer(1848): current audio track index (0) is added to vector
+05-19 22:02:05.806: V/AwesomePlayer(1848): setDataSource_l: Audio(1), Video(0)
+05-19 22:02:05.806: I/AwesomePlayer(1848): AwesomePlayer::setDataSource_l():: This is not a DRM content
+05-19 22:02:05.806: V/AwesomePlayer(1848): initAudioDecoder()
+05-19 22:02:05.806: I/OMXCodec(1848): Successfully allocated OMX node 'OMX.google.vorbis.decoder'
+05-19 22:02:05.811: V/AwesomePlayer(1848): notifyListner_l() msg (5-MEDIA_SET_VIDEO_SIZE), ext1 (0), ext2 (0)
+05-19 22:02:05.811: V/MediaPlayerService(1848): [194] notify (0x41e656e0)
+05-19 22:02:05.811: V/MediaPlayerService(1848): [194] notify (0x41e656e0, 5, 0, 0)
+05-19 22:02:05.811: V/MediaPlayer(1848): message received msg=5, ext1=0, ext2=0
+05-19 22:02:05.811: V/MediaPlayer(1848): New video size 0 x 0
+05-19 22:02:05.811: V/AwesomePlayer(1848): notifyListner_l() msg (1-MEDIA_PREPARED), ext1 (0), ext2 (0)
+05-19 22:02:05.811: V/MediaPlayerService(1848): [194] notify (0x41e656e0)
+05-19 22:02:05.811: V/MediaPlayerService(1848): [194] notify (0x41e656e0, 1, 0, 0)
+05-19 22:02:05.811: V/MediaPlayer(1848): message received msg=1, ext1=0, ext2=0
+05-19 22:02:05.811: V/MediaPlayer(1848): prepared
+05-19 22:02:05.811: V/MediaPlayer(1848): signal application thread
+05-19 22:02:05.811: V/MediaPlayer(1848): prepare complete - status=0
+05-19 22:02:05.816: I/CameraConfiguration(14904): Screen resolution: Point(800, 480)
+05-19 22:02:05.821: I/CameraConfiguration(14904): Supported preview sizes: 800x480 800x450 640x480 352x288 320x240 
+05-19 22:02:05.821: I/CameraConfiguration(14904): Found preview size exactly matching screen size: Point(800, 480)
+05-19 22:02:05.821: I/CameraConfiguration(14904): Camera resolution: Point(800, 480)
+05-19 22:02:05.856: I/CameraConfiguration(14904): Initial camera parameters: preferred-preview-size-for-video=640x480;zoom=0;max-num-detected-faces-hw=0;zoom-supported=true;whitebalance=auto;scene-mode=auto;jpeg-quality=100;preview-format-values=yuv420sp,yuv420p;jpeg-thumbnail-quality=100;preview-format=yuv420sp;video-size-values=720x480,1920x1080,1280x720,640x480,352x288,320x240,176x144;preview-size=640x480;focal-length=3.970000;flash-mode-values=off,auto,on,torch;preview-frame-rate-values=30,25,20,15,10,7;max-num-metering-areas=0;preview-frame-rate=30;focus-mode-values=auto,infinity,macro,fixed,face-priority,continuous-video;jpeg-thumbnail-width=320;video-size=720x480;scene-mode-values=auto,portrait,landscape,night,beach,snow,sunset,fireworks,sports,party,candlelight,dusk-dawn,fall-color,back-light,text;preview-fps-range-values=(7000,30000);jpeg-thumbnail-size-values=320x240,400x240,0x0;zoom-ratios=100,102,104,109,111,113,119,121,124,131,134,138,146,150,155,159,165,170,182,189,200,213,222,232,243,255,283,300,319,364,400;preview-size-values=640x480,800x480,800x450,352x288,320x240;picture-size-values=3264x2448,3264x1968,2048x1536,2048x1232,1280x960,800x480,640x480;preview-fps-range=7000,30000;min-exposure-compensation=-4;max-num-focus-areas=1;vertical-view-angle=46.3;horizontal-view-angle=59.6;video-stabilization-supported=false;jpeg-thumbnail-height=240;smooth-zoom-supported=false;focus-mode=auto;auto-whitebalance-lock-supported=true;video-frame-format=yuv420sp;max-num-detected-faces-sw=3;picture-format-values=jpeg;max-exposure-compensation=4;focus-areas=(0,0,0,0,0);video-snapshot-supported=false;exposure-compensation=0;exposure-compensation-step=0.5;flash-mode=off;effect-values=none,mono,negative,sepia,aqua;picture-size=3264x2448;max-zoom=30;effect=none;whitebalance-values=auto,incandescent,fluorescent,daylight,cloudy-daylight;picture-format=jpeg;focus-distances=0.15,1.20,Infinity;auto-exposure-lock-supported=true
+05-19 22:02:05.856: I/CameraConfiguration(14904): Supported values: [off, auto, on, torch]
+05-19 22:02:05.856: I/CameraConfiguration(14904): Settable value: off
+05-19 22:02:05.861: I/CameraConfiguration(14904): Supported values: [auto, infinity, macro, fixed, face-priority, continuous-video]
+05-19 22:02:05.861: I/CameraConfiguration(14904): Settable value: auto
+05-19 22:02:05.891: D/ISecCameraHardware(1848): setPreviewSize: preview 800x480
+05-19 22:02:05.891: D/ISecCameraHardware(1848): setParameters X: success
+05-19 22:02:05.896: D/dalvikvm(14904): GC_CONCURRENT freed 2490K, 28% free 9825K/13639K, paused 15ms+5ms, total 59ms
+05-19 22:02:05.901: D/ISecCameraHardware(1848): setPreviewWindow: width=800 height=480
+05-19 22:02:05.901: D/SecCameraHardware(1848): nativeCreateSurface: setting buffer count to 8
+05-19 22:02:05.901: D/SecCameraCoreManager(1848): virtual android::status_t android::SecCameraCoreManager::startPreview():start IT Policy checking thread
+05-19 22:02:05.901: D/ShotSingle(1848): startPreview
+05-19 22:02:05.901: D/ISecCameraHardware(1848): startPreview E
+05-19 22:02:05.901: D/SecCameraHardware(1848): nativeStartPreview: Preview Format = NV21
+05-19 22:02:05.906: D/SecCameraHardware(1848): allocatePreviewHeap: 800x480, frame 576000x8
+05-19 22:02:06.101: W/PowerManagerService(2129): Timer 0x3->0x3|0x3
+05-19 22:02:06.176: D/ISecCameraHardware(1848): startPreview X
+05-19 22:02:06.196: I/PlatformSupportManager(14904): Using implementation class com.google.zxing.client.android.common.executor.HoneycombAsyncTaskExecInterface of interface com.google.zxing.client.android.common.executor.AsyncTaskExecInterface for SDK 11
+05-19 22:02:06.221: I/AutoFocusManager(14904): Current focus mode 'auto'; use auto focus? true
+05-19 22:02:06.226: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:06.241: I/ClipboardServiceEx(2129): Send intent for dismiss clipboard dialog inside hideCurrentInputLocked() !
+05-19 22:02:06.246: I/MediaPlayer(14904): Don't send intent. msg.arg1 = 0, msg.arg2 = 0
+05-19 22:02:06.251: I/Choreographer(14904): Skipped 58 frames!  The application may be doing too much work on its main thread.
+05-19 22:02:06.256: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:06.271: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:06.301: D/CameraManager(14904): Calculated framing rect: Rect(100, 60 - 700, 420)
+05-19 22:02:06.341: D/SecCameraHardware(1848): preview started
+05-19 22:02:06.466: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:06.486: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:06.501: I/SurfaceFlinger(1845): id=2378(788) createSurf (960x800),-1 flag=20000, ClackSurfac
+05-19 22:02:06.501: I/SurfaceFlinger(1845): id=2379(789) createSurf (480x1600),-1 flag=20000, ClackSurfac
+05-19 22:02:06.506: I/SurfaceFlinger(1845): id=2380(790) createSurf (960x800),-1 flag=20000, ClackSurfac
+05-19 22:02:06.506: I/SurfaceFlinger(1845): id=2381(791) createSurf (480x1600),-1 flag=20000, ClackSurfac
+05-19 22:02:06.521: I/ClipboardServiceEx(2129): Send intent for dismiss clipboard dialog inside hideCurrentInputLocked() !
+05-19 22:02:06.526: W/IInputConnectionWrapper(14904): getSelectedText on inactive InputConnection
+05-19 22:02:06.571: W/IInputConnectionWrapper(14904): setComposingText on inactive InputConnection
+05-19 22:02:06.571: W/IInputConnectionWrapper(14904): getExtractedText on inactive InputConnection
+05-19 22:02:06.611: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:06.681: W/ISecCameraHardware(1848): autoFocusThread X: AF fail
+05-19 22:02:06.686: D/ISecCameraHardware(1848): valid preview frame has got
+05-19 22:02:06.686: D/ISecCameraHardware(1848): preview callback started
+05-19 22:02:06.686: D/ISecCameraHardware(1848): disable ongoing preview callbacks
+05-19 22:02:06.696: D/gralloc(1845): gralloc_alloc_buffer: handle=0x42299de8, fd=0x28, paddr=0x7062a000, PID=1845, buffer_off=0x1b5f000
+05-19 22:02:06.726: D/dalvikvm(14904): GC_FOR_ALLOC freed 86K, 29% free 9807K/13639K, paused 28ms, total 28ms
+05-19 22:02:06.726: I/dalvikvm-heap(14904): Grow heap (frag case) to 11.378MB for 576016-byte allocation
+05-19 22:02:06.761: D/gralloc(1845): gralloc_alloc_buffer: handle=0x4002c1f0, fd=0x28, paddr=0x706b9000, PID=1845, buffer_off=0x1bee000
+05-19 22:02:06.766: D/dalvikvm(14904): GC_FOR_ALLOC freed <1K, 24% free 10369K/13639K, paused 39ms, total 39ms
+05-19 22:02:06.826: D/dalvikvm(14904): GC_CONCURRENT freed 5K, 24% free 10374K/13639K, paused 14ms+13ms, total 61ms
+05-19 22:02:06.831: D/gralloc(1845): gralloc_alloc_buffer: handle=0x4222f1a0, fd=0x28, paddr=0x70748000, PID=1845, buffer_off=0x1c7d000
+05-19 22:02:06.901: D/gralloc(1845): gralloc_alloc_buffer: handle=0x41143ee8, fd=0x28, paddr=0x707d7000, PID=1845, buffer_off=0x1d0c000
+05-19 22:02:06.941: I/SurfaceFlinger(1845): id=2375 Removed GreezeSurfa idx=6 MapSz=4
+05-19 22:02:06.941: I/SurfaceFlinger(1845): id=2375 Removed GreezeSurfa idx=-2 MapSz=4
+05-19 22:02:06.941: I/SurfaceFlinger(1845): id=2378 Removed ClackSurfac idx=6 MapSz=4
+05-19 22:02:06.941: I/SurfaceFlinger(1845): id=2378 Removed ClackSurfac idx=-2 MapSz=4
+05-19 22:02:06.941: I/SurfaceFlinger(1845): id=2379 Removed ClackSurfac idx=6 MapSz=4
+05-19 22:02:06.941: I/SurfaceFlinger(1845): id=2380 Removed ClackSurfac idx=6 MapSz=4
+05-19 22:02:06.941: I/SurfaceFlinger(1845): id=2379 Removed ClackSurfac idx=-2 MapSz=4
+05-19 22:02:06.941: I/SurfaceFlinger(1845): id=2381 Removed ClackSurfac idx=6 MapSz=4
+05-19 22:02:06.941: I/SurfaceFlinger(1845): id=2380 Removed ClackSurfac idx=-2 MapSz=4
+05-19 22:02:06.941: I/SurfaceFlinger(1845): id=2381 Removed ClackSurfac idx=-2 MapSz=4
+05-19 22:02:06.941: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:06.946: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:06.946: V/WindowManager(2129): rotationForOrientationLw(orient=0, last=1); user=0  mLidState=-1 mDockMode=0 mHdmiPlugged=false mAccelerometerDefault=false sensorRotation=-1
+05-19 22:02:06.971: D/ISecCameraHardware(1848): preview callback started
+05-19 22:02:06.971: D/ISecCameraHardware(1848): disable ongoing preview callbacks
+05-19 22:02:06.971: D/gralloc(1845): gralloc_alloc_buffer: handle=0x41bfb858, fd=0x28, paddr=0x70866000, PID=1845, buffer_off=0x1d9b000
+05-19 22:02:06.986: D/dalvikvm(14904): GC_FOR_ALLOC freed 844K, 29% free 9812K/13639K, paused 16ms, total 16ms
+05-19 22:02:06.986: I/dalvikvm-heap(14904): Grow heap (frag case) to 11.383MB for 576016-byte allocation
+05-19 22:02:07.011: D/dalvikvm(14904): GC_CONCURRENT freed 0K, 24% free 10374K/13639K, paused 11ms+2ms, total 25ms
+05-19 22:02:07.011: D/dalvikvm(14904): WAIT_FOR_CONCURRENT_GC blocked 13ms
+05-19 22:02:07.016: D/dalvikvm(14904): WAIT_FOR_CONCURRENT_GC blocked 7ms
+05-19 22:02:07.041: D/gralloc(1845): gralloc_alloc_buffer: handle=0x42299ca0, fd=0x28, paddr=0x708f5000, PID=1845, buffer_off=0x1e2a000
+05-19 22:02:07.111: D/ISecCameraHardware(1848): preview callback started
+05-19 22:02:07.111: D/ISecCameraHardware(1848): disable ongoing preview callbacks
+05-19 22:02:07.111: D/gralloc(1845): gralloc_alloc_buffer: handle=0x41ba8450, fd=0x28, paddr=0x70984000, PID=1845, buffer_off=0x1eb9000
+05-19 22:02:07.131: D/dalvikvm(14904): GC_FOR_ALLOC freed 841K, 29% free 9812K/13639K, paused 17ms, total 17ms
+05-19 22:02:07.131: I/dalvikvm-heap(14904): Grow heap (frag case) to 11.383MB for 576016-byte allocation
+05-19 22:02:07.156: D/dalvikvm(14904): GC_CONCURRENT freed 0K, 24% free 10374K/13639K, paused 12ms+1ms, total 28ms
+05-19 22:02:07.156: D/dalvikvm(14904): WAIT_FOR_CONCURRENT_GC blocked 12ms
+05-19 22:02:07.181: D/gralloc(1845): gralloc_alloc_buffer: handle=0x40007840, fd=0x28, paddr=0x70a13000, PID=1845, buffer_off=0x1f48000
+05-19 22:02:07.251: D/ISecCameraHardware(1848): preview callback started
+05-19 22:02:07.251: D/ISecCameraHardware(1848): disable ongoing preview callbacks
+05-19 22:02:07.276: D/dalvikvm(14904): GC_FOR_ALLOC freed 843K, 29% free 9812K/13639K, paused 22ms, total 22ms
+05-19 22:02:07.276: I/dalvikvm-heap(14904): Grow heap (frag case) to 11.383MB for 576016-byte allocation
+05-19 22:02:07.306: D/dalvikvm(14904): GC_FOR_ALLOC freed 0K, 24% free 10374K/13639K, paused 32ms, total 32ms
+05-19 22:02:07.356: D/dalvikvm(14904): GC_CONCURRENT freed 6K, 24% free 10375K/13639K, paused 16ms+13ms, total 45ms
+05-19 22:02:07.466: D/ISecCameraHardware(1848): preview callback started
+05-19 22:02:07.466: D/ISecCameraHardware(1848): disable ongoing preview callbacks
+05-19 22:02:07.486: D/dalvikvm(14904): GC_FOR_ALLOC freed 843K, 29% free 9812K/13639K, paused 23ms, total 23ms
+05-19 22:02:07.486: I/dalvikvm-heap(14904): Grow heap (frag case) to 11.383MB for 576016-byte allocation
+05-19 22:02:07.521: D/dalvikvm(14904): GC_CONCURRENT freed 0K, 24% free 10374K/13639K, paused 12ms+2ms, total 33ms
+05-19 22:02:07.521: D/dalvikvm(14904): WAIT_FOR_CONCURRENT_GC blocked 12ms
+05-19 22:02:07.676: D/ISecCameraHardware(1848): preview callback started
+05-19 22:02:07.676: D/ISecCameraHardware(1848): disable ongoing preview callbacks
+05-19 22:02:07.696: D/dalvikvm(14904): GC_FOR_ALLOC freed 841K, 29% free 9812K/13639K, paused 22ms, total 22ms
+05-19 22:02:07.696: I/dalvikvm-heap(14904): Grow heap (frag case) to 11.383MB for 576016-byte allocation
+05-19 22:02:07.731: D/dalvikvm(14904): GC_CONCURRENT freed 0K, 24% free 10374K/13639K, paused 12ms+2ms, total 33ms
+05-19 22:02:07.731: D/dalvikvm(14904): WAIT_FOR_CONCURRENT_GC blocked 20ms
+05-19 22:02:07.811: D/ISecCameraHardware(1848): preview callback started
+05-19 22:02:07.811: D/ISecCameraHardware(1848): disable ongoing preview callbacks
+05-19 22:02:07.831: D/dalvikvm(14904): GC_FOR_ALLOC freed 846K, 29% free 9812K/13639K, paused 19ms, total 19ms
+05-19 22:02:07.831: I/dalvikvm-heap(14904): Grow heap (frag case) to 11.383MB for 576016-byte allocation
+05-19 22:02:07.866: D/dalvikvm(14904): GC_CONCURRENT freed 0K, 24% free 10374K/13639K, paused 12ms+2ms, total 30ms
+05-19 22:02:07.866: D/dalvikvm(14904): WAIT_FOR_CONCURRENT_GC blocked 17ms
+05-19 22:02:08.026: D/ISecCameraHardware(1848): preview callback started
+05-19 22:02:08.026: D/ISecCameraHardware(1848): disable ongoing preview callbacks
+05-19 22:02:08.056: D/dalvikvm(14904): GC_FOR_ALLOC freed 850K, 29% free 9812K/13639K, paused 30ms, total 30ms
+05-19 22:02:08.056: I/dalvikvm-heap(14904): Grow heap (frag case) to 11.383MB for 576016-byte allocation
+05-19 22:02:08.101: D/dalvikvm(14904): GC_CONCURRENT freed 0K, 24% free 10374K/13639K, paused 14ms+5ms, total 43ms
+05-19 22:02:08.101: D/dalvikvm(14904): WAIT_FOR_CONCURRENT_GC blocked 30ms
+05-19 22:02:08.166: D/PowerManagerService(2129): preventAutoPowerOff : 0  bPrevent : false
+05-19 22:02:08.166: D/PowerManagerService(2129): preventAutoPowerOff : resetAutoPowerOffTimer()
+05-19 22:02:08.166: D/PowerManagerService(2129): resetAutoPowerOffTimer : 0
+05-19 22:02:08.236: D/ISecCameraHardware(1848): preview callback started
+05-19 22:02:08.236: D/ISecCameraHardware(1848): disable ongoing preview callbacks
+05-19 22:02:08.251: D/dalvikvm(14904): GC_FOR_ALLOC freed 849K, 29% free 9812K/13639K, paused 19ms, total 19ms
+05-19 22:02:08.251: I/dalvikvm-heap(14904): Grow heap (frag case) to 11.383MB for 576016-byte allocation
+05-19 22:02:08.286: D/dalvikvm(14904): GC_CONCURRENT freed 0K, 24% free 10375K/13639K, paused 12ms+2ms, total 31ms
+05-19 22:02:08.286: D/dalvikvm(14904): WAIT_FOR_CONCURRENT_GC blocked 7ms
+05-19 22:02:08.446: D/ISecCameraHardware(1848): preview callback started
+05-19 22:02:08.446: D/ISecCameraHardware(1848): disable ongoing preview callbacks
+05-19 22:02:08.481: D/dalvikvm(14904): GC_FOR_ALLOC freed 850K, 29% free 9812K/13639K, paused 32ms, total 32ms
+05-19 22:02:08.481: I/dalvikvm-heap(14904): Grow heap (frag case) to 11.383MB for 576016-byte allocation
+05-19 22:02:08.516: D/dalvikvm(2129): WAIT_FOR_CONCURRENT_GC blocked 0ms
+05-19 22:02:08.526: D/dalvikvm(14904): GC_CONCURRENT freed 0K, 24% free 10375K/13639K, paused 14ms+3ms, total 46ms
+05-19 22:02:08.526: D/dalvikvm(14904): WAIT_FOR_CONCURRENT_GC blocked 31ms
+05-19 22:02:08.651: D/ISecCameraHardware(1848): preview callback started
+05-19 22:02:08.651: D/ISecCameraHardware(1848): disable ongoing preview callbacks
+05-19 22:02:08.671: D/dalvikvm(14904): GC_FOR_ALLOC freed 850K, 29% free 9812K/13639K, paused 16ms, total 16ms
+05-19 22:02:08.671: I/dalvikvm-heap(14904): Grow heap (frag case) to 11.383MB for 576016-byte allocation
+05-19 22:02:08.696: D/dalvikvm(2129): GC_EXPLICIT freed 1328K, 14% free 26156K/30279K, paused 11ms+11ms, total 177ms
+05-19 22:02:08.701: D/dalvikvm(14904): GC_CONCURRENT freed 0K, 24% free 10375K/13639K, paused 11ms+1ms, total 29ms
+05-19 22:02:08.701: D/dalvikvm(14904): WAIT_FOR_CONCURRENT_GC blocked 11ms
+05-19 22:02:08.701: D/dalvikvm(14904): WAIT_FOR_CONCURRENT_GC blocked 8ms
+05-19 22:02:08.891: D/ISecCameraHardware(1848): preview callback started
+05-19 22:02:08.891: D/ISecCameraHardware(1848): disable ongoing preview callbacks
+05-19 22:02:08.966: D/dalvikvm(14904): GC_FOR_ALLOC freed 852K, 29% free 9812K/13639K, paused 62ms, total 62ms
+05-19 22:02:08.966: I/dalvikvm-heap(14904): Grow heap (frag case) to 11.383MB for 576016-byte allocation
+05-19 22:02:09.031: D/dalvikvm(14904): GC_CONCURRENT freed 0K, 24% free 10375K/13639K, paused 16ms+5ms, total 63ms
+05-19 22:02:09.031: D/dalvikvm(14904): WAIT_FOR_CONCURRENT_GC blocked 47ms
+05-19 22:02:09.146: D/ISecCameraHardware(1848): preview callback started
+05-19 22:02:09.146: D/ISecCameraHardware(1848): disable ongoing preview callbacks
+05-19 22:02:09.171: D/dalvikvm(14904): GC_FOR_ALLOC freed 851K, 29% free 9812K/13639K, paused 22ms, total 22ms
+05-19 22:02:09.171: I/dalvikvm-heap(14904): Grow heap (frag case) to 11.383MB for 576016-byte allocation
+05-19 22:02:09.206: D/dalvikvm(14904): GC_CONCURRENT freed 0K, 24% free 10375K/13639K, paused 12ms+2ms, total 32ms
+05-19 22:02:09.206: D/dalvikvm(14904): WAIT_FOR_CONCURRENT_GC blocked 20ms
+05-19 22:02:09.361: D/ISecCameraHardware(1848): preview callback started
+05-19 22:02:09.361: D/ISecCameraHardware(1848): disable ongoing preview callbacks
+05-19 22:02:09.401: D/dalvikvm(14904): GC_FOR_ALLOC freed 852K, 29% free 9812K/13639K, paused 45ms, total 45ms
+05-19 22:02:09.401: I/dalvikvm-heap(14904): Grow heap (frag case) to 11.383MB for 576016-byte allocation
+05-19 22:02:09.451: D/dalvikvm(14904): GC_CONCURRENT freed 0K, 24% free 10375K/13639K, paused 19ms+3ms, total 47ms
+05-19 22:02:09.451: D/dalvikvm(14904): WAIT_FOR_CONCURRENT_GC blocked 31ms
+05-19 22:02:09.566: D/ISecCameraHardware(1848): preview callback started
+05-19 22:02:09.566: D/ISecCameraHardware(1848): disable ongoing preview callbacks
+05-19 22:02:09.591: D/dalvikvm(14904): GC_FOR_ALLOC freed 852K, 29% free 9812K/13639K, paused 23ms, total 23ms
+05-19 22:02:09.591: I/dalvikvm-heap(14904): Grow heap (frag case) to 11.383MB for 576016-byte allocation
+05-19 22:02:09.631: D/dalvikvm(14904): GC_CONCURRENT freed 0K, 24% free 10375K/13639K, paused 12ms+4ms, total 38ms
+05-19 22:02:09.631: D/dalvikvm(14904): WAIT_FOR_CONCURRENT_GC blocked 1ms
+05-19 22:02:09.631: D/dalvikvm(14904): WAIT_FOR_CONCURRENT_GC blocked 25ms
+05-19 22:02:09.781: D/ISecCameraHardware(1848): preview callback started
+05-19 22:02:09.781: D/ISecCameraHardware(1848): disable ongoing preview callbacks
+05-19 22:02:09.801: D/dalvikvm(14904): GC_FOR_ALLOC freed 851K, 29% free 9812K/13639K, paused 22ms, total 22ms
+05-19 22:02:09.801: I/dalvikvm-heap(14904): Grow heap (frag case) to 11.383MB for 576016-byte allocation
+05-19 22:02:09.836: D/dalvikvm(14904): GC_CONCURRENT freed 0K, 24% free 10375K/13639K, paused 13ms+2ms, total 33ms
+05-19 22:02:09.836: D/dalvikvm(14904): WAIT_FOR_CONCURRENT_GC blocked 5ms
+05-19 22:02:09.916: D/ISecCameraHardware(1848): preview callback started
+05-19 22:02:09.916: D/ISecCameraHardware(1848): disable ongoing preview callbacks
+05-19 22:02:09.946: D/dalvikvm(14904): GC_FOR_ALLOC freed 853K, 29% free 9812K/13639K, paused 29ms, total 29ms
+05-19 22:02:09.946: I/dalvikvm-heap(14904): Grow heap (frag case) to 11.383MB for 576016-byte allocation
+05-19 22:02:09.976: D/dalvikvm(14904): GC_FOR_ALLOC freed 0K, 24% free 10375K/13639K, paused 29ms, total 29ms
+05-19 22:02:10.026: D/dalvikvm(14904): GC_CONCURRENT freed 6K, 24% free 10376K/13639K, paused 14ms+12ms, total 46ms
+05-19 22:02:10.111: D/DecodeHandler(14904): Found barcode in 111 ms
+05-19 22:02:10.136: D/dalvikvm(14904): GC_FOR_ALLOC freed 300K, 24% free 10409K/13639K, paused 22ms, total 22ms
+05-19 22:02:10.136: I/dalvikvm-heap(14904): Grow heap (frag case) to 12.242MB for 864016-byte allocation
+05-19 22:02:10.181: D/dalvikvm(14904): GC_CONCURRENT freed 0K, 18% free 11253K/13639K, paused 12ms+12ms, total 41ms
+05-19 22:02:10.181: D/dalvikvm(14904): WAIT_FOR_CONCURRENT_GC blocked 14ms
+05-19 22:02:10.211: D/dalvikvm(14904): GC_FOR_ALLOC freed <1K, 18% free 11253K/13639K, paused 21ms, total 21ms
+05-19 22:02:10.211: I/dalvikvm-heap(14904): Grow heap (frag case) to 13.065MB for 864016-byte allocation
+05-19 22:02:10.236: D/dalvikvm(14904): GC_CONCURRENT freed 0K, 17% free 12097K/14535K, paused 12ms+2ms, total 27ms
+05-19 22:02:10.241: D/dalvikvm(14904): WAIT_FOR_CONCURRENT_GC blocked 14ms
+05-19 22:02:10.246: D/CaptureActivityHandler(14904): Got decode succeeded message
+05-19 22:02:10.296: V/MediaPlayer-JNI(14904): start
+05-19 22:02:10.296: V/MediaPlayer(14904): start
+05-19 22:02:10.296: V/MediaPlayerService(1848): [191] setLooping(0)
+05-19 22:02:10.296: V/StagefrightPlayer(1848): setLooping
+05-19 22:02:10.296: V/AwesomePlayer(1848): setLooping (0)
+05-19 22:02:10.296: V/MediaPlayerService(1848): [191] setVolume(0.100000, 0.100000)
+05-19 22:02:10.296: V/AudioSink(1848): setVolume(0.100000, 0.100000)
+05-19 22:02:10.296: V/MediaPlayerService(1848): [191] setAuxEffectSendLevel(0.000000)
+05-19 22:02:10.296: V/AudioSink(1848): setAuxEffectSendLevel(0.000000)
+05-19 22:02:10.296: V/MediaPlayerService(1848): [191] start
+05-19 22:02:10.296: V/StagefrightPlayer(1848): setLooping
+05-19 22:02:10.296: V/AwesomePlayer(1848): setLooping (0)
+05-19 22:02:10.296: V/StagefrightPlayer(1848): start
+05-19 22:02:10.296: V/AwesomePlayer(1848): play
+05-19 22:02:10.296: V/AwesomePlayer(1848): AwesomePlayer::play_l():: This is not a DRM content
+05-19 22:02:10.301: I/AudioPlayer(1848):  Audioplayer kKeyAudioPCMFormat:1, 1, 0
+05-19 22:02:10.301: I/AudioPlayer(1848):  Audioplayer1 (1, 1)
+05-19 22:02:10.301: V/AudioSink(1848): open(44100, 1, 0x0, 1, 4, 316)
+05-19 22:02:10.301: E/AudioPolicyService(1848): getOutput() tid 1848 ++
+05-19 22:02:10.301: E/AudioPolicyService(1848): getOutput() tid 1848 --
+05-19 22:02:10.306: V/AudioPolicyManagerBase(1848): getOutput() stream 3, samplingRate 0, format 0, channelMask 3, flags 0
+05-19 22:02:10.306: V/AudioPolicyManagerBase(1848): getOutput() returns output 2
+05-19 22:02:10.306: E/AudioPolicyService(1848): getOutput() tid 1848 ++
+05-19 22:02:10.306: E/AudioPolicyService(1848): getOutput() tid 1848 --
+05-19 22:02:10.306: V/AudioPolicyManagerBase(1848): getOutput() stream 3, samplingRate 0, format 0, channelMask 3, flags 0
+05-19 22:02:10.306: V/AudioPolicyManagerBase(1848): getOutput() returns output 2
+05-19 22:02:10.306: E/AudioPolicyService(1848): getOutput() tid 1848 ++
+05-19 22:02:10.306: E/AudioPolicyService(1848): getOutput() tid 1848 --
+05-19 22:02:10.306: V/AudioPolicyManagerBase(1848): getOutput() stream 3, samplingRate 44100, format 1, channelMask 1, flags 0
+05-19 22:02:10.306: V/AudioPolicyManagerBase(1848): getOutput() returns output 2
+05-19 22:02:10.311: V/AudioSink(1848): setVolume
+05-19 22:02:10.311: E/AudioPolicyService(1848): getOutput() tid 1848 ++
+05-19 22:02:10.311: E/AudioPolicyService(1848): getOutput() tid 1848 --
+05-19 22:02:10.311: V/AudioPolicyManagerBase(1848): getOutput() stream 3, samplingRate 0, format 0, channelMask 3, flags 0
+05-19 22:02:10.311: V/AudioPolicyManagerBase(1848): getOutput() returns output 2
+05-19 22:02:10.311: V/AudioSink(1848): start
+05-19 22:02:10.311: V/AudioPolicyManagerBase(1848): startOutput() output 2, stream 3, session 316
+05-19 22:02:10.311: V/AudioPolicyManagerBase(1848): changeRefCount() stream 3, count 1
+05-19 22:02:10.311: V/AudioPolicyManagerBase(1848): getNewDevice() selected device 2
+05-19 22:02:10.311: I/AudioHardwareYamaha(1848): AudioHardware::setParameters(keyValuePairs="music_stream_active=true")
+05-19 22:02:10.311: V/AudioPolicyManagerBase(1848): getNewDevice() selected device 2
+05-19 22:02:10.311: V/AudioPolicyManagerBase(1848): getNewDevice() selected device 2
+05-19 22:02:10.311: V/AudioPolicyManagerBase(1848): checkOutputForStrategy(0002,0002,3)
+05-19 22:02:10.311: I/AudioFlinger(1848): AudioFlinger::PlaybackThread::addTrack_l() start_output_streamtype(1, 3) for 2
+05-19 22:02:10.311: D/PowerManagerService(2129): preventAutoPowerOff : 0  bPrevent : true
+05-19 22:02:10.311: D/PowerManagerService(2129): preventAutoPowerOff : resetAutoPowerOffTimer()
+05-19 22:02:10.311: D/PowerManagerService(2129): resetAutoPowerOffTimer : 0
+05-19 22:02:10.326: E/OMXCodec(1848): [OMX.google.vorbis.decoder] err = -1011
+05-19 22:02:10.331: I/yamaha::media::UserDep(1848): UserDep::getRouteInfo(output: audioengine=0, devices=00000002h
+05-19 22:02:10.331: I/yamaha::media::UserDep(1848):                       incall: onoff=0, devices=00000000h
+05-19 22:02:10.331: I/yamaha::media::UserDep(1848):                       capture: onoff=0, devices=00000000h, audioSource=0
+05-19 22:02:10.331: I/yamaha::media::UserDep(1848):                       playback: audio_onoff=1, line_onoff=0)
+05-19 22:02:10.371: I/ClipboardService(2129): Got clipboard for user=0
+05-19 22:02:10.371: I/ClipboardService(2129): Got clipboard for user=0
+05-19 22:02:10.376: I/ClipboardServiceEx(14904): text write to parcel
+05-19 22:02:10.376: I/ClipboardServiceEx(2129): ===================================================================
+05-19 22:02:10.376: I/ClipboardServiceEx(2129): SetClipboardDataOriginalToEx
+05-19 22:02:10.381: I/ClipboardServiceEx(2129): ===================================================================
+05-19 22:02:10.381: I/ClipboardServiceEx(2129): ----------------------------------------------------------------
+05-19 22:02:10.381: D/ClipboardServiceEx(2129): in synchronized
+05-19 22:02:10.381: I/ClipboardServiceEx(2129): addData..
+05-19 22:02:10.381: I/ClipboardServiceEx(2129): text equals
+05-19 22:02:10.411: I/ALSAModule(1848): Initialized ALSA PLAYBACK device hifi
+05-19 22:02:10.686: V/AwesomePlayer(1848): MEDIA_PLAYBACK_COMPLETE
+05-19 22:02:10.686: V/AwesomePlayer(1848): notifyListner_l() msg (2-MEDIA_PLAYBACK_COMPLETE), ext1 (0), ext2 (0)
+05-19 22:02:10.686: V/MediaPlayerService(1848): [191] notify (0x42f61e80)
+05-19 22:02:10.686: V/MediaPlayerService(1848): [191] notify (0x42f61e80, 2, 0, 0)
+05-19 22:02:10.686: V/AudioSink(1848): stop
+05-19 22:02:10.686: V/MediaPlayer(14904): message received msg=2, ext1=0, ext2=0
+05-19 22:02:10.686: V/MediaPlayer(14904): playback complete
+05-19 22:02:10.686: V/MediaPlayer(14904): callback application
+05-19 22:02:10.686: V/MediaPlayer(14904): back from callback
+05-19 22:02:10.686: V/AudioPolicyManagerBase(1848): stopOutput() output 2, stream 3, session 316
+05-19 22:02:10.686: V/AudioPolicyManagerBase(1848): changeRefCount() stream 3, count 0
+05-19 22:02:10.686: I/AudioHardwareYamaha(1848): AudioHardware::setParameters(keyValuePairs="music_stream_active=false")
+05-19 22:02:10.691: V/AudioPolicyManagerBase(1848): getNewDevice() selected device 0
+05-19 22:02:10.691: V/AudioPolicyManagerBase(1848): checkOutputForStrategy(0002,0002,3)
+05-19 22:02:10.701: V/MediaPlayer-JNI(14904): seekTo: 0(msec)
+05-19 22:02:10.701: V/MediaPlayer(14904): seekTo 0
+05-19 22:02:10.701: V/MediaPlayer(14904): getDuration
+05-19 22:02:10.701: V/MediaPlayerService(1848): getDuration
+05-19 22:02:10.701: V/StagefrightPlayer(1848): getDuration
+05-19 22:02:10.701: V/MediaPlayerService(1848): [191] getDuration = 200
+05-19 22:02:10.701: V/MediaPlayerService(1848): [191] seekTo(0)
+05-19 22:02:10.701: V/StagefrightPlayer(1848): seekTo 0.00 secs
+05-19 22:02:10.706: V/AwesomePlayer(1848): seekTo, locked=1
+05-19 22:02:10.706: V/AwesomePlayer(1848): seekTo timeUs (0)
+05-19 22:02:10.706: V/AwesomePlayer(1848): seekAudioIfNecessary_l mSeekTimeUs (0)
+05-19 22:02:10.706: V/AudioSink(1848): flush
+05-19 22:02:10.706: V/AwesomePlayer(1848): seeking(1) while paused, sending SEEK_COMPLETE notification immediately.
+05-19 22:02:10.706: V/AwesomePlayer(1848): notifyListner_l() msg (4-MEDIA_SEEK_COMPLETE), ext1 (0), ext2 (0)
+05-19 22:02:10.706: V/MediaPlayerService(1848): [191] notify (0x42f61e80)
+05-19 22:02:10.706: V/MediaPlayerService(1848): [191] notify (0x42f61e80, 4, 0, 0)
+05-19 22:02:10.706: V/MediaPlayer(14904): message received msg=4, ext1=0, ext2=0
+05-19 22:02:10.706: V/MediaPlayer(14904): Received seek complete
+05-19 22:02:10.711: V/MediaPlayer(14904): All seeks complete - return to regularly scheduled program
+05-19 22:02:10.711: V/MediaPlayer(14904): callback application
+05-19 22:02:10.711: V/MediaPlayer(14904): back from callback
+05-19 22:02:10.901: I/AudioFlinger(1848): AudioFlinger::MixerThread::prepareTracks_l stop_output_streamtype(1, 3) for 2
+05-19 22:02:11.106: W/SignalStrength(2249): getGsmLevel=4
+05-19 22:02:11.106: W/SignalStrength(2129): getGsmLevel=4
+05-19 22:02:11.121: W/SignalStrength(2249): getLevel=4 (SignalStrength: 19 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 gsm|lte 4)
+05-19 22:02:11.126: W/SignalStrength(2129): getLevel=4 (SignalStrength: 19 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 gsm|lte 4)
+05-19 22:02:11.126: W/SignalStrength(2249): getGsmLevel=4
+05-19 22:02:11.126: W/SignalStrength(2249): getLevel=4 (SignalStrength: 19 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 gsm|lte 4)
+05-19 22:02:11.126: D/STATUSBAR-NetworkController(2249): onSignalStrengthsChanged signalStrength=SignalStrength: 19 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 gsm|lte 4 level=4
+05-19 22:02:11.141: W/SignalStrength(2129): getGsmDbm=-75
+05-19 22:02:11.141: W/SignalStrength(2129): getDbm=-75
+05-19 22:02:11.146: W/SignalStrength(2129): getGsmAsuLevel=19
+05-19 22:02:11.146: W/SignalStrength(2129): getAsuLevel=19
+05-19 22:02:11.891: D/CaptureActivityHandler(14904): Got return scan result message
+05-19 22:02:12.011: D/SecCameraCoreManager(1848): virtual void android::SecCameraCoreManager::stopPreview():stop IT Policy checking thread
+05-19 22:02:12.081: D/ISecCameraHardware(1848): stopPreview E
+05-19 22:02:12.096: D/ISecCameraHardware(1848): previewThread exiting
+05-19 22:02:12.101: D/SecCameraHardware(1848): nativeStopPreview EX
+05-19 22:02:12.101: D/ISecCameraHardware(1848): stopPreview X
+05-19 22:02:12.106: D/ISecCameraHardware(1848): stopPreview E
+05-19 22:02:12.106: W/ISecCameraHardware(1848): stopPreview: warning, preview has been stopped
+05-19 22:02:12.106: D/ISecCameraHardware(1848): cancelPicture EX
+05-19 22:02:12.106: D/SecCameraHardware(1848): release E
+05-19 22:02:12.161: D/gralloc(1848): unmmap  pid(1845), vaddr(0x4879c000)
+05-19 22:02:12.161: E/gralloc(1848): [GR_MD] unmapping from 0x46ccc000, size=33427456
+05-19 22:02:12.166: D/gralloc(1848): unmmap  pid(1845), vaddr(0x4a8c1000)
+05-19 22:02:12.166: E/gralloc(1848): [GR_MD] unmapping from 0x48d62000, size=33427456
+05-19 22:02:12.166: D/gralloc(1848): unmmap  pid(1845), vaddr(0x4c99d000)
+05-19 22:02:12.171: E/gralloc(1848): [GR_MD] unmapping from 0x4adaf000, size=33427456
+05-19 22:02:12.171: D/gralloc(1848): unmmap  pid(1845), vaddr(0x4ea97000)
+05-19 22:02:12.171: E/gralloc(1848): [GR_MD] unmapping from 0x4ce1a000, size=33427456
+05-19 22:02:12.176: D/gralloc(1848): unmmap  pid(1845), vaddr(0x50bb2000)
+05-19 22:02:12.176: E/gralloc(1848): [GR_MD] unmapping from 0x4eea6000, size=33427456
+05-19 22:02:12.181: D/gralloc(1848): unmmap  pid(1845), vaddr(0x52cbb000)
+05-19 22:02:12.181: E/gralloc(1848): [GR_MD] unmapping from 0x50f20000, size=33427456
+05-19 22:02:12.181: D/gralloc(1848): unmmap  pid(1845), vaddr(0x54d90000)
+05-19 22:02:12.181: E/gralloc(1848): [GR_MD] unmapping from 0x52f66000, size=33427456
+05-19 22:02:12.186: D/gralloc(1848): unmmap  pid(1845), vaddr(0x56e65000)
+05-19 22:02:12.186: E/gralloc(1848): [GR_MD] unmapping from 0x54fac000, size=33427456
+05-19 22:02:12.196: E/ISecCameraHardware(1848): setPreviewWindow: NULL Surface!
+05-19 22:02:12.196: D/SecCameraCoreManager(1848): SecCameraCoreManager destroyed: pid=1848
+05-19 22:02:12.196: I/ShotSingle(1848): ShotSingle destroyed: pid=1848
+05-19 22:02:12.196: I/ShotCommon(1848): ShotCommon destroyed: pid=1848
+05-19 22:02:12.196: I/SecCameraCoreManager(1848): Destroying camera 0
+05-19 22:02:12.201: I/SecCameraHardware(1848): camera_device_close
+05-19 22:02:12.206: I/power(2129): *** acquire_dvfs_lock : lockType : 1  freq : 1000000 
+05-19 22:02:12.206: V/MediaPlayer(1848): disconnect
+05-19 22:02:12.206: V/MediaPlayerService(1848): disconnect(192) from pid 1848
+05-19 22:02:12.206: V/StagefrightPlayer(1848): reset
+05-19 22:02:12.206: I/AwesomePlayer(1848): reset
+05-19 22:02:12.206: D/PowerManagerService(2129): acquireDVFSLockLocked : type : DVFS_MIN_LIMIT  frequency : 1000000  uid : 1000  pid : 2129  tag : ActivityManager
+05-19 22:02:12.211: I/AwesomePlayer(1848): cancel player events
+05-19 22:02:12.211: V/AwesomePlayer(1848): mAudioTrackVector clear
+05-19 22:02:12.211: I/OMXCodec(1848): [OMX.google.vorbis.decoder] stop() sendCommand(0xed, OMX_CommandStateSet, OMX_StateIdle)
+05-19 22:02:12.211: I/OMXCodec(1848): [OMX.google.vorbis.decoder] stopped in state 1
+05-19 22:02:12.211: V/StagefrightPlayer(1848): ~StagefrightPlayer
+05-19 22:02:12.211: V/StagefrightPlayer(1848): reset
+05-19 22:02:12.211: I/AwesomePlayer(1848): reset
+05-19 22:02:12.211: I/AwesomePlayer(1848): cancel player events
+05-19 22:02:12.211: V/AwesomePlayer(1848): mAudioTrackVector clear
+05-19 22:02:12.211: I/AwesomePlayer(1848): reset
+05-19 22:02:12.211: I/AwesomePlayer(1848): cancel player events
+05-19 22:02:12.211: V/AwesomePlayer(1848): mAudioTrackVector clear
+05-19 22:02:12.211: V/AwesomePlayer(1848): ~AwesomePlayer()
+05-19 22:02:12.211: V/MediaPlayerService(1848): Client(192) destructor pid = 1848
+05-19 22:02:12.211: I/AudioSink(1848): +++ close
+05-19 22:02:12.211: I/AudioSink(1848): --- close
+05-19 22:02:12.211: V/MediaPlayerService(1848): disconnect(192) from pid 1848
+05-19 22:02:12.211: V/MediaPlayer(1848): destructor
+05-19 22:02:12.211: W/AudioFlinger(1848): session id 317 not found for pid 1848
+05-19 22:02:12.211: V/MediaPlayer(1848): disconnect
+05-19 22:02:12.211: V/MediaPlayer(1848): disconnect
+05-19 22:02:12.216: V/MediaPlayerService(1848): disconnect(193) from pid 1848
+05-19 22:02:12.216: V/StagefrightPlayer(1848): reset
+05-19 22:02:12.216: I/AwesomePlayer(1848): reset
+05-19 22:02:12.216: I/AwesomePlayer(1848): cancel player events
+05-19 22:02:12.216: V/AwesomePlayer(1848): mAudioTrackVector clear
+05-19 22:02:12.216: V/StagefrightPlayer(1848): ~StagefrightPlayer
+05-19 22:02:12.216: V/StagefrightPlayer(1848): reset
+05-19 22:02:12.216: I/AwesomePlayer(1848): reset
+05-19 22:02:12.216: I/AwesomePlayer(1848): cancel player events
+05-19 22:02:12.216: V/AwesomePlayer(1848): mAudioTrackVector clear
+05-19 22:02:12.216: I/AwesomePlayer(1848): reset
+05-19 22:02:12.216: I/AwesomePlayer(1848): cancel player events
+05-19 22:02:12.216: V/AwesomePlayer(1848): mAudioTrackVector clear
+05-19 22:02:12.216: V/AwesomePlayer(1848): ~AwesomePlayer()
+05-19 22:02:12.216: V/MediaPlayerService(1848): Client(193) destructor pid = 1848
+05-19 22:02:12.216: I/AudioSink(1848): +++ close
+05-19 22:02:12.216: I/AudioSink(1848): --- close
+05-19 22:02:12.216: V/MediaPlayerService(1848): disconnect(193) from pid 1848
+05-19 22:02:12.216: V/MediaPlayer(1848): destructor
+05-19 22:02:12.216: W/AudioFlinger(1848): session id 318 not found for pid 1848
+05-19 22:02:12.216: V/MediaPlayer(1848): disconnect
+05-19 22:02:12.216: V/MediaPlayer(1848): disconnect
+05-19 22:02:12.216: V/MediaPlayerService(1848): disconnect(194) from pid 1848
+05-19 22:02:12.216: V/StagefrightPlayer(1848): reset
+05-19 22:02:12.216: I/AwesomePlayer(1848): reset
+05-19 22:02:12.216: I/AwesomePlayer(1848): cancel player events
+05-19 22:02:12.216: V/AwesomePlayer(1848): mAudioTrackVector clear
+05-19 22:02:12.216: I/OMXCodec(1848): [OMX.google.vorbis.decoder] stop() sendCommand(0xee, OMX_CommandStateSet, OMX_StateIdle)
+05-19 22:02:12.216: I/OMXCodec(1848): [OMX.google.vorbis.decoder] stopped in state 1
+05-19 22:02:12.216: V/StagefrightPlayer(1848): ~StagefrightPlayer
+05-19 22:02:12.216: V/StagefrightPlayer(1848): reset
+05-19 22:02:12.216: I/AwesomePlayer(1848): reset
+05-19 22:02:12.216: I/AwesomePlayer(1848): cancel player events
+05-19 22:02:12.216: V/AwesomePlayer(1848): mAudioTrackVector clear
+05-19 22:02:12.216: I/AwesomePlayer(1848): reset
+05-19 22:02:12.216: I/AwesomePlayer(1848): cancel player events
+05-19 22:02:12.216: V/AwesomePlayer(1848): mAudioTrackVector clear
+05-19 22:02:12.216: V/AwesomePlayer(1848): ~AwesomePlayer()
+05-19 22:02:12.216: V/MediaPlayerService(1848): Client(194) destructor pid = 1848
+05-19 22:02:12.221: I/AudioSink(1848): +++ close
+05-19 22:02:12.221: I/AudioSink(1848): --- close
+05-19 22:02:12.221: V/MediaPlayerService(1848): disconnect(194) from pid 1848
+05-19 22:02:12.221: V/MediaPlayer(1848): destructor
+05-19 22:02:12.221: W/AudioFlinger(1848): session id 319 not found for pid 1848
+05-19 22:02:12.221: V/MediaPlayer(1848): disconnect
+05-19 22:02:12.221: V/WindowOrientationListener(2129): Proposed rotation changed!  proposedRotation=0, oldProposedRotation=-1currentRotation = 1
+05-19 22:02:12.226: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:12.226: V/WindowManager(2129): rotationForOrientationLw(orient=0, last=1); user=0  mLidState=-1 mDockMode=0 mHdmiPlugged=false mAccelerometerDefault=false sensorRotation=0
+05-19 22:02:12.226: W/ActivityManager(2129): mDVFSLock.acquire()
+05-19 22:02:12.241: I/SurfaceFlinger(1845): id=2382(792) createSurf (480x800),-1 flag=30004, GreezeSurfa
+05-19 22:02:12.241: I/InputReader(2129): Reconfiguring input devices.  changes=0x00000004
+05-19 22:02:12.241: I/InputReader(2129): Device reconfigured: id=2, name='sec_touchscreen', surface size is now 480x800, mode is 1
+05-19 22:02:12.241: V/WindowManager(2129): rotationForOrientationLw(orient=-1, last=1); user=0  mLidState=-1 mDockMode=0 mHdmiPlugged=false mAccelerometerDefault=false sensorRotation=0
+05-19 22:02:12.246: I/SurfaceFlinger(1845): Orientation 1=>0
+05-19 22:02:12.271: I/ActivityManager(2129): Config changed: {Rect(385, 0 - 415, 480) 1 0 1.0 226mcc10mnc en_GB sw320dp w320dp h508dp nrml long port finger -keyb/v/h -nav/h s.165}
+05-19 22:02:12.286: D/PhoneApp(2354): updateProximitySensorMode: lock already released.
+05-19 22:02:12.286: D/STATUSBAR-QuickSettingPanel(2249): mDisplayButtonCnt : 9 mCurButtonNum : 5
+05-19 22:02:12.291: W/STATUSBAR-QuickSettingPanel(2249): prepareTranslationXfalse  237
+05-19 22:02:12.316: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:12.346: D/WindowManager(2129): PhoneWindowManager: focusChangedLw
+05-19 22:02:12.346: D/WindowManager(2129): mInputFocus is not null.
+05-19 22:02:12.351: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:12.361: D/WindowManager(2129): mInputFocus is not null.
+05-19 22:02:12.361: D/WindowManager(2129): mInputFocus is not null.
+05-19 22:02:12.366: D/WindowManager(2129): mInputFocus is not null.
+05-19 22:02:12.366: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:12.366: D/STATUSBAR-PhoneStatusBar(2249): onConfigurationChanged
+05-19 22:02:12.366: D/WindowManager(2129): mInputFocus is not null.
+05-19 22:02:12.371: D/CordovaInterfaceImpl(14904): Sending activity result to plugin
+05-19 22:02:12.376: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:12.376: D/WindowManager(2129): mInputFocus is not null.
+05-19 22:02:12.386: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:12.386: D/WindowManager(2129): mInputFocus is not null.
+05-19 22:02:12.386: D/WindowManager(2129): mInputFocus is not null.
+05-19 22:02:12.396: D/ClockAlarmWidgetService(12456): [ClockAlarmWidgetService] onReceive: action = android.intent.action.CONFIGURATION_CHANGED
+05-19 22:02:12.401: D/Mms/MmsApp(2877): [start]    onConfigurationChanged(),newConfig={Rect(0, 385 - 480, 415) 1 0 1.0 226mcc10mnc en_GB sw320dp w320dp h508dp nrml long port finger -keyb/v/h -nav/h s.165}
+05-19 22:02:12.401: D/VoIPInterfaceManager(2129): getState()...
+05-19 22:02:12.401: D/VoIPInterfaceManager(2129):     Not exist call session
+05-19 22:02:12.401: D/VoIPInterfaceManager(2129): getState()...
+05-19 22:02:12.401: D/VoIPInterfaceManager(2129):     Not exist call session
+05-19 22:02:12.411: I/SurfaceFlinger(1845): id=2383(4) createSurf 0x417dd03c (480x800),1 flag=400, IomeA
+05-19 22:02:12.411: D/WindowManager(2129): PhoneWindowManager: focusChangedLw
+05-19 22:02:12.411: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:12.411: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:12.411: D/STATUSBAR-StatusBarManagerService(2129): setSystemUiVisibility(0x0)
+05-19 22:02:12.411: D/STATUSBAR-StatusBarManagerService(2129): manageDisableList what=0x0 pkg=WindowManager.LayoutParams
+05-19 22:02:12.416: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:12.426: D/STATUSBAR-NetworkController(2249): onReceive() - ACTION_CONFIGURATION_CHANGED
+05-19 22:02:12.441: D/STATUSBAR-Clock(2249): onReceive() - ACTION_CONFIGURATION_CHANGED
+05-19 22:02:12.441: D/STATUSBAR-Clock(2249): onReceive() - ACTION_CONFIGURATION_CHANGED
+05-19 22:02:12.451: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:12.451: W/SurfaceView(14904): CHECK surface infomation creating=false formatChanged=false sizeChanged=false visible=false visibleChanged=true surfaceChanged=true realSizeChanged=false redrawNeeded=false left=false top=false
+05-19 22:02:12.456: I/SurfaceFlinger(1845): id=2377 Removed TurfaceView idx=3 MapSz=4
+05-19 22:02:12.456: I/SurfaceFlinger(1845): id=2377 Removed TurfaceView idx=-2 MapSz=4
+05-19 22:02:12.466: I/SurfaceFlinger(1845): id=2376 Removed DaptureActi idx=4 MapSz=3
+05-19 22:02:12.466: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:12.466: D/PowerManagerService(2129): releaseWakeLockLocked : ON_AFTER_RELEASE
+05-19 22:02:12.466: D/PowerManagerService(2129): releaseWakeLockLocked flags=0x0 tag=KEEP_SCREEN_ON_FLAG
+05-19 22:02:12.471: I/SurfaceFlinger(1845): id=2376 Removed DaptureActi idx=-2 MapSz=3
+05-19 22:02:12.486: V/Mms/LayoutManager(2877): -> LayoutManager.onConfigurationChanged().
+05-19 22:02:12.486: V/Mms/HVGALayoutParameters(2877): HVGALayoutParameters.<init>(11).
+05-19 22:02:12.486: V/Mms/HVGALayoutParameters(2877): HVGALayoutParameters mMaxWidth: 480 mMaxHeight: 762 mImageHeightLandscape: 685 mTextHeightLandscape: 76 mImageHeightPortrait: 432 mTextHeightPortrait: 48
+05-19 22:02:12.486: V/Mms/LayoutManager(2877): LayoutParameters: HVGA-P: 762x480
+05-19 22:02:12.486: E/ClockAlarmWidget(12456): [AlarmWidgetIdManager] getListItem() : itemIndex=0, widgetID:1
+05-19 22:02:12.486: E/ClockAlarmWidget(12456): [AlarmWidgetIdManager] getListItem() : ItemIndex exceed ListItemCount. itemIndex=1
+05-19 22:02:12.486: E/ClockAlarmWidget(12456): [AlarmWidgetIdManager] getListItem() : itemIndex=1, widgetID:1
+05-19 22:02:12.486: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:12.491: D/Mms/MmsApp(2877): [end]    onConfigurationChanged(),newConfig={Rect(0, 385 - 480, 415) 1 0 1.0 226mcc10mnc en_GB sw320dp w320dp h508dp nrml long port finger -keyb/v/h -nav/h s.165}
+05-19 22:02:12.501: D/ClockAlarmDataProvider(12456): getAlarm() - too many same ID alarm data. nCount: 0
+05-19 22:02:12.501: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:12.506: I/power(2129): *** release_dvfs_lock : lockType : 1 
+05-19 22:02:12.506: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:12.506: D/PowerManagerService(2129): releaseDVFSLockLocked : all DVFS_MIN_LIMIT are released 
+05-19 22:02:12.506: W/ActivityManager(2129): mDVFSLock.release()
+05-19 22:02:12.511: I/SurfaceFlinger(1845): id=2384(793) createSurf (1600x480),-1 flag=20000, ClackSurfac
+05-19 22:02:12.511: I/ClipboardServiceEx(2129): Send intent for dismiss clipboard dialog inside hideCurrentInputLocked() !
+05-19 22:02:12.511: I/SurfaceFlinger(1845): id=2385(794) createSurf (800x960),-1 flag=20000, ClackSurfac
+05-19 22:02:12.511: I/SurfaceFlinger(1845): id=2386(795) createSurf (1600x480),-1 flag=20000, ClackSurfac
+05-19 22:02:12.511: I/SurfaceFlinger(1845): id=2387(796) createSurf (800x960),-1 flag=20000, ClackSurfac
+05-19 22:02:12.516: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:12.536: W/PluginManager(14904): THREAD WARNING: exec() call to Toast.show blocked the main thread for 23ms. Plugin should use CordovaInterface.getThreadPool().
+05-19 22:02:12.536: D/STATUSBAR-NotificationService(2129): enqueueToast()
+05-19 22:02:12.561: D/STATUSBAR-NotificationService(2129): enqueueToast()
+05-19 22:02:12.566: E/SpannableStringBuilder(14904): SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length
+05-19 22:02:12.566: E/SpannableStringBuilder(14904): SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length
+05-19 22:02:12.576: I/SurfaceFlinger(1845): id=2388(5) createSurf 0x41c4af5c (1x1),1 flag=0, Uoast
+05-19 22:02:12.581: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:12.591: D/PowerManagerService(2129): acquireWakeLock flags=0x2000000a tag=KEEP_SCREEN_ON_FLAG uid=1000 pid=2129
+05-19 22:02:12.596: D/STATUSBAR-NotificationService(2129): enqueueToast()
+05-19 22:02:12.611: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:12.616: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:12.626: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:12.806: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:12.961: I/SurfaceFlinger(1845): id=2382 Removed GreezeSurfa idx=6 MapSz=4
+05-19 22:02:12.961: I/SurfaceFlinger(1845): id=2382 Removed GreezeSurfa idx=-2 MapSz=4
+05-19 22:02:12.961: I/SurfaceFlinger(1845): id=2384 Removed ClackSurfac idx=6 MapSz=4
+05-19 22:02:12.966: I/SurfaceFlinger(1845): id=2384 Removed ClackSurfac idx=-2 MapSz=4
+05-19 22:02:12.966: I/SurfaceFlinger(1845): id=2385 Removed ClackSurfac idx=6 MapSz=4
+05-19 22:02:12.966: I/SurfaceFlinger(1845): id=2385 Removed ClackSurfac idx=-2 MapSz=4
+05-19 22:02:12.966: I/SurfaceFlinger(1845): id=2386 Removed ClackSurfac idx=6 MapSz=4
+05-19 22:02:12.971: I/SurfaceFlinger(1845): id=2386 Removed ClackSurfac idx=-2 MapSz=4
+05-19 22:02:12.971: I/SurfaceFlinger(1845): id=2387 Removed ClackSurfac idx=6 MapSz=4
+05-19 22:02:12.971: I/SurfaceFlinger(1845): id=2387 Removed ClackSurfac idx=-2 MapSz=4
+05-19 22:02:12.981: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:12.986: V/WindowManager(2129): rotationForOrientationLw(orient=-1, last=0); user=0  mLidState=-1 mDockMode=0 mHdmiPlugged=false mAccelerometerDefault=false sensorRotation=0
+05-19 22:02:13.146: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:13.151: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:13.881: I/ALSAModule(1848): Terminated ALSA PLAYBACK device hifi
+05-19 22:02:13.881: D/PowerManagerService(2129): preventAutoPowerOff : 0  bPrevent : false
+05-19 22:02:13.881: D/PowerManagerService(2129): preventAutoPowerOff : resetAutoPowerOffTimer()
+05-19 22:02:13.881: D/PowerManagerService(2129): resetAutoPowerOffTimer : 0
+05-19 22:02:13.976: W/PowerManagerService(2129): Timer 0x3->0x3|0x3
+05-19 22:02:14.271: I/yamaha::media::UserDep(1848): UserDep::getRouteInfo(output: audioengine=0, devices=00000002h
+05-19 22:02:14.271: I/yamaha::media::UserDep(1848):                       incall: onoff=0, devices=00000000h
+05-19 22:02:14.271: I/yamaha::media::UserDep(1848):                       capture: onoff=0, devices=00000000h, audioSource=0
+05-19 22:02:14.271: I/yamaha::media::UserDep(1848):                       playback: audio_onoff=0, line_onoff=0)
+05-19 22:02:14.516: D/dalvikvm(2129): WAIT_FOR_CONCURRENT_GC blocked 0ms
+05-19 22:02:14.551: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:14.586: I/SurfaceFlinger(1845): id=2389(6) createSurf 0x40ed846c (1x1),1 flag=0, Uoast
+05-19 22:02:14.586: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:14.631: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:14.781: D/dalvikvm(2129): GC_EXPLICIT freed 755K, 15% free 25764K/30279K, paused 20ms+8ms, total 269ms
+05-19 22:02:15.326: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:15.336: I/SurfaceFlinger(1845): id=2388 Removed Uoast idx=5 MapSz=4
+05-19 22:02:15.346: I/SurfaceFlinger(1845): id=2388 Removed Uoast idx=-2 MapSz=4
+05-19 22:02:15.351: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:15.351: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:16.221: W/SignalStrength(2129): getGsmLevel=4
+05-19 22:02:16.221: W/SignalStrength(2129): getLevel=4 (SignalStrength: 17 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 gsm|lte 4)
+05-19 22:02:16.221: W/SignalStrength(2249): getGsmLevel=4
+05-19 22:02:16.221: W/SignalStrength(2249): getLevel=4 (SignalStrength: 17 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 gsm|lte 4)
+05-19 22:02:16.221: W/SignalStrength(2249): getGsmLevel=4
+05-19 22:02:16.221: W/SignalStrength(2249): getLevel=4 (SignalStrength: 17 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 gsm|lte 4)
+05-19 22:02:16.221: D/STATUSBAR-NetworkController(2249): onSignalStrengthsChanged signalStrength=SignalStrength: 17 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 gsm|lte 4 level=4
+05-19 22:02:16.226: V/WindowOrientationListener(2129): nearestRotation : 0   Angle: 355   tilt: 38
+05-19 22:02:16.231: W/SignalStrength(2129): getGsmDbm=-79
+05-19 22:02:16.231: W/SignalStrength(2129): getDbm=-79
+05-19 22:02:16.231: W/SignalStrength(2129): getGsmAsuLevel=17
+05-19 22:02:16.231: W/SignalStrength(2129): getAsuLevel=17
+05-19 22:02:16.566: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:16.596: I/SurfaceFlinger(1845): id=2390(7) createSurf 0x41010bdc (1x1),1 flag=0, Uoast
+05-19 22:02:16.596: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:16.681: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:17.106: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:17.111: I/SurfaceFlinger(1845): id=2389 Removed Uoast idx=5 MapSz=4
+05-19 22:02:17.111: I/SurfaceFlinger(1845): id=2389 Removed Uoast idx=-2 MapSz=4
+05-19 22:02:17.116: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:17.206: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:17.211: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:17.481: V/AlarmManager(2129): waitForAlarm result :1
+05-19 22:02:17.481: V/AlarmManager(2129): trigger ELAPSED_REALTIME_WAKEUP or RTC_WAKEUP
+05-19 22:02:17.531: W/AlarmManager(2129): FACTORY_ON= 0
+05-19 22:02:17.591: W/AlarmManager(2129): FACTORY_ON= 0
+05-19 22:02:18.576: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:18.786: W/SignalStrength(2129): getGsmLevel=4
+05-19 22:02:18.786: W/SignalStrength(2129): getLevel=4 (SignalStrength: 16 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 gsm|lte 4)
+05-19 22:02:18.801: W/SignalStrength(2249): getGsmLevel=4
+05-19 22:02:18.806: W/SignalStrength(2249): getLevel=4 (SignalStrength: 16 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 gsm|lte 4)
+05-19 22:02:18.816: W/SignalStrength(2129): getGsmDbm=-81
+05-19 22:02:18.816: W/SignalStrength(2129): getDbm=-81
+05-19 22:02:18.816: W/SignalStrength(2129): getGsmAsuLevel=16
+05-19 22:02:18.816: W/SignalStrength(2129): getAsuLevel=16
+05-19 22:02:18.821: W/SignalStrength(2249): getGsmLevel=4
+05-19 22:02:18.821: D/STATUSBAR-NetworkController(2249): onSignalStrengthsChanged signalStrength=SignalStrength: 16 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 gsm|lte 4 level=4
+05-19 22:02:18.836: W/SignalStrength(2249): getLevel=4 (SignalStrength: 16 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 gsm|lte 4)
+05-19 22:02:19.126: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:19.131: I/SurfaceFlinger(1845): id=2390 Removed Uoast idx=5 MapSz=3
+05-19 22:02:19.131: I/SurfaceFlinger(1845): id=2390 Removed Uoast idx=-2 MapSz=3
+05-19 22:02:19.146: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:19.151: D/PowerManagerService(2129): releaseWakeLockLocked : ON_AFTER_RELEASE
+05-19 22:02:19.156: D/PowerManagerService(2129): releaseWakeLockLocked flags=0x0 tag=KEEP_SCREEN_ON_FLAG
+05-19 22:02:19.161: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:20.656: W/PowerManagerService(2129): Timer 0x3->0x3|0x0
+05-19 22:02:21.331: E/Watchdog(2129): !@Sync 2965
+05-19 22:02:24.641: V/WindowOrientationListener(2129): Proposed rotation changed!  proposedRotation=1, oldProposedRotation=-1currentRotation = 0
+05-19 22:02:24.641: I/SurfaceFlinger(1845): id=2391(797) createSurf (480x800),-1 flag=30004, GreezeSurfa
+05-19 22:02:24.641: V/WindowManager(2129): rotationForOrientationLw(orient=-1, last=0); user=0  mLidState=-1 mDockMode=0 mHdmiPlugged=false mAccelerometerDefault=false sensorRotation=1
+05-19 22:02:24.646: I/InputReader(2129): Reconfiguring input devices.  changes=0x00000004
+05-19 22:02:24.651: I/InputReader(2129): Device reconfigured: id=2, name='sec_touchscreen', surface size is now 480x800, mode is 1
+05-19 22:02:24.681: I/SurfaceFlinger(1845): Orientation 0=>1
+05-19 22:02:24.696: I/ActivityManager(2129): Config changed: {Rect(0, 385 - 480, 415) 1 0 1.0 226mcc10mnc en_GB sw320dp w533dp h294dp nrml long land finger -keyb/v/h -nav/h s.166}
+05-19 22:02:24.711: D/STATUSBAR-QuickSettingPanel(2249): mDisplayButtonCnt : 9 mCurButtonNum : 8
+05-19 22:02:24.731: D/PhoneApp(2354): updateProximitySensorMode: lock already released.
+05-19 22:02:24.796: W/STATUSBAR-QuickSettingPanel(2249): prepareTranslationXfalse  99
+05-19 22:02:24.826: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:24.891: D/STATUSBAR-PhoneStatusBar(2249): Landscape - marquee statusbar
+05-19 22:02:24.896: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:24.901: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:24.911: D/VoIPInterfaceManager(2129): getState()...
+05-19 22:02:24.911: D/VoIPInterfaceManager(2129):     Not exist call session
+05-19 22:02:24.911: D/VoIPInterfaceManager(2129): getState()...
+05-19 22:02:24.911: D/VoIPInterfaceManager(2129):     Not exist call session
+05-19 22:02:24.926: D/ClockAlarmWidgetService(12456): [ClockAlarmWidgetService] onReceive: action = android.intent.action.CONFIGURATION_CHANGED
+05-19 22:02:24.931: D/WebView(14904): onSizeChanged - w:800 h:442
+05-19 22:02:24.941: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:24.941: D/STATUSBAR-NetworkController(2249): onReceive() - ACTION_CONFIGURATION_CHANGED
+05-19 22:02:24.956: D/STATUSBAR-Clock(2249): onReceive() - ACTION_CONFIGURATION_CHANGED
+05-19 22:02:24.956: D/STATUSBAR-Clock(2249): onReceive() - ACTION_CONFIGURATION_CHANGED
+05-19 22:02:24.966: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:24.976: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:25.006: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:25.026: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:25.036: E/ClockAlarmWidget(12456): [AlarmWidgetIdManager] getListItem() : itemIndex=0, widgetID:1
+05-19 22:02:25.041: E/ClockAlarmWidget(12456): [AlarmWidgetIdManager] getListItem() : ItemIndex exceed ListItemCount. itemIndex=1
+05-19 22:02:25.041: E/ClockAlarmWidget(12456): [AlarmWidgetIdManager] getListItem() : itemIndex=1, widgetID:1
+05-19 22:02:25.041: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:25.046: I/SurfaceFlinger(1845): id=2392(798) createSurf (960x800),-1 flag=20000, ClackSurfac
+05-19 22:02:25.046: I/SurfaceFlinger(1845): id=2393(799) createSurf (480x1600),-1 flag=20000, ClackSurfac
+05-19 22:02:25.046: I/SurfaceFlinger(1845): id=2394(800) createSurf (960x800),-1 flag=20000, ClackSurfac
+05-19 22:02:25.046: I/SurfaceFlinger(1845): id=2395(801) createSurf (480x1600),-1 flag=20000, ClackSurfac
+05-19 22:02:25.051: D/ClockAlarmDataProvider(12456): getAlarm() - too many same ID alarm data. nCount: 0
+05-19 22:02:25.051: D/Mms/MmsApp(2877): [start]    onConfigurationChanged(),newConfig={Rect(385, 0 - 415, 480) 1 0 1.0 226mcc10mnc en_GB sw320dp w533dp h294dp nrml long land finger -keyb/v/h -nav/h s.166}
+05-19 22:02:25.051: V/Mms/LayoutManager(2877): -> LayoutManager.onConfigurationChanged().
+05-19 22:02:25.051: V/Mms/HVGALayoutParameters(2877): HVGALayoutParameters.<init>(11).
+05-19 22:02:25.051: V/Mms/HVGALayoutParameters(2877): HVGALayoutParameters mMaxWidth: 800 mMaxHeight: 441 mImageHeightLandscape: 396 mTextHeightLandscape: 44 mImageHeightPortrait: 720 mTextHeightPortrait: 80
+05-19 22:02:25.051: V/Mms/LayoutManager(2877): LayoutParameters: HVGA-P: 441x800
+05-19 22:02:25.056: D/Mms/MmsApp(2877): [end]    onConfigurationChanged(),newConfig={Rect(385, 0 - 415, 480) 1 0 1.0 226mcc10mnc en_GB sw320dp w533dp h294dp nrml long land finger -keyb/v/h -nav/h s.166}
+05-19 22:02:25.476: I/SurfaceFlinger(1845): id=2391 Removed GreezeSurfa idx=5 MapSz=3
+05-19 22:02:25.476: I/SurfaceFlinger(1845): id=2391 Removed GreezeSurfa idx=-2 MapSz=3
+05-19 22:02:25.476: I/SurfaceFlinger(1845): id=2392 Removed ClackSurfac idx=5 MapSz=3
+05-19 22:02:25.476: I/SurfaceFlinger(1845): id=2393 Removed ClackSurfac idx=5 MapSz=3
+05-19 22:02:25.476: I/SurfaceFlinger(1845): id=2392 Removed ClackSurfac idx=-2 MapSz=3
+05-19 22:02:25.476: I/SurfaceFlinger(1845): id=2394 Removed ClackSurfac idx=5 MapSz=3
+05-19 22:02:25.476: I/SurfaceFlinger(1845): id=2393 Removed ClackSurfac idx=-2 MapSz=3
+05-19 22:02:25.476: I/SurfaceFlinger(1845): id=2394 Removed ClackSurfac idx=-2 MapSz=3
+05-19 22:02:25.481: I/SurfaceFlinger(1845): id=2395 Removed ClackSurfac idx=5 MapSz=3
+05-19 22:02:25.481: I/SurfaceFlinger(1845): id=2395 Removed ClackSurfac idx=-2 MapSz=3
+05-19 22:02:25.481: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:25.486: D/KeyguardViewMediator(2129): setHidden false
+05-19 22:02:25.486: V/WindowManager(2129): rotationForOrientationLw(orient=-1, last=1); user=0  mLidState=-1 mDockMode=0 mHdmiPlugged=false mAccelerometerDefault=false sensorRotation=-1
+05-19 22:02:27.051: D/dalvikvm(2129): WAIT_FOR_CONCURRENT_GC blocked 0ms
+05-19 22:02:27.261: D/dalvikvm(2129): GC_EXPLICIT freed 112K, 15% free 25759K/30279K, paused 22ms+7ms, total 211ms
+05-19 22:02:29.026: W/SignalStrength(2129): getGsmLevel=4
+05-19 22:02:29.026: W/SignalStrength(2129): getLevel=4 (SignalStrength: 15 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 gsm|lte 4)
+05-19 22:02:29.036: W/SignalStrength(2249): getGsmLevel=4
+05-19 22:02:29.036: W/SignalStrength(2249): getLevel=4 (SignalStrength: 15 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 gsm|lte 4)
+05-19 22:02:29.036: D/STATUSBAR-NetworkController(2249): onSignalStrengthsChanged signalStrength=SignalStrength: 15 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 gsm|lte 4 level=4
+05-19 22:02:29.041: W/SignalStrength(2129): getGsmDbm=-83
+05-19 22:02:29.046: W/SignalStrength(2129): getDbm=-83
+05-19 22:02:29.046: W/SignalStrength(2129): getGsmAsuLevel=15
+05-19 22:02:29.046: W/SignalStrength(2129): getAsuLevel=15
+05-19 22:02:29.046: W/SignalStrength(2249): getGsmLevel=4
+05-19 22:02:29.051: W/SignalStrength(2249): getLevel=4 (SignalStrength: 15 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 gsm|lte 4)
+05-19 22:02:31.601: W/SignalStrength(2129): getGsmLevel=4
+05-19 22:02:31.601: W/SignalStrength(2249): getGsmLevel=4
+05-19 22:02:31.606: W/SignalStrength(2249): getLevel=4 (SignalStrength: 14 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 gsm|lte 4)
+05-19 22:02:31.606: W/SignalStrength(2249): getGsmLevel=4
+05-19 22:02:31.606: W/SignalStrength(2249): getLevel=4 (SignalStrength: 14 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 gsm|lte 4)
+05-19 22:02:31.606: D/STATUSBAR-NetworkController(2249): onSignalStrengthsChanged signalStrength=SignalStrength: 14 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 gsm|lte 4 level=4
+05-19 22:02:31.611: W/SignalStrength(2129): getLevel=4 (SignalStrength: 14 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 gsm|lte 4)
+05-19 22:02:31.626: W/SignalStrength(2129): getGsmDbm=-85
+05-19 22:02:31.626: W/SignalStrength(2129): getDbm=-85
+05-19 22:02:31.626: W/SignalStrength(2129): getGsmAsuLevel=14
+05-19 22:02:31.631: W/SignalStrength(2129): getAsuLevel=14
+05-19 22:02:32.171: W/SignalStrength(2129): getGsmLevel=4
+05-19 22:02:32.176: W/SignalStrength(2249): getGsmLevel=4
+05-19 22:02:32.176: W/SignalStrength(2249): getLevel=4 (SignalStrength: 15 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 gsm|lte 4)
+05-19 22:02:32.181: W/SignalStrength(2249): getGsmLevel=4
+05-19 22:02:32.181: W/SignalStrength(2249): getLevel=4 (SignalStrength: 15 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 gsm|lte 4)
+05-19 22:02:32.181: D/STATUSBAR-NetworkController(2249): onSignalStrengthsChanged signalStrength=SignalStrength: 15 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 gsm|lte 4 level=4
+05-19 22:02:32.186: W/SignalStrength(2129): getLevel=4 (SignalStrength: 15 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 gsm|lte 4)
+05-19 22:02:32.196: W/SignalStrength(2129): getGsmDbm=-83
+05-19 22:02:32.196: W/SignalStrength(2129): getDbm=-83
+05-19 22:02:32.196: W/SignalStrength(2129): getGsmAsuLevel=15
+05-19 22:02:32.201: W/SignalStrength(2129): getAsuLevel=15
+05-19 22:02:32.216: W/AlarmManager(2129): FACTORY_ON= 0
+05-19 22:02:34.781: W/SignalStrength(2129): getGsmLevel=4
+05-19 22:02:34.781: W/SignalStrength(2129): getLevel=4 (SignalStrength: 16 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 gsm|lte 4)
+05-19 22:02:34.791: W/SignalStrength(2249): getGsmLevel=4
+05-19 22:02:34.791: W/SignalStrength(2249): getLevel=4 (SignalStrength: 16 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 gsm|lte 4)
+05-19 22:02:34.796: W/SignalStrength(2129): getGsmDbm=-81
+05-19 22:02:34.796: W/SignalStrength(2129): getDbm=-81
+05-19 22:02:34.801: W/SignalStrength(2129): getGsmAsuLevel=16
+05-19 22:02:34.801: W/SignalStrength(2129): getAsuLevel=16
+05-19 22:02:34.801: D/STATUSBAR-NetworkController(2249): onSignalStrengthsChanged signalStrength=SignalStrength: 16 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 gsm|lte 4 level=4
+05-19 22:02:34.806: W/SignalStrength(2249): getGsmLevel=4
+05-19 22:02:34.806: W/SignalStrength(2249): getLevel=4 (SignalStrength: 16 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 gsm|lte 4)
+05-19 22:02:35.291: D/BatteryService(2129): update start
+05-19 22:02:35.296: D/BatteryService(2129): level:37 scale:100 status:2 health:2 present:true voltage: 3816 temperature: 290 technology: Li-ion AC powered:false USB powered:true icon:17303239 invalid charger:0
+05-19 22:02:35.311: D/STATUSBAR-BatteryController(2249): onReceive() - ACTION_BATTERY_CHANGED
+05-19 22:02:35.311: D/STATUSBAR-BatteryController(2249): onReceive() - level:37
+05-19 22:02:35.316: D/STATUSBAR-BatteryController(2249): onReceive() - plugged:2
+05-19 22:02:35.316: D/STATUSBAR-BatteryController(2249): onReceive() - BATTERY_STATUS_CHARGING:
+05-19 22:02:35.346: E/MtpService(14481): In MTPAPP onReceive:android.intent.action.BATTERY_CHANGED
+05-19 22:02:35.351: E/MtpService(14481): battPlugged Type : 2
+05-19 22:02:35.371: D/STATUSBAR-PhoneStatusBar(2249): ACTION_BATTERY_CHANGED
+05-19 22:02:35.376: D/STATUSBAR-PhoneStatusBar(2249): NORMAL_BATTERY
+: E/(): Device disconnected: 1
+: E/(): Device disconnected

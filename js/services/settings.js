@@ -1,3 +1,4 @@
+/* TODO use indexDB for persistency */
 
 ionicApp.service('SettingsService', function ($q) {
     var localStoreAvailable = typeof (Storage) !== "undefined";
@@ -27,12 +28,20 @@ ionicApp.service('SettingsService', function ($q) {
         }
     };
 
-    this.get = function (name) {
+    this.get = function (name) 
+	{
+		var obj = null;
         if (localStoreAvailable) {
-            return getItem(name);
-        } else {
-            return null;//return $cookieStore.get(name);
+            obj = getItem(name);
         }
+		
+		if(obj === null || obj === "undefined")
+		{
+			if(name == 'settings')
+			{
+				obj = [{}];
+			}
+		}
     };
 
     this.destroy = function (name) {
